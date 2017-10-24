@@ -1,0 +1,71 @@
+#+LaTeX_HEADER: \usepackage[a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+#+LaTeX_HEADER: \setlength{\parfillskip}{0pt plus 1fil}
+#+LaTeX_HEADER: \usepackage{german}
+#+LaTeX_HEADER: \usepackage{fancyhdr}
+#+LaTeX_HEADER: \pagestyle{fancy}
+#+LaTeX_HEADER: \fancyhead{}
+#+LaTeX_HEADER: \fancyfoot{}
+#+LaTeX_HEADER: \fancyhead[L]{\rightmark}
+#+LaTeX_HEADER: \fancyhead[R]{\thepage}
+#+LaTeX_HEADER: \renewcommand{\headrulewidth}{0.4pt}
+#+LaTeX_HEADER: \renewcommand{\footrulewidth}{0pt}
+
+#+LaTeX_HEADER: \usepackage{tcolorbox}
+#+LaTeX_HEADER: \tcbuselibrary{theorems}
+#+LaTeX_HEADER: \newtcbtheorem[number within=section]{definition}{Definition}%
+#+LaTeX_HEADER: {colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+#+LaTeX_HEADER: \newtcbtheorem[number within=section]{axiom}{Axiom}%
+#+LaTeX_HEADER: {colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
+#+LaTeX_HEADER: \newtcbtheorem[number within=section]{theo}{Satz}%
+#+LaTeX_HEADER: {colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{th}
+#+LaTeX_HEADER: \newtcbtheorem[number within=section]{satz}{Satz}%
+#+LaTeX_HEADER: {colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
+#+LaTeX_HEADER: \newtcolorbox{comm}[1][]
+#+LaTeX_HEADER: {title=Kommentar,colback=black!5,colframe=black!35!black,fonttitle=\bfseries}
+
+#+LaTeX_HEADER: \newtcolorbox{relation}[1][]
+#+LaTeX_HEADER: {
+#+LaTeX_HEADER:   colframe = red!25,
+#+LaTeX_HEADER:   colback  = red!10,
+#+LaTeX_HEADER:   halign = center,
+#+LaTeX_HEADER:   #1,
+#+LaTeX_HEADER: }
+
+#+LaTeX_HEADER: \usepackage{etoolbox}
+#+LaTeX_HEADER: \usepackage{amsthm}
+#+LaTeX_HEADER: \usepackage{amssymb}
+#+LaTeX_HEADER: \usepackage{gauss}
+#+LaTeX_HEADER: \usepackage{stmaryrd}
+
+#+LaTeX_HEADER: \newtheorem{prof}{Beweis}[section]
+#+LaTeX_HEADER: \newtheorem{exa}{Beispiel}[section]
+#+LaTeX_HEADER: \newtheorem{expe}{experiment}[section]
+#+LaTeX_HEADER: \newtheorem*{notte}{Beachte}
+#+LaTeX_HEADER: \newtheorem*{notation}{Notation}
+#+LaTeX_HEADER: \newtheorem*{proposition}{Proposition}
+
+
+#+LaTeX_CLASS: article
+
+#+BEGIN_EXPORT latex
+\maketitle
+\newpage
+#+END_EXPORT
+
+* Vorwort
+Ihr habt hier die Mitschriften Valentin Boettchers vor euch. Er teilt eben Diese
+"ausserst gern mit euch und freut sich "uber Feedback, Fehlerkorrekturen und
+Verbesserungsvorschl"age. Kontaktiert ihn am besten via [[mailto:valentin.boettcher@mailbox.tu-dresden.de][Email]] :).
+
+Vor allem aber ist es wichtig zu verstehen, dass das Format dieses Skriptes
+kein allumfassendes Kompendium ist und nur den Inhalt der Vorlesung abdeckt.
+Wenn Valentin einmal ein Paar interessante Gedanken kommen, packt er sie
+wohlm"oglich auch hinein, versucht aber immer deren Korrektheit zu
+gew"ahrleisten. Auch Kommentare des Lesenden k"onnen Teil dieses Skriptes
+werden.
+
+Wie ihr bestimmt bis hierher bemerkt habt, ist Valentins Rechtschreibung
+grausig: Also frisch ans Werk und Feedback geben.
+
+
+Viel Vergn"ugen. *Mathe ist sch"on.*

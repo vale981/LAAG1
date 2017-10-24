@@ -1,5 +1,5 @@
 #+TITLE: Lineare Algebra (f"ur Physiker) I
-#+INCLUDE: "../../../latex_preamble.org"
+#+INCLUDE: "latex_preamble.org"
 
 * Mengenlehre
 In der modernen Mathematik fasst man Strukturen (R"aume, Fl"achen,

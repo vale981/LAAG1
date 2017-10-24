@@ -1,0 +1,950 @@
+#+TITLE: Lineare Algebra (f"ur Physiker) I
+#+INCLUDE: "../../../latex_preamble.org"
+
+* Mengenlehre
+In der modernen Mathematik fasst man Strukturen (R"aume, Fl"achen,
+Zahlensysteme) als /Mengen/ und /Abbildungen/ auf.
+
+#+ATTR_LATEX: :options {Menge}{def-meng}
+#+begin_definition
+Eine Zusammenfassung von Objekten die *Elemente* der heissen. Eine Menge ist
+also eindeutig dadurch bestimmt, welche Elemente sie enth"alt.
+#+end_definition
+
+#+ATTR_LATEX: :options \
+#+begin_notation
+ - $M=\{m_1,m_2,m_3,...\}$ - Aufzeahlung
+   - $\{...\}$ - Mengenklammern
+ - $M=\{x| P(x)\}$ - Eigenschaft
+   - Alle $x$ mit der Eigenschaft $P(x)$
+#+end_notation
+
+#+ATTR_LATEX: :options \
+#+begin_exa 
+ - $n=\{\text{Nat"urliche Zahlen}\} =(add-hook 'La(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)TeX-mode-hook 'LaTeX-math-mode) \{0,1,2,...\}$
+ - $E=\{x|\text{x hat die Eigenschaft } P(x)\}$
+#+end_exa
+
+** Wichtige Mengen
+ - $\mathbb{N}=\{\text{nat"urliche Zahlen}\} = \{1,2,...\}$
+ - $\mathbb{Z}=\{\text{ganze Zahlen}\} = \{...,-2,-1,0,1,2,...\}$
+ - $Q=\{\text{Rationale
+   Zahlen}\}=\left\{\left.\displaystyle\frac{p}{q}\;\right\vert\begin{array}{c}p \in \mathbb{Z} \\ q \in N \setminus \{0\}\end{array}\right\}$
+ - $\mathbb{R}=\{\text{reelle Zahlen}\}$
+
+** Beziehungen zwischen Mengen
+#+ATTR_LATEX: :options {Mengenbeziehungen}{def-teilmenge}
+#+begin_definition
+Seien $A,B$ zwei Mengen. 
+ 1) $A$ heisst *Teilmenge* von B, wenn f"ur jedes Element $a\in A$ gilt: $a\in B$.
+ 2) Es sei die Menge $C = \{a|a\in A \text{ und } b\in B\}$, so heisst $C$ *Durchschnitt* von $A$ und $B$.
+ 3) Es sei die Menge $C = \{a|a\in A \text{ oder } b\in B\}$, so heisst $C$ *Vereinigung* von $A$ u(add-hook 'c++-mode-hook 'clang-format-bindings)nd $B$.
+#+end_definition
+
+#+ATTR_LATEX: :options \
+#+begin_notation
+ - $\in$ ``Element von'': $x\in X$ - ''x ist Element von X''
+ - $\subseteq$ Teilmenge: $A\subseteq B$ - ''A ist eine Teilmenge von B''
+ - $\cap$ Durchschnitt: $A\cap B = \{a|a\in A \text{ und } b\in B\}$
+ - $\cup$ Vereinigung $A\cup B = \{a|a\in A \text{ oder } b\in B\}$
+ - $\varnothing$ - Leere Menge
+ - $A\setminus B$ - Mengendifferenz
+ - $A\times B$ - Direktes Produkt
+   - $(a,b)$ - geordentes Paar mit dem ersten Element $a$ und dem zweiten
+     Element $b$.
+#+end_notation
+
+#+begin_exa 
+$N\subseteq \mathbb{Z}$, aber $Q \not\subset \mathbb{Z}$: $\frac{1}{2} \not\in \mathbb{Z}$
+#+end_exa
+
+#+begin_exa 
+F"ur $A = \{1,2,3,4,5\}$ und $B = \{2,3,10\}$:
+ - $A\cap B = \{2,3\}$
+ - $A\cup B = \{1,2,3,5,10\}$
+#+end_exa
+
+#+ATTR_LATEX: :options {Leere Menge}{}
+#+begin_definition
+Die leere Menge $\varnothing$ ist die (eindeutig bestimmte) Menge, die kein Element enth"alt.
+#+end_definition
+
+#+begin_exa 
+$\{\pi\} \cap Q = \varnothing$
+#+end_exa
+
+#+ATTR_LATEX: :options {Differenz}{}
+#+begin_definition
+Die Differenz zweier Mengen $A, B$ wird definiert als $A\setminus B = \{a\in A | a\not\in
+B\}$ (Elemente aus $A$, die nicht in $B$ liegen). 
+#+end_definition
+
+#+ATTR_LATEX: :options {Direktes/Kartesisches Produkt}{}
+#+begin_definition
+Wenn $A,B$ zwei Mengen sind dann ist die Menge der Paare $(a,b)$ und $a\in A,
+b\in B$ das direkte (kartesische) Produkt von $A$ und $B$ ($A\times B$).
+#+end_definition
+
+Analog gilt: $A_1\times A_2\times ... \times A_n = \{(a_1,...,a_n)| a_1\in A_1,...,a_n\in A_n\}$
+
+#+begin_exa 
+$\mathbb{R}^n=\mathbb{R}\times ... \times \mathbb{R} =  \{(x_1,...,x_n)| x_1\in \mathbb{R},...,x_n\in \mathbb{R}\}$
+#+end_exa
+
+Geometrie $m$ der Ebene mit Koordinaten $=$ Untersuchung von Konstruktionen in
+$\mathbb{R}^2=\mathbb{R}\cdot\mathbb{R}$.
+
+#+ATTR_LATEX: :options {Komplemen"armenge}
+#+begin_definition
+Seien $A,M$ Mengen und $A\subseteq B$ so ist $A^c = M\setminus A$ und heisst
+*Komplement"armenge* zu $M$.
+#+end_definition
+
+Seien $A,B,M$ Mengen und $A\subseteq M$ und $B\subseteq M$, so gilt:
+#+begin_relation 
+ 1) $(A\cup B)^c = A^c \cap B^c$
+ 2) $(A\cap B)^c = A^c \cup B^c$
+ 3) $(A^c)^c = A$
+ 4) $A\cup A^c = M$
+#+end_relation
+
+#+begin_notte
+Es gelten auch alle Identit"aten f"ur Mengen.
+#+end_notte
+
+
+** Abbildungen zwischen Mengen
+#+ATTR_LATEX: :options {Abbildung}{}
+#+begin_definition
+Seien $X,Y$ Mengen. Eine Abbildung $f$ von $X$ nach $Y$ (Bez: $f:X\rightarrow
+Y$) ist eine Vorschrift, die jedem Element $x\in X$ ein Element von
+$y\in Y$ Zuordnet.
+#+end_definition
+
+
+#+begin_notation
+Man schreibt: $x\mapsto f(x)$ - ''x wird auf $f(x)$ abgebildet'' = ''dem $x\in
+X$ wird ein $f(x)\in Y$ zugeordnet.''
+#+end_notation
+
+#+ATTR_LATEX: :options \
+#+begin_exa 
+ - $f(t)=t^2+1$ definiert eine Abbildung $f: \mathbb{R}\mapsto \mathbb{R}, t\mapsto f(t)=t^2+1$
+ - $g(t)= \frac{t^2+1}{t-1}$ definiert eine Abbildung $g: \mathbb{R}\setminus\{
+   1\}\mapsto \mathbb{R}, t\mapsto  \frac{t^2+1}{t-1}$
+ - $h: S=\{\text{Teilnehmer der Vorlesung}\}\mapsto N, s\mapsto Geburtsjahr(s)$
+#+end_exa
+
+*** Spezielle Abbildungen
+#+begin_relation 
+ 1) F"ur jede Menge $X$ ist die *Indentit"atsabbildung* auf $X$ definiert durch $Id_x:X\mapsto X, x\mapsto x$.
+ 2) Gegeben seien Mengen $A,B$. Die Abbildung $\pi_A: A\times B \mapsto A, (a,b)
+    \mapsto a$ heisst *Projektionsabbildung* von $A\times B$ auf $A$.
+ 3) Seien $X,Y$ Mengen, sei $y_0 \in Y$. Dann heisst die Abbildung $f: X\mapsto
+    Y, x\mapsto y_0$ eine *konstante Abbildung* (mit dem wert $y_0$).
+#+end_relation
+
+#+ATTR_LATEX: :options \
+#+begin_exa 
+ - Identit"atsabbildung: $f(x)=x$
+ - konstante Abbildung: $f(x)=1$
+ - Projektionsabbildung: $f(x,y)=x$
+#+end_exa
+
+*** Bild und Urbild
+#+ATTR_LATEX: :options {Bild und Urbild einer Funktion}{}
+#+begin_definition
+Sei $f: X\mapsto Y$ eine Abbildung.
+ - Sei $A\subseteq X$. Dann heisst $f(A):=\{f(a)|a\in A\}$ das Bild von A.
+ - Sei $B\subseteq Y$. Dann heisst $f^{-1}(B):=\{a\in A|f(a)\in B\}$ das Urbild von $B$.
+#+end_definition
+
+#+begin_notte
+Das Bild und das Urbild f"ur eine /Menge/ einer Funktion ist wieder eine /Menge/.
+#+end_notte
+
+
+#+begin_notte
+$f^{-1}$ ist keine Abbildung, sonder nur ein formales Symbol!
+#+end_notte
+
+*** Einige Eigenschaften von Funktionen
+Seien $X,Y$ Mengen, $f: X\mapsto Y$ eine Abbildung. $f$ heist:
+#+begin_relation 
+ 1) *Injektiv*, wenn f"ur $x\in X\not = x' \in X$ gilt: $f(x) \not = f(x')$
+    * Keine Verklebung von Punkten!
+ 2) *Surjektiv*, wenn f"ur $y\in Y$ ein $x\in X$ existiert mit $f(x)=y$.
+    * Keine Abbildung auf eine echte Teilmenge von $Y$!
+ 3) *Bijektiv*, wenn $f$ injektiv und surjektiv ist.
+#+end_relation
+
+#+ATTR_LATEX: :options \
+#+begin_exa 
+ 1. $f: \mathbb{R} \implies \mathbb{R}, t\mapsto t^2$ 
+    - ist nicht injektiv: 
+$-1\mapsto 1$
+    - ist nicht surjektiv: f"ur $-1\in \mathbb{R}$ gibt es kein $t\in\mathbb{R}$
+      mit $t^2=-1$
+ 2. $g: \mathbb{N}\mapsto\mathbb{Z}, n\mapsto-n$
+    - ist injektiv: $m\ne n\implies g(m)=-m \ne -n = g(n)$
+    - ist nicht surjektiv: f"ur $1\in \mathbb{Z}$ gibt es kein $n\in \mathbb{N}$
+      mit $-n=1$
+ 3. $h: \mathbb{R}\mapsto\mathbb{R},t\mapsto t^3$ ist Bijektiv ("Ubung)
+#+end_exa
+
+*** Inverse Abbildung zu einer bijektiven Abbildung
+#+ATTR_LATEX: :options {Inverse Abbildung}{}
+#+begin_definition
+Sei $f:X\mapsto Y$ bijektiv. Sei $y\in Y$. Definiere eine Abbildung $f^{-1}:
+Y\mapsto X$ so: $f^{-1}(y)=x$ mit der Eigenschaft $f(x)=y$.
+#+end_definition
+
+Dies ist wohldefiniert (diese Vorschrift definiert tats"achlich eine Abbildung)
+weil:
+
+#+begin_relation 
+ - Das x mit der gew"unschten Eigenschaft existiert f"ur jedes $y\in Y$, weil
+   $f$ surjectiv ist.
+ - F"ur jedes $y\in Y$ existiert h"ochstens ein $x\in X$ mit der gew"unschten
+   Eigenschaft, weil $f$ injektiv ist.
+#+end_relation
+
+#+begin_notte
+Wenn die Abbildung $f$ bijektiv ist, hat $f^{-1}(A)$ f"ur ein $A\subseteq Y$ a
+priori zwei Bedeutungen:
+ - Urbild von $A$ unter f
+ - Bild von $A$ von $f^{-1}$
+
+Wenn $f$ bijektiv ist, stimmen aber diese Mengen "uberein. (Bew. "Ubung)
+
+*Aber*: Wenn $f$ nicht bijektiv ist, hat $f^{-1}$ nur einen Sinn: Urbild!
+#+end_notte
+
+*** Verkn"upfung von Abbildungen
+#+ATTR_LATEX: :options {Verkn"upfung}{}
+#+begin_definition
+$f: X\mapsto Y, g: Y\mapsto Z$ ist die verkn"upfung $g\circ: X\mapsto Z$ definiert
+als $g\circ f(x)=g(f(x))$. Diagramme Siehe V2_1.
+#+end_definition
+
+
+Die Verkn"upfung hat folgende Eigenschaften:
+#+begin_relation 
+ 1) Sie ist Assoziativ: $h\circ (g\circ f) = (h \circ g) \circ f$ f"ur alle Abb. $f: X\mapsto Y, g:Y\mapsto Z$, $h:Z\mapsto V$
+ 2) F"ur jede abbildung $f: X\mapsto Y$ gilt: $f\circ id_X=id_Y\circ f = f$.
+ 3) Wenn $f:X\mapsto Y$ bijektiv ist, dann gilt: $f\circ f^{-1}=id_Y$:
+    - $f^{-1}\circ f=id_X$ weil: $f(f^{-1}(y))=y$:
+    - $f^{-1}(f(x))=x'$ mit $f(x')=f(x)\implies x=x'$ wenn /Bijektiv/
+#+end_relation
+
+*** Kommutative Diagramme
+Siehe V2_2: 
+ 1) Dieses Diagramm heist kommutativ, wenn $h=g\circ f$.
+ 2) kommutativ wenn $g\circ f=h\circ k$
+
+*** Eingeschr"ankte Abbildungen
+#+ATTR_LATEX: :options {Einschr"ankung}{}
+#+begin_definition
+Sei $f: X\mapsto Y$ eine Abbildung.\\
+Die Einschr"ankung von $f$ auf eine Teilmenge $A\subseteq X$ ist die  Abbildung:
+$f|_A:\begin{matrix}A\mapsto Y\\ a\mapsto f(a)\end{matrix}$
+#+end_definition
+
+#+begin_exa 
+$f: \mathbb{R}\mapsto \mathbb{R}, t\mapsto t^{2}$ ist nicht injektiv, $f|_{[0,
+\infty)}$ ist injektiv.
+#+end_exa
+
+*** Quantoren
+#+ATTR_LATEX: :options {Quantoren}{}
+#+begin_definition
+ - f"ur alle $x$ in $X$ - $\forall x \in X$
+ - es existiert $x \in X$ - $\exists x \in X$
+#+end_definition
+
+#+begin_exa 
+$f:X\mapsto Y$ ist surjektiv, wenn $\forall y \in Y \exists x\in X$ mit $f(x)=y$.
+#+end_exa
+
+F"ur die Negation der Quantoren gilt:
+#+begin_relation 
+ - $\neg(\forall x\in X : A(x)) = \exists x\in X : \neq A(x)$
+ - $\neg(\exists x\in X : A(x)) = \forallx\in X : \neq A(x)$
+#+end_relation
+
+#+ATTR_LATEX: :options [] \label{} \
+#+begin_exa 
+$f: X\mapsto Y$ ist surjektiv $\iff \forall y\in Y \exists x\in X : f(x)=y$.\\
+Also: $f: X\mapsto Y$ ist *nicht* surjektiv $\iff \exists y\in Y \forall x\in X : f(x)\not=y$.
+#+end_exa
+
+** Schlagworte
+ - Venn Diagram - Kreise und Schnittmengen
+ - Zeigen von "Aquivalenz zweier Zusammengeseten Mengen:
+   - Wahrheitstafel
+   - Zur"uckf"uhren auf Aussagenlogik
+ - Zeigen das $p,q,r$ "aquivalent sind:
+   - $p\implies q \implies r \implies q$
+ - /Injektivit"at/ zeigen:
+   - nicht I. wenn Gegenbeispiel existiert
+   - Zeigen das Funktion streng monoton steigt.
+ - /Surjektivit"at/ zeigen:
+   - nicht S. wenn Gegenbeispiel existiert
+   - Zeigen das Funktion streng monoton steigt und gegen $+-\infty$ strebt.
+ - $A\setminus (A\setminus B) = A \cap B$
+ - Beweise mit Abbildungen $M$ sei Menge, $f$ sei Abbildung:
+   - $y \in f(M) \implies \exists x \in M : f(x)=y$
+
+* Logik und Beweisf"uhrung
+Mathematik operiert mit *Aussagen*.
+
+#+ATTR_LATEX: :options {Aussage}{}
+#+begin_definition
+Eine Aussage ist eine Behauptung, die Wahr oder Falsch sein kann.
+#+end_definition
+
+#+ATTR_LATEX: :options [Wahrheitswerte] \label{}
+#+ATTR_LATEX: :options \
+#+begin_notation
+  - 1 :: wahr
+  - 0 :: falsche
+#+end_notation
+
+$A,B$ seien Aussagen, dann kann man folgende Aussagen betrachten:
+#+begin_relation 
+ - ''nicht $A$'': $\neg A$
+| $A$      | 0 | 1 |
+|----------+---+---|
+| $\neg A$ | 1 | 0 |
+
+ - Vernk"upfungen
+| $A$ | $B$ | $\neg A$ | $A\wedge B$ | $A \vee B$ | $A\implies B$ |
+|-----+-----+---------+-------------+------------+------------------|
+|   0 |   0 |       1 |           0 |          0 |                1 |
+|   0 |   1 |       1 |           0 |          1 |                1 |
+|   1 |   0 |       0 |           0 |          1 |                0 |
+|   1 |   1 |       0 |           1 |          1 |                1 |
+
+ - ''A "aquivalent zu B'':  $A\iff B$
+| $A$ | $B$ | $\iff A$ |
+|-----+-----+----------|
+|   0 |   0 |        1 |
+|   0 |   1 |        0 |
+|   1 |   0 |        0 |
+|   1 |   1 |        1 |
+
+#+end_relation
+
+#+begin_exa 
+F"ur ein Element $x\in X$ k"onnen wir Aussagen betrachten:
+ 1) $A(x)=x\in A$
+ 2) $B(x)=x\in B$
+$A(x)\wedge B(x)=x\in (A\cap B)$
+#+end_exa
+
+** Identit"aten der Aussagenlogik
+#+begin_relation 
+ 1) Direkter Beweis 
+    - $(A\implies B) = (\neg A)\vee B$
+    - Vorraussetzung $\rightarrow$ logische Aussage $\rightarrow$ Behauptung
+ 2) Beweis in Schritten
+    - $((A\implies B)\wedge (B\implies C))\implies (A\implies C)$ \\
+       \rightarrow{} Konstant $=1$ (/Tautologie/)
+ 3) Beweis durch Kontraposition
+    - $(A\implies B) \iff (\neg B \implies \neg A)$ - /Tautologie/
+#+end_relation
+
+** Widerspruchsbeweis
+Wenn wir die Konsequenz aus der Negation der zu beweisenden Aussage und die
+Pr"amisse zu einem widerspruch f"uhren so ist die Aussage bewiesen, denn:
+#+begin_relation 
+\[(A\wedge \neg A)=0\]
+#+end_relation
+
+
+Wir wollen $A\implies B$ zeigen.
+Nehmen an $\neg B$ und leiten her:\\
+#+begin_relation 
+$(\neg B \wedge A)\implies 0$, also $\neg B\wedge A = 0$, und daher $A\implies
+B$.
+#+end_relation
+
+#+ATTR_LATEX: :options {Satz von Euklid}{}
+#+begin_theo 
+Es gibt unendlich viele Primzahlen.
+#+end_theo
+
+#+ATTR_LATEX: :options \
+#+begin_proof
+ 1) Nehmen wie an, es gibt nur endlich viele Primzahlen. $p_1, ..., p_n$.
+ 2) Betrachte $n=p_1\cdot p_2\cdot ... \cdot p_n + 1$. $n$ geteilt durch jede
+    von den Primzahlen $p_1, ..., p_n$ gibt Rest $1$.
+ 3) Also ist $n$ eine Primzahl, aber $n\not=p_1 ... p_n$ weil gr"osser.
+ 4) Folglich enth"alt die Menge ${p_1,...,p_n}$ nicht alle Primzahlen. 
+\indent\indent \rightarrow{} Das ist ein *Widerspruch*. ($(A\wedge \neg A) = 0$)
+#+end_proof
+
+
+#+begin_exa 
+Wir werden die Aussage: wenn $q$ eine gerade Primzahl ist $\implies q=2$
+beweisen.
+
+#+ATTR_LATEX: :options [Direkter Beweis] \label{} \
+#+begin_proof
+ 1) $q$ ist gerade $\implies q$ ist durch $2$ Teilbar f"ur $k\in\mathbb{N}$
+ 2) $q$ ist aber eine Primzahl $\implies$ einer der Faktoren in $2\cdot k$ ist
+    gerade $1$, $2\not= 1$
+ 3) $\implies k=1, q=2$
+#+end_proof
+
+#+ATTR_LATEX: :options [Kontraposition] \label{} \
+#+begin_proof
+Wir m"ussen zeigen: $q\not= 2\implies$ ($q$ ungerade) $\vee$ ($q$ keine
+Primzahl). Es reicht zu zeigen: ($q\not=2)\wedge(q$ ist eine Primzahl)
+$\implies q$ ist ungerade!
+ 1) Wenn $q$ gerade ist, $q\cdot 2k$, also ist $k>1$
+ 2) also $q\not= 2$
+#+end_proof
+
+#+ATTR_LATEX: :options [Widerspruchsbeweis] \label{} \
+#+begin_proof
+Annahme: $q$ ist gerade, $q$ ist eine Primzahl, $q\not= 2$. Wir wollen einen
+Widerspruch herleiten.
+
+ 1) da $q$ gerade ist, gilt $q=2\cdot k$ f"ur ein $k\in \mathbb{N}$
+ 2) da $q\not= 2$, gilt $k>1$
+ 3) aber $q$ ist prim, also kann $q$ kein Produkt von zwei Zahlen sein! $\lightning$
+#+end_proof
+#+end_exa
+
+* Komplexe Zahlen
+Idee: Man m"ochte Quadratische Gleichungen ohne reelle Nullstellen trotzdem
+l"osen, also erweitert man die reellen Zahlen.
+
+#+begin_relation 
+Die pototypische Quadratische Gleichungen ohne reelle L"osungen ist: $x^2+1 =
+-1$.\\
+Man f"ugt K"unstlich die Zahl $i$ hinzu mit $i^2=-1$, m"oglichst unter
+Beibehaltung der "ublichen Rechenregeln: man braucht also die Zahlen $b\cdot i :
+b\in \mathbb{R}$ und $a+b\cdot i :  a,b\in \mathbb{R}$.
+#+end_relation
+
+Was passiert, wenn man solche Zahlen miteinander multipliziert ''als ob'' sie
+normale Zahlen w"aren: 
+#+begin_relation 
+$(a+bi)\cdot(c+di)=ac+bc\cdot i+ad\cdot i+(-bd)=(ac-bd)+(bc+ad)\cdot i$ f"ur $a,b,c,d\in \mathbb{R}$
+#+end_relation
+
+Addieren kann man solche Ausdr"ucke auch:
+#+begin_relation 
+$(a+bi)+(c+di)=(a+c)+(b+d)\cdot i$
+#+end_relation
+
+#+ATTR_LATEX: :options {Komplexe Zahlen}{}
+#+begin_definition
+Die komplexen Zahlen $\mathbb{C}$ sind die Menge der Paare $(a,b)\in
+\mathbb{R}^2$ versehen mit der Addition $(a,b)+(c,d)=(a+c,b+d)$ und der
+Multiplikation $(a,b)\cdot (c,d)=(ac-bd, bc+ad)$.
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{} \
+#+begin_notation
+ - Statt $(a,b)$ schreibt man auch $(a+bi)\in \mathbb{C}$.
+ - $i:=(0,1)=0+1\cdot i$:
+   - nach Multiplikation erf"ullt $i^2=-1$
+#+end_notation
+
+Man "uberpr"uft, dass die "ublichen Rechenregeln aus $\mathbb{R}$ weiterhin
+gelten (/K"orperaxiome/): F"ur $z_1, z_2, z_3 \in \mathbb{C}$ gilt, z.B.:
+#+begin_relation 
+ - $z_1\cdot (z_2+z_3)=z_1z_2+z_1z_3$
+ - $z_1\cdot (z_2\cdot z_3)=(z_1\cdot z_2)\cdot z_3$
+ - $z_1 + (z_2 + z_3)=(z_1 + z_2) + z_3$
+#+end_relation
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_notte
+$(\mathbb{R},+,\cdot)\subsetneq (\mathbb{C},+,\cdot)$ auf nat"urliche Weise als
+der der Form $a+0\cdot i = (a,0)$, $a\in \mathbb{R}$.
+#+end_notte
+
+#+ATTR_LATEX: :options {Real- und Imagin"aranteil}{}
+#+begin_definition
+F"ur $z=a+b\cdot i\in \mathbb{C}$ heisst:
+ - $a:=:Re(z)$ Realanteil von $z$
+ - $b:=:Im(z)$ Imagin"aranteil von $z$
+
+Also ist $z=Re(z)+ Im(z)\cdot i$.
+#+end_definition
+
+#+ATTR_LATEX: :options {Rein Imagin"are Zahlen}{}
+#+begin_definition
+Die Zahlen der Form $b\cdot i : b\in \mathbb{R}$ heissen *rein Imagin"ar*.
+#+end_definition
+
+F"ur reele Zahlen wissen wir: $\forall a\in \mathbb{R}$ mit $a\not= 0 \exists
+a^{-1}\in \mathbb{R} mit $a*a^{-1}=1$. Gilt das auch in $\mathbb{C}$ ?
+
+#+ATTR_LATEX: :options {Komplexe Konjugation}{}
+#+begin_definition
+F"ur $z\in \mathbb{C}$ heisst die Zahl $\overline{z}:=a-bi$ die komplex
+konjugierte Zahl zu $a+bi$.
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+$\overline{1+i}=1-i$
+#+end_exa
+
+#+begin_relation 
+$z*\overline{z}=(a+bi)(a-bi)=a^2+b^2\geq -$ mit Gleichheit genau dann, wenn $z=0$.
+#+end_relation
+
+#+ATTR_LATEX: :options {Betrag der Komplexen Zahl}{}
+#+begin_definition
+$|z|:=\sqrt{x\cdot \overline{z}}=\sqrt{a^2+b^2}$ mit $z=a+bi$.
+#+end_definition
+
+** Inverses zu einer komplexen Zahl
+Das Inverse zu $z\not= 0$:
+#+begin_relation 
+$z\cdot \frac{\overline{z}}{|z|^2}=1$ \\
+Also: $\forall z\not= 0 \exists z^{-1} = \frac{\overline{z}}{|z|^2}$ mit $z \cdot z^{-1}}=1$
+#+end_relation
+
+#+ATTR_LATEX: :options [] \label{} \
+#+begin_exa 
+$(1+i)^{-1}=\frac{1-i}{2}$
+#+end_exa
+
+Mnemonische Rechenregel, Multipliziere mit dem Inversen: 
+#+begin_relation 
+$\frac{1}{1+i}=\frac{1-i}{(1+i)(1-i)}=\frac{1-i}{2}$
+#+end_relation
+
+** Geometrische Interpretation von $\mathbb{C}$
+Siehe Zeichung $C_1$.
+
+#+begin_relation 
+ - Addition: als Addition von Vektoren
+ - Betrag: L"ange des Vektors
+ - $\varphi$ - Winkel zwischen der reellen Achse und dem Vektor der $z$ entspricht,
+   gez"ahlt gegen den Urzeigersinn.
+#+end_relation
+
+Es folgt:
+#+begin_relation 
+$a=|z|\cdot \cos(\varphi)$ und $b=|z|\cdot \sin(\varphi)$
+#+end_relation
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_notte
+$\varphi$ ist nicht eindeutig bestimmt, sondern bis auf Addition von eines
+vielfachen von $2\pi$.
+#+end_notte
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+$\varphi=\frac{\pi}{4}$ und $\varphi=-\frac{7\pi}{4}$ sind im geometrischen Bild von
+$\mathbb{C}$ "aquivalent.
+#+end_exa
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Der wert von $\varphi$, welcher in $[0, 2\pi)$ liegt, heisst Hauptargument von $z$,
+$arg(z)=\varphi$.\\
+Das Argument von $z$ ist die Menge von allen $\varphi \in R$,4
+$z=|z|(\cos(\varphi)+i\cdot \sin(\varphi))$, $Arg\, z = {\varphi \in R : |z|(\cos(\varphi)+i\cdot \sin(\varphi))}$.
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_notte
+$Arg\, z= {arg(z)+2\pi\cdot k : k\in \mathbb{Z}}$
+#+end_notte
+
+#+ATTR_LATEX: :options [] \label{} \
+#+begin_exa 
+Seien $z_1=|z_1|\cdot \cos(\varphi_1)+i\cdot \sin(\varphi_1)$, $z_2=|z_2|\cdot
+\cos(\varphi_2)+i\cdot \sin(\varphi_2)$ zwei komplexe Zahlen.\\
+
+So gilt: $z_1\cdot z_2 = |z_1|\cdot |z_2|(\cos(\varphi_1+\varphi_2)+i\cdot \sin(\varphi_1 +
+\varphi_2))$
+#+end_exa
+
+#+begin_relation 
+Bei der Multiplikation von komplexen Zahlen multiplizieren sich die Betr"age,
+und die Argumente addieren sich.
+#+end_relation
+
+F"ur geometrische Interpretation: Siehe $C_2$.
+
+Besonders n"utzlich ist dies f"ur die Multiplikation einer komplexen Zahl vom
+Betrag $1$:
+\begin{align*}
+|z|=1\iff z=\cos(\varphi)+i\cdot \sin(\varphi)$ f"ur ein $\varphi \in \mathbb{R}
+\end{align*}
+
+#+begin_relation 
+Es liegen $\{z\in \mathbb{C} : |z|=1\}$ auf dem Einheitskreis.
+Die Multiplikation mit von komplexen Zahlen Zahlen mit dem Betrag 1 entspricht
+also der Rotation gegen den Urzeigersinn um $\varphi$.
+#+end_relation
+
+** Exponentialform der komplexen Zahlen
+#+ATTR_LATEX: :options [] \label{} \
+#+begin_notation
+ - Exponentialform: $\cos(\varphi)+i\cdot \sin(\varphi):=e^{i\cdot \varphi}$
+ - es gilt $e^{i(\varphi_k)}, k\in\mathbb{R}$ sind die Zahlen auf dem Einheitskreis
+#+end_notation
+
+#+ATTR_LATEX: :options {Exponentialform der komplexen Zahlen}{}
+#+begin_definition
+Die Exponentialform f"ur jede komplexe Zahl $z\in\mathbb{C}$ lautet $z=|z|e^{i\cdot arg\,z}$.
+#+end_definition
+
+Mit dieser Notation folgt:
+#+begin_relation 
+ $(e^{i\varphi})^n=(\cos(\varphi)+i\cdot\sin(\varphi))^2=e^{n\cdot i\cdot
+ \varphi}=\cos(n\varphi)+i\cdot\sin(n\varphi)$ f"ur alle $n\in\mathbb{N}$
+#+end_relation
+
+#+ATTR_LATEX: :options [] \label{}\
+#+begin_exa 
+\begin{align*}
+\begin{split}
+(\cos(\varphi)+i\pcdot \sin(\varphi))^2 & =\cos^2(\varphi)-\sin^2(\varphi)+2\cdot\sin(\varphi)\cdot\cos(\varphi) \\
+ & = \cos(2\varphi) + 2\sin(2\varphi) \\
+&  \implies 
+\begin{cases}
+\cos(2\varphi)=\cos^2(\varphi)-\sin^2(\varphi) \\
+\sin(2\varphi)=2\cdot\sin(\varphi)\cdot\cos(\varphi)
+\end{cases}
+\end{split}
+\end{align*}
+#+end_exa
+
+** Einscheitswurzeln
+Sei die gleichung $x^n=a$ "uber $\mathbb{R}$ gegeben. Je nach Vorzeichen von
+$a$ und Parit"at von $n$, gibt es Varianten f"ur die Anzahl der L"osungen.
+#+begin_relation 
+In $\mathbb{C}$ hat aber die Gleichung $z^n=a$ f"ur ein $a\in
+\mathbb{C}\setminus \{0\}$ immer genau $n$ L"osungen.
+#+end_relation
+
+Sei $w\in \mathbb{C}$ mit $w^n=a$. Dann gilt $(\frac{z}{w})^n=1$ f"ur jedes
+$z\in \mathbb{C}$ mit $z^n=a$. *Also* l"osen wir erst mal die Gleichung $z^n=1$,
+und dann reduzieren wir den allgemeinen Fall darauf.
+
+#+ATTR_LATEX: :options {Einheitswurzel}{}
+#+begin_definition
+Eine Zahl $z\in \mathbb{C}$ heisst $n\text{-te}$ Einheitswurzel, wenn $z^n=1$.
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proposition
+F"ur jedes $n\geq, n\in\mathbb{N}$ existieren genau $n$
+Einheitswurzeln in $\mathbb{C}$. Sie sind durch die Formel
+$z_k=e^{\frac{2\pi\cdot k\cdot i}{n}},\quad k=0,1,...,n-1$ gegeben.
+#+end_proposition
+
+#+ATTR_LATEX: :options [] \label{} \
+#+begin_proof
+$z_k$ sind $n\text{-te}$ Einheitswurzeln denn:
+\begin{align*}
+z_k^n & = (e^{\frac{2\cdot\pi\cdot k}{n}})^n \\ 
+& = e^{2\pi\cdot k} \\
+& = 1
+\end{align*}
+
+
+Wir m"ussen noch zeigen, dass jede $n\text{-te}$ Einheitswurzel von dieser Form
+ist. \\
+
+Sei $z\in\mathbb{C}$ mit $z^n=1$. Es gilt:
+
+\begin{align*}
+|z|^n & =|z^n|=1 \\
+& \implies |z|=1  \\
+& \implies z=e^{i\cdot\varphi} \tag*{f"ur ein $\varphi\in[0, 2\pi)$}  \\ 
+& \implies 1 = z^n \\
+& = (e^{i\varphi})^n=e^{i\varphi\cdot n} \\
+& =\cos(n\varphi)+i\cdot \sin(n\varphi)
+\end{align*}
+
+Also folgt:
+\begin{gather*}
+\cos(n\varphi)=1,\;\sin(n\varphi)=0 \\
+\implies  n\cdot\varphi = 2\pi\cdot k \tag*{f"ur ein $k\in \mathbb{Z}$} \\ 
+ \implies \varphi = \frac{2\pi\cdot k}{n} \tag*{f"ur ein $k\in \mathbb{Z}$}
+\end{gather*}
+
+
+Da $\varphi$ in $[0,2\pi)\implies 0\leq k < n$.
+#+end_proof
+
+Wenn wir jetzt also eine Gleichung $z^n=a$ l"osen wollen, reicht es, eine
+L"osung $w$ zu finden, die anderen L"osungen bekommt man als $w\cdot z_k,\;
+k=0,...,n-1$ mit $z_k$, der $n\text{-ten}$ Einheitswurzeln: $z^n=a\iff
+(\frac{z}{w})^n=1$.\\
+
+Eine L"osung $w$ kann man folgendermassen finden:
+#+begin_relation 
+
+\begin{align*} 
+\text{Schreiben wir a}\; & =|a|\cdot e^{i\cdot \psi}\; \text{f"ur ein $\psi\in \mathbb{R}$} \\
+\text{Dann gilt: }
+w & =\sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}} \text{ l"ost $w^n=a$} \\
+& \\
+\left(\sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}}\right)^n & = \sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}\cdot n} \\
+& = |a|\cdot e^{i\cdot \psi} \\ 
+& = a
+\end{align*}
+#+end_relation
+
+Gemetrische Interpretation: regul"ares $n\text{-Eck}$.
+
+\newpage
+
+* Lineare Gleichungsysteme
+Wir werden die Bezeichung $K$ f"ur $\mathbb{R}$ oder $\mathbb{C}$ verwenden.
+
+#+ATTR_LATEX: :options {Lineare Gleichung}{}
+#+begin_definition
+Eine Lineare Gleichung "uber $K$ ist eine Gleichung der Form
+$a_1x_1+a_2x_2+...+a_nx_n=b$.\\
+Hierbei sind $x_1,...,x_n$ die Variablen und $a_1,...,a_n,b \in K$, die Koeffizienten.
+#+end_definition
+
+#+ATTR_LATEX: :options {Lineares Gleichunssystem}{}
+#+begin_definition
+Ein Lineares Gleichungsystem ist eine endliche Menge von Gleichungen:
+\[{\displaystyle {\begin{matrix}a_{11}x_{1}+a_{12}x_{2}\,+&\cdots
+&+\,a_{1n}x_{n}&=&b_{1}\\a_{21}x_{1}+a_{22}x_{2}\,+&\cdots
+&+\,a_{2n}x_{n}&=&b_{2}\\&&&\vdots &\\a_{m1}x_{1}+a_{m2}x_{2}\,+&\cdots
+&+\,a_{mn}x_{n}&=&b_{m}\\\end{matrix}}}\]
+#+end_definition
+
+Ein L"osung von diesem Gleichungssystem ist ein \[n\text{-Tupel }
+\left( \begin{matrix} x_{1}\\ \vdots\\ x_{n}\end{matrix} \right) \in K^{n} \]
+dass jede Gleichung erf"ullt. Ein lineares Gleichungssystem (LGS) zu l"osen,
+heisst, alle L"osungen zu finden.
+
+#+begin_relation 
+*Idee*: Man formt das LGS durch Operationen um, die die Menge der L"osungen nicht
+ver"andern. Solche Operationen heissen "Aquivalenzumformungen. Diese sind unter
+anderem: 
+ 1) Multiplikation einer Gleichung mit einer zahl $\alpha\in K\setminus \{0\}$
+ 2) Addierung von einer Gleichung zu der anderen (z.B. Ersetzen der zweiten
+    Gleichung durch die Summe der ersten und zweiten.)
+ 3) Vertauschen von zwei Gleichungen; dies kann man auf Operationen von Typ eins
+    und Zwei zur"ukf"uhren
+#+end_relation
+
+Wir werden ein LGS umformen, um es auf eine Form zu bringen, wo die L"osung
+offensichtlich ist.
+
+Wir beobachten:
+#+begin_relation 
+Es ist "uberflu"ssig, die Variablen mitzuschleppen. Man k"onnte statdessen die
+''Tabellen'' von Koeffizienten umformen.
+#+end_relation
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Eine $M\times N$ Matrix $A$ ist eine Tabelle der Gr"osse $m\times n$, gef"ullt
+mit Elementen aus $K$.  
+\[A=(a_{ij})_{\substack{i=1,\cdots,m \\ j=1,\cdots,n}}\]
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+\[
+  A=\left( \begin{matrix} 1& 1\\ 2& -3\end{matrix} \right)
+\]
+
+Wobei $a_{11} = 1$, $a_{21} = 2$, $a_{12}=1$ und $a_{22}=-3$.
+#+end_exa
+
+#+begin_relation 
+Gegeben ein LGS ($*$), k"onnen wir eine Matrix \[ A=\left( \begin{matrix}
+a_{11}& \cdots & a_{1n}\\ \vdots & & \vdots \\ a_{n1}& \ldots &
+a_{nn}\end{matrix} \right) \] aufstellen. Sie heisst Koeffizientenmatrix des
+LGS. Auch stellen wir \[b=\left( \begin{matrix} b_{1}\\ \vdots
+\\ b_{n}\end{matrix} \right)\]
+eine $m\times 1$ Matrix (Spalte) auf. (Sie
+heisst rechter Teil des LGS). Die Matrix $A'=(A\mid b)$ heisst erweiterte
+Koeffizientenmatrix des LGS ($*$).
+#+end_relation
+
+
+#+ATTR_LATEX: :options {Elementare Zeilenumforumungen}{}
+#+begin_definition
+Die "Aquivalenzumformungen des LGS, die wir vorhin betrachtet haben, entsprechen
+dann folgenden Umformungen von der erweiterten Koeffizientenmatrix: 
+\begin{itemize}
+ \item[1'.] Multiplikation einer Zeile mit $\alpha \in K^\times$
+ \item[2'.] Addieren von einer Zeile zu der anderen.
+\end{itemize}
+Wir werden dann versuchen, die (erweiterten koeffzienten-) Matrizen durch diese
+Umformungen auf eine Form zu bringen, in der man die L"osung leicht ablesen
+kann.
+
+$1'$ und $2'$ heissen elementare Zeilenumforumungen.
+#+end_definition
+
+Weitere Zeilenumformungen, die man aus diesen erhalten kann:
+#+begin_relation 
+ - Vertauschen Zweier Zeilen
+ - Addieren einer Zeile, Multipliziert mit $\alpha \not= 0$
+#+end_relation
+
+Ziel ist eine gegebe erweiterte Koeffizientenmatrix $(A\mid b)$, durch
+Zeilenumformungen zu einer Matrix umzuformen, aus der man die L"osung leicht
+ablesen kann.
+
+#+ATTR_LATEX: :options {Pivotelement}{}
+#+begin_definition
+Gegeben einer Zeile $Z=(a_1,...,a_n)\in K^n$, nennen wir das erste Element
+$a\not= 0$ das Pivotelement.
+Wenn $Z=(0,...,0)$ ist dann gibt es kein Pivotelement.
+#+end_definition
+
+#+ATTR_LATEX: :options {Zeilenstufenform}{}
+#+begin_definition
+Eine Matrix $A$ hat Zeilenstufenform, wenn folgendes gilt:
+ 1) Die Nummern von Pivotlementen der Zeilen von $A$ bilden eine aufsteigende
+    Folge.
+ 2) Die Nullzeilen, falls existent, stehen am Ende.
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{} \
+#+begin_exa 
+#+attr_latex: :mode math :environment pmatrix
+| 0 | $a_{12}$ | $a_{13}$ |
+| 0 |        0 | $a_{23}$ |
+| 0 |        0 | 0        |
+
+#+end_exa
+
+#+ATTR_LATEX: :options {Gauss}{}
+#+begin_theo 
+Jede Matrix kann durch elementare Zeilenumformungen auf die Stufenform gebracht
+werden.
+#+end_theo
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+Sei $A=\begin{matrix}a_{11}&...&a_{nn}\end{matrix}$. \\
+Wenn $A=0$ - Bewiesen. \\ 
+Wenn $A\not=0$, dann gibt es eine Spalte $\not= 0$. Sei
+$j_1$ die Nummer dieser Spalte. Durch vertausche von Zeilen erreichen wir
+zun"achst $a_{1j_1}}\not= 0$. Multiplaktion der ersten Zeule mit
+$\frac{1}{j_1}$. Jetzt Subtrahiere von jeder Zeile ab der Zweiten die erste
+Zeile multipliziert mit $a_{kj_1}$ ($k=$ Nummer der Zeile). \\
+
+Wir erhalten dann Restmatrix $A_1<A$ und wir wenden das selbe Verfahren auf
+$A_1$ an. Da $A_1$ weniger Zeilen hat, stoppt der ganze Prozess.
+
+#+begin_notte
+Nach diesem Verfahren gilt sogar: Pivotelemente sind alle $=1$1
+#+end_notte
+#+end_proof
+
+
+#+begin_exa 
+\begin{align*}
+  & \begin{gmatrix}[p]
+      1 & 2 \\
+      3 & 4
+      \rowops
+      \add[-3]{0}{1}
+    \end{gmatrix} \\
+  \Rightarrow & \begin{gmatrix}[p]
+      1 & 2 \\
+      0 & -6
+      \rowops
+      \mult{1}{\scriptstyle\cdot-\frac{1}{6}}
+    \end{gmatrix} \\
+  \Rightarrow & \begin{gmatrix}[p]
+      1 & 2 \\
+      0 & 1
+      \rowops
+      \add[-2]{1}{0}
+    \end{gmatrix} \\
+  \Rightarrow & \begin{gmatrix}[p]
+      1 & 0 \\
+      0 & 1
+    \end{gmatrix}
+\end{align*}
+#+end_exa
+
+#+ATTR_LATEX: :options {Reduzierte Zeilenstufenform}{}
+#+begin_definition
+Nachdem wir die Zeilenstufenform mit Pivotelementen $=1$ erreicht haben, k"onnen
+wir durch weitere Zeilenumformungen die eintr"age zu Null f"uhren, die oberhalb
+von Pivotelementen stehen; Die Finalform heisst dann *reduzierte
+Zeilenstufenform*.
+#+end_definition
+
+Das entsprechende Verfahren zum L"osen von LGS sieht so aus:
+#+begin_relation 
+ 1) Bringe die erweiterte Koeffizientenmatrix auf die reduzierte
+    Zeilenstufenform: \\
+    Die Spalten mit den Pivotelementen in dieser reduzierten Zeilenstufenform
+    nennen wir Basispalten.
+ 2) Zwei F"alle:
+    1. Letzte Spalte des ist eine Basispalte - in diesem Fall hat das LGS keine
+       L"osungen, da eine Gleichung $0=1$ entsteht.
+    2. Die letzte Spalte ist keine Basisspalte: \\
+       Das LGS in der reduzierten Zeilenstufenform dr"uckt die Variablen, die zu
+       Basisspalten geh"oren , durch die restlichen (freien) Variablen und den
+       rechten Teil des LGS aus. Alle L"osungen werden dadurch erhalten, dass
+       man f"ur die freien Variablen beliebige Werte in $K$ ausw"ahlt. Die
+       Basisvariablen werden dann durch Freie Variablen ausgedr"uckt.
+#+end_relation
+
+In unserem Beispiel l"asst sich die L"osung so aufschreiben: 
+\\
+
+Errinnerung: ein LGS hatte die erweiterte Koeffizientenmatrix $(A|b)$. Das LGS4
+l"asst sich dann auch so aufschreiben:\\ $:=A\cdot x$, wobei $x=$
+
+
+** Matrizenrechnung
+#+ATTR_LATEX: :options {Matrix-Spaltenvektor Produkt}{}
+#+begin_definition
+Das Produkt von einer $m\times n$ Matrix $A$ und einer Spalte (in dieser
+Reihenfolge) wird definiert durch $A\cdot x =$. In dieser Spalte wird das LGS
+$A\cdot b$.
+#+end_definition
+
+Die Menge von Matrizen der Gr"osse $m\times n$ mit Eintr"agen in $K$ wird durch
+$M(m\times n, k)$ oder $K^{m\times n}$ bezeichnet. Matrizen der Gr"osse $1\times
+n$ heissen Spalten der L"ange $n$. Matrizen der Gr"osse $n\times 1$ heissen
+Zeilen der L"ange $n$.
+
+#+ATTR_LATEX: :options {Addition}{}
+#+begin_definition
+Matrizen gleicher Gr"osse kann man eintragsweise Addieren: $A,B \in K^{m\times
+n} \rightarrow (A+B)_{ij}:=$A_{ij}+B_{ij}$$
+#+end_definition
+
+#+ATTR_LATEX: :options {Multiplikation}{}
+#+begin_definition
+Matrizen kann man mit Zahlen multiplizieren (indem man jeden eintrag mit dieser
+Zahl multipliziert).
+
+$(\lambda \cdot A)_{ij}:=\lambda \cdot A_{ij}$.
+#+end_definition
+
+#+ATTR_LATEX: :options {Produkt}{}
+#+begin_definition
+Wenn die Breite von $A$ mit der H"ohe von $B$ "ubereinstimmt, kann man das
+Produkt $A\cdot B$ definieren: \\
+$A\cdot B:=(A\cdot b_1\; ... \4; A\cdot b_n)$ mit $B=(b_1\; ...\; b_n)$ (Spalten)
+mit $A\cdot B \in K^{p\times n}$
+#+end_definition
+
+
+
+

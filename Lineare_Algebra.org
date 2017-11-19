@@ -945,6 +945,732 @@ $A\cdot B:=(A\cdot b_1\; ... \4; A\cdot b_n)$ mit $B=(b_1\; ...\; b_n)$ (Spalten
 mit $A\cdot B \in K^{p\times n}$
 #+end_definition
 
+** Eigenschaften der Matrix-Multiplikation
+#+ATTR_LATEX: :options [] \label{}
+#+begin_notation
+ - wenn $\alpha_1,...,\alpha_n\in K$ dann notieren wir $\alpha_1+...+\alpha_n :=
+   \sum_{i=1}^{n}{\alpha_i}$
+ - analog $\alpha_1\cdot ...\cdot\alpha_n := \Pi_{i=1}^{n}{\alpha_i}$
+#+end_notation
 
+#+begin_relation 
+Es gilt dann mit $A=(a_{ij})_{\substack{i=1,p}}$ : $(A\cdot
+x))_i=\sum_{j=1}^{m}{a_{ij}\cdot x_j,\, i=1,p}$ \\
+
+Insbesondere gilt: $(A\cdot b_k)_i$ Aber $(A\cdot b_k)_i = (A\cdot B)_{ik}$ und $(b_k)_j=b_jk$
+#+end_relation
+
+#+begin_relation 
+Matrixmultiplikation ist /linear/: $A\cdot (\lambda B_1 + \lambda_2 A B_2)$
+Analog:
+#+end_relation
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+Sei $C=A\cdot (\lambda_1 B_1 + \lambda_2 B_2)$
+#+end_proof
+
+#+begin_relation 
+Die Matrixmultiplikation ist assoziativ: $A\cdot (B\cdot C)=(A\cdot B)\cdot C$
+#+end_relation
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+
+#+end_proof
+
+#+ATTR_LATEX: :options {Einheitsmatrix}{}
+#+begin_definition
+Die Einheitsmatrix der gr"osse $r$ ist die Matrix, die auf der Hauptdiagonale
+(links-oben nach rechts unten) Einsen und sonnst Nullen hat. Beizeichnung $E_r$
+oder $1_r$.
+#+end_definition
+
+#+ATTR_LATEX: :options {Kronecker-Symbol}{}
+#+begin_definition
+Das Kronecker-Symbol ist definiert als: 
+
+Also gilt: $(Er)_{ij}=\delta_{ij}$.
+#+end_definition
+
+# Muss lemma werden!!!
+#+ATTR_LATEX: :options {}{} \ 
+#+begin_theo 
+F"ir alle $A\in K^{p\times m}$ gilt:
+ - $E_p\cdot A=A$
+ - $A\cdot E_m =A$
+#+end_theo
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+
+#+end_proof
+
+
+#+ATTR_LATEX: :options [] \label{Vorsicht!}
+#+begin_notation
+Die Matrix Multiplikation ist nicht Konjunktiv: $A\cdot B\not= B\cdot A$ im
+Allgemeinen, selbst wenn beide Produkte definiert sind und die gleiche Gr"osse
+haben.
+#+end_notation
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+
+#+end_exa
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_notation
+Die $i\text{te}$ Spalten der Einheitsmatrix wird durch $e_i=()$ bezeichnet.
+#+end_notation
+
+#+ATTR_LATEX: :options {Transposition}{}
+#+begin_definition
+Sei $A\in K^{m\times n}$. Die transponierte Matrix $A^{T}\in K^{n\times n}$ ist
+definiert durch $(A^T)_{ij}:=A_{ji}$. Also ist die i-te Zeile der Einheitsmatrix $(e_i)^T$
+#+end_definition
+
+Wie l"ost man nun das LGS $A\cdot x=b$? Man bringt die erweiterte
+Koeffizientenmatrix in die reduzierten Zeilenstufenform.
+
+#+begin_relation 
+Die Basisspalten in der reduzierten Zeilenstufenform sind von der Form, wo $e_i$
+die i-te Spalte der Einheitsmatrix $1_r$ ist. $r <= m$.
+#+end_relation
+
+Wenn die ersten $r$ Spalten Basisspalten sind, dann sieht die reduzierte
+Zeilenstufenform so aus:
+
+
+Dann sehen die L"osungen so aus:
+#+begin_relation 
+ 1) Es gibt keine $\iff$ $b''\not= 0$
+ 2) Wenn $b''=0$, dann sehen die L"osungen so aus: \[x=+\]
+#+end_relation
+
+# TODO: Block
+Proposition: Sei $A\in k^{m\times n}$. Das homogene LGS der Form $L=\{\phi
+t\sep \}$ fuer ein $r\geq 0, \phi$
+
+\rightarrow es gibt $n-r$ freie Parameter, die die Loesungsmenge beschreiben.
+
+*Anmerkung* Ein homogenes LGS $A\cdot x=0$ mit  hat immer eine L"osung $x\not=
+0$ (es gibt mindestens eine freie Variable).
+
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+Finde ein reelles Polynom von Grad 2.
+
+Die Frage ist aequivalent zu dem LGS:
+#+end_exa
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Die Menge der Polynome vom Grad h"ochstens $n$ mit Koeffizienten in $K$ ist
+durch $K[t]_n$ berechnet.
+#+end_definition
+
+* Vektorra"ume
+#+ATTR_LATEX: :options {Vektorraum}{}
+#+begin_definition
+Ein $k$ - Vektorraum $V$ ist eine Menge zusammen mit den Operationen und mit
+folgenden Eigenschaften:
+ - "Addition" $+:\, V\times V \mapsto V, (v_1,v_2)\mapsto v_1+v_2$
+   1) kommutativ
+   2) assoziativ
+   3) $\exists 0 \in V$ mit $0+v=v+0=v$ $v \in V$
+ - "Skalarmultiplikation" $+:\, V\times V \mapsto V, (v_1,v_2)\mapsto v_1+v_2$
+   1) assoziativ
+   2) distributiv bez. addition
+   3) $1\cdot v = v$, $v\in V$
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+ 1) $K$ ist selbst ein Vektorraum mit $+$ und $\cdot$
+ 2) $K^{n}:=K^{n\times 1}$ ist ein K-Vektorraum mit:
+    1) Addition
+    2) Skalarmultiplikation
+ 3) $K^{m \times n}$, eine Matrix der Gr"osse $m\times n$ mit Eintr"agen in K,
+    ist ein K-Vektorraum mit Addition und Skalarmultiplikation von Matrizen:
+ 4) $K[t]_n$ ist ein K-Vektorraum:
+ 5) $K[t]:=\{a_n\cdot \}$ - alle Polynome mit Koeffizienten in $K$ bilden einen
+    K-Vektorraum mit gleichen Operatoren.
+ 6) Sei $X$ X eine Menge (z.B. $X=\mathbb{R}$) $Fun(X,K)=\{\}$ ist ein K-Vektorraum:
+    1) Addition $(f_1 + f_2)(x):= f_1(x)+ f_2(x)$, $x\in X$
+    2) Miltiplikation
+ 7) Sei $A\in K^{m\times n}$. Die L"osungen von dem homogenen LGS bilden einen
+    Vektorraum:
+    - Wenn $x_1,x_2$ L"osungen sind, dann gilt: Also ist die Menge der
+      L"osungen auch ein Vekorraum bzgl. der Operatoren aus $K^n$
+#+end_exa
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_notte
+Bei der Entwicklung der Vektorraumtheorie ist es oft n"utzlich, an das Beispiel
+$V=K^n$ zu denken.
+#+end_notte
+
+** Vektorraumtheorie
+Sei $V$ ein K-Vektorraum.
+
+#+ATTR_LATEX: :options {Linearkombination}{}
+#+begin_definition
+Seien $v_1, v_2$. Die Linearkombination mit Koeffizienten ist der Vektor.
+#+end_definition
+
+#+ATTR_LATEX: :options {Triviale Linearkombination}{}
+#+begin_definition
+Eine Linearkombination heist trivial wenn $\lambda_1 = \lambda_2 = ... =
+\lambda_n = 0$. (/Nichttrivial/ wenn mindestens ein $\lambda_i\not= 0$).
+#+end_definition
+
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Die Menge der Vektoren heist linear Unabh"angig wenn: $$ (Nur die Triviale
+linearkombination ergibt 0). Andernfalls heist die Menge linear abh"angig."
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+$\begin{pmatrix}1\\0\end{pmatrix}\begin{pmatrix}0\\1\end{pmatrix}$
+#+end_exa
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+$\{v_1,v_2\}$ sind linear abhaengig wenn sie Proportional sind.
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+
+#+end_proof
+
+#+end_exa
+
+# TODO Black
+*Lemma* Die Menge ist linear abh"angig. $v_i$ ist eine Linearkombination von $$
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+Wenn $v_i=\lambda_1 v_1$, dann $0=$ Denn $-1$ ist ein nicht-trivialer
+Linearfaktor.
+
+$(\implies)$ Nach Definition gibt es eine nichttriviale Linearkombination: als
+$\exists i : \lambda_i \not= 0$ Also gilt  folglich 
+#+end_proof
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_notte
+Eine L"osung des LGS $Ax=b$ ist eine Spalte $$ mit 
+Deis heisst, das LGS $Ax=b$ zu l"osen ist genau linearkombinationen von spalten
+zu finden, welche $b$ ergeben.
+#+end_notte
+
+*Lemma* Seien die Vektoren linear unabh"angig. Ein Vektor $v$ ist genau dann
+eine Linearkombination von $v_1,...,v_n$ wenn linear abh"angig ist.
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+($\implies$) Sei Dann gilt , also ist linear ab"angig.
+Sei .. linear abh"angig  Dann 
+
+Es gilt: $\lambda \not= 0$ (wenn  .. linearunabh"angig.) Also gilt $v=-\lambda_1$
+#+end_proof
+
+*Lemma* Sei $v=\lambda$ eine Linearkombination von $v_1,...,v_n$. Diese
+Darstellung ist eindeutig ganau dann, wenn linear unabh"angig sind.
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+$(\implies)$ Sei die Darstellung eindeutig $v=..$ Wenn jetzt $$, dan gilt $v=$
+Eindeutigkeit der Darstellung ergibt:
+
+Seien $v_1,..,v_n$ linear unabh"angig, sei 
+Dann gilt: $\rightarrow$ lineare Unabhaengigkeit von erzwingt Korrolar: Wenn die
+Spalten von $A$ linear unabhaenig sind, hat das LGS $Ax=b$ h"ochstens eine
+L"osung, folglich hat $Ax=0$ genau eine L"osung x=0.
+#+end_proof
+
+** Geometrische Deutung der linearen Abh"angigket
+#+ATTR_LATEX: :options [zu geometrischer Interpretation] \label{}
+#+begin_notte
+Wichitige Beispiele von Vektorr"aumen sind: $V=\mathbb{R}^2$ (Ebene),
+$V=\mathbb{R}^3$ (3D-Raum).
+#+end_notte
+
+Seien $v_1, v_2$ nicht proportional.
+In drei Dimensionen:
+#+begin_relation 
+ - wenn $v_3$ in $\Epsilon$ liegt, dann ist $v_3$ eine Linearkombination $v_1, v_2$
+ - wenn nicht, dann linear Unabhaenig (sonst in Ebene.)
+#+end_relation
+
+** Lineare unabhangigkeit in R"aumenx
+*Proposition* Seien $v_1,...,v_n \in \mathbb{V}$ linear unabhaenig, seien $W_1,
+..., W_n \in \mathbb{V}$ so dass jedes $w_i$ eine Linearkombination von
+$v_1,...,v_n$ ist. Wenn $m>n$, dann sind $w_1,...,w_n$ linear abhaengig.
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+Seien 
+\begin{align*}
+$w_1= a_{11} v_1 + a_{12} v_2 + ... + a_{nn} v_n$ \\
+$w_1= a_{21} v_1 + a_{22} v_2 + ... + a_{nn} v_n$ \\
+
+\end{align*}
+Wir suchen $\lambda$ (*). Das ist "aquivalent zu:
+
+Dies ist nach linearer Unabhaenig von ... "Aquivalent zu:
+
+Das heist (*) ist "aquivalent zu einem homogenen LGS aus $n$ Gleichungen mit $m$
+Variablen. $n<m$, also gibt es eine L"osung ..., die ungleich $0$ ist. $\implies
+sind linear unabh"angig.
+#+end_proof
+
+*Korrolar* Je drei Vektoren in $\mathbb{R}^2$ sind linear unabh"angig, je $n+1$
+Vektoren in $$ sind linear unabh"angig.
+
+#+ATTR_LATEX: :options [von Korrolar] \label{}
+#+begin_proof
+Seien $e_i$ die Spalten der Einheitsmatrix sind linear unabh"angig. 
+
+Dies zeigt auch, dass jeder Vektor in $R$ eine Linearkombination von $e_i$ ist. 
+#+end_proof
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Sei V ein $K-$ Vektorraum, $U\subseteq V$ eine Teilmenge von V. $U$ heist
+untervektorraum wenn:
+ 1) $V\not= \varnothing$
+ 2) 
+ 3) 
+
+In anderen Worten: Eine Teilmenge von $V$ die selbst ein Vektorraum ist bzgl.
+der von $V$ vererbten Operationen.
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_notte
+(1) und (3) \implies $0\in U$
+#+end_notte
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Sei $S \in V$ eine Teilmenge. Der von $S$ erzeugte Vektorraum (lineare H"ulle
+von $S$) $<S>:=\{\}$ (Menge aller Linearkombinationen von Vektoren in $S$).
+
+Alternative Notation: $<s>=\text{span S}$.
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_notte
+$<s>$ ist der kleinste Untervektorraum in $V$, der $S$ enth"alt. 
+$<\varnothing >:=\{0\}$
+#+end_notte
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+Seien $v_1, v_2 \in \mathbb{R}^3$.
+$<v1,v2>$ ist eine Gerade wenn $v_1,v_2$ linear abh. Ist Ebene wenn $v_1,v_2$
+linear unbh.
+#+end_exa
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+$S\in V$ heisst Erzeugendensystem wenn $<S>=V$. (S spannt den Vektorraum auf.)
+
+ist ein Erzeugendensystem: jeder Vektor in $V$ ist eine Linearkombination von:
+
+$\lambda_i$ sind nicht unbedingt eindeutig bestimmt, weil nicht linear unabh.
+vorrausgesetzt waren.
+#+end_definition
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Ein Erzeugendensystem $B\in V$ heisst basis, wenn es linear unabh. ist. Nach dem
+Lemma ueber Eindeutigkeit der koeffzienten der Linearkombination gilt: $B=\{v_1,
+..., v_n\}$ ist eine Basis genau dann, wenn f"ur jeden Vektor $v \in V$ gibt es
+ eindeutig bestimmte Zahlen.
+#+end_definition
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Ein Vektorraum $V$ heisst endlich dimensional, wenn er ein endliches
+erzeugendensystem besitzt. (= wird von endlich vielen Vektoren aufgespannt).
+#+end_definition
+
+#+ATTR_LATEX: :options {}{}
+#+begin_theo 
+Jeder endlichedimensionale Vektorraum $V$  hat eine Basis, Je zwei Basen von $V$
+haben gleich viele Elemente.
+#+end_theo
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+Sei $S$ ein endliches Erzeugendensyste von $V$, Wenn $S$ lin. unabh. ist, ist es
+eine Basis und wir haben gewonnen. Wenn $S$ linear abh"angig ist \implies
+(lemma) einer von den Vektoren in $S$ ist eine Linearkombination von den
+anderen. Das entfernen dieses Vektors "andert die Tatsache nicht, das $S$ den
+Vektorraum aufspannt. Jetzt haben wir eine kleinere Menge und fangen von vorne
+an. Da $S$ endlich ist und durch entfernen Vektoren kleiner wird haben wir am
+Ende eine Basis.
+\rightarrow Wir haben eine Basis.
+
+Seien $S, S'$ zwei Basen. Da $S$ eine Basis ist, ist jedes element von $S'$ eine
+linearkombination in $S$. Die elemente von $S$ sind linear unabh. (weil Basis).
+Wenn also $m>n$, dann folgt aus der Proposition, dass $S'$ linear abh. ist, was
+unm"oglich ist, da $S'$ eine Basis ist. Also $m \seq n$ und $n \seq m$.
+#+end_proof
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Sei $V$ ein endlichdimensionaler Vektorraum. Die Anzahl der Vektoren in einer
+(folglich in jeder) Basis von $V$ heist Dimension von V. /Bezeichung/: $\dim V$.n
+#+end_definition
+
+#+ATTR_LATEX: :options [s] \label{}
+#+begin_exa 
+$\dim K^{n}=n$ weil ... eine Basis bilden. 
+#+end_exa
+
+*Frage*: kannn man eine lineare unabh"angige Menge $S\in V$ zu eine Basis
+erweitern?.
+
+*Proposition* Jede linear unabh"angige Teilmenge $S\in V$ eines
+endlichdimensionalen Vektorraumes $V$ ist in einer maximalen linear
+unabh"angigen Teilmenge enthalten. Eine maximal linear unabh. Teilmenge von $V$
+st eine Basis von $V$.
+
+#+ATTR_LATEX: :options {Maximal linear unabh"angige Teilmengen}{}
+#+begin_definition
+Eine Teilmenge $S'\in V$ ist maximal linear unabh., wenn aus $S$
+linear unabh. folgt.
+#+end_definition
+
+#+ATTR_LATEX: :options [1] \label{}
+#+begin_proof
+Sei linear unabh.
+Zwei F"alle: entweder ist $S$ schon maximal (dann sind wir fertig) oder man kann
+S erweitern. Wenn wir $S$ erweitern k"onnen, f"ugen wir neue Vektoren hinzu, bis
+wir es nicht mehr tun koennen, ohne lineare unabh. zu verletzen.
+
+Dieser Prozess endet, weil eine linear unabh. Teilmenge h"ochstens von $V$
+hoechstens $\dim V$ viele Vektoren enthalten kann. (Prop. "uber lineare unabh.
+von vektoren aus linearkombinartionen der Basis.)
+#+end_proof
+
+#+ATTR_LATEX: :options [2] \label{}
+#+begin_proof
+Sei $S\in V$ maximal linear unabh"angig. Wir habe zu zeigen: $<S>=V$ (Def. einer
+Basis). Wenn ... d.h. aber, aber $S\cup {v}$ ist linear unabh. (lemma) \implies
+$S$ dann nicht maximal.
+#+end_proof
+
+*Korrolar* Man kann jeder lienar unabh. Teilmenge $S\in V$ zu einer Basis
+erweitern.
+
+#+begin_notte
+Wenn $V=K^n, S\in V$ linear unabh. \rightarrow man kann zur erweiterung passende
+Spalten der Einheitsmatrix.
+#+end_notte
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_notte
+Man kann bei der obrigen Proposition das Wort "endlichdimensional" fallen
+lassen, aber es braucht ein bisschen mehr Mengenlehre (Auswahlaxiom).x
+#+end_notte
+
+
+#+ATTR_LATEX: :options {}{}
+#+begin_theo 
+Sei V ein endlichdimensionaler Vektorraum und $U\in V$ ein Untervektorraum. Dann
+gillt: $\dim U \seq \dim V$.  $\dim U = \dim V \iff U=V$
+#+end_theo
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+Sei eine maximale linear unabh. Teilmenge in U. (so eine Teilmenge existiert
+weil V endlich ist.)
+Nach Proposition (2) ist ... eine Basis in $U$, also gilt $\dim U = k$ Erweitere
+... zu einer Basis in V .... 
+
+(2) ... trivial ... Sei ... eine Basis in U. Erweitere sie zu einer Basis in
+$V$. Diese Basis in V muss aber wegen ... gleich viele Vektoren haben. .... ist
+eine Basis in $V$ ...
+#+end_proof
+
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Sei $V$ ein Vektorraum $$ eine Basis in V. Die Zahlen $(\lambda_1,...\lambda_n)$
+heissen Koordinaten bzgl. des Vektors. Die Spalte ... heisst Koordinatenspalte
+dieses Vektors bzgl. $B$.
+Die Definition einer Basis garantiert, dass hierdurch eine Bijektion ... entsteht.
+#+end_definition
+
+*Warnung* Diese Korrespondenz kommt auf die Wahl der Basis an.
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+
+#+end_exa
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+Sei $Ax=0$ ein h. LGS
+#+end_exa
+
+*Aus Uebungen* ...
+
+*Lemma* Die Spalten von $\Phi$ bilden eine Basis in L.
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+Die Spalten von $\Phi$ sind linear unabhaenig. (sonst abb. nicht injektiv)
+
+Ferner spannen sie das ganze L auf (Surjektiv). 
+#+end_proof
+
+*Frage* Gegeben Basen ... in $V$, und einem Vektor $v\in V$. Wie rechnet man die
+Koordinaten bezgl. B in Koordinaten bzgl. B' um.
+
+Sprachweise ist: B ist alte Basis und B' ist neue Basis.
+So gilt:
+#+begin_relation 
+... Dr"ucken wir Vektoren von B' bzgl. Vektoren von B aus: $V$ ...
+wir erhalten $C$ 
+(Die Spalten von C sind Koordinaten der "neuen" Basis bzgl der alten Basis. )
+
+Also gilt: ...
+$\lambda = G\cdot \lambda'$
+#+end_relation
+
+*Frage* Ist $D$ in diesem Fall immer invertierbar? (Ja, aber wir brauchen mehr Theorie.)
+
+** Lineare Abbildungen zwischen Vektorr"aumen
+#+ATTR_LATEX: :options {Lineare Abbildung}{}
+#+begin_definition
+Seien $V, W$ zwei K-Vektorr"aume. Eine Abbildung. $f$ heist linear wenn:
+
+
+(Strukturell kopatiebel.)
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+$W=K^n,\; W=K^n$
+
+Es gilt tats"achlich $A(x_1+x_2) = A\cdot x_1 + A\cdot x_2$...
+#+end_exa
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+$V=\mathbb{R}[x]_5,\;W=\mathbb{R}[x]_4$ Ableitung ist lineare abbildung.
+#+end_exa
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+Relle Funktionen
+#+end_exa
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Sei eine Lineare Abbildung. Der Kern von $f$ wird definiert als:
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+
+#+end_exa
+
+*Beobachtung* Kern von $f$ ist ein Untervektorraum von $V$: ...
+
+Errinerung: f"ur djede Abbildung $f$ existiert ein Bild:
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+Wenn, dann definiert A eine Lineare Abbildung
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+Definitionsgem"ass ist $f: V\mapsto W$ surjektiv genau dann, wenn $lm(f)=W$.
+#+end_proof
+#+end_exa
+
+
+*Proposition* Sei $f:$ linear Es gilt: $f$ injektiv \iff $Ker(f)=\{0\}$
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+$f$ injektiv \iff f"ur $v_1\not= v_2 \in V$ gilt $f(v_1)\not= f(v_2)$
+#+end_proof
+
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Eine Bijektive Lineare Abbilfung $f:V\mapsto W$ heisst Vektorraum Isomorphismus
+zwischen $V$ und $V$. $V$ und $W$ heissen isomorph, wenn es einen
+Vektorraumisomorphismus $f: V\mapsto W$ gibt.
+#+end_definition
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+Sei $V$ ein Vektorraum, $S\subseteq V = \{v_1, v_2, ..., v_n\}$. Die
+Aufspannabbildung ... wird definiert als ...
+#+end_exa
+
+*Korrolar* $S={v_1, ..., v_n} eine Basis \implies ... ein Isomorphismus
+
+*Korrolar* $\dim V = n \iff V$ ismorph $K^n$. (... isomorphe Vektorraume haben
+die gleiche Dimension)
+
+*Beobachung* Wenn ... Isomorphismus \implies ... ist auch ein Isomorphismus.
+
+*** Dimensionsformel
+#+ATTR_LATEX: :options {}{}
+#+begin_theo 
+Sei $f$ eine Lineare Abbildung, sei $V$ endlich dimensional. Dann gilt: 
+#+end_theo
+
+*lemma* sei $f$ wie oben. Sei $U \subseteq \Ker(f)$  Dann ist ... ein Isomorphismus
+
+#+ATTR_LATEX: :options [des Lemmas] \label{}
+#+begin_proof
+... ist surjektiv nach Konstruktion. Inkektiv \iff ... Sei ... . Dann gilt .... 
+#+end_proof
+
+#+ATTR_LATEX: :options [der Dimensionsformel] \label{}
+#+begin_proof
+W"ahle eine Basis ${e_1, ..., e_k}$ in ... und erg"anze sie zu einer Basis
+${e_1, ..., e_n}$ in $V$.
+
+Betrachte jetzt $U:=<e_{k+1}, ..., e_n> \subseteq V$ Untervektorraum. Es gilt
+Lemma. es gilt: ... weil .. eine Basis im Kern ist. und ... weil $u\in U$ also
+...
+
+Das Lemma sagt jetzt ... ist ein Isomorphismus. Ausserdem gilt f"ur ... \implies
+$f(V)=f(V)$ also ... \implies ... 
+
+Nun gilt nach Konstruktion von $U$ ... 
+#+end_proof
+
+*** Summe von Untervektorr"aumen
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Sei ... ein Vektorraum.... 
+#+end_definition
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Die Summe von ... heisst direkt wenn ... 
+#+end_definition
+
+*Bemerkung* ...
+
+In dieser Bezeichnung haben wir im Beseris der Dimensionsformel haben wir den
+Ausgangsraum als eine direkte Summe dargestellt. 
+
+*Bemerkung*: Dimensionsformel ist auch Rangformel.
+
+#+ATTR_LATEX: :options {Rang}{}
+#+begin_definition
+Sei ... linear. Der Rang von $f$ ist $rk...$
+#+end_definition
+
+*Proposition* Sei ... linear, endlichdimensional.
+Dann gilt:
+ - f injekt. ...
+
+Insbesondere gilt: *Korrolar* Ist ..., so ist f injektiv \iff f surjektiv.
+
+*Proposition* Dimensionformel' $\dim (U_1+U_2)=\di..$
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+ist stehts ein Untervektorraum, wenn Untervektorra"me sind. 
+
+Betrachte die Abbildung .. Hierbei ist ... der Verktorraum der Paare mit
+elementweisen operationen. (auch ''A"ussere Summe'', die Kollision der
+Bezeichnunge ... fuer die direkte Summe zweier Unterr"aume/a"ussere Summe ist harmlos.)
+
+Nun gilt ... 
+
+Weiterhin gilt eine Basis in eine Basis in ... eine Basis in ...
+Ferner gilt: ... 
+
+$Ker(f)$ ... (Unterraum)
+#+end_proof
+
+Was hat diese ganze Theorie mit Matrizen zu tun? Intuitiv: Abbildungen sind
+"geometisch" und Matrizen sind Koordinatenform dieser "geometrischen""
+Abbildungen.
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+Strecken in richtung von $l_2$ mit Faktor 2. Wie beschreibt man $f$ in
+Koordinaten?4
+#+end_exa
+
+*** Abbildunngsmatrix
+#+ATTR_LATEX: :options {}{}
+#+begin_definition
+Seien $V,W$ zwei Vektorraume.
+$\Hom_k(v,w)$  ist selbst ein Vektorraum.
+#+end_definition
+
+Seien $V, W$ endlichdimensional, ... Sei  Die Abbildungsmatrix ist definiert als
+Matrix, deren Spalten die Koordinatenspalten von ... bzgl. der Basis $C$ sind. 
+
+*Vorsicht* H"angt von der Wahl der Basen B und C ab ($f$ nicht!)
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+Rotation um $\frac{\pi}{4}$ gegen Urzeigersinn.
+#+end_exa
+
+*Proposition* Seien $V,W,B,C$ wie oben. Dann entsprechen die Abbildungsmatrizen
+ ...den Abbildungen.  gennauer. Die Abbildung. Ist ein Isomorphismus von
+ Vektorra"umen.
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+Aus Definition der $M_C^B$ folgt sofort: ... also ist ... eine lineare
+Abbildung:
+
+Ist injektiv: wenn $f$ dann gilt \rightarrow Kern ist injektiv.
+
+Ist auch surjektiv: sei gegeben: Definiere eine Abbildung... folgendermassen:
+
+Ist linear und es gilt: ...
+#+end_proof
+
+Im Beweis haben wir unter anderem festgestellt:
+#+begin_relation 
+...
+
+Das heisst: wenn $v$
+#+end_relation
+
+#+ATTR_LATEX: :options [] \label{}
+#+begin_exa 
+Wenn $V=K^n, W=K^M$ dann hat $V$ eine Basis ... Sei $A\in K^{m\times n }$ 
+#+end_exa
+
+Seien $V, W, Z$ drei Vektorraume ... Dann gilt ... . Seien $B,C,D$ Basen in
+$V,W,Z$
+
+*Proposition* ...
+#+ATTR_LATEX: :options [] \label{}
+#+begin_proof
+Sei 
+#+end_proof
+
+*Bemerkung* Wenn $V$ ein Vektorraum ist, $B,B'$ zwei Basen, dann Haben wir die
+ Basiswechselmatrix. Bezueglich der alten Basis. Es folgt sofort aus den
+= Definitionen: $S+$
+** Schlagworte:
+ - $A\cdot B$ Zeilen von $A$ mal Spalten von $B$
+ - LGS L"osungen als Vektor!
+   - Keine nicht offensichtlich Schritte ueberspringen!
+   - Paramatervektor und sine Elemente genau definieren! 
+ - k-te Spalte $(A)_k$
 
 

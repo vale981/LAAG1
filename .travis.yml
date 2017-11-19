@@ -1,7 +1,7 @@
 sudo: required
 dist: trusty
 before_install:
-- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-lang-german texlive-generic-recommended texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
+- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-full texlive-lang-german texlive-generic-recommended
 script:
 - mkdir _build
 - pdflatex -interaction=nonstopmode -output-directory _build Lineare_Algebra.tex

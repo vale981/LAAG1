@@ -1,21 +1,16 @@
-language: emacs-lisp
-sudo: false
-cache:
-  - directories:
-      # Cache stable Emacs binaries (saves 1min per job)
-      - "$HOME/emacs/"
-# Allow Emacs snapshot builds to fail and don’t wait for these as they can take
-# a looooong time
-matrix:
-  fast_finish: true
-
-env:
-  - EMACS_VERSION=snapshot
+sudo: required
+dist: trusty
 before_install:
-  - sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended emacs
-  # Configure $PATH: Executables are installed to $HOME/bin
-  - export PATH="$HOME/bin:$PATH"
-  
+- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
 script:
-  # Run your tests
-  - sh ./build.sh
+- mkdir _build
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build Lineare_Algebra.tex
+deploy:
+  provider: releases
+  api_key:
+    secure: [YOUR KEY]
+  file:
+  - _build/Lineare_Algebra.pdf
+  skip_cleanup: true
+  on:
+    tags: true

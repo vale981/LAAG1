@@ -411,7 +411,7 @@ F"ur die Negation der Quantoren gilt:
 \begin{relation}
 \begin{itemize}
 \item \(\neg(\forall x\in X : A(x)) = \exists x\in X : \neq A(x)\)
-\item \(\neg(\exists x\in X : A(x)) = \forallx\in X : \neq A(x)\)
+\item \(\neg(\exists x\in X : A(x)) = \forall x\in X : \neq A(x)\)
 \end{itemize}
 \end{relation}
 
@@ -674,7 +674,7 @@ Die Zahlen der Form \(b\cdot i : b\in \mathbb{R}\) heissen \textbf{rein Imagin"a
 \end{definition}
 
 F"ur reele Zahlen wissen wir: \(\forall a\in \mathbb{R}\) mit \$a\textlnot{}= 0 \(\exists\)
-a\(^{\text{-1}} \in\) \mathbb{R} mit \(a*a^{-1}=1\). Gilt das auch in \(\mathbb{C}\) ?
+\(a^{-1} \in \mathbb{R}\) mit \(a*a^{-1}=1\). Gilt das auch in \(\mathbb{C}\) ?
 
 \begin{definition}{Komplexe Konjugation}{}
 F"ur \(z\in \mathbb{C}\) heisst die Zahl \(\overline{z}:=a-bi\) die komplex
@@ -698,7 +698,7 @@ konjugierte Zahl zu \(a+bi\).
 Das Inverse zu \(z\not= 0\):
 \begin{relation}
 \(z\cdot \frac{\overline{z}}{|z|^2}=1\) \\
-Also: \(\forall z\not= 0 \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}}=1\)
+Also: \(\forall z\not= 0 \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}=1\)
 \end{relation}
 
 \begin{exa}[] \label{} \
@@ -767,7 +767,7 @@ F"ur geometrische Interpretation: Siehe \(C_2\).
 Besonders n"utzlich ist dies f"ur die Multiplikation einer komplexen Zahl vom
 Betrag \(1\):
 \begin{align*}
-|z|=1\iff z=\cos(\varphi)+i\cdot \sin(\varphi)$ f"ur ein $\varphi \in \mathbb{R}
+|z|=1\iff z=\cos(\varphi)+i\cdot \sin(\varphi) \text{f"ur ein} \varphi \in \mathbb{R}
 \end{align*}
 
 \begin{relation}
@@ -796,17 +796,17 @@ Mit dieser Notation folgt:
 \end{relation}
 
 \begin{exa}[] \label{}\
-\begin{align*}
-\begin{split}
-(\cos(\varphi)+i\pcdot \sin(\varphi))^2 & =\cos^2(\varphi)-\sin^2(\varphi)+2\cdot\sin(\varphi)\cdot\cos(\varphi) \\
- & = \cos(2\varphi) + 2\sin(2\varphi) \\
-&  \implies 
+\begin{equation*}
+%\begin{split}
+(\cos(\varphi)+i\cdot \sin(\varphi))^2 =\cos^2(\varphi)-\sin^2(\varphi)+2\cdot\sin(\varphi)\cdot\cos(\varphi) 
+ = \cos(2\varphi) + 2\sin(2\varphi) 
+ \implies 
 \begin{cases}
 \cos(2\varphi)=\cos^2(\varphi)-\sin^2(\varphi) \\
 \sin(2\varphi)=2\cdot\sin(\varphi)\cdot\cos(\varphi)
 \end{cases}
-\end{split}
-\end{align*}
+%\end{split}
+\end{equation*}
 \end{exa}
 
 \subsection{Einscheitswurzeln}
@@ -1004,11 +1004,11 @@ Folge.
 
 \begin{exa}[] \label{} \
 \[
-\begin{ppnmatrix}
- 0 & $a_{12}$ & $a_{13}$ \\
- 0 & 0 & $a_{23}$ \\
+\begin{pmatrix}
+ 0 & a_{12} & a_{13} \\
+ 0 & 0 & a_{23} \\
  0 & 0 & 0 \\
-\end{ppnmatrix}
+\end{pmatrix}
 \]
 \end{exa}
 
@@ -1022,7 +1022,7 @@ Sei \(A=\begin{matrix}a_{11}&...&a_{nn}\end{matrix}\). \\
 Wenn \(A=0\) - Bewiesen. \\
 Wenn \(A\not=0\), dann gibt es eine Spalte \(\not= 0\). Sei
 \(j_1\) die Nummer dieser Spalte. Durch vertausche von Zeilen erreichen wir
-zun"achst \(a_{1j_1}}\not= 0\). Multiplaktion der ersten Zeule mit
+zun"achst \(a_{1j_1}\not= 0\). Multiplaktion der ersten Zeule mit
 \(\frac{1}{j_1}\). Jetzt Subtrahiere von jeder Zeile ab der Zweiten die erste
 Zeile multipliziert mit \(a_{kj_1}\) (\(k=\) Nummer der Zeile). \\
 
@@ -1125,7 +1125,7 @@ Zahl multipliziert).
 \begin{definition}{Produkt}{}
 Wenn die Breite von \(A\) mit der H"ohe von \(B\) "ubereinstimmt, kann man das
 Produkt \(A\cdot B\) definieren: \\
-\(A\cdot B:=(A\cdot b_1\; ... \4; A\cdot b_n)\) mit \(B=(b_1\; ...\; b_n)\) (Spalten)
+\(A\cdot B:=(A\cdot b_1\; \cdots \; A\cdot b_n)\) mit \(B=(b_1\; \cdots\; b_n)\) (Spalten)
 mit \(A\cdot B \in K^{p\times n}\)
 \end{definition}
 
@@ -1228,7 +1228,7 @@ Dann sehen die L"osungen so aus:
 \end{relation}
 
 Proposition: Sei \(A\in k^{m\times n}\). Das homogene LGS der Form \(L=\{\phi
-t\sep \}\) fuer ein \(r\geq 0, \phi\)
+t \}\) fuer ein \(r\geq 0, \phi\)
 
 \(\rightarrow\) es gibt \(n-r\) freie Parameter, die die Loesungsmenge beschreiben.
 
@@ -1253,13 +1253,13 @@ durch \(K[t]_n\) berechnet.
 Ein \(k\) - Vektorraum \(V\) ist eine Menge zusammen mit den Operationen und mit
 folgenden Eigenschaften:
 \begin{itemize}
-\item "Addition" \(+:\, V\times V \mapsto V, (v_1,v_2)\mapsto v_1+v_2\)
+\item Addition \(+:\, V\times V \mapsto V, (v_1,v_2)\mapsto v_1+v_2\)
 \begin{enumerate}
 \item kommutativ
 \item assoziativ
 \item \(\exists 0 \in V\) mit \(0+v=v+0=v\) \(v \in V\)
 \end{enumerate}
-\item "Skalarmultiplikation" \(+:\, V\times V \mapsto V, (v_1,v_2)\mapsto v_1+v_2\)
+\item Skalarmultiplikation \(+:\, V\times V \mapsto V, (v_1,v_2)\mapsto v_1+v_2\)
 \begin{enumerate}
 \item assoziativ
 \item distributiv bez. addition
@@ -1316,7 +1316,7 @@ Eine Linearkombination heist trivial wenn \(\lambda_1 = \lambda_2 = ... =
 
 \begin{definition}{}{}
 Die Menge der Vektoren heist linear Unabh"angig wenn: \$\$ (Nur die Triviale
-linearkombination ergibt 0). Andernfalls heist die Menge linear abh"angig."
+linearkombination ergibt 0). Andernfalls heist die Menge linear abh"angig.
 \end{definition}
 
 \begin{exa}[] \label{}
@@ -1381,7 +1381,7 @@ Seien \(v_1, v_2\) nicht proportional.
 In drei Dimensionen:
 \begin{relation}
 \begin{itemize}
-\item wenn \(v_3\) in \(\Epsilon\) liegt, dann ist \(v_3\) eine Linearkombination \(v_1, v_2\)
+\item wenn \(v_3\) in \(E\) liegt, dann ist \(v_3\) eine Linearkombination \(v_1, v_2\)
 \item wenn nicht, dann linear Unabhaenig (sonst in Ebene.)
 \end{itemize}
 \end{relation}
@@ -1395,16 +1395,15 @@ In drei Dimensionen:
 \begin{proof}[] \label{}
 Seien 
 \begin{align*}
-$w_1= a_{11} v_1 + a_{12} v_2 + ... + a_{nn} v_n$ \\
-$w_1= a_{21} v_1 + a_{22} v_2 + ... + a_{nn} v_n$ \\
-
+w_1= a_{11} v_1 + a_{12} v_2 + ... + a_{nn} v_n \\
+w_1= a_{21} v_1 + a_{22} v_2 + ... + a_{nn} v_n \\
 \end{align*}
 Wir suchen \(\lambda\) (*). Das ist "aquivalent zu:
 
 Dies ist nach linearer Unabhaenig von \ldots{} "Aquivalent zu:
 
 Das heist (*) ist "aquivalent zu einem homogenen LGS aus \(n\) Gleichungen mit \(m\)
-Variablen. \(n<m\), also gibt es eine L"osung \ldots{}, die ungleich \(0\) ist. \$\implies
+Variablen. \(n<m\), also gibt es eine L"osung $\ldots{}$, die ungleich \(0\) ist. \(\implies\)
 sind linear unabh"angig.
 \end{proof}
 
@@ -1432,7 +1431,7 @@ der von \(V\) vererbten Operationen.
 \end{definition}
 
 \begin{notte}[] \label{}
-(1) und (3) \implies \(0\in U\)
+(1) und (3) \(\implies\) \(0\in U\)
 \end{notte}
 
 \begin{definition}{}{}
@@ -1481,7 +1480,7 @@ haben gleich viele Elemente.
 
 \begin{proof}[] \label{}
 Sei \(S\) ein endliches Erzeugendensyste von \(V\), Wenn \(S\) lin. unabh. ist, ist es
-eine Basis und wir haben gewonnen. Wenn \(S\) linear abh"angig ist \implies
+eine Basis und wir haben gewonnen. Wenn \(S\) linear abh"angig ist $\implies$
 (lemma) einer von den Vektoren in \(S\) ist eine Linearkombination von den
 anderen. Das entfernen dieses Vektors "andert die Tatsache nicht, das \(S\) den
 Vektorraum aufspannt. Jetzt haben wir eine kleinere Menge und fangen von vorne
@@ -1492,7 +1491,7 @@ Ende eine Basis.
 Seien \(S, S'\) zwei Basen. Da \(S\) eine Basis ist, ist jedes element von \(S'\) eine
 linearkombination in \(S\). Die elemente von \(S\) sind linear unabh. (weil Basis).
 Wenn also \(m>n\), dann folgt aus der Proposition, dass \(S'\) linear abh. ist, was
-unm"oglich ist, da \(S'\) eine Basis ist. Also \(m \seq n\) und \(n \seq m\).
+unm"oglich ist, da \(S'\) eine Basis ist. Also \(m \leq n\) und aus Symmetriegr"unden folgt auch \(n \leq m\).
 \end{proof}
 
 \begin{definition}{}{}
@@ -1530,7 +1529,7 @@ von vektoren aus linearkombinartionen der Basis.)
 
 \begin{proof}[2] \label{}
 Sei \(S\in V\) maximal linear unabh"angig. Wir habe zu zeigen: \(<S>=V\) (Def. einer
-Basis). Wenn \ldots{} d.h. aber, aber \(S\cup {v}\) ist linear unabh. (lemma) \implies
+Basis). Wenn $\ldots{}$ d.h. aber, aber \(S\cup {v}\) ist linear unabh. (lemma) $\implies$
 \(S\) dann nicht maximal.
 \end{proof}
 
@@ -1550,7 +1549,7 @@ lassen, aber es braucht ein bisschen mehr Mengenlehre (Auswahlaxiom).x
 
 \begin{theo}{}{}
 Sei V ein endlichdimensionaler Vektorraum und \(U\in V\) ein Untervektorraum. Dann
-gillt: \(\dim U \seq \dim V\).  \(\dim U = \dim V \iff U=V\)
+gillt: \(\dim U \leq \dim V\).  \(\dim U = \dim V \iff U=V\)
 \end{theo}
 
 \begin{proof}[] \label{}
@@ -1651,10 +1650,10 @@ Definitionsgem"ass ist \(f: V\mapsto W\) surjektiv genau dann, wenn \(lm(f)=W\).
 \end{exa}
 
 
-\textbf{Proposition} Sei \(f:\) linear Es gilt: \(f\) injektiv \iff \(Ker(f)=\{0\}\)
+\textbf{Proposition} Sei \(f:\) linear Es gilt: \(f\) injektiv $\iff$ \(Ker(f)=\{0\}\)
 
 \begin{proof}[] \label{}
-\(f\) injektiv \iff f"ur \(v_1\not= v_2 \in V\) gilt \(f(v_1)\not= f(v_2)\)
+\(f\) injektiv $\iff$ f"ur \(v_1\not= v_2 \in V\) gilt \(f(v_1)\not= f(v_2)\)
 \end{proof}
 
 \begin{definition}{}{}
@@ -1668,12 +1667,12 @@ Sei \(V\) ein Vektorraum, \(S\subseteq V = \{v_1, v_2, ..., v_n\}\). Die
 Aufspannabbildung \ldots{} wird definiert als \ldots{}
 \end{exa}
 
-\textbf{Korrolar} \$S=\{v\(_{\text{1}}\), \ldots{}, v\(_{\text{n}}\)\} eine Basis \implies \ldots{} ein Isomorphismus
+\textbf{Korrolar} \$S=\{v\(_{\text{1}}\), \ldots{}, v\(_{\text{n}}\)\} eine Basis $\implies \ldots{}$ ein Isomorphismus
 
 \textbf{Korrolar} \(\dim V = n \iff V\) ismorph \(K^n\). (\ldots{} isomorphe Vektorraume haben
 die gleiche Dimension)
 
-\textbf{Beobachung} Wenn \ldots{} Isomorphismus \implies \ldots{} ist auch ein Isomorphismus.
+\textbf{Beobachung} Wenn ... Isomorphismus $\implies \ldots{}$ ist auch ein Isomorphismus.
 
 \subsubsection{Dimensionsformel}
 \label{sec:org9a58004}
@@ -1681,10 +1680,10 @@ die gleiche Dimension)
 Sei \(f\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gilt: 
 \end{theo}
 
-\textbf{lemma} sei \(f\) wie oben. Sei \(U \subseteq \Ker(f)\)  Dann ist \ldots{} ein Isomorphismus
+\textbf{lemma} sei \(f\) wie oben. Sei \(U \subseteq Ker(f)\)  Dann ist $ \ldots{}$ ein Isomorphismus
 
 \begin{proof}[des Lemmas] \label{}
-\ldots{} ist surjektiv nach Konstruktion. Inkektiv \iff \ldots{} Sei \ldots{} . Dann gilt \ldots{}. 
+$\ldots{}$ ist surjektiv nach Konstruktion. Inkektiv $\iff \ldots{}$ Sei $\ldots{}$ . Dann gilt $\ldots{}$. 
 \end{proof}
 
 \begin{proof}[der Dimensionsformel] \label{}
@@ -1695,10 +1694,10 @@ Betrachte jetzt \(U:=<e_{k+1}, ..., e_n> \subseteq V\) Untervektorraum. Es gilt
 Lemma. es gilt: \ldots{} weil .. eine Basis im Kern ist. und \ldots{} weil \(u\in U\) also
 \ldots{}
 
-Das Lemma sagt jetzt \ldots{} ist ein Isomorphismus. Ausserdem gilt f"ur \ldots{} \implies
-\(f(V)=f(V)\) also \ldots{} \implies \ldots{} 
+Das Lemma sagt jetzt $\ldots{} $ist ein Isomorphismus. Ausserdem gilt f"ur $\ldots{} \implies$
+\(f(V)=f(V)\) also $\ldots{} \implies \ldots{} $
 
-Nun gilt nach Konstruktion von \(U\) \ldots{} 
+Nun gilt nach Konstruktion von \(U\) $ \ldots{} $
 \end{proof}
 
 \subsubsection{Summe von Untervektorr"aumen}
@@ -1727,9 +1726,9 @@ Dann gilt:
 \item f injekt. \ldots{}
 \end{itemize}
 
-Insbesondere gilt: \textbf{Korrolar} Ist \ldots{}, so ist f injektiv \iff f surjektiv.
+Insbesondere gilt: \textbf{Korrolar} Ist $\ldots{}$, so ist f injektiv $\iff $f surjektiv.
 
-\textbf{Proposition} Dimensionformel' \$\(\dim\) (U\(_{\text{1}}\)+U\(_{\text{2}}\))=\di..\$
+\textbf{Proposition} Dimensionformel' \(\dim U_1 +U_2 =\dim..\)
 \begin{proof}[] \label{}
 ist stehts ein Untervektorraum, wenn Untervektorra"me sind. 
 
@@ -1746,7 +1745,7 @@ Ferner gilt: \ldots{}
 \end{proof}
 
 Was hat diese ganze Theorie mit Matrizen zu tun? Intuitiv: Abbildungen sind
-"geometisch" und Matrizen sind Koordinatenform dieser "geometrischen""
+\``geometrisch\'' und Matrizen sind Koordinatenform dieser geometrischen
 Abbildungen.
 
 \begin{exa}[] \label{}
@@ -1758,7 +1757,7 @@ Koordinaten?4
 \label{sec:org00a1823}
 \begin{definition}{}{}
 Seien \(V,W\) zwei Vektorraume.
-\(\Hom_k(v,w)\)  ist selbst ein Vektorraum.
+\(Hom_k(v,w)\)  ist selbst ein Vektorraum.
 \end{definition}
 
 Seien \(V, W\) endlichdimensional, \ldots{} Sei  Die Abbildungsmatrix ist definiert als

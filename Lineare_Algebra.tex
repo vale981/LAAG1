@@ -1,0 +1,1821 @@
+% Created 2017-11-19 Sun 20:51
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\setlength{\parfillskip}{0pt plus 1fil}
+\usepackage{german}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[L]{\rightmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\newtcbtheorem[number within=section]{definition}{Definition}%
+{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+\newtcbtheorem[number within=section]{axiom}{Axiom}%
+{colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
+\newtcbtheorem[number within=section]{theo}{Satz}%
+{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{th}
+\newtcbtheorem[number within=section]{satz}{Satz}%
+{colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
+\newtcolorbox{comm}[1][]
+{title=Kommentar,colback=black!5,colframe=black!35!black,fonttitle=\bfseries}
+\newtcolorbox{relation}[1][]
+{
+colframe = red!25,
+colback  = red!10,
+halign = center,
+#1,
+}
+\usepackage{etoolbox}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{gauss}
+\usepackage{stmaryrd}
+\newtheorem{prof}{Beweis}[section]
+\newtheorem{exa}{Beispiel}[section]
+\newtheorem{expe}{experiment}[section]
+\newtheorem*{notte}{Beachte}
+\newtheorem*{notation}{Notation}
+\newtheorem*{proposition}{Proposition}
+\author{Valentin Boettcher}
+\date{\today}
+\title{Lineare Algebra (f"ur Physiker) I}
+\hypersetup{
+ pdfauthor={Valentin Boettcher},
+ pdftitle={Lineare Algebra (f"ur Physiker) I},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.3.1 (Org mode 9.1.2)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\maketitle
+\newpage
+
+\section{Vorwort}
+\label{sec:org8d9fa1c}
+Ihr habt hier die Mitschriften Valentin Boettchers vor euch. Er teilt eben Diese
+"ausserst gern mit euch und freut sich "uber Feedback, Fehlerkorrekturen und
+Verbesserungsvorschl"age. Kontaktiert ihn am besten via \href{mailto:valentin.boettcher@mailbox.tu-dresden.de}{Email} :).
+
+Vor allem aber ist es wichtig zu verstehen, dass das Format dieses Skriptes
+kein allumfassendes Kompendium ist und nur den Inhalt der Vorlesung abdeckt.
+Wenn Valentin einmal ein Paar interessante Gedanken kommen, packt er sie
+wohlm"oglich auch hinein, versucht aber immer deren Korrektheit zu
+gew"ahrleisten. Auch Kommentare des Lesenden k"onnen Teil dieses Skriptes
+werden.
+
+Wie ihr bestimmt bis hierher bemerkt habt, ist Valentins Rechtschreibung
+grausig: Also frisch ans Werk und Feedback geben.
+
+
+Viel Vergn"ugen. \textbf{Mathe ist sch"on.}
+
+\section{Mengenlehre}
+\label{sec:orgd4be270}
+In der modernen Mathematik fasst man Strukturen (R"aume, Fl"achen,
+Zahlensysteme) als \emph{Mengen} und \emph{Abbildungen} auf.
+
+\begin{definition}{Menge}{def-meng}
+Eine Zusammenfassung von Objekten die \textbf{Elemente} der heissen. Eine Menge ist
+also eindeutig dadurch bestimmt, welche Elemente sie enth"alt.
+\end{definition}
+
+\begin{notation}\
+\begin{itemize}
+\item \(M=\{m_1,m_2,m_3,...\}\) - Aufzeahlung
+\begin{itemize}
+\item \(\{...\}\) - Mengenklammern
+\end{itemize}
+\item \(M=\{x| P(x)\}\) - Eigenschaft
+\begin{itemize}
+\item Alle \(x\) mit der Eigenschaft \(P(x)\)
+\end{itemize}
+\end{itemize}
+\end{notation}
+
+\begin{exa}\
+\begin{itemize}
+\item \(n=\{\text{Nat"urliche Zahlen}\} =(add-hook 'La(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)TeX-mode-hook 'LaTeX-math-mode) \{0,1,2,...\}\)
+\item \(E=\{x|\text{x hat die Eigenschaft } P(x)\}\)
+\end{itemize}
+\end{exa}
+
+\subsection{Wichtige Mengen}
+\label{sec:orga565e26}
+\begin{itemize}
+\item \(\mathbb{N}=\{\text{nat"urliche Zahlen}\} = \{1,2,...\}\)
+\item \(\mathbb{Z}=\{\text{ganze Zahlen}\} = \{...,-2,-1,0,1,2,...\}\)
+\item \(Q=\{\text{Rationale
+   Zahlen}\}=\left\{\left.\displaystyle\frac{p}{q}\;\right\vert\begin{array}{c}p \in \mathbb{Z} \\ q \in N \setminus \{0\}\end{array}\right\}\)
+\item \(\mathbb{R}=\{\text{reelle Zahlen}\}\)
+\end{itemize}
+
+\subsection{Beziehungen zwischen Mengen}
+\label{sec:orgcffbbc3}
+\begin{definition}{Mengenbeziehungen}{def-teilmenge}
+Seien \(A,B\) zwei Mengen. 
+\begin{enumerate}
+\item \(A\) heisst \textbf{Teilmenge} von B, wenn f"ur jedes Element \(a\in A\) gilt: \(a\in B\).
+\item Es sei die Menge \(C = \{a|a\in A \text{ und } b\in B\}\), so heisst \(C\) \textbf{Durchschnitt} von \(A\) und \(B\).
+\item Es sei die Menge \(C = \{a|a\in A \text{ oder } b\in B\}\), so heisst \(C\) \textbf{Vereinigung} von \(A\) u(add-hook 'c++-mode-hook 'clang-format-bindings)nd \(B\).
+\end{enumerate}
+\end{definition}
+
+\begin{notation}\
+\begin{itemize}
+\item \(\in\) ``Element von'': \(x\in X\) - ''x ist Element von X''
+\item \(\subseteq\) Teilmenge: \(A\subseteq B\) - ''A ist eine Teilmenge von B''
+\item \(\cap\) Durchschnitt: \(A\cap B = \{a|a\in A \text{ und } b\in B\}\)
+\item \(\cup\) Vereinigung \(A\cup B = \{a|a\in A \text{ oder } b\in B\}\)
+\item \(\varnothing\) - Leere Menge
+\item \(A\setminus B\) - Mengendifferenz
+\item \(A\times B\) - Direktes Produkt
+\begin{itemize}
+\item \((a,b)\) - geordentes Paar mit dem ersten Element \(a\) und dem zweiten
+Element \(b\).
+\end{itemize}
+\end{itemize}
+\end{notation}
+
+\begin{exa}
+\(N\subseteq \mathbb{Z}\), aber \(Q \not\subset \mathbb{Z}\): \(\frac{1}{2} \not\in \mathbb{Z}\)
+\end{exa}
+
+\begin{exa}
+F"ur \(A = \{1,2,3,4,5\}\) und \(B = \{2,3,10\}\):
+\begin{itemize}
+\item \(A\cap B = \{2,3\}\)
+\item \(A\cup B = \{1,2,3,5,10\}\)
+\end{itemize}
+\end{exa}
+
+\begin{definition}{Leere Menge}{}
+Die leere Menge \(\varnothing\) ist die (eindeutig bestimmte) Menge, die kein Element enth"alt.
+\end{definition}
+
+\begin{exa}
+\(\{\pi\} \cap Q = \varnothing\)
+\end{exa}
+
+\begin{definition}{Differenz}{}
+Die Differenz zweier Mengen \(A, B\) wird definiert als \(A\setminus B = \{a\in A | a\not\in
+B\}\) (Elemente aus \(A\), die nicht in \(B\) liegen). 
+\end{definition}
+
+\begin{definition}{Direktes/Kartesisches Produkt}{}
+Wenn \(A,B\) zwei Mengen sind dann ist die Menge der Paare \((a,b)\) und \(a\in A,
+b\in B\) das direkte (kartesische) Produkt von \(A\) und \(B\) (\(A\times B\)).
+\end{definition}
+
+Analog gilt: \(A_1\times A_2\times ... \times A_n = \{(a_1,...,a_n)| a_1\in A_1,...,a_n\in A_n\}\)
+
+\begin{exa}
+\(\mathbb{R}^n=\mathbb{R}\times ... \times \mathbb{R} =  \{(x_1,...,x_n)| x_1\in \mathbb{R},...,x_n\in \mathbb{R}\}\)
+\end{exa}
+
+Geometrie \(m\) der Ebene mit Koordinaten \(=\) Untersuchung von Konstruktionen in
+\(\mathbb{R}^2=\mathbb{R}\cdot\mathbb{R}\).
+
+\begin{definition}{Komplemen"armenge}
+Seien \(A,M\) Mengen und \(A\subseteq B\) so ist \(A^c = M\setminus A\) und heisst
+\textbf{Komplement"armenge} zu \(M\).
+\end{definition}
+
+Seien \(A,B,M\) Mengen und \(A\subseteq M\) und \(B\subseteq M\), so gilt:
+\begin{relation}
+\begin{enumerate}
+\item \((A\cup B)^c = A^c \cap B^c\)
+\item \((A\cap B)^c = A^c \cup B^c\)
+\item \((A^c)^c = A\)
+\item \(A\cup A^c = M\)
+\end{enumerate}
+\end{relation}
+
+\begin{notte}
+Es gelten auch alle Identit"aten f"ur Mengen.
+\end{notte}
+
+
+\subsection{Abbildungen zwischen Mengen}
+\label{sec:org4ef8946}
+\begin{definition}{Abbildung}{}
+Seien \(X,Y\) Mengen. Eine Abbildung \(f\) von \(X\) nach \(Y\) (Bez: \(f:X\rightarrow
+Y\)) ist eine Vorschrift, die jedem Element \(x\in X\) ein Element von
+\(y\in Y\) Zuordnet.
+\end{definition}
+
+
+\begin{notation}
+Man schreibt: \(x\mapsto f(x)\) - ''x wird auf \(f(x)\) abgebildet'' = ''dem \(x\in
+X\) wird ein \(f(x)\in Y\) zugeordnet.''
+\end{notation}
+
+\begin{exa}\
+\begin{itemize}
+\item \(f(t)=t^2+1\) definiert eine Abbildung \(f: \mathbb{R}\mapsto \mathbb{R}, t\mapsto f(t)=t^2+1\)
+\item \(g(t)= \frac{t^2+1}{t-1}\) definiert eine Abbildung \(g: \mathbb{R}\setminus\{
+   1\}\mapsto \mathbb{R}, t\mapsto  \frac{t^2+1}{t-1}\)
+\item \(h: S=\{\text{Teilnehmer der Vorlesung}\}\mapsto N, s\mapsto Geburtsjahr(s)\)
+\end{itemize}
+\end{exa}
+
+\subsubsection{Spezielle Abbildungen}
+\label{sec:orge512a75}
+\begin{relation}
+\begin{enumerate}
+\item F"ur jede Menge \(X\) ist die \textbf{Indentit"atsabbildung} auf \(X\) definiert durch \(Id_x:X\mapsto X, x\mapsto x\).
+\item Gegeben seien Mengen \(A,B\). Die Abbildung \(\pi_A: A\times B \mapsto A, (a,b)
+    \mapsto a\) heisst \textbf{Projektionsabbildung} von \(A\times B\) auf \(A\).
+\item Seien \(X,Y\) Mengen, sei \(y_0 \in Y\). Dann heisst die Abbildung \(f: X\mapsto
+    Y, x\mapsto y_0\) eine \textbf{konstante Abbildung} (mit dem wert \(y_0\)).
+\end{enumerate}
+\end{relation}
+
+\begin{exa}\
+\begin{itemize}
+\item Identit"atsabbildung: \(f(x)=x\)
+\item konstante Abbildung: \(f(x)=1\)
+\item Projektionsabbildung: \(f(x,y)=x\)
+\end{itemize}
+\end{exa}
+
+\subsubsection{Bild und Urbild}
+\label{sec:org006b051}
+\begin{definition}{Bild und Urbild einer Funktion}{}
+Sei \(f: X\mapsto Y\) eine Abbildung.
+\begin{itemize}
+\item Sei \(A\subseteq X\). Dann heisst \(f(A):=\{f(a)|a\in A\}\) das Bild von A.
+\item Sei \(B\subseteq Y\). Dann heisst \(f^{-1}(B):=\{a\in A|f(a)\in B\}\) das Urbild von \(B\).
+\end{itemize}
+\end{definition}
+
+\begin{notte}
+Das Bild und das Urbild f"ur eine \emph{Menge} einer Funktion ist wieder eine \emph{Menge}.
+\end{notte}
+
+
+\begin{notte}
+\(f^{-1}\) ist keine Abbildung, sonder nur ein formales Symbol!
+\end{notte}
+
+\subsubsection{Einige Eigenschaften von Funktionen}
+\label{sec:org1909a84}
+Seien \(X,Y\) Mengen, \(f: X\mapsto Y\) eine Abbildung. \(f\) heist:
+\begin{relation}
+\begin{enumerate}
+\item \textbf{Injektiv}, wenn f"ur \(x\in X\not = x' \in X\) gilt: \(f(x) \not = f(x')\)
+\begin{itemize}
+\item Keine Verklebung von Punkten!
+\end{itemize}
+\item \textbf{Surjektiv}, wenn f"ur \(y\in Y\) ein \(x\in X\) existiert mit \(f(x)=y\).
+\begin{itemize}
+\item Keine Abbildung auf eine echte Teilmenge von \(Y\)!
+\end{itemize}
+\item \textbf{Bijektiv}, wenn \(f\) injektiv und surjektiv ist.
+\end{enumerate}
+\end{relation}
+
+\begin{exa}\
+\begin{enumerate}
+\item \(f: \mathbb{R} \implies \mathbb{R}, t\mapsto t^2\) 
+\begin{itemize}
+\item ist nicht injektiv:
+\end{itemize}
+\end{enumerate}
+\(-1\mapsto 1\)
+\begin{itemize}
+\item ist nicht surjektiv: f"ur \(-1\in \mathbb{R}\) gibt es kein \(t\in\mathbb{R}\)
+mit \(t^2=-1\)
+\end{itemize}
+\begin{enumerate}
+\item \(g: \mathbb{N}\mapsto\mathbb{Z}, n\mapsto-n\)
+\begin{itemize}
+\item ist injektiv: \(m\ne n\implies g(m)=-m \ne -n = g(n)\)
+\item ist nicht surjektiv: f"ur \(1\in \mathbb{Z}\) gibt es kein \(n\in \mathbb{N}\)
+mit \(-n=1\)
+\end{itemize}
+\item \(h: \mathbb{R}\mapsto\mathbb{R},t\mapsto t^3\) ist Bijektiv ("Ubung)
+\end{enumerate}
+\end{exa}
+
+\subsubsection{Inverse Abbildung zu einer bijektiven Abbildung}
+\label{sec:orgaae7124}
+\begin{definition}{Inverse Abbildung}{}
+Sei \(f:X\mapsto Y\) bijektiv. Sei \(y\in Y\). Definiere eine Abbildung \(f^{-1}:
+Y\mapsto X\) so: \(f^{-1}(y)=x\) mit der Eigenschaft \(f(x)=y\).
+\end{definition}
+
+Dies ist wohldefiniert (diese Vorschrift definiert tats"achlich eine Abbildung)
+weil:
+
+\begin{relation}
+\begin{itemize}
+\item Das x mit der gew"unschten Eigenschaft existiert f"ur jedes \(y\in Y\), weil
+\(f\) surjectiv ist.
+\item F"ur jedes \(y\in Y\) existiert h"ochstens ein \(x\in X\) mit der gew"unschten
+Eigenschaft, weil \(f\) injektiv ist.
+\end{itemize}
+\end{relation}
+
+\begin{notte}
+Wenn die Abbildung \(f\) bijektiv ist, hat \(f^{-1}(A)\) f"ur ein \(A\subseteq Y\) a
+priori zwei Bedeutungen:
+\begin{itemize}
+\item Urbild von \(A\) unter f
+\item Bild von \(A\) von \(f^{-1}\)
+\end{itemize}
+
+Wenn \(f\) bijektiv ist, stimmen aber diese Mengen "uberein. (Bew. "Ubung)
+
+\textbf{Aber}: Wenn \(f\) nicht bijektiv ist, hat \(f^{-1}\) nur einen Sinn: Urbild!
+\end{notte}
+
+\subsubsection{Verkn"upfung von Abbildungen}
+\label{sec:org540b965}
+\begin{definition}{Verkn"upfung}{}
+\(f: X\mapsto Y, g: Y\mapsto Z\) ist die verkn"upfung \(g\circ: X\mapsto Z\) definiert
+als \(g\circ f(x)=g(f(x))\). Diagramme Siehe V2\(_{\text{1}}\).
+\end{definition}
+
+
+Die Verkn"upfung hat folgende Eigenschaften:
+\begin{relation}
+\begin{enumerate}
+\item Sie ist Assoziativ: \(h\circ (g\circ f) = (h \circ g) \circ f\) f"ur alle Abb. \(f: X\mapsto Y, g:Y\mapsto Z\), \(h:Z\mapsto V\)
+\item F"ur jede abbildung \(f: X\mapsto Y\) gilt: \(f\circ id_X=id_Y\circ f = f\).
+\item Wenn \(f:X\mapsto Y\) bijektiv ist, dann gilt: \(f\circ f^{-1}=id_Y\):
+\begin{itemize}
+\item \(f^{-1}\circ f=id_X\) weil: \(f(f^{-1}(y))=y\):
+\item \(f^{-1}(f(x))=x'\) mit \(f(x')=f(x)\implies x=x'\) wenn \emph{Bijektiv}
+\end{itemize}
+\end{enumerate}
+\end{relation}
+
+\subsubsection{Kommutative Diagramme}
+\label{sec:org429b8d6}
+Siehe V2\(_{\text{2}}\): 
+\begin{enumerate}
+\item Dieses Diagramm heist kommutativ, wenn \(h=g\circ f\).
+\item kommutativ wenn \(g\circ f=h\circ k\)
+\end{enumerate}
+
+\subsubsection{Eingeschr"ankte Abbildungen}
+\label{sec:org60b2559}
+\begin{definition}{Einschr"ankung}{}
+Sei \(f: X\mapsto Y\) eine Abbildung.\\
+Die Einschr"ankung von \(f\) auf eine Teilmenge \(A\subseteq X\) ist die  Abbildung:
+\(f|_A:\begin{matrix}A\mapsto Y\\ a\mapsto f(a)\end{matrix}\)
+\end{definition}
+
+\begin{exa}
+\(f: \mathbb{R}\mapsto \mathbb{R}, t\mapsto t^{2}\) ist nicht injektiv, \(f|_{[0,
+\infty)}\) ist injektiv.
+\end{exa}
+
+\subsubsection{Quantoren}
+\label{sec:orgd2b2557}
+\begin{definition}{Quantoren}{}
+\begin{itemize}
+\item f"ur alle \(x\) in \(X\) - \(\forall x \in X\)
+\item es existiert \(x \in X\) - \(\exists x \in X\)
+\end{itemize}
+\end{definition}
+
+\begin{exa}
+\(f:X\mapsto Y\) ist surjektiv, wenn \(\forall y \in Y \exists x\in X\) mit \(f(x)=y\).
+\end{exa}
+
+F"ur die Negation der Quantoren gilt:
+\begin{relation}
+\begin{itemize}
+\item \(\neg(\forall x\in X : A(x)) = \exists x\in X : \neq A(x)\)
+\item \(\neg(\exists x\in X : A(x)) = \forallx\in X : \neq A(x)\)
+\end{itemize}
+\end{relation}
+
+\begin{exa}[] \label{} \
+\(f: X\mapsto Y\) ist surjektiv \(\iff \forall y\in Y \exists x\in X : f(x)=y\).\\
+Also: \(f: X\mapsto Y\) ist \textbf{nicht} surjektiv \(\iff \exists y\in Y \forall x\in X : f(x)\not=y\).
+\end{exa}
+
+\subsection{Schlagworte}
+\label{sec:org0cab6a2}
+\begin{itemize}
+\item Venn Diagram - Kreise und Schnittmengen
+\item Zeigen von "Aquivalenz zweier Zusammengeseten Mengen:
+\begin{itemize}
+\item Wahrheitstafel
+\item Zur"uckf"uhren auf Aussagenlogik
+\end{itemize}
+\item Zeigen das \(p,q,r\) "aquivalent sind:
+\begin{itemize}
+\item \(p\implies q \implies r \implies q\)
+\end{itemize}
+\item \emph{Injektivit"at} zeigen:
+\begin{itemize}
+\item nicht I. wenn Gegenbeispiel existiert
+\item Zeigen das Funktion streng monoton steigt.
+\end{itemize}
+\item \emph{Surjektivit"at} zeigen:
+\begin{itemize}
+\item nicht S. wenn Gegenbeispiel existiert
+\item Zeigen das Funktion streng monoton steigt und gegen \(+-\infty\) strebt.
+\end{itemize}
+\item \(A\setminus (A\setminus B) = A \cap B\)
+\item Beweise mit Abbildungen \(M\) sei Menge, \(f\) sei Abbildung:
+\begin{itemize}
+\item \(y \in f(M) \implies \exists x \in M : f(x)=y\)
+\end{itemize}
+\end{itemize}
+
+\section{Logik und Beweisf"uhrung}
+\label{sec:orgc083250}
+Mathematik operiert mit \textbf{Aussagen}.
+
+\begin{definition}{Aussage}{}
+Eine Aussage ist eine Behauptung, die Wahr oder Falsch sein kann.
+\end{definition}
+
+\begin{notation}\
+\begin{description}
+\item[{1}] wahr
+\item[{0}] falsche
+\end{description}
+\end{notation}
+
+\(A,B\) seien Aussagen, dann kann man folgende Aussagen betrachten:
+\begin{relation}
+\begin{itemize}
+\item ''nicht \(A\)'': \(\neg A\)
+\end{itemize}
+\begin{center}
+\begin{tabular}{lrr}
+\(A\) & 0 & 1\\
+\hline
+\(\neg A\) & 1 & 0\\
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+\item Vernk"upfungen
+\end{itemize}
+\begin{center}
+\begin{tabular}{rrrrrr}
+\(A\) & \(B\) & \(\neg A\) & \(A\wedge B\) & \(A \vee B\) & \(A\implies B\)\\
+\hline
+0 & 0 & 1 & 0 & 0 & 1\\
+0 & 1 & 1 & 0 & 1 & 1\\
+1 & 0 & 0 & 0 & 1 & 0\\
+1 & 1 & 0 & 1 & 1 & 1\\
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+\item ''A "aquivalent zu B'':  \(A\iff B\)
+\end{itemize}
+\begin{center}
+\begin{tabular}{rrr}
+\(A\) & \(B\) & \(\iff A\)\\
+\hline
+0 & 0 & 1\\
+0 & 1 & 0\\
+1 & 0 & 0\\
+1 & 1 & 1\\
+\end{tabular}
+\end{center}
+\end{relation}
+
+\begin{exa}
+F"ur ein Element \(x\in X\) k"onnen wir Aussagen betrachten:
+\begin{enumerate}
+\item \(A(x)=x\in A\)
+\item \(B(x)=x\in B\)
+\end{enumerate}
+\(A(x)\wedge B(x)=x\in (A\cap B)\)
+\end{exa}
+
+\subsection{Identit"aten der Aussagenlogik}
+\label{sec:orgd743b6e}
+\begin{relation}
+\begin{enumerate}
+\item Direkter Beweis 
+\begin{itemize}
+\item \((A\implies B) = (\neg A)\vee B\)
+\item Vorraussetzung \(\rightarrow\) logische Aussage \(\rightarrow\) Behauptung
+\end{itemize}
+\item Beweis in Schritten
+\begin{itemize}
+\item \(((A\implies B)\wedge (B\implies C))\implies (A\implies C)\) \\
+\(\rightarrow\) Konstant \(=1\) (\emph{Tautologie})
+\end{itemize}
+\item Beweis durch Kontraposition
+\begin{itemize}
+\item \((A\implies B) \iff (\neg B \implies \neg A)\) - \emph{Tautologie}
+\end{itemize}
+\end{enumerate}
+\end{relation}
+
+\subsection{Widerspruchsbeweis}
+\label{sec:org54c9d02}
+Wenn wir die Konsequenz aus der Negation der zu beweisenden Aussage und die
+Pr"amisse zu einem widerspruch f"uhren so ist die Aussage bewiesen, denn:
+\begin{relation}
+\[(A\wedge \neg A)=0\]
+\end{relation}
+
+
+Wir wollen \(A\implies B\) zeigen.
+Nehmen an \(\neg B\) und leiten her:\\
+\begin{relation}
+\((\neg B \wedge A)\implies 0\), also \(\neg B\wedge A = 0\), und daher \(A\implies
+B\).
+\end{relation}
+
+\begin{theo}{Satz von Euklid}{}
+Es gibt unendlich viele Primzahlen.
+\end{theo}
+
+\begin{proof}\
+\begin{enumerate}
+\item Nehmen wie an, es gibt nur endlich viele Primzahlen. \(p_1, ..., p_n\).
+\item Betrachte \(n=p_1\cdot p_2\cdot ... \cdot p_n + 1\). \(n\) geteilt durch jede
+von den Primzahlen \(p_1, ..., p_n\) gibt Rest \(1\).
+\item Also ist \(n\) eine Primzahl, aber \(n\not=p_1 ... p_n\) weil gr"osser.
+\item Folglich enth"alt die Menge \({p_1,...,p_n}\) nicht alle Primzahlen.
+\end{enumerate}
+\indent\indent \(\rightarrow\) Das ist ein \textbf{Widerspruch}. (\((A\wedge \neg A) = 0\))
+\end{proof}
+
+
+\begin{exa}
+Wir werden die Aussage: wenn \(q\) eine gerade Primzahl ist \(\implies q=2\)
+beweisen.
+
+\begin{proof}[Direkter Beweis] \label{} \
+\begin{enumerate}
+\item \(q\) ist gerade \(\implies q\) ist durch \(2\) Teilbar f"ur \(k\in\mathbb{N}\)
+\item \(q\) ist aber eine Primzahl \(\implies\) einer der Faktoren in \(2\cdot k\) ist
+gerade \(1\), \(2\not= 1\)
+\item \(\implies k=1, q=2\)
+\end{enumerate}
+\end{proof}
+
+\begin{proof}[Kontraposition] \label{} \
+Wir m"ussen zeigen: \(q\not= 2\implies\) (\(q\) ungerade) \(\vee\) (\(q\) keine
+Primzahl). Es reicht zu zeigen: (\(q\not=2)\wedge(q\) ist eine Primzahl)
+\(\implies q\) ist ungerade!
+\begin{enumerate}
+\item Wenn \(q\) gerade ist, \(q\cdot 2k\), also ist \(k>1\)
+\item also \(q\not= 2\)
+\end{enumerate}
+\end{proof}
+
+\begin{proof}[Widerspruchsbeweis] \label{} \
+Annahme: \(q\) ist gerade, \(q\) ist eine Primzahl, \(q\not= 2\). Wir wollen einen
+Widerspruch herleiten.
+
+\begin{enumerate}
+\item da \(q\) gerade ist, gilt \(q=2\cdot k\) f"ur ein \(k\in \mathbb{N}\)
+\item da \(q\not= 2\), gilt \(k>1\)
+\item aber \(q\) ist prim, also kann \(q\) kein Produkt von zwei Zahlen sein! \(\lightning\)
+\end{enumerate}
+\end{proof}
+\end{exa}
+
+\section{Komplexe Zahlen}
+\label{sec:org73b0a26}
+Idee: Man m"ochte Quadratische Gleichungen ohne reelle Nullstellen trotzdem
+l"osen, also erweitert man die reellen Zahlen.
+
+\begin{relation}
+Die pototypische Quadratische Gleichungen ohne reelle L"osungen ist: \(x^2+1 =
+-1\).\\
+Man f"ugt K"unstlich die Zahl \(i\) hinzu mit \(i^2=-1\), m"oglichst unter
+Beibehaltung der "ublichen Rechenregeln: man braucht also die Zahlen \(b\cdot i :
+b\in \mathbb{R}\) und \(a+b\cdot i :  a,b\in \mathbb{R}\).
+\end{relation}
+
+Was passiert, wenn man solche Zahlen miteinander multipliziert ''als ob'' sie
+normale Zahlen w"aren: 
+\begin{relation}
+\((a+bi)\cdot(c+di)=ac+bc\cdot i+ad\cdot i+(-bd)=(ac-bd)+(bc+ad)\cdot i\) f"ur \(a,b,c,d\in \mathbb{R}\)
+\end{relation}
+
+Addieren kann man solche Ausdr"ucke auch:
+\begin{relation}
+\((a+bi)+(c+di)=(a+c)+(b+d)\cdot i\)
+\end{relation}
+
+\begin{definition}{Komplexe Zahlen}{}
+Die komplexen Zahlen \(\mathbb{C}\) sind die Menge der Paare \((a,b)\in
+\mathbb{R}^2\) versehen mit der Addition \((a,b)+(c,d)=(a+c,b+d)\) und der
+Multiplikation \((a,b)\cdot (c,d)=(ac-bd, bc+ad)\).
+\end{definition}
+
+\begin{notation}[] \label{} \
+\begin{itemize}
+\item Statt \((a,b)\) schreibt man auch \((a+bi)\in \mathbb{C}\).
+\item \(i:=(0,1)=0+1\cdot i\):
+\begin{itemize}
+\item nach Multiplikation erf"ullt \(i^2=-1\)
+\end{itemize}
+\end{itemize}
+\end{notation}
+
+Man "uberpr"uft, dass die "ublichen Rechenregeln aus \(\mathbb{R}\) weiterhin
+gelten (\emph{K"orperaxiome}): F"ur \(z_1, z_2, z_3 \in \mathbb{C}\) gilt, z.B.:
+\begin{relation}
+\begin{itemize}
+\item \(z_1\cdot (z_2+z_3)=z_1z_2+z_1z_3\)
+\item \(z_1\cdot (z_2\cdot z_3)=(z_1\cdot z_2)\cdot z_3\)
+\item \(z_1 + (z_2 + z_3)=(z_1 + z_2) + z_3\)
+\end{itemize}
+\end{relation}
+
+\begin{notte}[] \label{}
+\((\mathbb{R},+,\cdot)\subsetneq (\mathbb{C},+,\cdot)\) auf nat"urliche Weise als
+der der Form \(a+0\cdot i = (a,0)\), \(a\in \mathbb{R}\).
+\end{notte}
+
+\begin{definition}{Real- und Imagin"aranteil}{}
+F"ur \(z=a+b\cdot i\in \mathbb{C}\) heisst:
+\begin{itemize}
+\item \(a:=:Re(z)\) Realanteil von \(z\)
+\item \(b:=:Im(z)\) Imagin"aranteil von \(z\)
+\end{itemize}
+
+Also ist \(z=Re(z)+ Im(z)\cdot i\).
+\end{definition}
+
+\begin{definition}{Rein Imagin"are Zahlen}{}
+Die Zahlen der Form \(b\cdot i : b\in \mathbb{R}\) heissen \textbf{rein Imagin"ar}.
+\end{definition}
+
+F"ur reele Zahlen wissen wir: \(\forall a\in \mathbb{R}\) mit \$a\textlnot{}= 0 \(\exists\)
+a\(^{\text{-1}} \in\) \mathbb{R} mit \(a*a^{-1}=1\). Gilt das auch in \(\mathbb{C}\) ?
+
+\begin{definition}{Komplexe Konjugation}{}
+F"ur \(z\in \mathbb{C}\) heisst die Zahl \(\overline{z}:=a-bi\) die komplex
+konjugierte Zahl zu \(a+bi\).
+\end{definition}
+
+\begin{exa}[] \label{}
+\(\overline{1+i}=1-i\)
+\end{exa}
+
+\begin{relation}
+\(z*\overline{z}=(a+bi)(a-bi)=a^2+b^2\geq -\) mit Gleichheit genau dann, wenn \(z=0\).
+\end{relation}
+
+\begin{definition}{Betrag der Komplexen Zahl}{}
+\(|z|:=\sqrt{x\cdot \overline{z}}=\sqrt{a^2+b^2}\) mit \(z=a+bi\).
+\end{definition}
+
+\subsection{Inverses zu einer komplexen Zahl}
+\label{sec:org0018acd}
+Das Inverse zu \(z\not= 0\):
+\begin{relation}
+\(z\cdot \frac{\overline{z}}{|z|^2}=1\) \\
+Also: \(\forall z\not= 0 \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}}=1\)
+\end{relation}
+
+\begin{exa}[] \label{} \
+\((1+i)^{-1}=\frac{1-i}{2}\)
+\end{exa}
+
+Mnemonische Rechenregel, Multipliziere mit dem Inversen: 
+\begin{relation}
+\(\frac{1}{1+i}=\frac{1-i}{(1+i)(1-i)}=\frac{1-i}{2}\)
+\end{relation}
+
+\subsection{Geometrische Interpretation von \(\mathbb{C}\)}
+\label{sec:org992fe0c}
+Siehe Zeichung \(C_1\).
+
+\begin{relation}
+\begin{itemize}
+\item Addition: als Addition von Vektoren
+\item Betrag: L"ange des Vektors
+\item \(\varphi\) - Winkel zwischen der reellen Achse und dem Vektor der \(z\) entspricht,
+gez"ahlt gegen den Urzeigersinn.
+\end{itemize}
+\end{relation}
+
+Es folgt:
+\begin{relation}
+\(a=|z|\cdot \cos(\varphi)\) und \(b=|z|\cdot \sin(\varphi)\)
+\end{relation}
+
+\begin{notte}[] \label{}
+\(\varphi\) ist nicht eindeutig bestimmt, sondern bis auf Addition von eines
+vielfachen von \(2\pi\).
+\end{notte}
+
+\begin{exa}[] \label{}
+\(\varphi=\frac{\pi}{4}\) und \(\varphi=-\frac{7\pi}{4}\) sind im geometrischen Bild von
+\(\mathbb{C}\) "aquivalent.
+\end{exa}
+
+\begin{definition}{}{}
+Der wert von \(\varphi\), welcher in \([0, 2\pi)\) liegt, heisst Hauptargument von \(z\),
+\(arg(z)=\varphi\).\\
+Das Argument von \(z\) ist die Menge von allen \(\varphi \in R\),4
+\(z=|z|(\cos(\varphi)+i\cdot \sin(\varphi))\), \(Arg\, z = {\varphi \in R : |z|(\cos(\varphi)+i\cdot \sin(\varphi))}\).
+\end{definition}
+
+\begin{notte}[] \label{}
+\(Arg\, z= {arg(z)+2\pi\cdot k : k\in \mathbb{Z}}\)
+\end{notte}
+
+\begin{exa}[] \label{} \
+Seien \(z_1=|z_1|\cdot \cos(\varphi_1)+i\cdot \sin(\varphi_1)\), \(z_2=|z_2|\cdot
+\cos(\varphi_2)+i\cdot \sin(\varphi_2)\) zwei komplexe Zahlen.\\
+
+So gilt: \(z_1\cdot z_2 = |z_1|\cdot |z_2|(\cos(\varphi_1+\varphi_2)+i\cdot \sin(\varphi_1 +
+\varphi_2))\)
+\end{exa}
+
+\begin{relation}
+Bei der Multiplikation von komplexen Zahlen multiplizieren sich die Betr"age,
+und die Argumente addieren sich.
+\end{relation}
+
+F"ur geometrische Interpretation: Siehe \(C_2\).
+
+Besonders n"utzlich ist dies f"ur die Multiplikation einer komplexen Zahl vom
+Betrag \(1\):
+\begin{align*}
+|z|=1\iff z=\cos(\varphi)+i\cdot \sin(\varphi)$ f"ur ein $\varphi \in \mathbb{R}
+\end{align*}
+
+\begin{relation}
+Es liegen \(\{z\in \mathbb{C} : |z|=1\}\) auf dem Einheitskreis.
+Die Multiplikation mit von komplexen Zahlen Zahlen mit dem Betrag 1 entspricht
+also der Rotation gegen den Urzeigersinn um \(\varphi\).
+\end{relation}
+
+\subsection{Exponentialform der komplexen Zahlen}
+\label{sec:orgb4d9f14}
+\begin{notation}[] \label{} \
+\begin{itemize}
+\item Exponentialform: \(\cos(\varphi)+i\cdot \sin(\varphi):=e^{i\cdot \varphi}\)
+\item es gilt \(e^{i(\varphi_k)}, k\in\mathbb{R}\) sind die Zahlen auf dem Einheitskreis
+\end{itemize}
+\end{notation}
+
+\begin{definition}{Exponentialform der komplexen Zahlen}{}
+Die Exponentialform f"ur jede komplexe Zahl \(z\in\mathbb{C}\) lautet \(z=|z|e^{i\cdot arg\,z}\).
+\end{definition}
+
+Mit dieser Notation folgt:
+\begin{relation}
+\((e^{i\varphi})^n=(\cos(\varphi)+i\cdot\sin(\varphi))^2=e^{n\cdot i\cdot
+ \varphi}=\cos(n\varphi)+i\cdot\sin(n\varphi)\) f"ur alle \(n\in\mathbb{N}\)
+\end{relation}
+
+\begin{exa}[] \label{}\
+\begin{align*}
+\begin{split}
+(\cos(\varphi)+i\pcdot \sin(\varphi))^2 & =\cos^2(\varphi)-\sin^2(\varphi)+2\cdot\sin(\varphi)\cdot\cos(\varphi) \\
+ & = \cos(2\varphi) + 2\sin(2\varphi) \\
+&  \implies 
+\begin{cases}
+\cos(2\varphi)=\cos^2(\varphi)-\sin^2(\varphi) \\
+\sin(2\varphi)=2\cdot\sin(\varphi)\cdot\cos(\varphi)
+\end{cases}
+\end{split}
+\end{align*}
+\end{exa}
+
+\subsection{Einscheitswurzeln}
+\label{sec:org0755105}
+Sei die gleichung \(x^n=a\) "uber \(\mathbb{R}\) gegeben. Je nach Vorzeichen von
+\(a\) und Parit"at von \(n\), gibt es Varianten f"ur die Anzahl der L"osungen.
+\begin{relation}
+In \(\mathbb{C}\) hat aber die Gleichung \(z^n=a\) f"ur ein \(a\in
+\mathbb{C}\setminus \{0\}\) immer genau \(n\) L"osungen.
+\end{relation}
+
+Sei \(w\in \mathbb{C}\) mit \(w^n=a\). Dann gilt \((\frac{z}{w})^n=1\) f"ur jedes
+\(z\in \mathbb{C}\) mit \(z^n=a\). \textbf{Also} l"osen wir erst mal die Gleichung \(z^n=1\),
+und dann reduzieren wir den allgemeinen Fall darauf.
+
+\begin{definition}{Einheitswurzel}{}
+Eine Zahl \(z\in \mathbb{C}\) heisst \(n\text{-te}\) Einheitswurzel, wenn \(z^n=1\).
+\end{definition}
+
+\begin{proposition}[] \label{}
+F"ur jedes \(n\geq, n\in\mathbb{N}\) existieren genau \(n\)
+Einheitswurzeln in \(\mathbb{C}\). Sie sind durch die Formel
+\(z_k=e^{\frac{2\pi\cdot k\cdot i}{n}},\quad k=0,1,...,n-1\) gegeben.
+\end{proposition}
+
+\begin{proof}[] \label{} \
+\(z_k\) sind \(n\text{-te}\) Einheitswurzeln denn:
+\begin{align*}
+z_k^n & = (e^{\frac{2\cdot\pi\cdot k}{n}})^n \\ 
+& = e^{2\pi\cdot k} \\
+& = 1
+\end{align*}
+
+
+Wir m"ussen noch zeigen, dass jede \(n\text{-te}\) Einheitswurzel von dieser Form
+ist. \\
+
+Sei \(z\in\mathbb{C}\) mit \(z^n=1\). Es gilt:
+
+\begin{align*}
+|z|^n & =|z^n|=1 \\
+& \implies |z|=1  \\
+& \implies z=e^{i\cdot\varphi} \tag*{f"ur ein $\varphi\in[0, 2\pi)$}  \\ 
+& \implies 1 = z^n \\
+& = (e^{i\varphi})^n=e^{i\varphi\cdot n} \\
+& =\cos(n\varphi)+i\cdot \sin(n\varphi)
+\end{align*}
+
+Also folgt:
+\begin{gather*}
+\cos(n\varphi)=1,\;\sin(n\varphi)=0 \\
+\implies  n\cdot\varphi = 2\pi\cdot k \tag*{f"ur ein $k\in \mathbb{Z}$} \\ 
+ \implies \varphi = \frac{2\pi\cdot k}{n} \tag*{f"ur ein $k\in \mathbb{Z}$}
+\end{gather*}
+
+
+Da \(\varphi\) in \([0,2\pi)\implies 0\leq k < n\).
+\end{proof}
+
+Wenn wir jetzt also eine Gleichung \(z^n=a\) l"osen wollen, reicht es, eine
+L"osung \(w\) zu finden, die anderen L"osungen bekommt man als \(w\cdot z_k,\;
+k=0,...,n-1\) mit \(z_k\), der \(n\text{-ten}\) Einheitswurzeln: \(z^n=a\iff
+(\frac{z}{w})^n=1\).\\
+
+Eine L"osung \(w\) kann man folgendermassen finden:
+\begin{relation}
+
+
+\begin{align*} 
+\text{Schreiben wir a}\; & =|a|\cdot e^{i\cdot \psi}\; \text{f"ur ein $\psi\in \mathbb{R}$} \\
+\text{Dann gilt: }
+w & =\sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}} \text{ l"ost $w^n=a$} \\
+& \\
+\left(\sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}}\right)^n & = \sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}\cdot n} \\
+& = |a|\cdot e^{i\cdot \psi} \\ 
+& = a
+\end{align*}
+\end{relation}
+
+Gemetrische Interpretation: regul"ares \(n\text{-Eck}\).
+
+\newpage
+
+\section{Lineare Gleichungsysteme}
+\label{sec:org4c2c71d}
+Wir werden die Bezeichung \(K\) f"ur \(\mathbb{R}\) oder \(\mathbb{C}\) verwenden.
+
+\begin{definition}{Lineare Gleichung}{}
+Eine Lineare Gleichung "uber \(K\) ist eine Gleichung der Form
+\(a_1x_1+a_2x_2+...+a_nx_n=b\).\\
+Hierbei sind \(x_1,...,x_n\) die Variablen und \(a_1,...,a_n,b \in K\), die Koeffizienten.
+\end{definition}
+
+\begin{definition}{Lineares Gleichunssystem}{}
+Ein Lineares Gleichungsystem ist eine endliche Menge von Gleichungen:
+\[{\displaystyle {\begin{matrix}a_{11}x_{1}+a_{12}x_{2}\,+&\cdots
+&+\,a_{1n}x_{n}&=&b_{1}\\a_{21}x_{1}+a_{22}x_{2}\,+&\cdots
+&+\,a_{2n}x_{n}&=&b_{2}\\&&&\vdots &\\a_{m1}x_{1}+a_{m2}x_{2}\,+&\cdots
+&+\,a_{mn}x_{n}&=&b_{m}\\\end{matrix}}}\]
+\end{definition}
+
+Ein L"osung von diesem Gleichungssystem ist ein \[n\text{-Tupel }
+\left( \begin{matrix} x_{1}\\ \vdots\\ x_{n}\end{matrix} \right) \in K^{n} \]
+dass jede Gleichung erf"ullt. Ein lineares Gleichungssystem (LGS) zu l"osen,
+heisst, alle L"osungen zu finden.
+
+\begin{relation}
+\textbf{Idee}: Man formt das LGS durch Operationen um, die die Menge der L"osungen nicht
+ver"andern. Solche Operationen heissen "Aquivalenzumformungen. Diese sind unter
+anderem: 
+\begin{enumerate}
+\item Multiplikation einer Gleichung mit einer zahl \(\alpha\in K\setminus \{0\}\)
+\item Addierung von einer Gleichung zu der anderen (z.B. Ersetzen der zweiten
+Gleichung durch die Summe der ersten und zweiten.)
+\item Vertauschen von zwei Gleichungen; dies kann man auf Operationen von Typ eins
+und Zwei zur"ukf"uhren
+\end{enumerate}
+\end{relation}
+
+Wir werden ein LGS umformen, um es auf eine Form zu bringen, wo die L"osung
+offensichtlich ist.
+
+Wir beobachten:
+\begin{relation}
+Es ist "uberflu"ssig, die Variablen mitzuschleppen. Man k"onnte statdessen die
+''Tabellen'' von Koeffizienten umformen.
+\end{relation}
+
+\begin{definition}{}{}
+Eine \(M\times N\) Matrix \(A\) ist eine Tabelle der Gr"osse \(m\times n\), gef"ullt
+mit Elementen aus \(K\).  
+\[A=(a_{ij})_{\substack{i=1,\cdots,m \\ j=1,\cdots,n}}\]
+\end{definition}
+
+\begin{exa}[] \label{}
+\[
+  A=\left( \begin{matrix} 1& 1\\ 2& -3\end{matrix} \right)
+\]
+
+Wobei \(a_{11} = 1\), \(a_{21} = 2\), \(a_{12}=1\) und \(a_{22}=-3\).
+\end{exa}
+
+\begin{relation}
+Gegeben ein LGS (\(*\)), k"onnen wir eine Matrix \[ A=\left( \begin{matrix}
+a_{11}& \cdots & a_{1n}\\ \vdots & & \vdots \\ a_{n1}& \ldots &
+a_{nn}\end{matrix} \right) \] aufstellen. Sie heisst Koeffizientenmatrix des
+LGS. Auch stellen wir \[b=\left( \begin{matrix} b_{1}\\ \vdots
+\\ b_{n}\end{matrix} \right)\]
+eine \(m\times 1\) Matrix (Spalte) auf. (Sie
+heisst rechter Teil des LGS). Die Matrix \(A'=(A\mid b)\) heisst erweiterte
+Koeffizientenmatrix des LGS (\(*\)).
+\end{relation}
+
+
+\begin{definition}{Elementare Zeilenumforumungen}{}
+Die "Aquivalenzumformungen des LGS, die wir vorhin betrachtet haben, entsprechen
+dann folgenden Umformungen von der erweiterten Koeffizientenmatrix: 
+\begin{itemize}
+ \item[1'.] Multiplikation einer Zeile mit $\alpha \in K^\times$
+ \item[2'.] Addieren von einer Zeile zu der anderen.
+\end{itemize}
+Wir werden dann versuchen, die (erweiterten koeffzienten-) Matrizen durch diese
+Umformungen auf eine Form zu bringen, in der man die L"osung leicht ablesen
+kann.
+
+\(1'\) und \(2'\) heissen elementare Zeilenumforumungen.
+\end{definition}
+
+Weitere Zeilenumformungen, die man aus diesen erhalten kann:
+\begin{relation}
+\begin{itemize}
+\item Vertauschen Zweier Zeilen
+\item Addieren einer Zeile, Multipliziert mit \(\alpha \not= 0\)
+\end{itemize}
+\end{relation}
+
+Ziel ist eine gegebe erweiterte Koeffizientenmatrix \((A\mid b)\), durch
+Zeilenumformungen zu einer Matrix umzuformen, aus der man die L"osung leicht
+ablesen kann.
+
+\begin{definition}{Pivotelement}{}
+Gegeben einer Zeile \(Z=(a_1,...,a_n)\in K^n\), nennen wir das erste Element
+\(a\not= 0\) das Pivotelement.
+Wenn \(Z=(0,...,0)\) ist dann gibt es kein Pivotelement.
+\end{definition}
+
+\begin{definition}{Zeilenstufenform}{}
+Eine Matrix \(A\) hat Zeilenstufenform, wenn folgendes gilt:
+\begin{enumerate}
+\item Die Nummern von Pivotlementen der Zeilen von \(A\) bilden eine aufsteigende
+Folge.
+\item Die Nullzeilen, falls existent, stehen am Ende.
+\end{enumerate}
+\end{definition}
+
+\begin{exa}[] \label{} \
+\[
+\begin{ppnmatrix}
+ 0 & $a_{12}$ & $a_{13}$ \\
+ 0 & 0 & $a_{23}$ \\
+ 0 & 0 & 0 \\
+\end{ppnmatrix}
+\]
+\end{exa}
+
+\begin{theo}{Gauss}{}
+Jede Matrix kann durch elementare Zeilenumformungen auf die Stufenform gebracht
+werden.
+\end{theo}
+
+\begin{proof}[] \label{}
+Sei \(A=\begin{matrix}a_{11}&...&a_{nn}\end{matrix}\). \\
+Wenn \(A=0\) - Bewiesen. \\
+Wenn \(A\not=0\), dann gibt es eine Spalte \(\not= 0\). Sei
+\(j_1\) die Nummer dieser Spalte. Durch vertausche von Zeilen erreichen wir
+zun"achst \(a_{1j_1}}\not= 0\). Multiplaktion der ersten Zeule mit
+\(\frac{1}{j_1}\). Jetzt Subtrahiere von jeder Zeile ab der Zweiten die erste
+Zeile multipliziert mit \(a_{kj_1}\) (\(k=\) Nummer der Zeile). \\
+
+Wir erhalten dann Restmatrix \(A_1<A\) und wir wenden das selbe Verfahren auf
+\(A_1\) an. Da \(A_1\) weniger Zeilen hat, stoppt der ganze Prozess.
+
+\begin{notte}
+Nach diesem Verfahren gilt sogar: Pivotelemente sind alle \$=1\$1
+\end{notte}
+\end{proof}
+
+
+\begin{exa}
+\begin{align*}
+  & \begin{gmatrix}[p]
+      1 & 2 \\
+      3 & 4
+      \rowops
+      \add[-3]{0}{1}
+    \end{gmatrix} \\
+  \Rightarrow & \begin{gmatrix}[p]
+      1 & 2 \\
+      0 & -6
+      \rowops
+      \mult{1}{\scriptstyle\cdot-\frac{1}{6}}
+    \end{gmatrix} \\
+  \Rightarrow & \begin{gmatrix}[p]
+      1 & 2 \\
+      0 & 1
+      \rowops
+      \add[-2]{1}{0}
+    \end{gmatrix} \\
+  \Rightarrow & \begin{gmatrix}[p]
+      1 & 0 \\
+      0 & 1
+    \end{gmatrix}
+\end{align*}
+\end{exa}
+
+\begin{definition}{Reduzierte Zeilenstufenform}{}
+Nachdem wir die Zeilenstufenform mit Pivotelementen \(=1\) erreicht haben, k"onnen
+wir durch weitere Zeilenumformungen die eintr"age zu Null f"uhren, die oberhalb
+von Pivotelementen stehen; Die Finalform heisst dann \textbf{reduzierte
+Zeilenstufenform}.
+\end{definition}
+
+Das entsprechende Verfahren zum L"osen von LGS sieht so aus:
+\begin{relation}
+\begin{enumerate}
+\item Bringe die erweiterte Koeffizientenmatrix auf die reduzierte
+Zeilenstufenform: \\
+Die Spalten mit den Pivotelementen in dieser reduzierten Zeilenstufenform
+nennen wir Basispalten.
+\item Zwei F"alle:
+\begin{enumerate}
+\item Letzte Spalte des ist eine Basispalte - in diesem Fall hat das LGS keine
+L"osungen, da eine Gleichung \(0=1\) entsteht.
+\item Die letzte Spalte ist keine Basisspalte: \\
+Das LGS in der reduzierten Zeilenstufenform dr"uckt die Variablen, die zu
+Basisspalten geh"oren , durch die restlichen (freien) Variablen und den
+rechten Teil des LGS aus. Alle L"osungen werden dadurch erhalten, dass
+man f"ur die freien Variablen beliebige Werte in \(K\) ausw"ahlt. Die
+Basisvariablen werden dann durch Freie Variablen ausgedr"uckt.
+\end{enumerate}
+\end{enumerate}
+\end{relation}
+
+In unserem Beispiel l"asst sich die L"osung so aufschreiben: 
+
+
+Errinnerung: ein LGS hatte die erweiterte Koeffizientenmatrix \((A|b)\). Das LGS4
+l"asst sich dann auch so aufschreiben:$\backslash$\ \(:=A\cdot x\), wobei \(x=\)
+
+
+\subsection{Matrizenrechnung}
+\label{sec:org0f3e63e}
+\begin{definition}{Matrix-Spaltenvektor Produkt}{}
+Das Produkt von einer \(m\times n\) Matrix \(A\) und einer Spalte (in dieser
+Reihenfolge) wird definiert durch \(A\cdot x =\). In dieser Spalte wird das LGS
+\(A\cdot b\).
+\end{definition}
+
+Die Menge von Matrizen der Gr"osse \(m\times n\) mit Eintr"agen in \(K\) wird durch
+\(M(m\times n, k)\) oder \(K^{m\times n}\) bezeichnet. Matrizen der Gr"osse \(1\times
+n\) heissen Spalten der L"ange \(n\). Matrizen der Gr"osse \(n\times 1\) heissen
+Zeilen der L"ange \(n\).
+
+\begin{definition}{Addition}{}
+Matrizen gleicher Gr"osse kann man eintragsweise Addieren: \$A,B \(\in\) K\(^{\text{m}\texttimes{}\text{
+n}}\) \(\rightarrow\) (A+B)\(_{\text{ij}}\):=\$A\(_{\text{ij}}\)+B\(_{\text{ij}}\)\$\$
+\end{definition}
+
+\begin{definition}{Multiplikation}{}
+Matrizen kann man mit Zahlen multiplizieren (indem man jeden eintrag mit dieser
+Zahl multipliziert).
+
+\((\lambda \cdot A)_{ij}:=\lambda \cdot A_{ij}\).
+\end{definition}
+
+\begin{definition}{Produkt}{}
+Wenn die Breite von \(A\) mit der H"ohe von \(B\) "ubereinstimmt, kann man das
+Produkt \(A\cdot B\) definieren: \\
+\(A\cdot B:=(A\cdot b_1\; ... \4; A\cdot b_n)\) mit \(B=(b_1\; ...\; b_n)\) (Spalten)
+mit \(A\cdot B \in K^{p\times n}\)
+\end{definition}
+
+\subsection{Eigenschaften der Matrix-Multiplikation}
+\label{sec:org8eaaee0}
+\begin{notation}[] \label{}
+\begin{itemize}
+\item wenn \(\alpha_1,...,\alpha_n\in K\) dann notieren wir \(\alpha_1+...+\alpha_n :=
+   \sum_{i=1}^{n}{\alpha_i}\)
+\item analog \(\alpha_1\cdot ...\cdot\alpha_n := \Pi_{i=1}^{n}{\alpha_i}\)
+\end{itemize}
+\end{notation}
+
+\begin{relation}
+Es gilt dann mit \(A=(a_{ij})_{\substack{i=1,p}}\) : \((A\cdot
+x))_i=\sum_{j=1}^{m}{a_{ij}\cdot x_j,\, i=1,p}\) \\
+
+Insbesondere gilt: \((A\cdot b_k)_i\) Aber \((A\cdot b_k)_i = (A\cdot B)_{ik}\) und \((b_k)_j=b_jk\)
+\end{relation}
+
+\begin{relation}
+Matrixmultiplikation ist \emph{linear}: \(A\cdot (\lambda B_1 + \lambda_2 A B_2)\)
+Analog:
+\end{relation}
+
+\begin{proof}[] \label{}
+Sei \(C=A\cdot (\lambda_1 B_1 + \lambda_2 B_2)\)
+\end{proof}
+
+\begin{relation}
+Die Matrixmultiplikation ist assoziativ: \(A\cdot (B\cdot C)=(A\cdot B)\cdot C\)
+\end{relation}
+
+\begin{proof}[] \label{}
+
+\end{proof}
+
+\begin{definition}{Einheitsmatrix}{}
+Die Einheitsmatrix der gr"osse \(r\) ist die Matrix, die auf der Hauptdiagonale
+(links-oben nach rechts unten) Einsen und sonnst Nullen hat. Beizeichnung \(E_r\)
+oder \(1_r\).
+\end{definition}
+
+\begin{definition}{Kronecker-Symbol}{}
+Das Kronecker-Symbol ist definiert als: 
+
+Also gilt: \((Er)_{ij}=\delta_{ij}\).
+\end{definition}
+
+\begin{theo}{}{} \
+F"ir alle \(A\in K^{p\times m}\) gilt:
+\begin{itemize}
+\item \(E_p\cdot A=A\)
+\item \(A\cdot E_m =A\)
+\end{itemize}
+\end{theo}
+
+\begin{proof}[] \label{}
+
+\end{proof}
+
+
+\begin{notation}[] \label{Vorsicht!}
+Die Matrix Multiplikation ist nicht Konjunktiv: \(A\cdot B\not= B\cdot A\) im
+Allgemeinen, selbst wenn beide Produkte definiert sind und die gleiche Gr"osse
+haben.
+\end{notation}
+
+\begin{exa}[] \label{}
+
+\end{exa}
+
+\begin{notation}[] \label{}
+Die \(i\text{te}\) Spalten der Einheitsmatrix wird durch \(e_i=()\) bezeichnet.
+\end{notation}
+
+\begin{definition}{Transposition}{}
+Sei \(A\in K^{m\times n}\). Die transponierte Matrix \(A^{T}\in K^{n\times n}\) ist
+definiert durch \((A^T)_{ij}:=A_{ji}\). Also ist die i-te Zeile der Einheitsmatrix \((e_i)^T\)
+\end{definition}
+
+Wie l"ost man nun das LGS \(A\cdot x=b\)? Man bringt die erweiterte
+Koeffizientenmatrix in die reduzierten Zeilenstufenform.
+
+\begin{relation}
+Die Basisspalten in der reduzierten Zeilenstufenform sind von der Form, wo \(e_i\)
+die i-te Spalte der Einheitsmatrix \(1_r\) ist. \(r <= m\).
+\end{relation}
+
+Wenn die ersten \(r\) Spalten Basisspalten sind, dann sieht die reduzierte
+Zeilenstufenform so aus:
+
+
+Dann sehen die L"osungen so aus:
+\begin{relation}
+\begin{enumerate}
+\item Es gibt keine \(\iff\) \(b''\not= 0\)
+\item Wenn \(b''=0\), dann sehen die L"osungen so aus: \[x=+\]
+\end{enumerate}
+\end{relation}
+
+Proposition: Sei \(A\in k^{m\times n}\). Das homogene LGS der Form \(L=\{\phi
+t\sep \}\) fuer ein \(r\geq 0, \phi\)
+
+\(\rightarrow\) es gibt \(n-r\) freie Parameter, die die Loesungsmenge beschreiben.
+
+\textbf{Anmerkung} Ein homogenes LGS \(A\cdot x=0\) mit  hat immer eine L"osung \(x\not=
+0\) (es gibt mindestens eine freie Variable).
+
+
+\begin{exa}[] \label{}
+Finde ein reelles Polynom von Grad 2.
+
+Die Frage ist aequivalent zu dem LGS:
+\end{exa}
+
+\begin{definition}{}{}
+Die Menge der Polynome vom Grad h"ochstens \(n\) mit Koeffizienten in \(K\) ist
+durch \(K[t]_n\) berechnet.
+\end{definition}
+
+\section{Vektorra"ume}
+\label{sec:org4906e00}
+\begin{definition}{Vektorraum}{}
+Ein \(k\) - Vektorraum \(V\) ist eine Menge zusammen mit den Operationen und mit
+folgenden Eigenschaften:
+\begin{itemize}
+\item "Addition" \(+:\, V\times V \mapsto V, (v_1,v_2)\mapsto v_1+v_2\)
+\begin{enumerate}
+\item kommutativ
+\item assoziativ
+\item \(\exists 0 \in V\) mit \(0+v=v+0=v\) \(v \in V\)
+\end{enumerate}
+\item "Skalarmultiplikation" \(+:\, V\times V \mapsto V, (v_1,v_2)\mapsto v_1+v_2\)
+\begin{enumerate}
+\item assoziativ
+\item distributiv bez. addition
+\item \(1\cdot v = v\), \(v\in V\)
+\end{enumerate}
+\end{itemize}
+\end{definition}
+
+\begin{exa}[] \label{}
+\begin{enumerate}
+\item \(K\) ist selbst ein Vektorraum mit \(+\) und \(\cdot\)
+\item \(K^{n}:=K^{n\times 1}\) ist ein K-Vektorraum mit:
+\begin{enumerate}
+\item Addition
+\item Skalarmultiplikation
+\end{enumerate}
+\item \(K^{m \times n}\), eine Matrix der Gr"osse \(m\times n\) mit Eintr"agen in K,
+ist ein K-Vektorraum mit Addition und Skalarmultiplikation von Matrizen:
+\item \(K[t]_n\) ist ein K-Vektorraum:
+\item \(K[t]:=\{a_n\cdot \}\) - alle Polynome mit Koeffizienten in \(K\) bilden einen
+K-Vektorraum mit gleichen Operatoren.
+\item Sei \(X\) X eine Menge (z.B. \(X=\mathbb{R}\)) \(Fun(X,K)=\{\}\) ist ein K-Vektorraum:
+\begin{enumerate}
+\item Addition \((f_1 + f_2)(x):= f_1(x)+ f_2(x)\), \(x\in X\)
+\item Miltiplikation
+\end{enumerate}
+\item Sei \(A\in K^{m\times n}\). Die L"osungen von dem homogenen LGS bilden einen
+Vektorraum:
+\begin{itemize}
+\item Wenn \(x_1,x_2\) L"osungen sind, dann gilt: Also ist die Menge der
+L"osungen auch ein Vekorraum bzgl. der Operatoren aus \(K^n\)
+\end{itemize}
+\end{enumerate}
+\end{exa}
+
+\begin{notte}[] \label{}
+Bei der Entwicklung der Vektorraumtheorie ist es oft n"utzlich, an das Beispiel
+\(V=K^n\) zu denken.
+\end{notte}
+
+\subsection{Vektorraumtheorie}
+\label{sec:org432e282}
+Sei \(V\) ein K-Vektorraum.
+
+\begin{definition}{Linearkombination}{}
+Seien \(v_1, v_2\). Die Linearkombination mit Koeffizienten ist der Vektor.
+\end{definition}
+
+\begin{definition}{Triviale Linearkombination}{}
+Eine Linearkombination heist trivial wenn \(\lambda_1 = \lambda_2 = ... =
+\lambda_n = 0\). (\emph{Nichttrivial} wenn mindestens ein \(\lambda_i\not= 0\)).
+\end{definition}
+
+
+\begin{definition}{}{}
+Die Menge der Vektoren heist linear Unabh"angig wenn: \$\$ (Nur die Triviale
+linearkombination ergibt 0). Andernfalls heist die Menge linear abh"angig."
+\end{definition}
+
+\begin{exa}[] \label{}
+\(\begin{pmatrix}1\\0\end{pmatrix}\begin{pmatrix}0\\1\end{pmatrix}\)
+\end{exa}
+
+\begin{exa}[] \label{}
+\(\{v_1,v_2\}\) sind linear abhaengig wenn sie Proportional sind.
+
+\begin{proof}[] \label{}
+
+\end{proof}
+\end{exa}
+
+\textbf{Lemma} Die Menge ist linear abh"angig. \(v_i\) ist eine Linearkombination von \$\$
+
+\begin{proof}[] \label{}
+Wenn \(v_i=\lambda_1 v_1\), dann \(0=\) Denn \(-1\) ist ein nicht-trivialer
+Linearfaktor.
+
+\((\implies)\) Nach Definition gibt es eine nichttriviale Linearkombination: als
+\(\exists i : \lambda_i \not= 0\) Also gilt  folglich 
+\end{proof}
+
+\begin{notte}[] \label{}
+Eine L"osung des LGS \(Ax=b\) ist eine Spalte \$\$ mit 
+Deis heisst, das LGS \(Ax=b\) zu l"osen ist genau linearkombinationen von spalten
+zu finden, welche \(b\) ergeben.
+\end{notte}
+
+\textbf{Lemma} Seien die Vektoren linear unabh"angig. Ein Vektor \(v\) ist genau dann
+eine Linearkombination von \(v_1,...,v_n\) wenn linear abh"angig ist.
+
+\begin{proof}[] \label{}
+(\(\implies\)) Sei Dann gilt , also ist linear ab"angig.
+Sei .. linear abh"angig  Dann 
+
+Es gilt: \(\lambda \not= 0\) (wenn  .. linearunabh"angig.) Also gilt \(v=-\lambda_1\)
+\end{proof}
+
+\textbf{Lemma} Sei \(v=\lambda\) eine Linearkombination von \(v_1,...,v_n\). Diese
+Darstellung ist eindeutig ganau dann, wenn linear unabh"angig sind.
+
+\begin{proof}[] \label{}
+\((\implies)\) Sei die Darstellung eindeutig \$v=..\$ Wenn jetzt \$\$, dan gilt \(v=\)
+Eindeutigkeit der Darstellung ergibt:
+
+Seien \(v_1,..,v_n\) linear unabh"angig, sei 
+Dann gilt: \(\rightarrow\) lineare Unabhaengigkeit von erzwingt Korrolar: Wenn die
+Spalten von \(A\) linear unabhaenig sind, hat das LGS \(Ax=b\) h"ochstens eine
+L"osung, folglich hat \(Ax=0\) genau eine L"osung x=0.
+\end{proof}
+
+\subsection{Geometrische Deutung der linearen Abh"angigket}
+\label{sec:org95b9a1d}
+\begin{notte}[zu geometrischer Interpretation] \label{}
+Wichitige Beispiele von Vektorr"aumen sind: \(V=\mathbb{R}^2\) (Ebene),
+\(V=\mathbb{R}^3\) (3D-Raum).
+\end{notte}
+
+Seien \(v_1, v_2\) nicht proportional.
+In drei Dimensionen:
+\begin{relation}
+\begin{itemize}
+\item wenn \(v_3\) in \(\Epsilon\) liegt, dann ist \(v_3\) eine Linearkombination \(v_1, v_2\)
+\item wenn nicht, dann linear Unabhaenig (sonst in Ebene.)
+\end{itemize}
+\end{relation}
+
+\subsection{Lineare unabhangigkeit in R"aumenx}
+\label{sec:orgea5b4b9}
+\textbf{Proposition} Seien \(v_1,...,v_n \in \mathbb{V}\) linear unabhaenig, seien \(W_1,
+..., W_n \in \mathbb{V}\) so dass jedes \(w_i\) eine Linearkombination von
+\(v_1,...,v_n\) ist. Wenn \(m>n\), dann sind \(w_1,...,w_n\) linear abhaengig.
+
+\begin{proof}[] \label{}
+Seien 
+\begin{align*}
+$w_1= a_{11} v_1 + a_{12} v_2 + ... + a_{nn} v_n$ \\
+$w_1= a_{21} v_1 + a_{22} v_2 + ... + a_{nn} v_n$ \\
+
+\end{align*}
+Wir suchen \(\lambda\) (*). Das ist "aquivalent zu:
+
+Dies ist nach linearer Unabhaenig von \ldots{} "Aquivalent zu:
+
+Das heist (*) ist "aquivalent zu einem homogenen LGS aus \(n\) Gleichungen mit \(m\)
+Variablen. \(n<m\), also gibt es eine L"osung \ldots{}, die ungleich \(0\) ist. \$\implies
+sind linear unabh"angig.
+\end{proof}
+
+\textbf{Korrolar} Je drei Vektoren in \(\mathbb{R}^2\) sind linear unabh"angig, je \(n+1\)
+Vektoren in \$\$ sind linear unabh"angig.
+
+\begin{proof}[von Korrolar] \label{}
+Seien \(e_i\) die Spalten der Einheitsmatrix sind linear unabh"angig. 
+
+Dies zeigt auch, dass jeder Vektor in \(R\) eine Linearkombination von \(e_i\) ist. 
+\end{proof}
+
+\begin{definition}{}{}
+Sei V ein \(K-\) Vektorraum, \(U\subseteq V\) eine Teilmenge von V. \(U\) heist
+untervektorraum wenn:
+\begin{enumerate}
+\item \(V\not= \varnothing\)
+\item 
+
+\item 
+\end{enumerate}
+
+In anderen Worten: Eine Teilmenge von \(V\) die selbst ein Vektorraum ist bzgl.
+der von \(V\) vererbten Operationen.
+\end{definition}
+
+\begin{notte}[] \label{}
+(1) und (3) \implies \(0\in U\)
+\end{notte}
+
+\begin{definition}{}{}
+Sei \(S \in V\) eine Teilmenge. Der von \(S\) erzeugte Vektorraum (lineare H"ulle
+von \(S\)) \(<S>:=\{\}\) (Menge aller Linearkombinationen von Vektoren in \(S\)).
+
+Alternative Notation: \(<s>=\text{span S}\).
+\end{definition}
+
+\begin{notte}[] \label{}
+\(<s>\) ist der kleinste Untervektorraum in \(V\), der \(S\) enth"alt. 
+\(<\varnothing >:=\{0\}\)
+\end{notte}
+
+\begin{exa}[] \label{}
+Seien \(v_1, v_2 \in \mathbb{R}^3\).
+\(<v1,v2>\) ist eine Gerade wenn \(v_1,v_2\) linear abh. Ist Ebene wenn \(v_1,v_2\)
+linear unbh.
+\end{exa}
+
+\begin{definition}{}{}
+\(S\in V\) heisst Erzeugendensystem wenn \(<S>=V\). (S spannt den Vektorraum auf.)
+
+ist ein Erzeugendensystem: jeder Vektor in \(V\) ist eine Linearkombination von:
+
+\(\lambda_i\) sind nicht unbedingt eindeutig bestimmt, weil nicht linear unabh.
+vorrausgesetzt waren.
+\end{definition}
+
+\begin{definition}{}{}
+Ein Erzeugendensystem \(B\in V\) heisst basis, wenn es linear unabh. ist. Nach dem
+Lemma ueber Eindeutigkeit der koeffzienten der Linearkombination gilt: \(B=\{v_1,
+..., v_n\}\) ist eine Basis genau dann, wenn f"ur jeden Vektor \(v \in V\) gibt es
+ eindeutig bestimmte Zahlen.
+\end{definition}
+
+\begin{definition}{}{}
+Ein Vektorraum \(V\) heisst endlich dimensional, wenn er ein endliches
+erzeugendensystem besitzt. (= wird von endlich vielen Vektoren aufgespannt).
+\end{definition}
+
+\begin{theo}{}{}
+Jeder endlichedimensionale Vektorraum \(V\)  hat eine Basis, Je zwei Basen von \(V\)
+haben gleich viele Elemente.
+\end{theo}
+
+\begin{proof}[] \label{}
+Sei \(S\) ein endliches Erzeugendensyste von \(V\), Wenn \(S\) lin. unabh. ist, ist es
+eine Basis und wir haben gewonnen. Wenn \(S\) linear abh"angig ist \implies
+(lemma) einer von den Vektoren in \(S\) ist eine Linearkombination von den
+anderen. Das entfernen dieses Vektors "andert die Tatsache nicht, das \(S\) den
+Vektorraum aufspannt. Jetzt haben wir eine kleinere Menge und fangen von vorne
+an. Da \(S\) endlich ist und durch entfernen Vektoren kleiner wird haben wir am
+Ende eine Basis.
+\(\rightarrow\) Wir haben eine Basis.
+
+Seien \(S, S'\) zwei Basen. Da \(S\) eine Basis ist, ist jedes element von \(S'\) eine
+linearkombination in \(S\). Die elemente von \(S\) sind linear unabh. (weil Basis).
+Wenn also \(m>n\), dann folgt aus der Proposition, dass \(S'\) linear abh. ist, was
+unm"oglich ist, da \(S'\) eine Basis ist. Also \(m \seq n\) und \(n \seq m\).
+\end{proof}
+
+\begin{definition}{}{}
+Sei \(V\) ein endlichdimensionaler Vektorraum. Die Anzahl der Vektoren in einer
+(folglich in jeder) Basis von \(V\) heist Dimension von V. \emph{Bezeichung}: \(\dim V\).n
+\end{definition}
+
+\begin{exa}[s] \label{}
+\(\dim K^{n}=n\) weil \ldots{} eine Basis bilden. 
+\end{exa}
+
+\textbf{Frage}: kannn man eine lineare unabh"angige Menge \(S\in V\) zu eine Basis
+erweitern?.
+
+\textbf{Proposition} Jede linear unabh"angige Teilmenge \(S\in V\) eines
+endlichdimensionalen Vektorraumes \(V\) ist in einer maximalen linear
+unabh"angigen Teilmenge enthalten. Eine maximal linear unabh. Teilmenge von \(V\)
+st eine Basis von \(V\).
+
+\begin{definition}{Maximal linear unabh"angige Teilmengen}{}
+Eine Teilmenge \(S'\in V\) ist maximal linear unabh., wenn aus \(S\)
+linear unabh. folgt.
+\end{definition}
+
+\begin{proof}[1] \label{}
+Sei linear unabh.
+Zwei F"alle: entweder ist \(S\) schon maximal (dann sind wir fertig) oder man kann
+S erweitern. Wenn wir \(S\) erweitern k"onnen, f"ugen wir neue Vektoren hinzu, bis
+wir es nicht mehr tun koennen, ohne lineare unabh. zu verletzen.
+
+Dieser Prozess endet, weil eine linear unabh. Teilmenge h"ochstens von \(V\)
+hoechstens \(\dim V\) viele Vektoren enthalten kann. (Prop. "uber lineare unabh.
+von vektoren aus linearkombinartionen der Basis.)
+\end{proof}
+
+\begin{proof}[2] \label{}
+Sei \(S\in V\) maximal linear unabh"angig. Wir habe zu zeigen: \(<S>=V\) (Def. einer
+Basis). Wenn \ldots{} d.h. aber, aber \(S\cup {v}\) ist linear unabh. (lemma) \implies
+\(S\) dann nicht maximal.
+\end{proof}
+
+\textbf{Korrolar} Man kann jeder lienar unabh. Teilmenge \(S\in V\) zu einer Basis
+erweitern.
+
+\begin{notte}
+Wenn \(V=K^n, S\in V\) linear unabh. \(\rightarrow\) man kann zur erweiterung passende
+Spalten der Einheitsmatrix.
+\end{notte}
+
+\begin{notte}[] \label{}
+Man kann bei der obrigen Proposition das Wort "endlichdimensional" fallen
+lassen, aber es braucht ein bisschen mehr Mengenlehre (Auswahlaxiom).x
+\end{notte}
+
+
+\begin{theo}{}{}
+Sei V ein endlichdimensionaler Vektorraum und \(U\in V\) ein Untervektorraum. Dann
+gillt: \(\dim U \seq \dim V\).  \(\dim U = \dim V \iff U=V\)
+\end{theo}
+
+\begin{proof}[] \label{}
+Sei eine maximale linear unabh. Teilmenge in U. (so eine Teilmenge existiert
+weil V endlich ist.)
+Nach Proposition (2) ist \ldots{} eine Basis in \(U\), also gilt \(\dim U = k\) Erweitere
+\ldots{} zu einer Basis in V \ldots{}. 
+
+(2) \ldots{} trivial \ldots{} Sei \ldots{} eine Basis in U. Erweitere sie zu einer Basis in
+\(V\). Diese Basis in V muss aber wegen \ldots{} gleich viele Vektoren haben. \ldots{}. ist
+eine Basis in \(V\) \ldots{}
+\end{proof}
+
+
+\begin{definition}{}{}
+Sei \(V\) ein Vektorraum \$\$ eine Basis in V. Die Zahlen \((\lambda_1,...\lambda_n)\)
+heissen Koordinaten bzgl. des Vektors. Die Spalte \ldots{} heisst Koordinatenspalte
+dieses Vektors bzgl. \(B\).
+Die Definition einer Basis garantiert, dass hierdurch eine Bijektion \ldots{} entsteht.
+\end{definition}
+
+\textbf{Warnung} Diese Korrespondenz kommt auf die Wahl der Basis an.
+
+\begin{exa}[] \label{}
+
+\end{exa}
+
+\begin{exa}[] \label{}
+Sei \(Ax=0\) ein h. LGS
+\end{exa}
+
+\textbf{Aus Uebungen} \ldots{}
+
+\textbf{Lemma} Die Spalten von \(\Phi\) bilden eine Basis in L.
+\begin{proof}[] \label{}
+Die Spalten von \(\Phi\) sind linear unabhaenig. (sonst abb. nicht injektiv)
+
+Ferner spannen sie das ganze L auf (Surjektiv). 
+\end{proof}
+
+\textbf{Frage} Gegeben Basen \ldots{} in \(V\), und einem Vektor \(v\in V\). Wie rechnet man die
+Koordinaten bezgl. B in Koordinaten bzgl. B' um.
+
+Sprachweise ist: B ist alte Basis und B' ist neue Basis.
+So gilt:
+\begin{relation}
+\ldots{} Dr"ucken wir Vektoren von B' bzgl. Vektoren von B aus: \(V\) \ldots{}
+wir erhalten \(C\) 
+(Die Spalten von C sind Koordinaten der "neuen" Basis bzgl der alten Basis. )
+
+Also gilt: \ldots{}
+\(\lambda = G\cdot \lambda'\)
+\end{relation}
+
+\textbf{Frage} Ist \(D\) in diesem Fall immer invertierbar? (Ja, aber wir brauchen mehr Theorie.)
+
+\subsection{Lineare Abbildungen zwischen Vektorr"aumen}
+\label{sec:orgb4c03c4}
+\begin{definition}{Lineare Abbildung}{}
+Seien \(V, W\) zwei K-Vektorr"aume. Eine Abbildung. \(f\) heist linear wenn:
+
+
+(Strukturell kopatiebel.)
+\end{definition}
+
+\begin{exa}[] \label{}
+\(W=K^n,\; W=K^n\)
+
+Es gilt tats"achlich \(A(x_1+x_2) = A\cdot x_1 + A\cdot x_2\)\ldots{}
+\end{exa}
+
+\begin{exa}[] \label{}
+\(V=\mathbb{R}[x]_5,\;W=\mathbb{R}[x]_4\) Ableitung ist lineare abbildung.
+\end{exa}
+
+\begin{exa}[] \label{}
+Relle Funktionen
+\end{exa}
+
+\begin{definition}{}{}
+Sei eine Lineare Abbildung. Der Kern von \(f\) wird definiert als:
+\end{definition}
+
+\begin{exa}[] \label{}
+
+\end{exa}
+
+\textbf{Beobachtung} Kern von \(f\) ist ein Untervektorraum von \(V\): \ldots{}
+
+Errinerung: f"ur djede Abbildung \(f\) existiert ein Bild:
+
+\begin{exa}[] \label{}
+Wenn, dann definiert A eine Lineare Abbildung
+
+\begin{proof}[] \label{}
+Definitionsgem"ass ist \(f: V\mapsto W\) surjektiv genau dann, wenn \(lm(f)=W\).
+\end{proof}
+\end{exa}
+
+
+\textbf{Proposition} Sei \(f:\) linear Es gilt: \(f\) injektiv \iff \(Ker(f)=\{0\}\)
+
+\begin{proof}[] \label{}
+\(f\) injektiv \iff f"ur \(v_1\not= v_2 \in V\) gilt \(f(v_1)\not= f(v_2)\)
+\end{proof}
+
+\begin{definition}{}{}
+Eine Bijektive Lineare Abbilfung \(f:V\mapsto W\) heisst Vektorraum Isomorphismus
+zwischen \(V\) und \(V\). \(V\) und \(W\) heissen isomorph, wenn es einen
+Vektorraumisomorphismus \(f: V\mapsto W\) gibt.
+\end{definition}
+
+\begin{exa}[] \label{}
+Sei \(V\) ein Vektorraum, \(S\subseteq V = \{v_1, v_2, ..., v_n\}\). Die
+Aufspannabbildung \ldots{} wird definiert als \ldots{}
+\end{exa}
+
+\textbf{Korrolar} \$S=\{v\(_{\text{1}}\), \ldots{}, v\(_{\text{n}}\)\} eine Basis \implies \ldots{} ein Isomorphismus
+
+\textbf{Korrolar} \(\dim V = n \iff V\) ismorph \(K^n\). (\ldots{} isomorphe Vektorraume haben
+die gleiche Dimension)
+
+\textbf{Beobachung} Wenn \ldots{} Isomorphismus \implies \ldots{} ist auch ein Isomorphismus.
+
+\subsubsection{Dimensionsformel}
+\label{sec:org9a58004}
+\begin{theo}{}{}
+Sei \(f\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gilt: 
+\end{theo}
+
+\textbf{lemma} sei \(f\) wie oben. Sei \(U \subseteq \Ker(f)\)  Dann ist \ldots{} ein Isomorphismus
+
+\begin{proof}[des Lemmas] \label{}
+\ldots{} ist surjektiv nach Konstruktion. Inkektiv \iff \ldots{} Sei \ldots{} . Dann gilt \ldots{}. 
+\end{proof}
+
+\begin{proof}[der Dimensionsformel] \label{}
+W"ahle eine Basis \({e_1, ..., e_k}\) in \ldots{} und erg"anze sie zu einer Basis
+\({e_1, ..., e_n}\) in \(V\).
+
+Betrachte jetzt \(U:=<e_{k+1}, ..., e_n> \subseteq V\) Untervektorraum. Es gilt
+Lemma. es gilt: \ldots{} weil .. eine Basis im Kern ist. und \ldots{} weil \(u\in U\) also
+\ldots{}
+
+Das Lemma sagt jetzt \ldots{} ist ein Isomorphismus. Ausserdem gilt f"ur \ldots{} \implies
+\(f(V)=f(V)\) also \ldots{} \implies \ldots{} 
+
+Nun gilt nach Konstruktion von \(U\) \ldots{} 
+\end{proof}
+
+\subsubsection{Summe von Untervektorr"aumen}
+\label{sec:org83dfe63}
+\begin{definition}{}{}
+Sei \ldots{} ein Vektorraum\ldots{}. 
+\end{definition}
+\begin{definition}{}{}
+Die Summe von \ldots{} heisst direkt wenn \ldots{} 
+\end{definition}
+
+\textbf{Bemerkung} \ldots{}
+
+In dieser Bezeichnung haben wir im Beseris der Dimensionsformel haben wir den
+Ausgangsraum als eine direkte Summe dargestellt. 
+
+\textbf{Bemerkung}: Dimensionsformel ist auch Rangformel.
+
+\begin{definition}{Rang}{}
+Sei \ldots{} linear. Der Rang von \(f\) ist \$rk\ldots{}\$
+\end{definition}
+
+\textbf{Proposition} Sei \ldots{} linear, endlichdimensional.
+Dann gilt:
+\begin{itemize}
+\item f injekt. \ldots{}
+\end{itemize}
+
+Insbesondere gilt: \textbf{Korrolar} Ist \ldots{}, so ist f injektiv \iff f surjektiv.
+
+\textbf{Proposition} Dimensionformel' \$\(\dim\) (U\(_{\text{1}}\)+U\(_{\text{2}}\))=\di..\$
+\begin{proof}[] \label{}
+ist stehts ein Untervektorraum, wenn Untervektorra"me sind. 
+
+Betrachte die Abbildung .. Hierbei ist \ldots{} der Verktorraum der Paare mit
+elementweisen operationen. (auch ''A"ussere Summe'', die Kollision der
+Bezeichnunge \ldots{} fuer die direkte Summe zweier Unterr"aume/a"ussere Summe ist harmlos.)
+
+Nun gilt \ldots{} 
+
+Weiterhin gilt eine Basis in eine Basis in \ldots{} eine Basis in \ldots{}
+Ferner gilt: \ldots{} 
+
+\(Ker(f)\) \ldots{} (Unterraum)
+\end{proof}
+
+Was hat diese ganze Theorie mit Matrizen zu tun? Intuitiv: Abbildungen sind
+"geometisch" und Matrizen sind Koordinatenform dieser "geometrischen""
+Abbildungen.
+
+\begin{exa}[] \label{}
+Strecken in richtung von \(l_2\) mit Faktor 2. Wie beschreibt man \(f\) in
+Koordinaten?4
+\end{exa}
+
+\subsubsection{Abbildunngsmatrix}
+\label{sec:org00a1823}
+\begin{definition}{}{}
+Seien \(V,W\) zwei Vektorraume.
+\(\Hom_k(v,w)\)  ist selbst ein Vektorraum.
+\end{definition}
+
+Seien \(V, W\) endlichdimensional, \ldots{} Sei  Die Abbildungsmatrix ist definiert als
+Matrix, deren Spalten die Koordinatenspalten von \ldots{} bzgl. der Basis \(C\) sind. 
+
+\textbf{Vorsicht} H"angt von der Wahl der Basen B und C ab (\(f\) nicht!)
+
+\begin{exa}[] \label{}
+Rotation um \(\frac{\pi}{4}\) gegen Urzeigersinn.
+\end{exa}
+
+\textbf{Proposition} Seien \(V,W,B,C\) wie oben. Dann entsprechen die Abbildungsmatrizen
+ \ldots{}den Abbildungen.  gennauer. Die Abbildung. Ist ein Isomorphismus von
+ Vektorra"umen.
+
+\begin{proof}[] \label{}
+Aus Definition der \(M_C^B\) folgt sofort: \ldots{} also ist \ldots{} eine lineare
+Abbildung:
+
+Ist injektiv: wenn \(f\) dann gilt \(\rightarrow\) Kern ist injektiv.
+
+Ist auch surjektiv: sei gegeben: Definiere eine Abbildung\ldots{} folgendermassen:
+
+Ist linear und es gilt: \ldots{}
+\end{proof}
+
+Im Beweis haben wir unter anderem festgestellt:
+\begin{relation}
+\ldots{}
+
+Das heisst: wenn \(v\)
+\end{relation}
+
+\begin{exa}[] \label{}
+Wenn \(V=K^n, W=K^M\) dann hat \(V\) eine Basis \ldots{} Sei \(A\in K^{m\times n }\) 
+\end{exa}
+
+Seien \(V, W, Z\) drei Vektorraume \ldots{} Dann gilt \ldots{} . Seien \(B,C,D\) Basen in
+\(V,W,Z\)
+
+\textbf{Proposition} \ldots{}
+\begin{proof}[] \label{}
+Sei 
+\end{proof}
+
+\textbf{Bemerkung} Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann Haben wir die
+ Basiswechselmatrix. Bezueglich der alten Basis. Es folgt sofort aus den
+= Definitionen: \(S+\)
+\subsection{Schlagworte:}
+\label{sec:orgcf8c685}
+\begin{itemize}
+\item \(A\cdot B\) Zeilen von \(A\) mal Spalten von \(B\)
+\item LGS L"osungen als Vektor!
+\begin{itemize}
+\item Keine nicht offensichtlich Schritte ueberspringen!
+\item Paramatervektor und sine Elemente genau definieren!
+\end{itemize}
+\item k-te Spalte \((A)_k\)
+\end{itemize}
+\end{document}

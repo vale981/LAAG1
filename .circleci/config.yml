@@ -7,10 +7,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            apt-get update && apt-get --assume-yes install jq
-            tlmgr init-usertree
-            tlmgr update --self
-            tlmgr install ulem german stmaryrd
+            apt-get update && apt-get --assume-yes install jq texlive-lang-german
       - checkout
       - run: cp .latexmkrc ~/.latexmkrc
       - run:

@@ -1,22 +1,22 @@
 version: 2
 jobs:
-    build:
-        docker:
-            - image: paperist/alpine-texlive-ja
-        steps:
-            - run:
-                name: Install Dependencies
-                command: |
-                    apk add --update git patch curl
-                    apk add --update ca-certificates openssl && update-ca-certificates
-                    tlmgr install ulem latexdiff
-            - checkout
-            - run: cp .latexmkrc ~/.latexmkrc
-            - run:
-                name: Generating current version
-                command: |
-                    latexmk Lineare_Algebra.tex;
-                    mkdir /tmp/artifacts;
-                    cp Lineare_Algebra.pdf /tmp/artifacts/
-            - store_artifacts:
-		path: /tmp/artifacts
+  build:
+    docker:
+      - image: paperist/alpine-texlive-ja
+    steps:
+      - run:
+        name: Install Dependencies
+        command: |
+          apk add --update git patch curl
+          apk add --update ca-certificates openssl && update-ca-certificates
+          tlmgr install ulem latexdiff
+      - checkout
+      - run: cp .latexmkrc ~/.latexmkrc
+      - run:
+          name: Generating current version
+          command: |
+            latexmk Lineare_Algebra.tex;
+            mkdir /tmp/artifacts;
+            cp Lineare_Algebra.pdf /tmp/artifacts/
+      - store_artifacts:
+          path: /tmp/artifacts

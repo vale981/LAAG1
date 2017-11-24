@@ -4,6 +4,10 @@ jobs:
     docker:
       - image: paperist/alpine-texlive-ja
     steps:
+      - run:
+          name: Install Dependencies
+          command: |
+            tlmgr install ulem latexdiff
       - checkout
       - run: cp .latexmkrc ~/.latexmkrc
       - run:

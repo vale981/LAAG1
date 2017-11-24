@@ -4,12 +4,6 @@ jobs:
     docker:
       - image: paperist/alpine-texlive-ja
     steps:
-      - run:
-        name: Install Dependencies
-        command: |
-          apk add --update git patch curl
-          apk add --update ca-certificates openssl && update-ca-certificates
-          tlmgr install ulem latexdiff
       - checkout
       - run: cp .latexmkrc ~/.latexmkrc
       - run:

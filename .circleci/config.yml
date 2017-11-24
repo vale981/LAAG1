@@ -25,9 +25,9 @@ jobs:
           command: |
             VERSION=$CIRCLE_BUILD_NUM
             API_JSON=$(printf '{"tag_name": "v%s","target_commitish": "master","name": "v%s","body": "Another Build %s","draft": false,"prerelease": false}' $VERSION $VERSION $VERSION)
-            UPLOAD_URL=$(curl --data "$API_JSON" "https://api.github.com/repos/vale981/LAAG1/releases?access_token=a4a8a9ce756374d3aa9772a33d96a4d0f6057fd4")
+            UPLOAD_URL=$(curl --data "$API_JSON" https://api.github.com/repos/vale981/LAAG1/releases?access_token=a7a3f02a112716ba4a0f976d82531c83fe2fa5ff | jq '.assets_url')
             echo $UPLOAD_URL
-            curl -H "Authorization: a4a8a9ce756374d3aa9772a33d96a4d0f6057fd4" -H "Accept: application/vnd.github.manifold-preview" -H "Content-Type: application/pdf" --data-binary /tmp/artifacts/Lineare_Algebra.pdf $UPLOAD_URL?name=Lineare_Algebra.pdf
+            curl -H "Authorization: a7a3f02a112716ba4a0f976d82531c83fe2fa5ff" -H "Accept: application/vnd.github.manifold-preview" -H "Content-Type: application/pdf" --data-binary /tmp/artifacts/Lineare_Algebra.pdf $UPLOAD_URL?name=Lineare_Algebra.pdf
 
       - store_artifacts:
           path: /tmp/artifacts

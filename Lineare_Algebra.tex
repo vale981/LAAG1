@@ -18,6 +18,8 @@
 \setlength{\parfillskip}{0pt plus 1fil}
 \usepackage{german}
 \usepackage{fancyhdr}
+\usepackage{mathtools} % for xrightarrow
+\usepackage{todonotes}
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
@@ -26,6 +28,10 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 \newcommand{\gq}[1]{\glqq{}#1\grqq{}} % german quotes
+\newcommand{\mdim}{\text{dim }}
+\newcommand{\mKer}{\text{Ker }}
+\newcommand{\mIm}{\text{Im }}
+\newcommand{\mRg}{\text{Rg }}
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 \newtcbtheorem[number within=section]{definition}{Definition}%
@@ -236,10 +242,10 @@ X\) wird ein \(f(x)\in Y\) zugeordnet.''
 
 \begin{exa}\
 \begin{itemize}
-\item \(f(t)=t^2+1\) definiert eine Abbildung \(f: \mathbb{R}\mapsto \mathbb{R}, t\mapsto f(t)=t^2+1\)
+\item \(f(t)=t^2+1\) definiert eine Abbildung \(f: \mathbb{R}\to \mathbb{R}, t\mapsto f(t)=t^2+1\)
 \item \(g(t)= \frac{t^2+1}{t-1}\) definiert eine Abbildung \(g: \mathbb{R}\setminus\{
-   1\}\mapsto \mathbb{R}, t\mapsto  \frac{t^2+1}{t-1}\)
-\item \(h: S=\{\text{Teilnehmer der Vorlesung}\}\mapsto N, s\mapsto Geburtsjahr(s)\)
+   1\}\to \mathbb{R}, t\mapsto  \frac{t^2+1}{t-1}\)
+\item \(h: S=\{\text{Teilnehmer der Vorlesung}\}\to N, s\mapsto Geburtsjahr(s)\)
 \end{itemize}
 \end{exa}
 
@@ -247,10 +253,10 @@ X\) wird ein \(f(x)\in Y\) zugeordnet.''
 \label{sec:orge512a75}
 \begin{relation}
 \begin{enumerate}
-\item F"ur jede Menge \(X\) ist die \textbf{Indentit"atsabbildung} auf \(X\) definiert durch \(Id_x:X\mapsto X, x\mapsto x\).
-\item Gegeben seien Mengen \(A,B\). Die Abbildung \(\pi_A: A\times B \mapsto A, (a,b)
+\item F"ur jede Menge \(X\) ist die \textbf{Indentit"atsabbildung} auf \(X\) definiert durch \(Id_x:X\to X, x\mapsto x\).
+\item Gegeben seien Mengen \(A,B\). Die Abbildung \(\pi_A: A\times B \to A, (a,b)
     \mapsto a\) heisst \textbf{Projektionsabbildung} von \(A\times B\) auf \(A\).
-\item Seien \(X,Y\) Mengen, sei \(y_0 \in Y\). Dann heisst die Abbildung \(f: X\mapsto
+\item Seien \(X,Y\) Mengen, sei \(y_0 \in Y\). Dann heisst die Abbildung \(f: X\to
     Y, x\mapsto y_0\) eine \textbf{konstante Abbildung} (mit dem wert \(y_0\)).
 \end{enumerate}
 \end{relation}
@@ -266,7 +272,7 @@ X\) wird ein \(f(x)\in Y\) zugeordnet.''
 \subsubsection{Bild und Urbild}
 \label{sec:org006b051}
 \begin{definition}{Bild und Urbild einer Funktion}{}
-Sei \(f: X\mapsto Y\) eine Abbildung.
+Sei \(f: X\to Y\) eine Abbildung.
 \begin{itemize}
 \item Sei \(A\subseteq X\). Dann heisst \(f(A):=\{f(a)|a\in A\}\) das Bild von A.
 \item Sei \(B\subseteq Y\). Dann heisst \(f^{-1}(B):=\{a\in A|f(a)\in B\}\) das Urbild von \(B\).
@@ -284,7 +290,7 @@ Das Bild und das Urbild f"ur eine \emph{Menge} einer Funktion ist wieder eine \e
 
 \subsubsection{Einige Eigenschaften von Funktionen}
 \label{sec:org1909a84}
-Seien \(X,Y\) Mengen, \(f: X\mapsto Y\) eine Abbildung. \(f\) heist:
+Seien \(X,Y\) Mengen, \(f: X\to Y\) eine Abbildung. \(f\) heist:
 \begin{relation}
 \begin{enumerate}
 \item \textbf{Injektiv}, wenn f"ur \(x\in X\not = x' \in X\) gilt: \(f(x) \not = f(x')\)
@@ -301,7 +307,7 @@ Seien \(X,Y\) Mengen, \(f: X\mapsto Y\) eine Abbildung. \(f\) heist:
 
 \begin{exa}\
 \begin{enumerate}
-\item \(f: \mathbb{R} \implies \mathbb{R}, t\mapsto t^2\) 
+\item \(f: \mathbb{R} \to \mathbb{R}, t\mapsto t^2\) 
 \begin{itemize}
 \item ist nicht injektiv:
 \end{itemize}
@@ -312,21 +318,21 @@ Seien \(X,Y\) Mengen, \(f: X\mapsto Y\) eine Abbildung. \(f\) heist:
 mit \(t^2=-1\)
 \end{itemize}
 \begin{enumerate}
-\item \(g: \mathbb{N}\mapsto\mathbb{Z}, n\mapsto-n\)
+\item \(g: \mathbb{N}\to\mathbb{Z}, n\mapsto-n\)
 \begin{itemize}
 \item ist injektiv: \(m\ne n\implies g(m)=-m \ne -n = g(n)\)
 \item ist nicht surjektiv: f"ur \(1\in \mathbb{Z}\) gibt es kein \(n\in \mathbb{N}\)
 mit \(-n=1\)
 \end{itemize}
-\item \(h: \mathbb{R}\mapsto\mathbb{R},t\mapsto t^3\) ist Bijektiv ("Ubung)
+\item \(h: \mathbb{R}\to\mathbb{R},t\mapsto t^3\) ist Bijektiv ("Ubung)
 \end{enumerate}
 \end{exa}
 
 \subsubsection{Inverse Abbildung zu einer bijektiven Abbildung}
 \label{sec:orgaae7124}
 \begin{definition}{Inverse Abbildung}{}
-Sei \(f:X\mapsto Y\) bijektiv. Sei \(y\in Y\). Definiere eine Abbildung \(f^{-1}:
-Y\mapsto X\) so: \(f^{-1}(y)=x\) mit der Eigenschaft \(f(x)=y\).
+Sei \(f:X\to Y\) bijektiv. Sei \(y\in Y\). Definiere eine Abbildung \(f^{-1}:
+Y\to X\) so: \(f^{-1}(y)=x\) mit der Eigenschaft \(f(x)=y\).
 \end{definition}
 
 Dies ist wohldefiniert (diese Vorschrift definiert tats"achlich eine Abbildung)
@@ -357,7 +363,7 @@ Wenn \(f\) bijektiv ist, stimmen aber diese Mengen "uberein. (Bew. "Ubung)
 \subsubsection{Verkn"upfung von Abbildungen}
 \label{sec:org540b965}
 \begin{definition}{Verkn"upfung}{}
-\(f: X\mapsto Y, g: Y\mapsto Z\) ist die verkn"upfung \(g\circ: X\mapsto Z\) definiert
+\(f: X\to Y, g: Y\to Z\) ist die verkn"upfung \(g\circ: X\to Z\) definiert
 als \(g\circ f(x)=g(f(x))\). Diagramme Siehe V2\(_{\text{1}}\).
 \end{definition}
 
@@ -365,9 +371,9 @@ als \(g\circ f(x)=g(f(x))\). Diagramme Siehe V2\(_{\text{1}}\).
 Die Verkn"upfung hat folgende Eigenschaften:
 \begin{relation}
 \begin{enumerate}
-\item Sie ist Assoziativ: \(h\circ (g\circ f) = (h \circ g) \circ f\) f"ur alle Abb. \(f: X\mapsto Y, g:Y\mapsto Z\), \(h:Z\mapsto V\)
-\item F"ur jede abbildung \(f: X\mapsto Y\) gilt: \(f\circ id_X=id_Y\circ f = f\).
-\item Wenn \(f:X\mapsto Y\) bijektiv ist, dann gilt: \(f\circ f^{-1}=id_Y\):
+\item Sie ist Assoziativ: \(h\circ (g\circ f) = (h \circ g) \circ f\) f"ur alle Abb. \(f: X\to Y, g:Y\to Z\), \(h:Z\to V\)
+\item F"ur jede abbildung \(f: X\to Y\) gilt: \(f\circ id_X=id_Y\circ f = f\).
+\item Wenn \(f:X\to Y\) bijektiv ist, dann gilt: \(f\circ f^{-1}=id_Y\):
 \begin{itemize}
 \item \(f^{-1}\circ f=id_X\) weil: \(f(f^{-1}(y))=y\):
 \item \(f^{-1}(f(x))=x'\) mit \(f(x')=f(x)\implies x=x'\) wenn \emph{Bijektiv}
@@ -386,13 +392,13 @@ Siehe V2\(_{\text{2}}\):
 \subsubsection{Eingeschr"ankte Abbildungen}
 \label{sec:org60b2559}
 \begin{definition}{Einschr"ankung}{}
-Sei \(f: X\mapsto Y\) eine Abbildung.\\
+Sei \(f: X\to Y\) eine Abbildung.\\
 Die Einschr"ankung von \(f\) auf eine Teilmenge \(A\subseteq X\) ist die  Abbildung:
-\(f|_A:\begin{matrix}A\mapsto Y\\ a\mapsto f(a)\end{matrix}\)
+\(f|_A:\begin{matrix}A\to Y\\ a\mapsto f(a)\end{matrix}\)
 \end{definition}
 
 \begin{exa}
-\(f: \mathbb{R}\mapsto \mathbb{R}, t\mapsto t^{2}\) ist nicht injektiv, \(f|_{[0,
+\(f: \mathbb{R}\to \mathbb{R}, t\mapsto t^{2}\) ist nicht injektiv, \(f|_{[0,
 \infty)}\) ist injektiv.
 \end{exa}
 
@@ -406,7 +412,7 @@ Die Einschr"ankung von \(f\) auf eine Teilmenge \(A\subseteq X\) ist die  Abbild
 \end{definition}
 
 \begin{exa}
-\(f:X\mapsto Y\) ist surjektiv, wenn \(\forall y \in Y \exists x\in X\) mit \(f(x)=y\).
+\(f:X\to Y\) ist surjektiv, wenn \(\forall y \in Y \exists x\in X\) mit \(f(x)=y\).
 \end{exa}
 
 F"ur die Negation der Quantoren gilt:
@@ -418,8 +424,8 @@ F"ur die Negation der Quantoren gilt:
 \end{relation}
 
 \begin{exa}[] \label{} \
-\(f: X\mapsto Y\) ist surjektiv \(\iff \forall y\in Y \exists x\in X : f(x)=y\).\\
-Also: \(f: X\mapsto Y\) ist \textbf{nicht} surjektiv \(\iff \exists y\in Y \forall x\in X : f(x)\not=y\).
+\(f: X\to Y\) ist surjektiv \(\iff \forall y\in Y \exists x\in X : f(x)=y\).\\
+Also: \(f: X\to Y\) ist \textbf{nicht} surjektiv \(\iff \exists y\in Y \forall x\in X : f(x)\not=y\).
 \end{exa}
 
 \subsection{Schlagworte}
@@ -1255,13 +1261,13 @@ durch \(K[t]_n\) berechnet.
 Ein \(k\) - Vektorraum \(V\) ist eine Menge zusammen mit den Operationen und mit
 folgenden Eigenschaften:
 \begin{itemize}
-\item Addition \(+:\, V\times V \mapsto V, (v_1,v_2)\mapsto v_1+v_2\)
+\item Addition \(+:\, V\times V \to V, (v_1,v_2)\mapsto v_1+v_2\)
 \begin{enumerate}
 \item kommutativ
 \item assoziativ
 \item \(\exists 0 \in V\) mit \(0+v=v+0=v\) \(v \in V\)
 \end{enumerate}
-\item Skalarmultiplikation \(+:\, V\times V \mapsto V, (v_1,v_2)\mapsto v_1+v_2\)
+\item Skalarmultiplikation \(+:\, V\times V \to V, (v_1,v_2)\mapsto v_1+v_2\)
 \begin{enumerate}
 \item assoziativ
 \item distributiv bez. addition
@@ -1483,7 +1489,7 @@ haben gleich viele Elemente.
 \begin{proof}[] \label{}
 Sei \(S\) ein endliches Erzeugendensyste von \(V\), Wenn \(S\) lin. unabh. ist, ist es
 eine Basis und wir haben gewonnen. Wenn \(S\) linear abh"angig ist $\implies$
-(lemma) einer von den Vektoren in \(S\) ist eine Linearkombination von den
+(Lemma) einer von den Vektoren in \(S\) ist eine Linearkombination von den
 anderen. Das entfernen dieses Vektors "andert die Tatsache nicht, das \(S\) den
 Vektorraum aufspannt. Jetzt haben wir eine kleinere Menge und fangen von vorne
 an. Da \(S\) endlich ist und durch entfernen Vektoren kleiner wird haben wir am
@@ -1647,7 +1653,7 @@ Errinerung: f"ur djede Abbildung \(f\) existiert ein Bild:
 Wenn, dann definiert A eine Lineare Abbildung
 
 \begin{proof}[] \label{}
-Definitionsgem"ass ist \(f: V\mapsto W\) surjektiv genau dann, wenn \(lm(f)=W\).
+Definitionsgem"ass ist \(f: V\to W\) surjektiv genau dann, wenn \(lm(f)=W\).
 \end{proof}
 \end{exa}
 
@@ -1659,47 +1665,49 @@ Definitionsgem"ass ist \(f: V\mapsto W\) surjektiv genau dann, wenn \(lm(f)=W\).
 \end{proof}
 
 \begin{definition}{}{}
-Eine Bijektive Lineare Abbilfung \(f:V\mapsto W\) heisst Vektorraum Isomorphismus
+Eine Bijektive Lineare Abbilfung \(f:V\to W\) hei"st Vektorraumisomorphismus
 zwischen \(V\) und \(V\). \(V\) und \(W\) heissen isomorph, wenn es einen
-Vektorraumisomorphismus \(f: V\mapsto W\) gibt.
+Vektorraumisomorphismus \(f: V\to W\) gibt.
 \end{definition}
 
 \begin{exa}[] \label{}
 Sei \(V\) ein Vektorraum, \(S\subseteq V = \{v_1, v_2, ..., v_n\}\). Die
-Aufspannabbildung \ldots{} wird definiert als \ldots{}
+Aufspannabbildung \(\varphi_S: \mathbb{K}^n \to V\) wird definiert als \(\varphi_S(\lambda) := \sum_{i=1}^n \lambda_iv_i \). Es gilt ("Ubung): \(\varphi_S\) bijektiv \(\iff S\) ist eine Basis.
 \end{exa}
 
-\textbf{Korrolar} \$S=\{v\(_{\text{1}}\), \ldots{}, v\(_{\text{n}}\)\} eine Basis $\implies \ldots{}$ ein Isomorphismus
+\textbf{Korrolar} \(S=\{v_1, \dots{}, v_n\}\) eine Basis \(\varphi_S: \mathbb{K}^n \xrightarrow{\cong} \) ein Isomorphismus (Bezeichnung \(\mathbb{K}^n \cong V\))
 
-\textbf{Korrolar} \(\dim V = n \iff V\) ismorph \(K^n\). (\ldots{} isomorphe Vektorraume haben
+\textbf{Korrolar} \(\dim V = n \iff V\cong \mathbb{K}^n \). (\((\impliedby)\) isomorphe Vektorraume haben
 die gleiche Dimension)
 
-\textbf{Beobachung} Wenn ... Isomorphismus $\implies \ldots{}$ ist auch ein Isomorphismus.
+\textbf{Beobachung} Wenn \(f: V\to W \) Isomorphismus $\implies f^{-1}: W\to V$ ist auch ein Isomorphismus.
 
 \subsubsection{Dimensionsformel}
 \label{sec:org9a58004}
 \begin{theo}{}{}
-Sei \(f\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gilt: 
+Sei \(f:V\to W\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gilt: \(\mdim\mKer f + \mdim\mIm f = \mdim V\).
 \end{theo}
 
-\textbf{lemma} sei \(f\) wie oben. Sei \(U \subseteq Ker(f)\)  Dann ist $ \ldots{}$ ein Isomorphismus
+\textbf{Lemma} sei \(f\) wie oben. Sei \(U \subseteq \mKer(f)\) ein Untervektorraum mit \(U \cap \mKer(f) = \{0\}\).  Dann ist \(f|_U:U\to f(U)\) ein Isomorphismus.
 
-\begin{proof}[des Lemmas] \label{}
-$\ldots{}$ ist surjektiv nach Konstruktion. Inkektiv $\iff \ldots{}$ Sei $\ldots{}$ . Dann gilt $\ldots{}$. 
+\begin{proof}[Beweis des Lemmas] \label{}
+\(f|_U:U\to f(U)\) ist surjektiv nach Konstruktion. Zu zeigen: \(f|_U\) injkektiv \(\iff \mKer f|_U = \{0\}\). Sei \(u\in \mKer f|_U \). Dann gilt \(u\in U \land u \in \mKer(f) \implies u \in U \cap \mKer f \implies u = 0\)
 \end{proof}
 
-\begin{proof}[der Dimensionsformel] \label{}
-W"ahle eine Basis \({e_1, ..., e_k}\) in \ldots{} und erg"anze sie zu einer Basis
+\begin{proof}[Beweis der Dimensionsformel] \label{}
+W"ahle eine Basis \({e_1, ..., e_k}\) in \(\mKer f\) und erg"anze sie zu einer Basis
 \({e_1, ..., e_n}\) in \(V\).
 
 Betrachte jetzt \(U:=<e_{k+1}, ..., e_n> \subseteq V\) Untervektorraum. Es gilt
-Lemma. es gilt: \ldots{} weil .. eine Basis im Kern ist. und \ldots{} weil \(u\in U\) also
-\ldots{}
+Lemma. Es gilt: \todo{Stimmt das?}\(u = \sum_{i=1}^k \lambda_ie_i \), weil \(e_1, \dots e_k\) eine Basis im Kern ist, und \(u = \sum_{i=k+1}^{n} \) weil \(u\in U\). Also: \(\sum_{i=1}^k \lambda_ie_i - \sum_{i=k+1}^{n} \lambda_ie_i = 0 \xRightarrow{e_1,\dots, e_n \text{Basis}} \text{alle }\lambda_i = 0 \implies u =0\).
 
-Das Lemma sagt jetzt $\ldots{} $ist ein Isomorphismus. Ausserdem gilt f"ur $\ldots{} \implies$
-\(f(V)=f(V)\) also $\ldots{} \implies \ldots{} $
+Das Lemma sagt jetzt \(f|_U\) ist ein Isomorphismus. Ausserdem gilt f"ur \(v =\sum_{i=1}^{n}\lambda_ie_i \in V:\)
+\begin{align*}
+f(v) = f\left(\underbrace{\sum_{i=1}^{k}\lambda_ie_i}_{\in \mKer(f)}\right) + f\left(\sum_{i=k+1}^{n}\lambda_ie_i\right) = f\left(\underbrace{\sum_{i=k+1}^{n} \lambda_ie_i}_{\in U}\right)
+\end{align*}
+\(\implies f(V)=f(U)\) also \(f|_U : U\to f(V) = \mIm(f) \) ist ein Isomorphismus \(\implies \mdim \mIm f = \mdim U \)
 
-Nun gilt nach Konstruktion von \(U\) $ \ldots{} $
+Nun gilt nach Konstruktion von \(U\): \[\underbrace{\mdim \mKer(f)}_{k} + \underbrace{\mdim U}_{n-k} = \underbrace{\mdim V}_{n} \implies \mdim\mKer f + \mdim\mIm f = \mdim V \]
 \end{proof}
 
 \subsubsection{Summe von Untervektorr"aumen}

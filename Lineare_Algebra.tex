@@ -49,12 +49,15 @@ halign = center,
 \usepackage{amssymb}
 \usepackage{gauss}
 \usepackage{stmaryrd}
-\newtheorem{prof}{Beweis}[section]
 \newtheorem{exa}{Beispiel}[section]
 \newtheorem{expe}{experiment}[section]
+\newtheorem*{prof}{Beweis}
 \newtheorem*{notte}{Beachte}
 \newtheorem*{notation}{Notation}
 \newtheorem*{proposition}{Proposition}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{korollar}{Korollar}
+\newtheorem*{beobachtung}{Beobachtung}
 \author{Valentin Boettcher}
 \date{\today}
 \title{Lineare Algebra (f"ur Physiker) I}
@@ -1365,7 +1368,7 @@ Darstellung ist eindeutig ganau dann, wenn linear unabh"angig sind.
 Eindeutigkeit der Darstellung ergibt:
 
 Seien \(v_1,..,v_n\) linear unabh"angig, sei 
-Dann gilt: \(\rightarrow\) lineare Unabhaengigkeit von erzwingt Korrolar: Wenn die
+Dann gilt: \(\rightarrow\) lineare Unabhaengigkeit von erzwingt Korollar: Wenn die
 Spalten von \(A\) linear unabhaenig sind, hat das LGS \(Ax=b\) h"ochstens eine
 L"osung, folglich hat \(Ax=0\) genau eine L"osung x=0.
 \end{proof}
@@ -1407,10 +1410,10 @@ Variablen. \(n<m\), also gibt es eine L"osung $\ldots{}$, die ungleich \(0\) ist
 sind linear unabh"angig.
 \end{proof}
 
-\textbf{Korrolar} Je drei Vektoren in \(\mathbb{R}^2\) sind linear unabh"angig, je \(n+1\)
+\textbf{Korollar} Je drei Vektoren in \(\mathbb{R}^2\) sind linear unabh"angig, je \(n+1\)
 Vektoren in \$\$ sind linear unabh"angig.
 
-\begin{proof}[von Korrolar] \label{}
+\begin{proof}[von Korollar] \label{}
 Seien \(e_i\) die Spalten der Einheitsmatrix sind linear unabh"angig. 
 
 Dies zeigt auch, dass jeder Vektor in \(R\) eine Linearkombination von \(e_i\) ist. 
@@ -1533,7 +1536,7 @@ Basis). Wenn $\ldots{}$ d.h. aber, aber \(S\cup {v}\) ist linear unabh. (lemma) 
 \(S\) dann nicht maximal.
 \end{proof}
 
-\textbf{Korrolar} Man kann jeder lienar unabh. Teilmenge \(S\in V\) zu einer Basis
+\textbf{Korollar} Man kann jeder lienar unabh. Teilmenge \(S\in V\) zu einer Basis
 erweitern.
 
 \begin{notte}
@@ -1668,41 +1671,56 @@ Vektorraumisomorphismus \(f: V\rightarrow W\) gibt.
 
 \begin{exa}[] \label{}
 Sei \(V\) ein Vektorraum, \(S\subseteq V = \{v_1, v_2, ..., v_n\}\). Die
-Aufspannabbildung \ldots{} wird definiert als \ldots{}
+Aufspannabbildung $\varphi_S: K^n \rightarrow V$ wird definiert als $\varphi_S(\lambda)=\sum_{i=1}^{n}\lambda_i v_i$
+
+\begin{itemize}
+	\item \(\varphi_s\) ist linear.
+	\item \(\varphi_s\) ist bijektiv \(\iff\) S ist Basis.
+\end{itemize}
 \end{exa}
 
-\textbf{Korrolar} \$S=\{v\(_{\text{1}}\), \ldots{}, v\(_{\text{n}}\)\} eine Basis $\implies \ldots{}$ ein Isomorphismus
+\begin{korollar}
+	\(S=\{v_1,\ldots,v_n\}\) ist eine Basis von V $\implies \varphi_S: K^n \rightarrow V$ ist Isomorphismus ($K^n\cong V$)
+\end{korollar}
 
-\textbf{Korrolar} \(\dim V = n \iff V\) ismorph \(K^n\). (\ldots{} isomorphe Vektorraume haben
-die gleiche Dimension)
+\begin{korollar}
+	\(\dim V = n \iff V\cong K^n\)
+\end{korollar}
 
-\textbf{Beobachung} Wenn ... Isomorphismus $\implies \ldots{}$ ist auch ein Isomorphismus.
+\begin{beobachtung}
+	Wenn \(f:V\rightarrow W\) Isomorphismus $\implies f^{-1}:W\rightarrow V $ ist auch ein Isomorphismus.
+\end{beobachtung}
 
 \subsubsection{Dimensionsformel}
 \label{sec:org9a58004}
 \begin{theo}{}{}
-Sei \(f\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gilt: 
+Sei \(f:V\rightarrow W\) eine lineare Abbildung, sei \(V\) endlichdimensional. Dann gilt:
+\[\dim \:\text{Ker}(f) + \dim\: \text{Im}(f) = \dim\: V \]
 \end{theo}
 
-\textbf{lemma} sei \(f\) wie oben. Sei \(U \subseteq Ker(f)\)  Dann ist $ \ldots{}$ ein Isomorphismus
+\textbf{Intuitives Verständnis:} dim Ker(f) = „verlorene“ Dimensionen, dim Im(f) = „übriggebliebene“ Dimensionen.
 
-\begin{proof}[des Lemmas] \label{}
-$\ldots{}$ ist surjektiv nach Konstruktion. Inkektiv $\iff \ldots{}$ Sei $\ldots{}$ . Dann gilt $\ldots{}$. 
-\end{proof}
+\begin{lemma}
+	 Sei \(f:V\rightarrow W\), V endlichdimensional. Sei \(U \subseteq V\) mit \(U\cap \text{Ker}(f)=\{0\}\) Dann ist die Einschränkung von f auf U \(f|_U: U\rightarrow f(U) \) ein Isomorphismus.
+\end{lemma}
 
-\begin{proof}[der Dimensionsformel] \label{}
-W"ahle eine Basis \({e_1, ..., e_k}\) in \ldots{} und erg"anze sie zu einer Basis
-\({e_1, ..., e_n}\) in \(V\).
+\begin{prof}[des Lemmas] \label{}
+$f|_U: U\rightarrow f(U)$ ist surjektiv nach Konstruktion.\\ Zu zeigen: $f|_U$ injektiv $\iff \text{Ker}(f|_U)=\{0\}$\\ Sei $u \in \ker(f|_U)$. Dann gilt: $u\in U \land u\in \ker(f) \iff u\in U \cap \ker(f) = \{0\} \implies u=0 $ 
+\end{prof}
 
-Betrachte jetzt \(U:=<e_{k+1}, ..., e_n> \subseteq V\) Untervektorraum. Es gilt
-Lemma. es gilt: \ldots{} weil .. eine Basis im Kern ist. und \ldots{} weil \(u\in U\) also
-\ldots{}
+\begin{prof}[der Dimensionsformel] \label{}
+W"ahle eine Basis \(\{e_1, ..., e_k\}\) in $\ker(f)$ und ergänze sie zu einer Basis \(\{e_1, ..., e_n\}\) in \(V\).
 
-Das Lemma sagt jetzt $\ldots{} $ist ein Isomorphismus. Ausserdem gilt f"ur $\ldots{} \implies$
-\(f(V)=f(V)\) also $\ldots{} \implies \ldots{} $
+Betrachte nun den Untervektorraum \(U:=\langle e_{k+1}, ..., e_n\rangle \subseteq V\). Es gilt: $U \cap \ker(f)=\{0\}$, weil für $u\in U \cap \ker(f)$ gilt:\\
+\(u=\sum\limits_{i=1}^{k}\lambda_i e_i \), weil $\{e_1,\dots,e_k\}$ Basis im Kern ist, und \(u=\sum\limits_{i=k+1}^{n}\lambda_i e_i \), weil $u\in U$.\\
+\(\implies \sum\limits_{i=1}^{k}-\sum\limits_{i=k+1}^{n} = 0 \implies \lambda_i=0 \quad \forall i \implies u=0 \)
+
+Das Lemma besagt jetzt, dass $f|_U: U\rightarrow f(U)$ ein Isomorphismus ist.\\
+Außerdem gilt für v=$\sum\limits_{i=1}^{n}\lambda_i e_i \in V:$
+\[f(v) = f(\sum\limits_{i=1}^{k}\lambda_i e_i) + f(\sum\limits_{i=k+1}^{n}\lambda_i e_i) = f(\sum\limits_{i=k+1}^{n}\lambda_i e_i)\]
 
 Nun gilt nach Konstruktion von \(U\) $ \ldots{} $
-\end{proof}
+\end{prof}
 
 \subsubsection{Summe von Untervektorr"aumen}
 \label{sec:org83dfe63}
@@ -1730,7 +1748,7 @@ Dann gilt:
 \item f injekt. \ldots{}
 \end{itemize}
 
-Insbesondere gilt: \textbf{Korrolar} Ist $\ldots{}$, so ist f injektiv $\iff $f surjektiv.
+Insbesondere gilt: \textbf{Korollar} Ist $\ldots{}$, so ist f injektiv $\iff $f surjektiv.
 
 \textbf{Proposition} Dimensionformel' \(\dim U_1 +U_2 =\dim..\)
 \begin{proof}[] \label{}

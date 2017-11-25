@@ -56,12 +56,15 @@ halign = center,
 \usepackage{amssymb}
 \usepackage{gauss}
 \usepackage{stmaryrd}
-\newtheorem{prof}{Beweis}[section]
 \newtheorem{exa}{Beispiel}[section]
 \newtheorem{expe}{experiment}[section]
+\newtheorem*{prof}{Beweis}
 \newtheorem*{notte}{Beachte}
 \newtheorem*{notation}{Notation}
 \newtheorem*{proposition}{Proposition}
+\newtheorem*{lemma}{Lemma}
+\newtheorem*{korollar}{Korollar}
+\newtheorem*{beobachtung}{Beobachtung}
 \author{Valentin Boettcher}
 \date{\today}
 \title{Lineare Algebra (f"ur Physiker) I}
@@ -1373,7 +1376,7 @@ Darstellung ist eindeutig ganau dann, wenn linear unabh"angig sind.
 Eindeutigkeit der Darstellung ergibt:
 
 Seien \(v_1,..,v_n\) linear unabh"angig, sei 
-Dann gilt: \(\rightarrow\) lineare Unabhaengigkeit von erzwingt Korrolar: Wenn die
+Dann gilt: \(\rightarrow\) lineare Unabhaengigkeit von erzwingt Korollar: Wenn die
 Spalten von \(A\) linear unabhaenig sind, hat das LGS \(Ax=b\) h"ochstens eine
 L"osung, folglich hat \(Ax=0\) genau eine L"osung x=0.
 \end{proof}
@@ -1415,10 +1418,10 @@ Variablen. \(n<m\), also gibt es eine L"osung $\ldots{}$, die ungleich \(0\) ist
 sind linear unabh"angig.
 \end{proof}
 
-\textbf{Korrolar} Je drei Vektoren in \(\mathbb{R}^2\) sind linear unabh"angig, je \(n+1\)
+\textbf{Korollar} Je drei Vektoren in \(\mathbb{R}^2\) sind linear unabh"angig, je \(n+1\)
 Vektoren in \$\$ sind linear unabh"angig.
 
-\begin{proof}[von Korrolar] \label{}
+\begin{proof}[von Korollar] \label{}
 Seien \(e_i\) die Spalten der Einheitsmatrix sind linear unabh"angig. 
 
 Dies zeigt auch, dass jeder Vektor in \(R\) eine Linearkombination von \(e_i\) ist. 
@@ -1541,7 +1544,7 @@ Basis). Wenn $\ldots{}$ d.h. aber, aber \(S\cup {v}\) ist linear unabh. (lemma) 
 \(S\) dann nicht maximal.
 \end{proof}
 
-\textbf{Korrolar} Man kann jeder lienar unabh. Teilmenge \(S\in V\) zu einer Basis
+\textbf{Korollar} Man kann jeder lienar unabh. Teilmenge \(S\in V\) zu einer Basis
 erweitern.
 
 \begin{notte}
@@ -1617,70 +1620,84 @@ Also gilt: \ldots{}
 \subsection{Lineare Abbildungen zwischen Vektorr"aumen}
 \label{sec:orgb4c03c4}
 \begin{definition}{Lineare Abbildung}{}
-Seien \(V, W\) zwei K-Vektorr"aume. Eine Abbildung. \(f\) heist linear wenn:
+Seien \(V, W\) zwei K-Vektorr"aume. Eine Abbildung \(f: V\rightarrow W\) heißt linear, wenn:
 
+\begin{enumerate}
+	\item \(\forall v,v' \in V: f(v+v')=f(v)+f(v')\)
+	\item \(\forall v\in V, \lambda \in K: f(\lambda v)=\lambda f(v)\)
+\end{enumerate}
 
-(Strukturell kopatiebel.)
 \end{definition}
 
 \begin{exa}[] \label{}
-\(W=K^n,\; W=K^n\)
-
-Es gilt tats"achlich \(A(x_1+x_2) = A\cdot x_1 + A\cdot x_2\)\ldots{}
+$f_{A}: K^n\rightarrow K^m, x\mapsto A\cdot x$, für $A \in K^{m\times n}$ ist eine lineare Abbildung.
 \end{exa}
 
 \begin{exa}[] \label{}
-\(V=\mathbb{R}[x]_5,\;W=\mathbb{R}[x]_4\) Ableitung ist lineare abbildung.
+\(V=\mathbb{R}[x]_5,\;W=\mathbb{R}[x]_4\). $f: V\rightarrow W, p \mapsto \frac{dp}{dx}$ ist eine lineare Abbildung, die jedem Polynom seine Ableitung zuordnet.
 \end{exa}
 
 \begin{exa}[] \label{}
-Relle Funktionen
+$V=W=\{f:\mathbb{R}\rightarrow\mathbb{R}\}$ die Menge aller reellen, reellwertiger Funktionen. Für eine gegebene Abbildung $g:\mathbb{R}\rightarrow\mathbb{R}$ ist die Abbildung $mg: V\rightarrow W, f\mapsto g\cdot f, (g\cdot f)(x)=g(x)\cdot f(x)$ linear.
 \end{exa}
 
 \begin{definition}{}{}
-Sei eine Lineare Abbildung. Der Kern von \(f\) wird definiert als:
+Sei $f:V\rightarrow W$eine Lineare Abbildung. Der Kern von \(f\) wird definiert als \[Ker\: f := f^{-1}(0) = \{v\in V|f(v)=0\}\] Der Kern der Abbildung f ist also die Menge aller Elemente in V, die auf das Nullelement von W abgebildet werden.
 \end{definition}
 
 \begin{exa}[] \label{}
-
+$f=f_A: K^n\rightarrow K^m \quad x\mapsto A\cdot x$\\
+$Ker (f_A) = \{x\in K^n|A\cdot x = 0\}$, also die Lösung des homogenen LGS mit der Koeffizientenmatrix A.
 \end{exa}
 
-\textbf{Beobachtung} Kern von \(f\) ist ein Untervektorraum von \(V\): \ldots{}
+\textbf{Beobachtung} Der Kern von \(f\) ist ein Untervektorraum von \(V\):
+\[v_1 , v_2 \in Ker(f) \Rightarrow f(v_1 + v_2)=f(v_1 )+f(v_2 )=0 \Rightarrow v_1 + v_2 \in Ker(f) \]
+\[v \in Ker(f), \lambda \in K \Rightarrow f(\lambda v)=\lambda f(v)=\lambda \cdot 0 = 0 \Rightarrow \lambda v \in Ker(f) \]
 
-Errinerung: f"ur djede Abbildung \(f\) existiert ein Bild:
+\textbf{Beobachtung} Das Bild von f $Im(f) \subseteq W$ ist Untervektorraum, wenn:
+\[w_1 =f(v_1 ), w_2 = f(v_2 )\in Im(f) \Rightarrow w_1 +w_2 = f(v_1 )+f(v_2 )= f(v_1 +v_2) \Rightarrow w_1 +w_2 \in Im(f) \]
+\[w=f(v)\in Im(f), \lambda \in K \Rightarrow \lambda w = \lambda f(v)=f(\lambda v) \in Im(f) \]
+$\Rightarrow$ Das Bild einer linearen Abbildung ist ein Untervektorraum.
 
 \begin{exa}[] \label{}
-Wenn, dann definiert A eine Lineare Abbildung
-
-\begin{proof}[] \label{}
-Definitionsgem"ass ist \(f: V\to W\) surjektiv genau dann, wenn \(lm(f)=W\).
-\end{proof}
+$Im(f_A )=\{b\in K^m \:|\: \exists x \in K^n: A\cdot x=b \}=\{b\in K^m\:|\:LGS Ax=b\; l"osbar\} $
 \end{exa}
 
+\textbf{Beobachtung} Definitionsgemäß ist $f:V\rightarrow W$ genau dann surjektiv, wenn $Im(f) = W$.
 
-\textbf{Proposition} Sei \(f:\) linear Es gilt: \(f\) injektiv $\iff$ \(Ker(f)=\{0\}\)
+\textbf{Proposition} Sei \(f:V\rightarrow W\) eine lineare Abbildung. Es gilt: \(f\) injektiv $\iff$ \(Ker(f)=\{0\}\)
 
 \begin{proof}[] \label{}
-\(f\) injektiv $\iff$ f"ur \(v_1\not= v_2 \in V\) gilt \(f(v_1)\not= f(v_2)\)
+f injektiv $\iff v_1 \neq v_2 \in V: f(v_1)\neq f(v_2) \iff f(v_1)-f(v_2)\neq 0 \iff f(v_1 -v_2)\neq 0 \iff v_1,v_2 \in V, v_1-v_2\neq 0: f(v_1 -v_2)\neq 0 \iff v\neq 0: f(v)\neq 0 \iff Ker(f) = \{0\}$
 \end{proof}
 
 \begin{definition}{}{}
-Eine Bijektive Lineare Abbilfung \(f:V\to W\) hei"st Vektorraumisomorphismus
-zwischen \(V\) und \(V\). \(V\) und \(W\) heissen isomorph, wenn es einen
-Vektorraumisomorphismus \(f: V\to W\) gibt.
+Eine bijektive Lineare Abbildung \(f:V\rightarrow W\) heißt Vektorraumisomorphismus
+zwischen \(V\) und \(W\). \(V\) und \(W\) heißen isomorph, wenn es einen
+Vektorraumisomorphismus \(f: V\rightarrow W\) gibt.
 \end{definition}
 
 \begin{exa}[] \label{}
 Sei \(V\) ein Vektorraum, \(S\subseteq V = \{v_1, v_2, ..., v_n\}\). Die
-Aufspannabbildung \(\varphi_S: \mathbb{K}^n \to V\) wird definiert als \(\varphi_S(\lambda) := \sum_{i=1}^n \lambda_iv_i \). Es gilt ("Ubung): \(\varphi_S\) bijektiv \(\iff S\) ist eine Basis.
+Aufspannabbildung $\varphi_S: K^n \rightarrow V$ wird definiert als $\varphi_S(\lambda)=\sum_{i=1}^{n}\lambda_i v_i$
+
+\begin{itemize}
+	\item \(\varphi_s\) ist linear.
+	\item \(\varphi_s\) ist bijektiv \(\iff\) S ist Basis.
+\end{itemize}
 \end{exa}
 
-\textbf{Korrolar} \(S=\{v_1, \dots{}, v_n\}\) eine Basis \(\varphi_S: \mathbb{K}^n \xrightarrow{\cong} \) ein Isomorphismus (Bezeichnung \(\mathbb{K}^n \cong V\))
+\begin{korollar}
+	\(S=\{v_1,\ldots,v_n\}\) ist eine Basis von V $\implies \varphi_S: K^n \rightarrow V$ ist Isomorphismus ($K^n\cong V$)
+\end{korollar}
 
-\textbf{Korrolar} \(\dim V = n \iff V\cong \mathbb{K}^n \). (\((\impliedby)\) isomorphe Vektorraume haben
-die gleiche Dimension)
+\begin{korollar}
+	\(\dim V = n \iff V\cong K^n\)
+\end{korollar}
 
-\textbf{Beobachung} Wenn \(f: V\to W \) Isomorphismus $\implies f^{-1}: W\to V$ ist auch ein Isomorphismus.
+\begin{beobachtung}
+	Wenn \(f:V\rightarrow W\) Isomorphismus $\implies f^{-1}:W\rightarrow V $ ist auch ein Isomorphismus.
+\end{beobachtung}
 
 \subsubsection{Dimensionsformel}
 \label{sec:org9a58004}
@@ -1736,7 +1753,7 @@ Dann gilt:
 \item f injekt. \ldots{}
 \end{itemize}
 
-Insbesondere gilt: \textbf{Korrolar} Ist $\ldots{}$, so ist f injektiv $\iff $f surjektiv.
+Insbesondere gilt: \textbf{Korollar} Ist $\ldots{}$, so ist f injektiv $\iff $f surjektiv.
 
 \textbf{Proposition} Dimensionformel' \(\dim U_1 +U_2 =\dim..\)
 \begin{proof}[] \label{}

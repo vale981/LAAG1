@@ -25,6 +25,7 @@
 \fancyhead[R]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
+\newcommand{\gq}[1]{\glqq{}#1\grqq{}} % german quotes
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 \newtcbtheorem[number within=section]{definition}{Definition}%
@@ -98,13 +99,13 @@ In der modernen Mathematik fasst man Strukturen (R"aume, Fl"achen,
 Zahlensysteme) als \emph{Mengen} und \emph{Abbildungen} auf.
 
 \begin{definition}{Menge}{def-meng}
-Eine Zusammenfassung von Objekten die \textbf{Elemente} der heissen. Eine Menge ist
+Eine Zusammenfassung von Objekten die \textbf{Elemente} der Menge heissen. Eine Menge ist
 also eindeutig dadurch bestimmt, welche Elemente sie enth"alt.
 \end{definition}
 
 \begin{notation}\
 \begin{itemize}
-\item \(M=\{m_1,m_2,m_3,...\}\) - Aufzeahlung
+\item \(M=\{m_1,m_2,m_3,...\}\) - Aufz"ahlung
 \begin{itemize}
 \item \(\{...\}\) - Mengenklammern
 \end{itemize}
@@ -117,7 +118,7 @@ also eindeutig dadurch bestimmt, welche Elemente sie enth"alt.
 
 \begin{exa}\
 \begin{itemize}
-\item \(n=\{\text{Nat"urliche Zahlen}\} =(add-hook 'La(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)TeX-mode-hook 'LaTeX-math-mode) \{0,1,2,...\}\)
+\item \(n=\{\text{Nat"urliche Zahlen}\} = \{0,1,2,...\}\)
 \item \(E=\{x|\text{x hat die Eigenschaft } P(x)\}\)
 \end{itemize}
 \end{exa}
@@ -125,11 +126,11 @@ also eindeutig dadurch bestimmt, welche Elemente sie enth"alt.
 \subsection{Wichtige Mengen}
 \label{sec:orga565e26}
 \begin{itemize}
-\item \(\mathbb{N}=\{\text{nat"urliche Zahlen}\} = \{1,2,...\}\)
-\item \(\mathbb{Z}=\{\text{ganze Zahlen}\} = \{...,-2,-1,0,1,2,...\}\)
-\item \(Q=\{\text{Rationale
-   Zahlen}\}=\left\{\left.\displaystyle\frac{p}{q}\;\right\vert\begin{array}{c}p \in \mathbb{Z} \\ q \in N \setminus \{0\}\end{array}\right\}\)
-\item \(\mathbb{R}=\{\text{reelle Zahlen}\}\)
+\item \(\mathbb{N}=\{\text{Nat"urliche Zahlen}\} = \{1,2,...\}\)
+\item \(\mathbb{Z}=\{\text{Ganze Zahlen}\} = \{...,-2,-1,0,1,2,...\}\)
+\item \(\mathbb{Q}=\{\text{Rationale
+   Zahlen}\}=\left\{\left.\displaystyle\frac{p}{q}\;\right\vert\begin{array}{c}p \in \mathbb{Z} \\ q \in \mathbb{N} \setminus \{0\}\end{array}\right\}\)
+\item \(\mathbb{R}=\{\text{Reelle Zahlen}\}\)
 \end{itemize}
 
 \subsection{Beziehungen zwischen Mengen}
@@ -139,35 +140,36 @@ Seien \(A,B\) zwei Mengen.
 \begin{enumerate}
 \item \(A\) heisst \textbf{Teilmenge} von B, wenn f"ur jedes Element \(a\in A\) gilt: \(a\in B\).
 \item Es sei die Menge \(C = \{a|a\in A \text{ und } b\in B\}\), so heisst \(C\) \textbf{Durchschnitt} von \(A\) und \(B\).
-\item Es sei die Menge \(C = \{a|a\in A \text{ oder } b\in B\}\), so heisst \(C\) \textbf{Vereinigung} von \(A\) u(add-hook 'c++-mode-hook 'clang-format-bindings)nd \(B\).
+\item Es sei die Menge \(C = \{a|a\in A \text{ oder } b\in B\}\), so heisst \(C\) \textbf{Vereinigung} von \(A\) und \(B\).
 \end{enumerate}
 \end{definition}
 
 \begin{notation}\
 \begin{itemize}
-\item \(\in\) ``Element von'': \(x\in X\) - ''x ist Element von X''
-\item \(\subseteq\) Teilmenge: \(A\subseteq B\) - ''A ist eine Teilmenge von B''
+\item \(\in\) Element von: \(x\in X\) - \gq{x ist Element von X}
+\item \(\subseteq\) Teilmenge: \(A\subseteq B\) - \gq{A ist eine Teilmenge von B}
+\item \(\subset\) echte Teilmenge: \(A\subset B \iff A\subseteq B \land A \neq B\)
 \item \(\cap\) Durchschnitt: \(A\cap B = \{a|a\in A \text{ und } b\in B\}\)
-\item \(\cup\) Vereinigung \(A\cup B = \{a|a\in A \text{ oder } b\in B\}\)
-\item \(\varnothing\) - Leere Menge
-\item \(A\setminus B\) - Mengendifferenz
-\item \(A\times B\) - Direktes Produkt
+\item \(\cup\) Vereinigung: \(A\cup B = \{a|a\in A \text{ oder } b\in B\}\)
+\item \(\varnothing\) Leere Menge: enth"alt keine Elemente und ist Teilmenge aller Mengen
+\item \(\setminus\) Mengendifferenz: \( A\setminus B = \{a|a\in A \land a\notin B \} \)
+\item \(A\times B\) Direktes Produkt: \(A \times B = \{(a,b)|a\in A\land b\in B \} \)
 \begin{itemize}
-\item \((a,b)\) - geordentes Paar mit dem ersten Element \(a\) und dem zweiten
-Element \(b\).
+	\item \((a,b)\): geordentes Paar mit dem ersten Element \(a\) und dem zweiten
+	Element \(b\).
 \end{itemize}
 \end{itemize}
 \end{notation}
 
 \begin{exa}
-\(N\subseteq \mathbb{Z}\), aber \(Q \not\subset \mathbb{Z}\): \(\frac{1}{2} \not\in \mathbb{Z}\)
+\(\mathbb{N}\subseteq \mathbb{Z}\), aber \(\mathbb{Q} \nsubseteq \mathbb{Z}\): \(\frac{1}{2} \notin \mathbb{Z}\)
 \end{exa}
 
 \begin{exa}
 F"ur \(A = \{1,2,3,4,5\}\) und \(B = \{2,3,10\}\):
 \begin{itemize}
 \item \(A\cap B = \{2,3\}\)
-\item \(A\cup B = \{1,2,3,5,10\}\)
+\item \(A\cup B = \{1,2,3,4,5,10\}\)
 \end{itemize}
 \end{exa}
 

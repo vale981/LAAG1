@@ -1705,20 +1705,20 @@ Aufspannabbildung $\varphi_S: K^n \rightarrow V$ wird definiert als $\varphi_S(\
 Sei \(f:V\to W\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gilt: \(\mdim\mKer f + \mdim\mIm f = \mdim V\).
 \end{theo}
 
-\textbf{Lemma} sei \(f\) wie oben. Sei \(U \subseteq \mKer(f)\) ein Untervektorraum mit \(U \cap \mKer(f) = \{0\}\).  Dann ist \(f|_U:U\to f(U)\) ein Isomorphismus.
+\begin{lemma} sei \(f\) wie oben. Sei \(U \subseteq \mKer(f)\) ein Untervektorraum mit \(U \cap \mKer(f) = \{0\}\).  Dann ist \(f|_U:U\to f(U)\) ein Isomorphismus.
+\end{lemma}
 
-\begin{proof}[Beweis des Lemmas] \label{}
+\begin{prof}[Beweis des Lemmas] \label{}
 \(f|_U:U\to f(U)\) ist surjektiv nach Konstruktion. Zu zeigen: \(f|_U\) injkektiv \(\iff \mKer f|_U = \{0\}\). Sei \(u\in \mKer f|_U \). Dann gilt \(u\in U \land u \in \mKer(f) \implies u \in U \cap \mKer f \implies u = 0\)
-\end{proof}
+\end{prof}
 
 \begin{proof}[Beweis der Dimensionsformel] \label{}
 W"ahle eine Basis \({e_1, ..., e_k}\) in \(\mKer f\) und erg"anze sie zu einer Basis
 \({e_1, ..., e_n}\) in \(V\).
 
-Betrachte jetzt \(U:=<e_{k+1}, ..., e_n> \subseteq V\) Untervektorraum. Es gilt
-Lemma. Es gilt: \todo{Stimmt das?}\(u = \sum_{i=1}^k \lambda_ie_i \), weil \(e_1, \dots e_k\) eine Basis im Kern ist, und \(u = \sum_{i=k+1}^{n} \) weil \(u\in U\). Also: \(\sum_{i=1}^k \lambda_ie_i - \sum_{i=k+1}^{n} \lambda_ie_i = 0 \xRightarrow{e_1,\dots, e_n \text{Basis}} \text{alle }\lambda_i = 0 \implies u =0\).
+Betrachte jetzt \(U:=\langle e_{k+1}, ..., e_n\rangle \subseteq V\) Untervektorraum. Es gilt $U \cap \ker(f) = \{0\}$, weil für $u\in U \cap \ker(f)$ gilt: \(u = \sum\limits_{i=1}^k \lambda_ie_i \), weil \(e_1, \dots e_k\) eine Basis im Kern ist, und \(u = \sum\limits_{i=k+1}^{n} \lambda_i e_i\) weil \(u\in U\). Also: \(\sum\limits_{i=1}^k \lambda_ie_i - \sum\limits_{i=k+1}^{n} \lambda_ie_i = 0 \xRightarrow{e_1,\dots, e_n \text{Basis}} \text{alle }\lambda_i = 0 \implies u =0\).
 
-Das Lemma sagt jetzt \(f|_U\) ist ein Isomorphismus. Ausserdem gilt f"ur \(v =\sum_{i=1}^{n}\lambda_ie_i \in V:\)
+Das Lemma sagt jetzt: \(f|_U\) ist ein Isomorphismus. Außerdem gilt f"ur \(v =\sum\limits_{i=1}^{n}\lambda_ie_i \in V:\)
 \begin{align*}
 f(v) = f\left(\underbrace{\sum_{i=1}^{k}\lambda_ie_i}_{\in \mKer(f)}\right) + f\left(\sum_{i=k+1}^{n}\lambda_ie_i\right) = f\left(\underbrace{\sum_{i=k+1}^{n} \lambda_ie_i}_{\in U}\right)
 \end{align*}

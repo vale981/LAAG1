@@ -65,6 +65,7 @@ halign = center,
 \newtheorem*{lemma}{Lemma}
 \newtheorem*{korollar}{Korollar}
 \newtheorem*{beobachtung}{Beobachtung}
+\newtheorem*{bem}{Bemerkung}
 \author{Valentin Boettcher}
 \date{\today}
 \title{Lineare Algebra (f"ur Physiker) I}
@@ -1730,21 +1731,25 @@ Nun gilt nach Konstruktion von \(U\): \[\underbrace{\mdim \mKer(f)}_{k} + \under
 \subsubsection{Summe von Untervektorr"aumen}
 \label{sec:org83dfe63}
 \begin{definition}{}{}
-Sei \ldots{} ein Vektorraum\ldots{}. 
+	Sei V ein Vektorraum, $U_1, U_2 \subseteq V$ Untervektorräume.
+	\[U_1 + U_2 := \{u_1+u_2 | u_1 \in U_1, u_2 \in U_2\}\]
+	heißt Summe von $U_1$ und $U_2$.
+	$U_1 + U_2$ ist Untervektorraum.
+	
 \end{definition}
 \begin{definition}{}{}
-Die Summe von \ldots{} heisst direkt wenn \ldots{} 
+Die Summe von $U_1$ und $U_2$ heißt direkt, wenn $U_1 \cap U_2 = \{0\}$. Bezeichnung: $U_1 + U_2 = U_1 \oplus U_2$
 \end{definition}
 
 \textbf{Bemerkung} \ldots{}
 
 In dieser Bezeichnung haben wir im Beseris der Dimensionsformel haben wir den
 Ausgangsraum als eine direkte Summe dargestellt. 
-
+\todo{Das bitte ergänzen, da habe ich nicht gut mitgeschrieben}
 \textbf{Bemerkung}: Dimensionsformel ist auch Rangformel.
 
 \begin{definition}{Rang}{}
-Sei \ldots{} linear. Der Rang von \(f\) ist \$rk\ldots{}\$
+Sei $f:V\to W$ linear. Der Rang von \(f\) ist Rg$(f) = $rk$(f) := \dim$ Im$(f)$
 \end{definition}
 
 \textbf{Proposition} Sei \ldots{} linear, endlichdimensional.

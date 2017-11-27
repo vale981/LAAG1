@@ -28,10 +28,11 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 \newcommand{\gq}[1]{\glqq{}#1\grqq{}} % german quotes
-\newcommand{\mdim}{\text{dim }}
-\newcommand{\mKer}{\text{Ker }}
-\newcommand{\mIm}{\text{Im }}
-\newcommand{\mRg}{\text{Rg }}
+\DeclareMathOperator{\mdim}{dim}
+\DeclareMathOperator{\mKer}{Ker}
+\DeclareMathOperator{\mIm}{Im}
+\DeclareMathOperator{\mRg}{Rg}
+\DeclareMathOperator{\mHom}{Hom}
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 \newtcbtheorem[number within=section]{definition}{Definition}%
@@ -1749,47 +1750,71 @@ Ausgangsraum als eine direkte Summe dargestellt.
 \textbf{Bemerkung}: Dimensionsformel ist auch Rangformel.
 
 \begin{definition}{Rang}{}
-Sei $f:V\to W$ linear. Der Rang von \(f\) ist Rg$(f) = $rk$(f) := \dim$ Im$(f)$
+Sei $f:V\to W$ linear. Der Rang von \(f\) ist $\mRg(f) = \text{rk}(f) := \dim\mIm(f)$
 \end{definition}
 
-\textbf{Proposition} Sei \ldots{} linear, endlichdimensional.
+\begin{proposition} Sei \(f:V\to W\) linear, endlichdimensional.
 Dann gilt:
 \begin{itemize}
-\item f injekt. \ldots{}
+	\item[] f injektiv
+	\item[\(\iff\)] \(\mKer(f) = \{0\} \)
+	\item[\(\iff\)] \(\mRg(f) = \dim V\)
 \end{itemize}
+Andererseits gilt:
+\begin{itemize}
+	\item[] f surjektiv
+	\item[\(\iff\)] \(\mIm(f) = W \)
+	\item[\(\iff\)] \(\mRg(f) = \dim W\)
+\end{itemize}
+\end{proposition}
 
-Insbesondere gilt: \textbf{Korollar} Ist $\ldots{}$, so ist f injektiv $\iff $f surjektiv.
+\begin{korollar} Ist \(\mdim V = \mdim W \), so ist \(f\) injektiv $\iff $ \(f\) surjektiv.\end{korollar}
 
-\textbf{Proposition} Dimensionformel' \(\dim U_1 +U_2 =\dim..\)
-\begin{proof}[] \label{}
-ist stehts ein Untervektorraum, wenn Untervektorra"me sind. 
+\begin{proposition}[Dimensionsformel]
+Sind \(U_1, U_2 \subset V\) Untervektorr"aume, dann gilt: \(\dim(U_1 +U_2) =\dim U_1 + \dim U_2 - \dim (U_1\cap U_2)\)
+\end{proposition}
+\begin{bem}
+\(U_1\cap U_2\) ist stets ein Untervektorraum, wenn \(U_1\) und \(U_2\) Untervektorr"aume sind.
+\end{bem}
+\begin{prof}[Dimensionsformel] 
 
-Betrachte die Abbildung .. Hierbei ist \ldots{} der Verktorraum der Paare mit
-elementweisen operationen. (auch ''A"ussere Summe'', die Kollision der
-Bezeichnunge \ldots{} fuer die direkte Summe zweier Unterr"aume/a"ussere Summe ist harmlos.)
+Betrachte die Abbildung \(f: U_1 \times U_2 \to U_1 + U_2, (u_1, u_2) \mapsto u_1 + u_2 \). Hierbei ist \(U_1\times U_2 = \{(u_1, u_2) | u_1 \in U_1, u_2 \in U_2 \} \) der Verktorraum der Paare \((u_1, u_2)\) mit
+elementweisen operationen:
+\begin{align*}
+(u_1, u_2) + (u_1', u_2') &= (u_1 + u_1', u_2 + u_2') \\
+\lambda (u_1, u_2) &= (\lambda u_1, \lambda u_2)
+\end{align*}
+Oft nennt man \(U_1 \times U_2\) auch \gq{"au"sere direkte Summe} von \(U_1\) und \(U_2\) mit Bezeichnung \(U_1 \oplus U_2\).
+\begin{bem}Die Kollision der
+Bezeichnungen \(U_1\oplus U_2\) fuer die direkte Summe zweier Untervektorr"aume / "aussere Summe ist harmlos ("Ubg).
+\end{bem}
 
-Nun gilt \ldots{} 
+Nun gilt \(\dim \mKer(f) + \dim\mIm(f) = \dim(U_1\times U_2) \)
 
-Weiterhin gilt eine Basis in eine Basis in \ldots{} eine Basis in \ldots{}
-Ferner gilt: \ldots{} 
+Es gilt weiterhin: \(\dim(U_1 \times U_2) = \dim U_1 + \dim U_2 \) Wenn \(e_1, \dots, e_k \) eine Basis in \(U_1\) und \(b_1, \dots, b_l \) eine Basis in \(U_2\) \(\implies\) \(e_1, \dots, e_k, b_1, \dots, b_l\) Basis in \(U_1\times U_2\)
 
-\(Ker(f)\) \ldots{} (Unterraum)
-\end{proof}
+Ferner gilt: \(\mIm(f) = U_1 + U_2\) per Definition. Nun ist:
+\begin{align*}
+\mKer(f) &= \{(u_1, u_2) | u_1 \in U_1, u_2\in U_2, u_1 + u_2 = 0\} = \{(u, -u)| u \in U_1 \cap U_2 \}\\
+&\implies \dim\mKer (f) = \dim(U_1 \cap U_2)\\
+&\implies \underbrace{\dim(U_1 \cap U_2)}_{\dim\mKer(f)} + \underbrace{\dim(U_1 + U_2)}_{\dim\mIm(f)} = \underbrace{\dim(U_1) + \dim(U_2)}_{\dim (U_1\times U_2)}
+\end{align*}\qed
+\end{prof}
 
 Was hat diese ganze Theorie mit Matrizen zu tun? Intuitiv: Abbildungen sind
-\``geometrisch\'' und Matrizen sind Koordinatenform dieser geometrischen
+\gq{geometrisch} und Matrizen sind Koordinatenformen dieser geometrischen
 Abbildungen.
 
-\begin{exa}[] \label{}
-Strecken in richtung von \(l_2\) mit Faktor 2. Wie beschreibt man \(f\) in
-Koordinaten?4
+\begin{exa}
+Strecken in Richtung von \(l_2\) mit Faktor 2. Wie beschreibt man \(f\) in
+Koordinaten?
 \end{exa}
 
 \subsubsection{Abbildunngsmatrix}
 \label{sec:org00a1823}
 \begin{definition}{}{}
 Seien \(V,W\) zwei Vektorraume.
-\(Hom_k(v,w)\)  ist selbst ein Vektorraum.
+\(\mHom_k(v,w)\)  ist selbst ein Vektorraum.
 \end{definition}
 
 Seien \(V, W\) endlichdimensional, \ldots{} Sei  Die Abbildungsmatrix ist definiert als

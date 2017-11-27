@@ -14,6 +14,7 @@
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
+\usepackage{nicefrac}
 \usepackage[a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
 \setlength{\parfillskip}{0pt plus 1fil}
 \usepackage{german}
@@ -33,6 +34,7 @@
 \DeclareMathOperator{\mIm}{Im}
 \DeclareMathOperator{\mRg}{Rg}
 \DeclareMathOperator{\mHom}{Hom}
+\DeclareMathOperator{\mId}{id}
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 \newtcbtheorem[number within=section]{definition}{Definition}%
@@ -1811,58 +1813,103 @@ Koordinaten?
 \end{exa}
 
 \subsubsection{Abbildunngsmatrix}
-\label{sec:org00a1823}
 \begin{definition}{}{}
-Seien \(V,W\) zwei Vektorraume.
-\(\mHom_k(v,w)\)  ist selbst ein Vektorraum.
+Seien \(V,W\) zwei (\(\mathbb{K}\)-) Vektorr"aume. Dann nennen wir
+\(\mHom_\mathbb{K}(V,W) = \{f: V\to W | f \text{ist }\mathbb{K}\text{-linear}\}\).
 \end{definition}
+\begin{proposition}
+\(\mHom_\mathbb{K}(V,W)\) ist auch ein Vektorraum.
+\end{proposition}
+\begin{prof}
+Wenn \(f_1, f_2 \in \mHom_\mathbb{K}(V,W)\):
+\begin{align*}
+(f_1 + f_2)(v) &= f_1(v) + f_2(v) \quad\text{ist linear} \\
+(\lambda f_1)(v) &= \lambda\cdot f_1(v)\quad\text{ist auch linear}
+\end{align*}
+\qed
+\end{prof}
 
-Seien \(V, W\) endlichdimensional, \ldots{} Sei  Die Abbildungsmatrix ist definiert als
-Matrix, deren Spalten die Koordinatenspalten von \ldots{} bzgl. der Basis \(C\) sind. 
+Seien \(V, W\) endlichdimensional, \(B = \{b_1, \dots, b_n\}\) Basis in \(V\), \(C = \{c_1, \dots, c_m\}\) Basis in \(W\). Sei \(f \in \mHom_\mathbb{K}(V,W)\). Die Abbildungsmatrix \(F= M_C^B(f)\) in \(f\) bzgl. \(B\) und \(C\) ist definiert als
+Matrix, deren Spalten die Koordinatenspalten von \(f(b_1),\dots, f(b_n)\) bzgl. der Basis \(C\) sind:
+\begin{align*}
+f(b_j) = \sum_{i=1}^mF_{ij}c_i \implies F \in \mathbb{K}^{m\times n}
+\end{align*}
 
-\textbf{Vorsicht} H"angt von der Wahl der Basen B und C ab (\(f\) nicht!)
+\textbf{Vorsicht!} \(M_C^B(f)\) h"angt von der Wahl der Basen B und C ab (\(f\) jedoch nicht!).
 
-\begin{exa}[] \label{}
+\begin{exa}
 Rotation um \(\frac{\pi}{4}\) gegen Urzeigersinn.
+\begin{align*}
+M_B^B(f) = \begin{pmatrix}
+\nicefrac{\sqrt{2}}{2} & -\nicefrac{\sqrt{2}}{2}\\
+\nicefrac{\sqrt{2}}{2} & \nicefrac{\sqrt{2}}{2}
+\end{pmatrix}
+\end{align*}
 \end{exa}
 
-\textbf{Proposition} Seien \(V,W,B,C\) wie oben. Dann entsprechen die Abbildungsmatrizen
- \ldots{}den Abbildungen.  gennauer. Die Abbildung. Ist ein Isomorphismus von
+\begin{proposition} Seien \(V,W,B,C\) wie oben. Dann entsprechen die Abbildungsmatrizen
+ \(F = M_C^B(f)\) den Abbildungen.  Genauer: Die Abbildung \(M_C^B: \mHom_\mathbb{K}(V,W)\to\mathbb{K}^{m\times n}\), \(f \mapsto M_C^B(f)\) ist ein Isomorphismus von
  Vektorra"umen.
+\end{proposition}
 
-\begin{proof}[] \label{}
-Aus Definition der \(M_C^B\) folgt sofort: \ldots{} also ist \ldots{} eine lineare
-Abbildung:
+\begin{prof}
+Aus Definition von \(M_C^B(f)\) folgt sofort:
+\begin{align*}
+M^B_C(f_1 + f_2) &= M_C^B(f_1) + M_C^B(f_2)\\
+M^B_C(\lambda\cdot f) &= \lambda\cdot M_C^B(f)
+\end{align*}
+Also ist \(M_C^B(f)\) eine lineare
+Abbildung.
 
-Ist injektiv: wenn \(f\) dann gilt \(\rightarrow\) Kern ist injektiv.
+\(M_C^B\) ist injektiv: wenn \(f\) mit \(M^B_C(f) = 0\), dann gilt \(f(b_j) = 0\quad\forall j= 1,\dots n\); Da jeder Vektor \(v \in V\) eine Linearkombination von \(b_j\)s ist, folgt \(f(v) = 0 \quad\forall v \in V\) \(\implies\) der Kern ist null
 
-Ist auch surjektiv: sei gegeben: Definiere eine Abbildung\ldots{} folgendermassen:
+\(M^B_C\) ist auch surjektiv: sei \(F\in \mathbb{K}^{m\times n}\) gegeben. Definiere eine Abbildung \(f: V\to W\) folgenderma"sen:
+\begin{align*}
+f\left(\sum_{j=1}^n\lambda_jb_j\right) = \sum_{j=1}^n\lambda_j\cdot\left(\sum_{i=1}^mF_{ij}c_i\right)=\sum_{i=1}^mc_i\sum_{j=1}^nF_{ij}\lambda_j
+\end{align*}
 
-Ist linear und es gilt: \ldots{}
-\end{proof}
+\(f\) ist linear und es gilt:
+\begin{align*}
+f(b_j) = \sum_{i=1}^mF_{ij}c_i \implies M^B_C(f) = F
+\end{align*}\qed
+\end{prof}
 
 Im Beweis haben wir unter anderem festgestellt:
 \begin{relation}
-\ldots{}
+\begin{align*}
+f\left(\sum_{j=1}^n\lambda_jb_j\right)=\sum_{i=1}^mc_i\underbrace{\sum_{j=1}^nF_{ij}\lambda_j}_{\mu_i}
+\end{align*}
 
-Das heisst: wenn \(v\)
+Das hei"st: Wenn \(v=\sum_{j=1}^n\lambda_jb_j\in V\) mit Koordinatenspalte \(\lambda = (\lambda_1,\dots,\lambda_n)^\top\) (bez"uglich \(B\)), \(w = f(v)\), dann hat \(w\) folgende Koordinatenspalte bez"uglich \(C\):
+\begin{align}
+\mu = F\cdot \lambda
+\end{align}
 \end{relation}
 
-\begin{exa}[] \label{}
-Wenn \(V=K^n, W=K^M\) dann hat \(V\) eine Basis \ldots{} Sei \(A\in K^{m\times n }\) 
+\begin{exa}
+Wenn \(V=K^n, W=K^M\) dann hat \(V\) eine Basis \(\mathcal{E}_n = (e_1, \dots, e_n)\), wobei \(e_i\) der Vektor ist, der an der \(i\)-ten Stelle 1 ist und sonst 0. Und \(W\) hat die Basis \(\mathcal{E}_m = (e_1, \dots, e_m)\).
+Sei \(A\in K^{m\times n }\), \(f_A: \mathbb{K}^n\to \mathbb{K}^m\), \(x \mapsto A\cdot x\). Dann gilt:
+\begin{align*}
+M^{\mathcal{E}_n}_{\mathcal{E}_m}(f_A) &= A\\
+f_A(e_j) &= A\cdot e_j = j\text{-te Spalte von } A = a_j
+\end{align*}
 \end{exa}
 
-Seien \(V, W, Z\) drei Vektorraume \ldots{} Dann gilt \ldots{} . Seien \(B,C,D\) Basen in
-\(V,W,Z\)
+Seien \(V, W, Z\) drei \(\mathbb{K}\)-Vektorr"aume, \(f \in \mHom_\mathbb{K}(V, W)\), \(g \in \mHom_\mathbb{K}(W,Z)\). Dann gilt: \(g\circ f \in \mHom_\mathbb{K}(V,Z)\).
 
-\textbf{Proposition} \ldots{}
-\begin{proof}[] \label{}
-Sei 
+\begin{proposition}
+	 Seien \(B,C,D\) Basen in
+	\(V,W,Z\). Dann gilt: \(M^B_D(g\circ f) = M^C_D(g)\cdot M^B_C(f)\).
+\end{proposition}
+\begin{proof}
+ Sei \(F = M^B_C(f)\), \(G = M^C_D(g)\). Dann:
+ \begin{align*}
+ (g\circ f)(b_j) &= g(f(b_j)) = g\left(\sum_{i=1}^m F_{ij}c_i\right) = \sum_{i=1}^mF_{ij}g(c_i) \\&= \sum_{i=1}^m F_{ij}\sum_{k=1}^lG_{ki}d_k = \sum_{k=1}^l\underbrace{\left(\sum_{i=1}^mG_{ki}F_{ij}\right)}_{M^B_D(g\circ f)}d_k
+ \end{align*}
 \end{proof}
 
-\textbf{Bemerkung} Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann Haben wir die
- Basiswechselmatrix. Bezueglich der alten Basis. Es folgt sofort aus den
-= Definitionen: \(S+\)
+Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann erhalten wir die
+ Basiswechselmatrix \(S\), deren Spalten die Koordinaten von den neuen Basisvektoren \((b_1', \dots, b_n')\) bez"uglich der alten Basis \(B = (b_1, \dots, b_n)\) sind. Es folgt sofort aus den Definitionen: \(S=M^{B'}_B(\mId_V)\)
 \subsection{Schlagworte:}
 \label{sec:orgcf8c685}
 \begin{itemize}

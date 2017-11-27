@@ -1771,6 +1771,14 @@ Andererseits gilt:
 \end{proposition}
 
 \begin{korollar} Ist \(\mdim V = \mdim W \), so ist \(f\) injektiv $\iff $ \(f\) surjektiv.\end{korollar}
+\begin{beobachtung}
+	Das ist analog zu Abbildungen endlicher Mengen: Sind \(X,Y\) endliche Mengen, \(h: X\to Y\) eine Abbildung, so gilt:
+	\begin{itemize}
+		\item \(h\text{ injektiv} \iff |h(X)| = |X| \)
+		\item \(h\text{ surjektiv} \iff |h(X)| = |Y| \)
+		\item \(h\text{ bijektiv} \iff |X|=|h(X)|=|Y| \)
+	\end{itemize}
+\end{beobachtung}
 
 \begin{proposition}[Dimensionsformel]
 Sind \(U_1, U_2 \subset V\) Untervektorr"aume, dann gilt: \(\dim(U_1 +U_2) =\dim U_1 + \dim U_2 - \dim (U_1\cap U_2)\)
@@ -1781,14 +1789,14 @@ Sind \(U_1, U_2 \subset V\) Untervektorr"aume, dann gilt: \(\dim(U_1 +U_2) =\dim
 \begin{prof}[Dimensionsformel] 
 
 Betrachte die Abbildung \(f: U_1 \times U_2 \to U_1 + U_2, (u_1, u_2) \mapsto u_1 + u_2 \). Hierbei ist \(U_1\times U_2 = \{(u_1, u_2) | u_1 \in U_1, u_2 \in U_2 \} \) der Verktorraum der Paare \((u_1, u_2)\) mit
-elementweisen operationen:
+elementweisen Operationen:
 \begin{align*}
 (u_1, u_2) + (u_1', u_2') &= (u_1 + u_1', u_2 + u_2') \\
 \lambda (u_1, u_2) &= (\lambda u_1, \lambda u_2)
 \end{align*}
 Oft nennt man \(U_1 \times U_2\) auch \gq{"au"sere direkte Summe} von \(U_1\) und \(U_2\) mit Bezeichnung \(U_1 \oplus U_2\).
 \begin{bem}Die Kollision der
-Bezeichnungen \(U_1\oplus U_2\) fuer die direkte Summe zweier Untervektorr"aume / "aussere Summe ist harmlos ("Ubg).
+Bezeichnungen \(U_1\oplus U_2\) für die direkte Summe zweier Untervektorr"aume / "außere Summe ist harmlos ("Ubg).
 \end{bem}
 
 Nun gilt \(\dim \mKer(f) + \dim\mIm(f) = \dim(U_1\times U_2) \)

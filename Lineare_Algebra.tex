@@ -62,13 +62,16 @@ halign = center,
 \usepackage{amssymb}
 \usepackage{gauss}
 \usepackage{stmaryrd}
+\theoremstyle{remark}
 \newtheorem{exa}{Beispiel}[section]
 \newtheorem{expe}{experiment}[section]
+\theoremstyle{definition}
 \newtheorem{prof}{Beweis}
 \newtheorem*{notte}{Beachte}
 \newtheorem*{notation}{Notation}
 \newtheorem*{proposition}{Proposition}
 \newtheorem*{lemma}{Lemma}
+\theoremstyle{remark}
 \newtheorem*{korollar}{Korollar}
 \newtheorem*{beobachtung}{Beobachtung}
 \newtheorem*{bem}{Bemerkung}
@@ -1762,14 +1765,14 @@ Sei $f:V\to W$ linear. Der Rang von \(f\) ist $\mRg(f) = \text{rk}(f) := \dim\mI
 Dann gilt:
 \begin{align*}
 	f injektiv &
-	\\ \(\mKer(f) = \{0\} \) &
-	\\ \(\mRg(f) = \dim V\) &
+	\\ \mKer(f) = \{0\}  &
+	\\ \mRg(f) = \dim V &
 \end{align*}
 Andererseits gilt:
 \begin{align*}
-	\text{f surjektiv} &
-	\\ \(\mIm(f) = W \) &
-	\\ \(\mRg(f) = \dim W\) &
+	\text{f surjektiv}
+	\\ \mIm(f) = W  &
+	\\ \mRg(f) = \dim W &
 \end{align*}
 \end{proposition}
 
@@ -1940,7 +1943,7 @@ nicht die einzige!
 \subsubsection{Physikerdefinition eines Vektors}
 \label{sec:phyv}
 
-Ein (kontravarianter) Vektor ist ein Objekt, welches durch ein n-Tuperl \lambda
+Ein (kontravarianter) Vektor ist ein Objekt, welches durch ein n-Tuperl \(\lambda\)
 von Zahlen beschrieben wird, die sich Koordinatentransformationenen so
 verh"alt: Ist $S$ die Basiswechselmatrix der Koordinatentransformation, so gilt
 in den neuen koordinaten $\lambda'=S^{-1}\lambda$
@@ -1977,9 +1980,9 @@ Sei .. eine Lineare Abbildung, ..., dann gilt:
   Basen ... , so dass ...
 \end{proposition}
 
-\begin{kor}
+\begin{korollar}
   F"ur jede Matrix ... gibt es invertierbare Matrizen ... , so dass
-\end{kor}
+\end{korollar}
 
 \begin{prof}
   Sei ... w"ahle eine Basis ... im $\text{Ker}(f)$  und erweitere sie zu einer
@@ -1993,13 +1996,13 @@ Sei .. eine Lineare Abbildung, ..., dann gilt:
 Sei ...
 $Rg(A)=Rg(f_A))=dim<a_1,...,a_n>$ ...
 
-\begin{kor}[Kriterien f"ur Invertierbarkeit]
+\begin{korollar}[Kriterien f"ur Invertierbarkeit]
   Sei ... Folgende bedingungen sin ... :
   \begin{enumerate}
   \item Wenn ..., dann ist $f$ ein Isomorphismus
   \item A ist invertierbar.
   \item $A^T$ ist Invertierbar
-  \item $\exists B\in K^$ mit (Ist ''Rechtsinvertierbar'')
+  \item $\exists B\in K^n$ mit (Ist ''Rechtsinvertierbar'')
   \item ... (Ist ''Linksinvertierbar'')
   \item ... A hat vollen Rang
   \item Kern ist die leere Menge
@@ -2009,7 +2012,7 @@ $Rg(A)=Rg(f_A))=dim<a_1,...,a_n>$ ...
   \end{enumerate}
 
   Ausserdem gilt: wenn ... wie in ..., so ist ... 
-\end{kor}
+\end{korollar}
 
 Aus dem Satz ergibt sich folgendes Verfahren zur Berechnung von $A^{-1}$: ...
 Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
@@ -2020,33 +2023,33 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
 
 \begin{prof}[Beweisschema]
   \begin{enumerate}
-  \item (0) \iff (1)
-  \item (1) \iff (2): $B:=A^{-1}$
-  \item (1) \iff (3): $C:=A^{-1}$
+  \item (0) $ \iff $ (1)
+  \item (1) $ \iff $ (2): $B:=A^{-1}$
+  \item (1) $ \iff $ (3): $C:=A^{-1}$
   \end{enumerate}
 \end{prof}
 
-\begin{prof}[des Satzes] \\
+\begin{prof}[des Satzes]
   \begin{itemize}
   \item[(0) $\implies$ (1)]  $A=M^{\epsilon}_{\epsilon}(f_A)$, woberi $f_A:$
   \item[(1) $\implies$ (0)] Sei $A$ invertierbar, $A=$ Betrachten wir die
     Abbildung $g$ mit ..., es gilt: 
   \item[(1) $\iff$ ($1^T$)] ...
-  \item[(4) \iff (5) \iff (6)] nach dem Lemma
-  \item[(7) \iff (5)]
-  \item[(8) \iff ((5) \iff (6))]
-  \item[(2) \implies (6)] Wenn $A\cdot B=1_n$, dann muss nach dem Lemmma die
-    Abbildung $x\mapsto A\cdotx$ surjektiv sein $\implies$ (6)
-  \item[(3) \implies (5)] $C\cdot A = 1_n$
-  \item[(9) \implies (1)] Elementarmatrizen sind invertierbar, und wenn...
-  \item[(7) \implies (9)] L"osen wir das LGS $A\cdot x = 0$ durch
+  \item[(4) $ \iff $ (5) $ \iff $ (6)] nach dem Lemma
+  \item[(7) $ \iff $ (5)]
+  \item[(8) $ \iff $ ((5) $ \iff $ (6))]
+  \item[(2) $ \implies $ (6)] Wenn $A\cdot B=1_n$, dann muss nach dem Lemmma die
+    Abbildung $x\mapsto A\cdot x$ surjektiv sein $\implies$ (6)
+  \item[(3) $ \implies $ (5)] $C\cdot A = 1_n$
+  \item[(9) $ \implies $ (1)] Elementarmatrizen sind invertierbar, und wenn...
+  \item[(7) m (9)] L"osen wir das LGS $A\cdot x = 0$ durch
     Zeilenumformungen (Gauss-Jordan): also machen wir Zeilenumformungen. Wir
     haben keine freien Variablen, denn wir haben nur eine L"osung $\implies$
     $A$ wird zur $1_n$ durch Zeilenumformungen transformiert. Wenn wir den
     Prozess invertieren, so transformieren wir $1_n$ zu $A$ durch
     Zeilenumformungen. \\
     Jede Zeilenumformung entspricht der Multiplikation mit einer
-    Elementarmatrix von links: \[A=T_1 \cdot \lcdots \cdot 1_n = T_1 \cdot \cdots
+    Elementarmatrix von links: \[A=T_1 \cdot \dots \cdot 1_n = T_1 \cdot \cdots
       \cdot T_e\]
     Nun wenn $A\cdot B = 1_n$ wie in (2) $\implies$, \\
     Wenn wir ... \\

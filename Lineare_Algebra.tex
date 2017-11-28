@@ -3,9 +3,7 @@
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{concmath}
-
 \usepackage[T1]{fontenc}
-
 \usepackage{graphicx}
 \usepackage{grffile}
 \usepackage{longtable}
@@ -39,6 +37,7 @@
 \DeclareMathOperator{\mRg}{Rg}
 \DeclareMathOperator{\mHom}{Hom}
 \DeclareMathOperator{\mId}{id}
+\DeclareMathOperator{\mVol}{Vol}
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 \newtcbtheorem[number within=section]{definition}{Definition}%
@@ -65,7 +64,7 @@ halign = center,
 \usepackage{stmaryrd}
 \newtheorem{exa}{Beispiel}[section]
 \newtheorem{expe}{experiment}[section]
-\newtheorem*{prof}{Beweis}
+\newtheorem{prof}{Beweis}
 \newtheorem*{notte}{Beachte}
 \newtheorem*{notation}{Notation}
 \newtheorem*{proposition}{Proposition}
@@ -1761,17 +1760,17 @@ Sei $f:V\to W$ linear. Der Rang von \(f\) ist $\mRg(f) = \text{rk}(f) := \dim\mI
 
 \begin{proposition} Sei \(f:V\to W\) linear, endlichdimensional.
 Dann gilt:
-\begin{itemize}
-	\item[] f injektiv
-	\item[\(\iff\)] \(\mKer(f) = \{0\} \)
-	\item[\(\iff\)] \(\mRg(f) = \dim V\)
-\end{itemize}
+\begin{align*}
+	f injektiv &
+	\\ \(\mKer(f) = \{0\} \) &
+	\\ \(\mRg(f) = \dim V\) &
+\end{align*}
 Andererseits gilt:
-\begin{itemize}
-	\item[] f surjektiv
-	\item[\(\iff\)] \(\mIm(f) = W \)
-	\item[\(\iff\)] \(\mRg(f) = \dim W\)
-\end{itemize}
+\begin{align*}
+	\text{f surjektiv} &
+	\\ \(\mIm(f) = W \) &
+	\\ \(\mRg(f) = \dim W\) &
+\end{align*}
 \end{proposition}
 
 \begin{korollar} Ist \(\mdim V = \mdim W \), so ist \(f\) injektiv $\iff $ \(f\) surjektiv.\end{korollar}
@@ -1921,7 +1920,215 @@ Seien \(V, W, Z\) drei \(\mathbb{K}\)-Vektorr"aume, \(f \in \mHom_\mathbb{K}(V, 
 \end{proof}
 
 Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann erhalten wir die
- Basiswechselmatrix \(S\), deren Spalten die Koordinaten von den neuen Basisvektoren \((b_1', \dots, b_n')\) bez"uglich der alten Basis \(B = (b_1, \dots, b_n)\) sind. Es folgt sofort aus den Definitionen: \(S=M^{B'}_B(\mId_V)\)
+ Basiswechselmatrix \(S\), deren Spalten die Koordinaten von den neuen
+ Basisvektoren \((b_1', \dots, b_n')\) bez"uglich der alten Basis \(B = (b_1,
+ \dots, b_n)\) sind. Es folgt sofort aus den Definitionen:
+ \(S=M^{B'}_B(\mId_V)\)
+
+
+\subsubsection{Basen und Abbildungsmatrizen (Zusammenfassung)}
+\label{sec:baab}
+Jede Basis in V definiert eine Bijektion $\phi_B^{-1}V\rightarrow K^n, v\mapsto C$
+\begin{relation}
+  $\phi_B$ ist hierbei die Aufspannabbildung.  
+\end{relation}
+
+\textbf{Warnung} Unsere Konvention f"ur die Basiswechselmatrix: ''von $B$ zu
+$B'$'' ist $M^{B'}_B$, also dr"uckt die meue Basis in der alten aus und ist
+nicht die einzige!
+
+\subsubsection{Physikerdefinition eines Vektors}
+\label{sec:phyv}
+
+Ein (kontravarianter) Vektor ist ein Objekt, welches durch ein n-Tuperl \lambda
+von Zahlen beschrieben wird, die sich Koordinatentransformationenen so
+verh"alt: Ist $S$ die Basiswechselmatrix der Koordinatentransformation, so gilt
+in den neuen koordinaten $\lambda'=S^{-1}\lambda$
+
+\begin{notte}
+  Diese Transformationsformel haben wir gesehen: ist $v\in V$ mit der
+  Koordinatenspalte $\lambda$ bzgl. $B$ so gilt
+  $\lambda=M^{B'}_{Basiswechselmatrix}\cdot \lambda ' $
+\end{notte}
+
+\textbf{Lemma}(Verhalten von Abbildungsmatrizen unter Basiswechsel)
+Sei .. eine Lineare Abbildung, ..., dann gilt:
+\[
+  M^{B'}_{C'}(f)=
+\] In Anderen Worten: wenn $S$ die Basiswechselmatrix von ... so gilt
+
+\begin{proof}
+  $M^{B'}_{C'}(f)=$
+\end{proof}
+
+\begin{notte}[zur Basiswechselmatrix]
+  $ M^{B'}_{B}$ ist die Basiswechselmatrix von $B$ zu $B'$: sie enth"alt die
+  Koordinaten von Vektoren aus $B'$ bzgl. $B$. Wie verhalten sich die
+  Kootdinaten von Vektoren bzgl. $B$ und $B'$ Antwort: $\lambda =
+  S^{-1}\lambda$.
+\end{notte}
+
+\begin{exa}
+  $V=R^{2}$
+\end{exa}
+
+\begin{proposition}[Rangform einer linearen Abbildung]
+  Sei ... eine Lineare Abbildung und $V,W$ endlichdimensional. Dann existieren
+  Basen ... , so dass ...
+\end{proposition}
+
+\begin{kor}
+  F"ur jede Matrix ... gibt es invertierbare Matrizen ... , so dass
+\end{kor}
+
+\begin{prof}
+  Sei ... w"ahle eine Basis ... im $\text{Ker}(f)$  und erweitere sie zu einer
+  Basis ... in Basis. Setze: ... Beim Beweis der Dimensionsformal haben wir
+  gesehen ... . Erweitere jetzt ... zu einer Basis ... in $W$. Es gilt. 
+\end{prof}
+
+\subsubsection{Konsequenzen f"ur Matrizen}
+\label{sec:konsma}
+
+Sei ...
+$Rg(A)=Rg(f_A))=dim<a_1,...,a_n>$ ...
+
+\begin{kor}[Kriterien f"ur Invertierbarkeit]
+  Sei ... Folgende bedingungen sin ... :
+  \begin{enumerate}
+  \item Wenn ..., dann ist $f$ ein Isomorphismus
+  \item A ist invertierbar.
+  \item $A^T$ ist Invertierbar
+  \item $\exists B\in K^$ mit (Ist ''Rechtsinvertierbar'')
+  \item ... (Ist ''Linksinvertierbar'')
+  \item ... A hat vollen Rang
+  \item Kern ist die leere Menge
+  \item Das LGS $A\cdot x = 0$ hat nur die triviale L"osung $x=0$
+  \item Das LGS $A\cdot x = n$ hat f"ur jedes $b\in $ genau eine L"osung
+  \item A ist darstellbar als das Produkt von Elementarmatrizen
+  \end{enumerate}
+
+  Ausserdem gilt: wenn ... wie in ..., so ist ... 
+\end{kor}
+
+Aus dem Satz ergibt sich folgendes Verfahren zur Berechnung von $A^{-1}$: ...
+Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
+
+\begin{lemma}[Injektivit"at und Surjektivit"at bei Verkn"upfungen]
+  Seien $X,Y,Z$ Mengen, ... Dann gilt:  
+\end{lemma}
+
+\begin{prof}[Beweisschema]
+  \begin{enumerate}
+  \item (0) \iff (1)
+  \item (1) \iff (2): $B:=A^{-1}$
+  \item (1) \iff (3): $C:=A^{-1}$
+  \end{enumerate}
+\end{prof}
+
+\begin{prof}[des Satzes] \\
+  \begin{itemize}
+  \item[(0) $\implies$ (1)]  $A=M^{\epsilon}_{\epsilon}(f_A)$, woberi $f_A:$
+  \item[(1) $\implies$ (0)] Sei $A$ invertierbar, $A=$ Betrachten wir die
+    Abbildung $g$ mit ..., es gilt: 
+  \item[(1) $\iff$ ($1^T$)] ...
+  \item[(4) \iff (5) \iff (6)] nach dem Lemma
+  \item[(7) \iff (5)]
+  \item[(8) \iff ((5) \iff (6))]
+  \item[(2) \implies (6)] Wenn $A\cdot B=1_n$, dann muss nach dem Lemmma die
+    Abbildung $x\mapsto A\cdotx$ surjektiv sein $\implies$ (6)
+  \item[(3) \implies (5)] $C\cdot A = 1_n$
+  \item[(9) \implies (1)] Elementarmatrizen sind invertierbar, und wenn...
+  \item[(7) \implies (9)] L"osen wir das LGS $A\cdot x = 0$ durch
+    Zeilenumformungen (Gauss-Jordan): also machen wir Zeilenumformungen. Wir
+    haben keine freien Variablen, denn wir haben nur eine L"osung $\implies$
+    $A$ wird zur $1_n$ durch Zeilenumformungen transformiert. Wenn wir den
+    Prozess invertieren, so transformieren wir $1_n$ zu $A$ durch
+    Zeilenumformungen. \\
+    Jede Zeilenumformung entspricht der Multiplikation mit einer
+    Elementarmatrix von links: \[A=T_1 \cdot \lcdots \cdot 1_n = T_1 \cdot \cdots
+      \cdot T_e\]
+    Nun wenn $A\cdot B = 1_n$ wie in (2) $\implies$, \\
+    Wenn wir ... \\
+    Analog
+  \end{itemize}
+\end{prof}
+
+\subsubsection{Determinanten}
+\label{sec:det}
+
+Motivation: Wir haben viele Kriterien f"ur invertierbarkeit, aber bislang kein
+Kriterium, welches effizient berechenbar w"ahre. Ausserdem fehlt uns zur Zeit
+eine geometrische Interpretation f"ur invertierbarkeit.
+
+\begin{relation}
+\begin{trivlist}
+  \item Wir haben gesehen: $A\in K^{n\times n}$ ist genau dann invertierbar, wenn ihre Spalten
+  (Zeilen) linear unabh"angig sind.
+ 
+  \item  Wenn $A\in \mathbb{K}^{2\times 2}$, dann sind ihre
+  Spalten linear unabh"angig genau dann, wenn die entsprechenden Vektoren $a_1,
+  a_2 \in \mathbb{R}^2$ ein ''nicht ausgeartetes'' Parallelogramm aufspannen. \\
+
+  \item Analog sind $a_1, a_2, a_3$ linear unabh"angig in $\mathbb{R}^3$.
+\end{trivlist}
+\end{relation}
+
+Wenn wir diese Ideen in einen ''abstrakten'' Vektorraum uebertragen wollen,
+m"ussen wir also Volumen invertieren, indem wir nur die Struktur des
+Vektorraums benutzen.\\
+
+Welche Eigenschaften hat das Volumen bzgl. der Vektorraumstruktur in
+$\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
+\begin{itemize}
+\item $\mVol(a_1,a_2)=\mVol(a_1, a_2 + \lambda \cdot a_1)\; \forall \lambda \in
+  \mathbb{R}$
+\item $\mVol(a_1,a_1)=0$
+\item Bei Streckungen von einem Vektore multipliziert das Volumen mit dem
+  entsprechenden Faktor.
+  \begin{align*}
+    Vol(\lambda\cdot a_1, a_2)=\lambda\cdot \mVol(a_1,a_2) \tag{$\lambda \geq 0$}
+    \end{align*}
+\end{itemize}
+
+\begin{definition}{Volumenform}
+  Eine \textbf{Volumenform} $\omega$ auf $V$ ist eine Abbildung ... mit
+  folgenden Eigenschaften:
+  \begin{enumerate}
+  \item $\omega$ ist linear in jeder Variable: ...
+  \item $\omega$ ist alternierend: ...
+  \end{enumerate}
+\end{definition}
+
+\begin{notte}[zu (2)]
+  ...
+\end{notte}
+
+\begin{prof}[zur Bemerkung]
+  Wir lassen die Variablen ausser ... fest und rechnen.
+\end{prof}
+
+\begin{notte}
+  Genau wie bei Volumina von Quadern in $\mathbb{R}^3$ die Wahl einer
+  Masseinheit das Volumen eindeutig.
+\end{notte}
+
+\begin{lemma}
+  Sei $\omega: V^n\mapsto K$ eine Volumenform und sei $B=(b_1m, ... , b_n)$
+  eine Basis in $V$. Der Wert ....  ..
+\end{lemma}
+
+\begin{prof}[des Lemmas]
+  Stelle $v_i=\sum{\lambda_{ij}b_j}$ dar ($B$ ist ja eine Basis) und benutze
+  Linearit"at von $\omega$.
+  \begin{align*}
+    w(v_1, ..., v_n)=\text{Summe von Termen der Form } (...)
+  \end{align*}
+
+  Es ueberleben nur Terme, wo $b_{j1},...,b_{ji}$ in anderer Reihenfolge sind
+  $\implies$ dann ist ... $\implies$ ... Summe von Termen der Form
+\end{prof}
+
 \subsection{Schlagworte:}
 \label{sec:orgcf8c685}
 \begin{itemize}
@@ -1931,6 +2138,7 @@ Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann erhalten wir die
 \item Keine nicht offensichtlich Schritte ueberspringen!
 \item Paramatervektor und sine Elemente genau definieren!
 \end{itemize}
+\item Transposition vertauscht faktoren.
 \item k-te Spalte \((A)_k\)
 \end{itemize}
 \end{document}

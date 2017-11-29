@@ -62,18 +62,15 @@ halign = center,
 \usepackage{amssymb}
 \usepackage{gauss}
 \usepackage{stmaryrd}
-\theoremstyle{remark}
 \newtheorem{exa}{Beispiel}[section]
 \newtheorem{expe}{experiment}[section]
-\theoremstyle{definition}
-\newtheorem{prof}{Beweis}
+\renewcommand*{\proofname}{Beweis}
+\newtheorem{beobachtung}{Beobachtung}
 \newtheorem*{notte}{Beachte}
 \newtheorem*{notation}{Notation}
 \newtheorem*{proposition}{Proposition}
 \newtheorem*{lemma}{Lemma}
-\theoremstyle{remark}
 \newtheorem*{korollar}{Korollar}
-\newtheorem*{beobachtung}{Beobachtung}
 \newtheorem*{bem}{Bemerkung}
 \author{Valentin Boettcher}
 \date{\today}
@@ -1718,9 +1715,9 @@ Sei \(f:V\to W\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gil
 \begin{lemma} sei \(f\) wie oben. Sei \(U \subseteq \mKer(f)\) ein Untervektorraum mit \(U \cap \mKer(f) = \{0\}\).  Dann ist \(f|_U:U\to f(U)\) ein Isomorphismus.
 \end{lemma}
 
-\begin{prof}[Beweis des Lemmas] \label{}
+\begin{proof}[Beweis des Lemmas] \label{}
 \(f|_U:U\to f(U)\) ist surjektiv nach Konstruktion. Zu zeigen: \(f|_U\) injkektiv \(\iff \mKer f|_U = \{0\}\). Sei \(u\in \mKer f|_U \). Dann gilt \(u\in U \land u \in \mKer(f) \implies u \in U \cap \mKer f \implies u = 0\)
-\end{prof}
+\end{proof}
 
 \begin{proof}[Beweis der Dimensionsformel] \label{}
 W"ahle eine Basis \({e_1, ..., e_k}\) in \(\mKer f\) und erg"anze sie zu einer Basis
@@ -1792,7 +1789,7 @@ Sind \(U_1, U_2 \subset V\) Untervektorr"aume, dann gilt: \(\dim(U_1 +U_2) =\dim
 \begin{bem}
 \(U_1\cap U_2\) ist stets ein Untervektorraum, wenn \(U_1\) und \(U_2\) Untervektorr"aume sind.
 \end{bem}
-\begin{prof}[Dimensionsformel] 
+\begin{proof}[Dimensionsformel] 
 
 Betrachte die Abbildung \(f: U_1 \times U_2 \to U_1 + U_2, (u_1, u_2) \mapsto u_1 + u_2 \). Hierbei ist \(U_1\times U_2 = \{(u_1, u_2) | u_1 \in U_1, u_2 \in U_2 \} \) der Verktorraum der Paare \((u_1, u_2)\) mit
 elementweisen Operationen:
@@ -1815,7 +1812,7 @@ Ferner gilt: \(\mIm(f) = U_1 + U_2\) per Definition. Nun ist:
 &\implies \dim\mKer (f) = \dim(U_1 \cap U_2)\\
 &\implies \underbrace{\dim(U_1 \cap U_2)}_{\dim\mKer(f)} + \underbrace{\dim(U_1 + U_2)}_{\dim\mIm(f)} = \underbrace{\dim(U_1) + \dim(U_2)}_{\dim (U_1\times U_2)}
 \end{align*}\qed
-\end{prof}
+\end{proof}
 
 Was hat diese ganze Theorie mit Matrizen zu tun? Intuitiv: Abbildungen sind
 \gq{geometrisch} und Matrizen sind Koordinatenformen dieser geometrischen
@@ -1834,14 +1831,14 @@ Seien \(V,W\) zwei (\(\mathbb{K}\)-) Vektorr"aume. Dann nennen wir
 \begin{proposition}
 \(\mHom_\mathbb{K}(V,W)\) ist auch ein Vektorraum.
 \end{proposition}
-\begin{prof}
+\begin{proof}
 Wenn \(f_1, f_2 \in \mHom_\mathbb{K}(V,W)\):
 \begin{align*}
 (f_1 + f_2)(v) &= f_1(v) + f_2(v) \quad\text{ist linear} \\
 (\lambda f_1)(v) &= \lambda\cdot f_1(v)\quad\text{ist auch linear}
 \end{align*}
 \qed
-\end{prof}
+\end{proof}
 
 Seien \(V, W\) endlichdimensional, \(B = \{b_1, \dots, b_n\}\) Basis in \(V\), \(C = \{c_1, \dots, c_m\}\) Basis in \(W\). Sei \(f \in \mHom_\mathbb{K}(V,W)\). Die Abbildungsmatrix \(F= M_C^B(f)\) in \(f\) bzgl. \(B\) und \(C\) ist definiert als
 Matrix, deren Spalten die Koordinatenspalten von \(f(b_1),\dots, f(b_n)\) bzgl. der Basis \(C\) sind:
@@ -1866,7 +1863,7 @@ M_B^B(f) = \begin{pmatrix}
  Vektorra"umen.
 \end{proposition}
 
-\begin{prof}
+\begin{proof}
 Aus Definition von \(M_C^B(f)\) folgt sofort:
 \begin{align*}
 M^B_C(f_1 + f_2) &= M_C^B(f_1) + M_C^B(f_2)\\
@@ -1886,7 +1883,7 @@ f\left(\sum_{j=1}^n\lambda_jb_j\right) = \sum_{j=1}^n\lambda_j\cdot\left(\sum_{i
 \begin{align*}
 f(b_j) = \sum_{i=1}^mF_{ij}c_i \implies M^B_C(f) = F
 \end{align*}\qed
-\end{prof}
+\end{proof}
 
 Im Beweis haben wir unter anderem festgestellt:
 \begin{relation}
@@ -1984,11 +1981,11 @@ Sei .. eine Lineare Abbildung, ..., dann gilt:
   F"ur jede Matrix ... gibt es invertierbare Matrizen ... , so dass
 \end{korollar}
 
-\begin{prof}
+\begin{proof}
   Sei ... w"ahle eine Basis ... im $\text{Ker}(f)$  und erweitere sie zu einer
   Basis ... in Basis. Setze: ... Beim Beweis der Dimensionsformal haben wir
   gesehen ... . Erweitere jetzt ... zu einer Basis ... in $W$. Es gilt. 
-\end{prof}
+\end{proof}
 
 \subsubsection{Konsequenzen f"ur Matrizen}
 \label{sec:konsma}
@@ -2021,15 +2018,15 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
   Seien $X,Y,Z$ Mengen, ... Dann gilt:  
 \end{lemma}
 
-\begin{prof}[Beweisschema]
+\begin{proof}[Beweisschema]
   \begin{enumerate}
   \item (0) $ \iff $ (1)
   \item (1) $ \iff $ (2): $B:=A^{-1}$
   \item (1) $ \iff $ (3): $C:=A^{-1}$
   \end{enumerate}
-\end{prof}
+\end{proof}
 
-\begin{prof}[des Satzes]
+\begin{proof}[des Satzes]
   \begin{itemize}
   \item[(0) $\implies$ (1)]  $A=M^{\epsilon}_{\epsilon}(f_A)$, woberi $f_A:$
   \item[(1) $\implies$ (0)] Sei $A$ invertierbar, $A=$ Betrachten wir die
@@ -2055,7 +2052,7 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
     Wenn wir ... \\
     Analog
   \end{itemize}
-\end{prof}
+\end{proof}
 
 \subsubsection{Determinanten}
 \label{sec:det}
@@ -2107,9 +2104,9 @@ $\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
   ...
 \end{notte}
 
-\begin{prof}[zur Bemerkung]
+\begin{proof}[zur Bemerkung]
   Wir lassen die Variablen ausser ... fest und rechnen.
-\end{prof}
+\end{proof}
 
 \begin{notte}
   Genau wie bei Volumina von Quadern in $\mathbb{R}^3$ die Wahl einer
@@ -2121,7 +2118,7 @@ $\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
   eine Basis in $V$. Der Wert ....  ..
 \end{lemma}
 
-\begin{prof}[des Lemmas]
+\begin{proof}[des Lemmas]
   Stelle $v_i=\sum{\lambda_{ij}b_j}$ dar ($B$ ist ja eine Basis) und benutze
   Linearit"at von $\omega$.
   \begin{align*}
@@ -2130,7 +2127,7 @@ $\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
 
   Es ueberleben nur Terme, wo $b_{j1},...,b_{ji}$ in anderer Reihenfolge sind
   $\implies$ dann ist ... $\implies$ ... Summe von Termen der Form
-\end{prof}
+\end{proof}
 \begin{proposition}
   Sei ... eine Volumenform auf V. Dann gilt:
   \begin{enumerate}
@@ -2139,19 +2136,19 @@ $\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
   \end{enumerate}
 \end{proposition}
 
-\begin{prof}
+\begin{proof}
   \begin{enumerate}
   \item Linearit"at: 
   \item Sind ... linear abh"angig, dann ist ein $V_J=\sum$
   \end{enumerate}
-\end{prof}
+\end{proof}
 
 Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 
 \subsubsection{Permutationen}
 \label{sec:perm}
 
-\begin{definition}[Permutation]
+\begin{definition}
   Sei $X$ eine Menge. Eine bijektion $\sigma: X \mapsto X$ heisst Permutation
   von X.
 \end{definition}
@@ -2199,9 +2196,9 @@ Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 \begin{notte}[Interpretation f"ur $\epsilon (\sigma)$]
   $d$ .. Anzahl der ''Reihenfolgeverst"osse'' in $\sigma$
 \end{notte}
-\begin{prof}
+\begin{proof}
   ...
-\end{prof}
+\end{proof}
 
 \begin{definition}
   Die Permutationen ... heissen gerade ... ungerade.

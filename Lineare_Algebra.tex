@@ -2,7 +2,6 @@
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{concmath}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{grffile}
@@ -2029,7 +2028,7 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
 
 \begin{proof}[des Satzes]
   \begin{itemize}
-  \item[(0) $\implies$ (1)]  $A=M^{\epsilon}_{\epsilon}(f_A)$, woberi $f_A:$
+  \item[(0) $\implies$ (1)]  $A=M^{\varepsilon}_{\varepsilon}(f_A)$, woberi $f_A:$
   \item[(1) $\implies$ (0)] Sei $A$ invertierbar, $A=$ Betrachten wir die
     Abbildung $g$ mit ..., es gilt: 
   \item[(1) $\iff$ ($1^T$)] ...
@@ -2149,57 +2148,47 @@ Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 \subsubsection{Permutationen}
 \label{sec:perm}
 
-\begin{definition}
-  Sei $X$ eine Menge. Eine bijektion $\sigma: X \mapsto X$ heisst Permutation
-  von X.
-\end{definition}
-
-\begin{definition}
-  Fur  ... heisst die Permutation die symetrische Gruppe aus $n$ elementen,
-  bezeichnet als.
+\begin{definition}{Permutationen}{}
+  Sei $X$ eine Menge. Eine Bijektion $\sigma: X \to X$ heißt Permutation
+  von X. \newline
+  Für \(X = \{1,...,n\}\) heißt die Menge aller Permutationen \(\sigma: \{1,...,n\}\to\{1,...,n\}\) die symmetrische Gruppe auf n Elementen. Notation: \(S_n = \{ \sigma: \{1,...,n\}\to\{1,...,n\}|\sigma\text{ bijektiv}\}\)
 \end{definition}
 
 \begin{exa}
-  Ein Elelement ... schreibt man h"aufig als Tabelle:
+  Ein Elelement \(\sigma \in S_n\) schreibt man h"aufig als Tabelle:
+  
+  \(\left(\begin{array}{cccc}
+  	1 & 2 & ... & n\\
+  	\sigma(1) & \sigma(2) & ... & \sigma(n)\\
+  \end{array}\right)\)
 \end{exa}
 
 \begin{notte}
   $\tau\circ\sigma \not= \sigma\circ\tau$
 \end{notte}
 
-\begin{folgerung}
-  \begin{itemize}
-  \item   Da Verkn"upfungen von Bijektionen bijektiv sind, definiert ....
-  \item Ist auch assoziativ.
-  \item  Permutationen sind kommutativ.
-  \end{itemize}
-\end{folgerung}
+Da Verknüpfungen von Bijektionen bijektiv sind, definiert die Verknüpfung eine Abbildung \(\circ: S_n \times S_n \to S_n \) (Multiplikation von Permutationen). Permutationen kann man auch invertieren: \(\sigma \in S_n \implies \sigma^{-1} \in S_n \)
 
-\begin{definition}
-  Sei $P=\{\}$. Ein halbsystem in $P$ ist eine Halbmenge mit folgender
-  Eigenschaft: von den Paaren $(i,j), (j,i)\in P$ ist in $H$ jeweils genau eine enthalten.
+\begin{definition}{Halbysystem}{}
+  Sei \(P=\{(i,j) \in \{1,...,n\}^2\mid i\neq j \} \) Ein Halbsystem \(H \subseteq P \) ist eine Teilmenge mit der Eigenschaft: Von den Paaren \((i,j) \) und \((j,i) \) ist immer genau eines in P enthalten. Formal:
+  \(\forall (i,j) \in P: ((i,j) \in H \land (j,i) \notin H) \lor ((j,i) \in H \land (i,j) \notin H )\)
 \end{definition}
 
 \begin{exa}
-  $n=3$
+  Für \(n=3 \) ist \(\{(1,2), (1,3), (2,3)\} \) ein Halbsystem.
 \end{exa}
 
-\begin{definition}
-  Sei $\sigma\in S_n$. $\exists$... heisst Vorzeichen von $\sigma$
-  \begin{enumerate}
-  \item $\epsilon$ ist unabh"angig von der Wahl von $H$: Wenn $H'$ ein anderes
-    halbsystem ist, dann mann jeden Faktor ggf. $(j,i)$ statt $(i,j)$ nehmen,
-    aner ... 
-  \item $\epsilon(\sigma) \in \{0, 1\}$
-  \end{enumerate}
+\begin{definition}{Vorzeichen}{}
+  Sei \(\sigma \in S_n. \quad \varepsilon(\sigma):= \prod\limits_{(i,j)\in H} \frac{\sigma(i)-\sigma(j)}{i-j} \) heißt Vorzeichen von \(\sigma \).
 \end{definition}
 
-\begin{notte}[Interpretation f"ur $\epsilon (\sigma)$]
-  $d$ .. Anzahl der ''Reihenfolgeverst"osse'' in $\sigma$
-\end{notte}
-\begin{proof}
-  ...
-\end{proof}
+\(\varepsilon(\sigma) \) ist unabhängig von der Wahl von H, denn: Wenn \(H^\prime \) ein anderes Halbsystem ist, muss ggf. \((j,i) \) statt \((i,j) \) genommen werden, aber \(\frac{\sigma(j)-\sigma(i)}{j-i} = \frac{\sigma(i)-\sigma(j)}{i-j} \).
+Das heißt, wir können uns einfach ein Halbsystem aussuchen:
+\(\varepsilon(\sigma) = \prod\limits_{i<j}\frac{\sigma(i)-\sigma(j)}{i-j} \)
+
+\textbf{Interpretation für \(\varepsilon(\sigma) \)}:
+\[\varepsilon(\sigma) = \prod\limits_{i<j}\frac{\sigma(i)-\sigma(j)}{i-j} = \prod_{i<j} sgn(\sigma(i)-\sigma(j)) = \prod_{\substack{i<j\\ \sigma(i)>\sigma(j)}} (-1)\]\[ = \text{Minus eins hoch Anzahl der „Reihenfolgenverstöße“ von }\sigma\]
+
 
 \begin{definition}
   Die Permutationen ... heissen gerade ... ungerade.
@@ -2209,12 +2198,12 @@ Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 
 
 \begin{proposition}[das Vorzeichen ist multiplikativ]
-  $\epsilon(\sigma\circ \tau)= \epsilon (\sigma) \cdot \epsilon (\tau)$
+  $\varepsilon(\sigma\circ \tau)= \varepsilon (\sigma) \cdot \varepsilon (\tau)$
 \end{proposition}
 
 
 \begin{relation}
-  Sei $\tau_{ij}$ eine Transposition: $\epsilon(\tau_{ij})=-1$.
+  Sei $\tau_{ij}$ eine Transposition: $\varepsilon(\tau_{ij})=-1$.
 \end{relation}
 
 \begin{proposition}

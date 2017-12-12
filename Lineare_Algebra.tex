@@ -1811,7 +1811,7 @@ Ferner gilt: \(\mIm(f) = U_1 + U_2\) per Definition. Nun ist:
 \mKer(f) &= \{(u_1, u_2) | u_1 \in U_1, u_2\in U_2, u_1 + u_2 = 0\} = \{(u, -u)| u \in U_1 \cap U_2 \}\\
 &\implies \dim\mKer (f) = \dim(U_1 \cap U_2)\\
 &\implies \underbrace{\dim(U_1 \cap U_2)}_{\dim\mKer(f)} + \underbrace{\dim(U_1 + U_2)}_{\dim\mIm(f)} = \underbrace{\dim(U_1) + \dim(U_2)}_{\dim (U_1\times U_2)}
-\end{align*}\qed
+\end{align*}
 \end{proof}
 
 Was hat diese ganze Theorie mit Matrizen zu tun? Intuitiv: Abbildungen sind
@@ -1837,7 +1837,6 @@ Wenn \(f_1, f_2 \in \mHom_\mathbb{K}(V,W)\):
 (f_1 + f_2)(v) &= f_1(v) + f_2(v) \quad\text{ist linear} \\
 (\lambda f_1)(v) &= \lambda\cdot f_1(v)\quad\text{ist auch linear}
 \end{align*}
-\qed
 \end{proof}
 
 Seien \(V, W\) endlichdimensional, \(B = \{b_1, \dots, b_n\}\) Basis in \(V\), \(C = \{c_1, \dots, c_m\}\) Basis in \(W\). Sei \(f \in \mHom_\mathbb{K}(V,W)\). Die Abbildungsmatrix \(F= M_C^B(f)\) in \(f\) bzgl. \(B\) und \(C\) ist definiert als
@@ -1882,7 +1881,7 @@ f\left(\sum_{j=1}^n\lambda_jb_j\right) = \sum_{j=1}^n\lambda_j\cdot\left(\sum_{i
 \(f\) ist linear und es gilt:
 \begin{align*}
 f(b_j) = \sum_{i=1}^mF_{ij}c_i \implies M^B_C(f) = F
-\end{align*}\qed
+\end{align*}
 \end{proof}
 
 Im Beweis haben wir unter anderem festgestellt:
@@ -1928,10 +1927,10 @@ Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann erhalten wir die
 \begin{lemma}[Basiswechselmatrizen sind invertierbar]
 	\(S = M^{B'}_B(\mId_V)\) ist invertierbar f"ur je zwei Basen \(B, B' \subset V\), und \(S^{-1} = M^B_{B'}(\mId_V)\).
 \end{lemma}
-\begin{prof}
+\begin{proof}
 	\(M^B_B(\mId_V)=1_n\), daher ist
-	\[\underbrace{M^{B'}_B(\mId_V)}_{S}\cdot M^B_{B'}(\mId_V) = M^B_B(\mId_V) = 1_n \]\qed
-\end{prof}
+	\[\underbrace{M^{B'}_B(\mId_V)}_{S}\cdot M^B_{B'}(\mId_V) = M^B_B(\mId_V) = 1_n \]
+\end{proof}
 
 
 \subsubsection{Basen und Abbildungsmatrizen (Zusammenfassung)}

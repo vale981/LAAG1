@@ -2221,29 +2221,46 @@ Das heißt, wir können uns einfach ein Halbsystem aussuchen:
   Jede Permutation ist als Produkt von Transpositionen darstellbar ("Ubung)
 \end{notte}
 
-\begin{trivlist}
-\item Sei $v$ ein Vektorraum $b_1, ..., b_n$ eine Basis und $v_1, ..., v_n \in
-  V$ mit darstellungen $v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}$.
-  
-\item
-  \begin{align*}
-    \omega(v_1,...,v_n) = \omega (...) &  ... \\
-    = ... & = ... 
-   \end{align*}
- \end{trivlist}
+Sei \(V\) ein Vektorraum, \(b_1, ..., b_n\) eine Basis, \(v_1, ..., v_n \in
+V\) mit Darstellungen \(v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}\).
 
- Wenn $V=K^n, (b...$ die Standartbasis in $K^n$, und die Volumenform $\omega:
- V^n\mapsto K$ so gew"ahlt istm dass $\omega(e_1,...,e_n)$, dann bekommt man
- folgende Definition f"ur eine Matrix $A$:
+\todo{Das stand so nicht an der Tafel, aber \((-1)^\varepsilon\) kam mir spanisch vor}
+\begin{align*}
+    \omega(v_1,\dots,v_n) &= \omega\left(\sum_{j_1=1}^n\lambda_{1,j_1}b_{j_1},\dots,\sum_{j_n=1}^n\lambda_{n,j_n}b_{j_n}\right) \\
+    &= \sum_{j_1,\dots,j_n=1}^n\left(\underbrace{\lambda_{1,j_1}\dots\lambda_{n,j_n}}_{\text{Produkt}}\cdot\omega(b_{j_1},\dots,b_{j_n})\right) \\
+    &= \sum_{\sigma\in S_n}\left(\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)}\omega(b_{\sigma(1)},\dots,b_{\sigma(n)})\right) \\
+    &= \left(\sum_{\sigma\in S_n}{\varepsilon(\sigma)}\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)}\right)\omega(b_1,\dots,b_n)
+\end{align*}
+
+
+ Wenn \(V=K^n, (b_1,\dots,b_n) = (e_1,\dots,e_n)\) die Standardbasis in \(K^n\), und die Volumenform \(\omega:
+ V^n\to K\) so gew"ahlt ist, dass \(\omega(e_1,...,e_n)=1\), dann bekommt man
+ folgende Definition f"ur eine Matrix \(A\):
 
  \begin{definition}
-   Wenn ... eine Matrix mit eintr"agen $a_{ij}$. Wenn man die Zeilen als
-   Vektoren in $K^n$ auffast, dann gilt:...
+ 	Sei \(A\in K^{n\times n}\) eine Matrix mit Eintr"agen \(a_{ij}\). Wenn man die Zeilen von \(A\) (sagen wir \(\alpha_1,\dots, \alpha_n\)) als
+   Vektoren in \(K^n\) auffast, dann gilt: \[\omega(\alpha_1,\dots,\alpha_n) = \sum_{\sigma\in S_n}{\varepsilon(\sigma)a_{1,\sigma(1)}\dots a_{n,\sigma(n)}} =: \det A \]
+   Das nennen wir ab jetzt auch Leibniz-Formel.
  \end{definition}
 
  \begin{relation}
-   Geometrische Bedeutung: 
+   Geometrische Bedeutung: \(\det A\) ist das (orientierte) Volumen des Quaders / Parallelotops aufgespannt durch Zeilen von \(A\) (wenn man das Volumen des \gq{Standardquaders} aufgespannt durch Standardzeilen \(e_1^T,\dots,e_n^T\) gleich 1 setzt)
  \end{relation}
+
+\begin{proposition}
+	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
+\end{proposition}
+\begin{proof}
+	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen. Es gilt:
+	\begin{align*}
+	\det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
+	&= \sum_{\sigma = \sigma'\circ\tau_{ij}\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{i,\sigma(i)}\dots\lambda_{j,\sigma(j)}\dots\lambda_{n,\sigma(n)} \\
+	&= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(i)}}\dots \lambda_{n,\sigma'(n)} \\
+	&= - \sum_{\sigma'\in S_n} \epsilon(\sigma') \lambda_{1,\sigma'(1)}\dots(-\lambda_{j,\sigma'(j)})\dots\lambda_{i,\sigma'(i)}\dots\lambda_{n,\sigma'(n)} = -\det A \\
+	&\implies \det A = 0
+	\end{align*}
+	\(\implies\omega \) alternierend.
+\end{proof}
 
 \subsection{Schlagworte:}
 \label{sec:orgcf8c685}

@@ -1924,6 +1924,14 @@ Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann erhalten wir die
  Basisvektoren \((b_1', \dots, b_n')\) bez"uglich der alten Basis \(B = (b_1,
  \dots, b_n)\) sind. Es folgt sofort aus den Definitionen:
  \(S=M^{B'}_B(\mId_V)\)
+ 
+\begin{lemma}[Basiswechselmatrizen sind invertierbar]
+	\(S = M^{B'}_B(\mId_V)\) ist invertierbar f"ur je zwei Basen \(B, B' \subset V\), und \(S^{-1} = M^B_{B'}(\mId_V)\).
+\end{lemma}
+\begin{prof}
+	\(M^B_B(\mId_V)=1_n\), daher ist
+	\[\underbrace{M^{B'}_B(\mId_V)}_{S}\cdot M^B_{B'}(\mId_V) = M^B_B(\mId_V) = 1_n \]\qed
+\end{prof}
 
 
 \subsubsection{Basen und Abbildungsmatrizen (Zusammenfassung)}

@@ -2263,6 +2263,83 @@ V\) mit Darstellungen \(v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}\).
 	\(\implies\omega \) alternierend.
 \end{proof}
 
+\(\omega\) ist eindeutig durch den Wert (=1) auf \(B\) bestimmt \(\implies\)  wenn \(\omega'\) eine Volumenform auf \(V\) ist, so gilt \(\omega' = \underbrace{\omega'(b_1,\dots,b_n)}_{\in K}\cdot\omega\)
+
+\begin{definition}{Determinante}
+	Sei \(V\) ein \(n\)-dimensionaler Vektorraum, \(f: V\to V\) linear. Die Determinante von \(f\) ist
+	\[\det(f):= \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)}\]
+	wobei \(\omega \neq 0\) eine Volumenform auf \(V\) ist.
+\end{definition}
+
+\begin{beobachtung}
+	Die obige Proposition zeigt, dass \(\det(f)\) wohldefiniert ist (= auf die Wahl von \(\omega\neq 0\) nicht ankommt). Geometrisch: \(\det(f)\) ist der Verzerrungsfaktor von dem Volumen (unter \(f\)).
+\end{beobachtung}
+
+\begin{lemma}
+	\(\det\Delta = \det\Delta^T\quad\forall \Delta\in K^{n\times n}\)
+\end{lemma}
+\begin{proof}
+	Es gilt: \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\quad\forall \sigma\in S_n \) (folgt z.B. aus \(\varepsilon(\sigma\circ\sigma^{-1})=1=\varepsilon(\sigma)\varepsilon(\sigma^{-1})\))
+	\begin{align*}
+	\det\Delta^T = \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{\sigma(1),1}\dots\lambda_{\sigma(n),n} = \sum_{\sigma^{-1}\in S_n}\varepsilon(\sigma^{-1})\lambda_{1,\sigma^{-1}(1)}\dots\lambda_{n,\sigma^{-1}(n)} = \det \Delta
+	\end{align*}
+\end{proof}
+\begin{proposition}
+	\begin{enumerate}
+		\item \(f, g: V\to V \) linear \(\implies\det(g\circ f) = \det(g)\det(f) \)
+		\item \(f\) ist genau dann invertierbar, wenn \(\det(f)\neq 0 \)
+	\end{enumerate}
+\end{proposition}
+\begin{korollar}
+	Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
+\end{korollar}
+\begin{proof}
+	\begin{align*}
+	\det(f) = \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
+	\end{align*}
+\end{proof}
+\begin{korollar}
+	Eine Matrix \(A\in K^{n\times n} \) ist genau dann invertierbar, wenn \(\det A \neq 0 \)
+\end{korollar}
+\begin{bem}
+	Es gibt eine Reihe von Begriffen f"ur Matrizen, die nach unseren Invertierbarkeitskriterien alle "aquivalent dazu sind, dass \(A \) invertierbar ist, z.B. nicht ausgeartet, regul"ar etc.
+\end{bem}
+\begin{korollar}
+Wie berechnet man Determinanten?
+
+Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnungen macht man normalerweise unter Benutzung folgender Eigenschaften der Determinante (die daraus folgen, dass \(\det : (K^n)^n \to K\) eine Volumenform ist):
+\begin{itemize}
+	\item Wenn man zu einer Zeile / Spalte der Matrix ein Vielfaches einer anderen Zeile bzw. Spalte addiert, so "andert sich die Determinante nicht;
+	\item \(\det \) ist linear in jeder Zeile bzw. Spalte.
+\end{itemize}
+\end{korollar}
+\begin{bem}
+	F"ur \(\varepsilon(\sigma)\), das Vorzeichen einer Permutation, gibt's auch die Physiker-Notation: \(\varepsilon_{1,\dots,n}=1\) und es ver"andert das Vorzeichen, wenn man zwei Indizes vertauscht.
+\end{bem}
+\begin{bem}[Orientierung von Vektorr"aumen]
+	Volumenformen sind laut unserer Definition linear \(\implies\) selbst wenn \(V\) ein \(\mathbb{R}\)-Vektorraum ist, kann es passieren, dass \(\omega(v_1,\dots,v_n)< 0\). Die Wahl von einer Volumenform \(\omega\) definiert die sogenannte \emph{Orientierung} von \(V\) (\(V\) ein \(mathbb{R}\)-VR). Wenn wir \(\omega\) fixieren, dann entstehen zwei Klassen von Basen in \(V\): \(B = (b_1,\dots,b_n)\) hei"st positiv (negativ) orientiert, wenn \(\omega(b_1,\dots,b_n) > (<) 0\). 
+	
+	In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
+\end{bem}
+
+\subsubsection{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
+
+Wir haben gesehen: wenn \(f: V\to W\) linear, \(V, W\) endlichdimensionale Vektorr"aume \(\implies \exists B\subset V, C\subset W \) Basen so dass
+\[M^B_C(f) = \begin{pmatrix}
+1_r & 0\\
+0 & 0
+\end{pmatrix}, r = \mRg f\]
+\begin{definition}
+	Ein Endomorphismus von \(V\) ist eine lineare Abbildung \(f: V\to V\). Bezeichnung: \(f\in \text{End}_K(V) = \text{Hom}_K(V,V) \)	
+	
+	Endomorphismus hei"sen auch lineare Operatoren auf \(V\). Die Wahl einer Basis \(B\subset V \) gibt uns eine Matrix \(M^B_B(f)\).
+\end{definition}
+\begin{korollar}[Hauptfrage]
+	Wenn \(f\) gegeben ist, wie findet man eine Basis \(B\), so dass \(M^B_B(f)\) eine besonders einfache Form hat?
+	
+	"Aquivalent, in Termen von Matrizen: Gegeben eine Matrix \(A\in K^{n\times n} \), finde eine invertierbare Matrix \(S\) so dass \(S^{-1}AS\) besonders einfache Form hat.
+\end{korollar}
+
 \subsection{Schlagworte:}
 \label{sec:orgcf8c685}
 \begin{itemize}

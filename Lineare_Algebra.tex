@@ -30,6 +30,7 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 \newcommand{\gq}[1]{\glqq{}#1\grqq{}} % german quotes
+\newcommand{\mcolor}[2][red]{\begingroup\color{#1}#2\endgroup }
 \DeclareMathOperator{\mdim}{dim}
 \DeclareMathOperator{\mKer}{Ker}
 \DeclareMathOperator{\mIm}{Im}
@@ -2251,12 +2252,12 @@ V\) mit Darstellungen \(v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}\).
 	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
 \end{proposition}
 \begin{proof}
-	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen. Es gilt:
+	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
 	\begin{align*}
 	\det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
 	&= \sum_{\sigma = \sigma'\circ\tau_{ij}\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{i,\sigma(i)}\dots\lambda_{j,\sigma(j)}\dots\lambda_{n,\sigma(n)} \\
-	&= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(i)}}\dots \lambda_{n,\sigma'(n)} \\
-	&= - \sum_{\sigma'\in S_n} \epsilon(\sigma') \lambda_{1,\sigma'(1)}\dots(-\lambda_{j,\sigma'(j)})\dots\lambda_{i,\sigma'(i)}\dots\lambda_{n,\sigma'(n)} = -\det A \\
+	&= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(j)}}\dots \lambda_{n,\sigma'(n)} \\
+	&= \mcolor{-} \sum_{\sigma'\in S_n} \mcolor{\varepsilon(\sigma')} \lambda_{1,\sigma'(1)}\dots\lambda_{i,\sigma'(i)}\dots\lambda_{j,\sigma'(j)}\dots\lambda_{n,\sigma'(n)} = -\det A \\
 	&\implies \det A = 0
 	\end{align*}
 	\(\implies\omega \) alternierend.

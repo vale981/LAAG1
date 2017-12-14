@@ -2027,7 +2027,7 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
   \end{enumerate}
 \end{proof}
 
-\begin{proof}[des Satzes]
+\begin{proof}{des Satzes}\leavevmode
   \begin{itemize}
   \item[(0) $\implies$ (1)]  $A=M^{\epsilon}_{\epsilon}(f_A)$, woberi $f_A:$
   \item[(1) $\implies$ (0)] Sei $A$ invertierbar, $A=$ Betrachten wir die
@@ -2040,7 +2040,7 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
     Abbildung $x\mapsto A\cdot x$ surjektiv sein $\implies$ (6)
   \item[(3) $ \implies $ (5)] $C\cdot A = 1_n$
   \item[(9) $ \implies $ (1)] Elementarmatrizen sind invertierbar, und wenn...
-  \item[(7) m (9)] L"osen wir das LGS $A\cdot x = 0$ durch
+  \item[(7) $ \implies $ (9)] L"osen wir das LGS $A\cdot x = 0$ durch
     Zeilenumformungen (Gauss-Jordan): also machen wir Zeilenumformungen. Wir
     haben keine freien Variablen, denn wir haben nur eine L"osung $\implies$
     $A$ wird zur $1_n$ durch Zeilenumformungen transformiert. Wenn wir den
@@ -2150,7 +2150,7 @@ Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 \label{sec:perm}
 
 \begin{definition}
-  Sei $X$ eine Menge. Eine bijektion $\sigma: X \mapsto X$ heisst Permutation
+  Sei $X$ eine Menge. Eine bijektion $\sigmaq: X \mapsto X$ heisst Permutation
   von X.
 \end{definition}
 
@@ -2228,6 +2228,7 @@ Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 \begin{trivlist}
 \item Sei $v$ ein Vektorraum $b_1, ..., b_n$ eine Basis und $v_1, ..., v_n \in
   V$ mit darstellungen $v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}$.
+
   
 \item
   \begin{align*}
@@ -2249,6 +2250,441 @@ Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
    Geometrische Bedeutung: 
  \end{relation}
 
+ \begin{proposition}
+   Sei $V$ ein n-dimensionaler Vektorraum. Es gibt eine (bis auf vielfaches
+   eindeutige) Volumenform auf $V$.
+ \end{proposition}
+
+ \begin{proof}
+   W"ahle eine Bais $B=(b_1,...,b_n)\in V$, definiere $\omega (v_1,...,v_n)$
+   durch die Leibnitz Formel mit $\omega (b_1,..., b_n):=1$, dann ist $\omega
+   \not= 0$ nach Konstruktion.
+   \begin{trivlist}
+   \item $\omega$ ist linear in jeder Variable, weil $\det \Lambda$ definiert
+     durch die Leibnitz-Formel linear in jeder Zeile der Matrix $\Lambda$ ist.
+   \item $\omega (v_1,...,v_{i-1}, v, v_{i=1)$ .... wobei die i-te und j-te
+       Zeile von $\Lambda$ ubereinstimmen. Es gilt:
+     \end{trivlist}
+
+     $\implies \omega$ ist eindeutig durch den Wert (=1) auf B bestimmt
+     $\implies$ wenn $w'$
+\end{trivlist}
+ \end{proof}
+
+ \begin{definition}{Determinante einer Abbildung}
+   Sei $V$ ein n-dimensionaler Vektorraum, $f: V\mapsto V$ eine lineare
+   Abbildung. Die Determinanten von $f$ ist:
+   \[
+     \det (f) :=\frac{\omega(f(b_1),...,f(b_n)}{}....
+   \]
+ \end{definition}
+ 
+ \begin{proof}
+   Doe obige Proposition zeigt, dass $\det(f)$ wohldefiniert ist. (Kommt auf
+   die Wahl von $\omega \not= 0$) und $B$ nicht an).
+ \end{proof}
+ 
+ \begin{relation}
+   Geometrisch ist $\det(f)$ der Verzerrungsfaktor von dem Volumen (unter f).
+ \end{relation}
+
+ \begin{proposition}
+   \begin{enumerate}
+   \item $f,g$ linear
+   \item $f$ ist genau dann invertierbar, wenn $\det (f) \not= 0$
+   \end{enumerate}
+ \end{proposition}
+
+ \begin{proof}
+   \begin{enumerate}
+   \item Wenn ... linear abh"angig sind $\implies$ ... \\
+     Wenn .... linear unabh"angig sind $\implies$ bilden Basis in $V$ dann gilt
+     ...
+   \item Wenn $f$ invertierbar ist,, existiert ..., und nach ... gilt ... Wenn
+     hingegen ..., dann sind ... sind linear unabh"angig $\implies$ $\rg f = n
+     \implies f \text{ invertierbar}$ 
+   \end{enumerate}
+ \end{proof}
+
+ Wie h"angen Determinanten von Matrizen und Abbildungen zusammen?
+
+ \begin{lemma}
+   $\det \Lambda = \det \Lambda^{-1}$ f"ur alle $\Lambda \in K^{n\times n}$
+ \end{lemma}
+
+ \begin{proof}
+   Es gilt $\epsilon (\sigma) = \epsilon (\sigma^{-1}) \forall \sigma\in S_n$\\
+   ...
+ \end{proof}
+
+ \begin{korollar}
+   Sei B eine eine Basis in $V$ ... Dann gilt:
+ \end{korollar}
+
+ \begin{proof}
+   ...
+ \end{proof}
+
+ \begin{korollar}
+   Eine Matrix $A\in K^{n\times n}$ ist genau dann invertierbar, wenn $\det A
+   \not= 0$.
+ \end{korollar}
+
+ \begin{notte}
+   Es gibt eine Reihe von Begriffen f"ur Matrizen, die nach unseren
+   Invertierbarkeitskriterien alle "aquivalent dazu sind , dass $A$
+   invertierbar ist. (ausgeartet, regul"ar, etc...)
+ \end{notte}
+
+ Wie berechnet man Determinanten? Die Leibnitz-Formel ist zu ineffizient, weil
+ sie $n!$ Summanden hat. Die Berechnung macht man normalerweise unet Benutzung
+ folgender Eigenschaften (da Volumenform).
+ \begin{relation}
+   \begin{itemize}
+   \item Wenn man zu einer Zeile/Spalte der Matrix ein Vielfaches einer anderen
+     Zeile bzw. Spalte addiert, so "andert sich die Determinate nicht.
+   \item $\det$ ist lineat in jeder Spalte.
+   \item Bei umstellung zweier Zeilen bzw. Spalten, "andert $\det$ das
+     Vozeichen nicht.
+   \end{itemize}
+ \end{relation}
+
+ \begin{exa}
+   ...
+ \end{exa}
+
+ \begin{notte}
+   F"ur $\epsilon (\sigma)$, das Vorzeichen einer Permutation, gibt es auch
+   die '' `Physiker Notation''''': ... \\
+   ''Physiker Definition'', und es "andert das Vorzeichen, wenn man zwei
+   Indizes umstellt.
+ \end{notte}
+
+ \begin{notte}[Orientierung von Vektorr"aumen]
+   Volumenformen sind nach unserer Definition linear. $\implies$ selbst wenn
+   $V$ ein $\mathbb{R}$ Vektorraum ist, kann das Volumen $<0$ sein.\\
+   Die Wahl von einer Volumenform $\omega$ definiert die so genannte
+   \textit{Orientierung} von $V$ ($V$ ein $\mathbb{R}$-VR). Wenn wir $\omega$
+   fixieren, dann entstehen zwei klassen von Basen in $V$:
+   \begin{trivlist}
+   \item $B=(b_1, ..., b_n)$ heisst positiv orientiert wenn $\omega (b_1, ...,
+     b_n)>0$.
+   \item $B=(b_1, ..., b_n)$ heisst negativ orientiert wenn $\omega (b_1,
+     ...,b_n) < 0$.
+   \end{trivlist}
+ \end{notte}
+
+ \begin{exa}[...]
+   ...
+ \end{exa}
+
+ \begin{relation}
+   In diesem Sinne ist $\omega(v_1, ..., v_n)$ das orientierte Voluumen von dem
+   ''Quader'' aufgespannt durch $v_1,...,v_n)$. Wennn .... 
+ \end{relation}
+
+\subsection{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
+\label{sec:eigen}
+
+Wir haben gegeben: Wenn linear ...
+
+\begin{definition}
+  Ein Endomorphismus in $V$ ist eine lineare Abbildung ....
+  Heissen auch lineare Operatoren
+\end{definition}
+
+Die Wahl einer Basis $B\subset V$ gibt uns eine Matrix $M^B_B(f)$. Wie findet
+man eine Basis B, so dass $M^B_B(f)$ besonders einfach ist.
+
+Gegebe eine Matrix $A\in K^{n\times n}$, finde eine invertierbare matrix S, s.d.
+$S^{-1}\cdot A\cdot S$ besonders einfache form hat. (Die Suche nach $S$ ist die
+Suche nach $M^{B}_{B'}(id)$)
+
+\begin{exa}
+  Sei $V$ ein $\mathbb{R}$ - Vektorraum, sei $B$ eine Basis. mit ...
+\end{exa}
+
+
+\begin{definition}
+  Sei $f: V\mapsto V$ eine lineare Abbildung. Ein Eigenvektor von $f$ ist ein
+  Vektor von $f$ist ein Vektor, so dass $f(v)=\lambda \cdot v$ f"ur ein ...
+  $\lambda$ heisst eigenwert. $v$ nennt man den Eigenvektor zum eigenwert
+  $\lambda$.
+\end{definition}
+
+Geometrisch: $f$ streckt $v$ mit dem koeffzienten $\lambda$.
+
+\begin{lemma}
+  Sei $f: V\mapsto V$ ein endomorphismus. Wenn .... eine Basis in $V$ aus
+  Eigenvektoren mit den Eigenwerten ... ist (Eigenbasis), so gilt:
+\end{lemma}
+
+\begin{proof}
+  Es gilt laut definition $f(b_i)=\lambda_i\cdot b_i,\; i=1,n$. Die Form von ...
+  folgt aus Definition.
+\end{proof}
+
+Es folgt: wenn wir die Diagonalform von ... erreichen m"ochten, m"ussen wir
+Eigenwerte und Eigenvektoren suchen (u. geg. finden!)
+
+\begin{proof}
+  Ein Endomorphismus $f$ heisst diagonalisierbar, wenn er eine Eigenbasis hat.
+\end{proof}
+
+\begin{proposition}
+  Sei ... $\lambda \in K$
+  \begin{enumerate}
+  \item $v\in V$ ist ein Eigenvektor von $f$ zum Eigenwenwert ....
+  \item $\lambda$ ist ein Eigenwerrt von f .... 
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  \begin{enumerate}
+  \item Sei $v\in V$ Eigenvektor zum Eigenwert $\lambda$. Dann gilt nach
+    Definition $f(v)=\lambda\cdot v$ ...
+  \item Nach (1) ist $\lambda$ ein Eigenwert $\iff$  ... 
+  \end{enumerate}
+\end{proof}
+\begin{relation}
+  \begin{enumerate}
+  \item F"ur Suche nach Eigenvektoren bedeutet das: Wenn wir wissen, dass
+    $\lambda$ Eigenwert ist, k"onnen wir Eigenvektoren durch die Bestimmung
+    einer Basis im ... bestimmen. (L"osung von LGS)
+  \item Um eigenwerte zu finden, m"ussen wir die Gleichung ... nach $\lambda$ l"osen.
+  \end{enumerate}
+\end{relation}
+
+\begin{definition}
+  Sei $f$ ... Das Polynom ... heisst charakteristisches Polynom von $f$. Die
+  Gleichung ... Heisst charakteristische Gleichung von $f$. Aus den obigen
+  "uberlegungen folgt: die Nullstellen von ... sind genau die Eigenwerte von $f$.
+\end{definition}
+
+Wenn wir also $f$ diagonalisieren wollen, m"ussen wir folgendes tun:
+\begin{relation}
+  \begin{enumerate}
+  \item Charakteristische Gleichung l"osen: Eigenwerte bestimmen
+  \item Finde Basen von $Ker(\lambda \cdot id - f)$ zu jedem Eigenwert
+    $\lambda$.
+  \item Hoffen, dass Vereinigung von diesen Basen eine Basis in V ergibt. 
+  \end{enumerate}
+\end{relation}
+
+\begin{definition}
+  ... heisst Eigenraum zum Eigenwert $\lambda$
+\end{definition}
+
+\begin{proof}[Ausf"uhrlicher Beweis des Lemmas]
+  Seien $v_1, ..., v_n$ Eigenvektoren zu Eigenwerten $\lambda_1,...,\lambda_n$
+  (paarweise verschieden). Sei $... = 0$  Wende ... an.
+\end{proof}
+
+Was sind m"ogliche Hindernisse zur diagonalisierbarkeit?
+\begin{enumerate}
+\item Zu wenig Eigenwerte:
+  \begin{exa}
+    Rotation in $\mathbb{R}^2$ um $\frac{\pi}{2}$ .... Keine reellen
+    Nullstellen. Hier schweitern wir daran, dass das Polynom $\lambda^2 + 1$
+    nicht genug Nullstellen in $\mathbb{R}$ hat.
+  \end{exa}
+\end{enumerate}
+
+\subsubsection{Nullstellen von Polynomen}
+\label{sec:polyns}
+
+\begin{definition}
+  Sei $p\in K\[\lambda\]=\{\}$.... ein Polynom. Eine Nullstelle $\mu$ von $p$
+  ist ein Element $\mu \in K$ so dass $p(\mu)=0$
+\end{definition}
+
+\begin{lemma}[Bezont]
+  $\mu \in K$ ist eine Nullstelle vo $p \iff p(\lambda) = (\lambda -  \mu) \cdot
+  p_1(\lambda)$
+\end{lemma}
+
+\begin{proof}[Skizze]
+  \begin{itemize}
+  \item[$\impliedby$] Offenbar
+  \item[$\implies$] Folgt durch Polynomdivision.
+  \end{itemize}
+\end{proof}
+
+\begin{folgerung}
+  \begin{itemize}
+  \item Ein Polynom von Grad $d$ h"ochstens $d$ Nullstellen.
+  \end{itemize}
+\end{folgerung}
+
+\begin{theorem}[Fundamentalsatz der Algebra]
+  Jedes Polynom $p\in \mathb{C}$ zerf"allt in Linearfaktoren. \[p(\lambda)= a_d
+    (\lambda-\lambda_1)\cdot (\lambda -\lambda_2) ... (\lambda - \lambda_n)\]. ...
+\end{theorem}
+
+\begin{folgerung}
+  Sei $V$ ein $\mathbf{C}$ Vektorraum, $f: V \mapsto V$ linear. Dann hat $f$
+  einen Eigenvektor. \\
+  Ideen:
+  \begin{itemize}
+  \item Wenn $V$ nun ein $\mathbb{R}$ Vektorraum ist, k"onnen wir es zu einem
+    $\mathbb{C}$ Vektorraum aufr"usten.
+  \end{itemize}
+\end{folgerung}
+
+
+\begin{definition}
+  Sei V ein $\mathbb{R}$ Vektorraum. Die komplexifizierung $V_{\mathbb{C}}$ von
+  $V$ ist der folgende $\mathbb{C}$ Vektorraum. \[V_{\mathbb{C}}=\{(v,w) |
+    v,w\in V\}\] als Menge, Addition komplexweise, .... 
+  Man denkt an $(v,w)$ als ''$v+i\cdot w$'' 
+\end{definition}
+
+\begin{lemma}
+  Sei $f: V\mapsto V$ $\mathbb{R}$ -  Linear, dann ist .... eine
+  komlexifizierung von $f$
+\end{lemma}
+\begin{proof}
+  $f_{\mathbb{c}}$ ... 
+\end{proof}
+
+\begin{lemma}
+  Wenn $B$ eine Basis in $V$ ist, so ist ...
+\end{lemma}
+
+\begin{proof}
+  $(b_1,0),...,(b_n,0)$ Spannen $V_{\mathbb{C}}$ weil die reellend
+  Linearkombinationen von ... den Raum ... aufspannenn, und ... den rest
+  aufspannen. Sie sind auch linear unabh"angig "uber $\mathbb{C}$ denn, die
+  Aufspannabbildung: ... ist die Komplexifizierung der reellen
+  Aufspannabbildung. ... war injektiv $\implies$ ... inkektiv. 
+\end{proof}
+
+\begin{lemma}
+  Wenn $f: V\mapsto V$ ... linear ist und ... die Komplexifizierung, $B$ Basis
+  in $V$, dann gilt: ... (Wir nehmen reelle Matrizen als Complexe war.)
+\end{lemma}
+
+\begin{proof}
+  Inspektion der Abbildungsmatrix. \[f_{\mathbf{C}(b_i,0) = (f(b_i), 0)\]
+\end{proof}
+\begin{exam}
+  ...
+\end{exa}
+
+\begin{definition}
+  Sei $f: V \mapsto V$ eine $K$ - Lineare Abbildung. Ein Untervektorraum
+  $U\subseteq V$ heisst invariant, wenn $f(U) \subseteq U$.
+\end{definition}
+
+\begin{proposition}
+  Sei $f: V\mapsto V$ eine ... Abbildung. Eim Vektor ... ist genau dann eine
+  Eigenvektor von ... mit dem Eogenwert ..., wenn .... invariant unter $f$ ist
+  mit ...
+\end{proposition}
+
+\begin{proof}
+  ... Diese Matrix hat Eigenwerte $\alpha + i\cdot\beta$ und hat keine
+  Eigenvektoren.
+\end{proof}
+
+Zusammen mit der Existenz von Eigenvektoren f"ur $f_{\mathbb{C}}$ haben wir:
+
+\begin{proposition}
+  ... ein linearer Operator auf einem $\mathbb{R}$ VR. Dann hat $f$ einen 1,
+  oder 2 dimensionalen invarianten Unterraum.
+\end{proposition}
+
+Geometrisch:
+\begin{relation}
+  \begin{itemize}
+  \item[1 - Dimensional] = Eigenraum
+  \item[2 - Dimensional] = Drehstreckung
+  \end{itemize}
+\end{relation}
+
+Diese Proposition beantwortet auf die bestm"ogliche Weise die Frage: ''Was
+passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat''
+
+\begin{exa}
+  ...
+  Es ist $f$ nicht diagonalisierbar.
+\end{exa}
+
+\begin{definition}
+  Seien $p,q\in K[\lambda]$ zwei Polynome. $p$ teilt $q$ ($p|q$), wenn $\exists
+  Es ist $f$ nicht diagonalisierbarp_1 \in K[t]$ s.d. $q= p\cdot p_1$. 
+\end{definition}
+
+\begin{proposition}
+  Sei ... linearer Operator $U\subseteq V$ ein invarianter Untervektorraum. Dann
+  Es ist $f$ nicht diagonalisierbargilt $\Xi_{f} | $... 
+\end{proposition}
+\begin{proof}
+  Nehmen wir eine Basis $B_U$ in $U$ und erweitern sie zu einer Basis $B$ in $V$
+\end{proof}
+
+\begin{folgerung}
+  Die Dimension des Eigenraumes $Ker...$ ist kleiner gleich der Vielfachheit von
+  Es ist $f$ nicht diagonalisierbar $\lambda$ als Nullstelle $\Xi_f$.
+\end{folgerung}
+
+\begin{proof}
+  .... ist invariant, 
+\end{proof}
+
+\begin{definition}
+  Sei ... linear $\lambda$ ein Eigenwert von $f$. Die algebraische Vielfachheit
+  Es ist $f$ nicht diagonalisierbar von $\lambda$, $\mu_{alg}(\lambda)$ ist die
+  Es ist $f$ nicht diagonalisierbarVielfachheit von $\lambda$ als Nullstelle von $\Xi_f$.
+\end{definition}
+
+\begin{definition}
+  Sei ... linear, $\lambda$ ein Eigenwert von $f$. Die geometrische Vielfachheit
+  Es ist $f$ nicht diagonalisierbarvon $\lambda$ ist ...
+  Die Behauptung oben ist ...
+\end{definition}
+
+\begin{theorem}
+  Sei ... linear. Dann ist $f$ diagonalisierbar genau dann, wenn:
+  \begin{enumerate}
+  \item alle Nullstellen von $\Xi_f \in K$ (Automatisch erf"ullt f"ur die
+  Es ist $f$ nicht diagonalisierbarkomplexen Zahlen)
+  \item f"ur jede Nullstelle $\lambda$ von $\Xi_f$ gilt: $\mu_{geo}(\lambda)=\mu_{alg}(\lambda)$
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  ... ist ein Polynom vom Grad $\dim V$ \rightarrow{} $\Xi_f$ hat h"ochstens $n$
+  Es ist $f$ nicht diagonalisierbarNullstellen in $K$, gez"ahlt mit
+  Es ist $f$ nicht diagonalisierbarVielfachheiten. $\implies$ ....
+
+  Andererseits ist $f$ genau dann diagonalisierbar, wenn es eine Basis aus
+  Es ist $f$ nicht diagonalisierbarEigenvektoren gibt, also ..
+\end{proof}
+
+\begin{notte}
+  \begin{proof}[Tips und Tricks]
+    Der obige Satz ist nur interessant, wenn (1) erf"ullt ist und mehrfache
+    Nullstellen existieren, weil f"ur jeden Eigenwert $\lambda$ von $f$ gilt ja
+    nach Definition $\mu_{geo}(\lambda)\geq 1$. D.h., wenn alle Nullstellen in
+    $K$ liegen und ..., f"ur alle Eigenwerte $\lambda$ dann gilt: ... f"ur alle
+    Eigenwerte $\lambda$, und $f$ ist dann diagonalisierbar.
+
+    $\implies$ Jede Komplexe Matrix ist bis auf eine beliebeig kleine
+    Pertubation diagonalisierbar. In diesen Sinne sind ''die meissten'' Matrizen diagonalisierbar.
+  \end{proof}
+\end{notte}
+
+Zum charakteristischen Polynom:
+\begin{relation}
+  \begin{enumerate}
+  \item $\Xi_A(0) = \det (-A) = (-1)^n \det A$
+  \item $\Xi_A (\lambda) = \lambda^n + ...$, weil der Einzige Summand in ...
+  \item Der Koeffizient vor ... in ... $=\Tr (A)$
+  \end{enumerate}
+\end{relation}
+
+Folglich kann man $\Xi_1$ f"ur $2\times 2$ Matrizen direkt ablesen.
 \subsection{Schlagworte:}
 \label{sec:orgcf8c685}
 \begin{itemize}

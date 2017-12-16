@@ -40,6 +40,7 @@
 \DeclareMathOperator{\mVol}{Vol}
 \DeclareMathOperator{\mDiag}{diag}
 \DeclareMathOperator{\mEnd}{End}
+\DeclareMathOperator{\mDeg}{deg}
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 \newtcbtheorem[number within=section]{definition}{Definition}%
@@ -2407,11 +2408,25 @@ Aus obigen "Uberlegungen folgt: Die Nullstellen von \(\chi_f(\lambda)\) sind gen
   \(\mKer(\lambda\mId_V-f)\) hei"st Eigenraum zum Eigenwert \(\lambda\).
 \end{definition}
 \begin{lemma}
-  Die Eigenvektoren zu verschiedenen Eigenwerten sind linear unabh"angig, genauer: \[\lambda_1\neq\lambda_2\in K\implies\mKer(\lambda_1\mId_V-f)\cup\mKer(\lambda_2\mId_V-f)=\{0\}\]
+  Die Eigenvektoren zu verschiedenen Eigenwerten sind linear unabh"angig, genauer: \[\lambda_1\neq\lambda_2\in K\implies\mKer(\lambda_1\mId_V-f)\cap\mKer(\lambda_2\mId_V-f)=\{0\}\]
   Insbesondere ist die Summe verschiedener Eigenr"aume immer direkt.
 \end{lemma}
 \begin{proof}
-  Sei \(\lambda_1\neq\lambda_2\), sei weiterhin \(v\in\mKer(\lambda_1\mId_V-f)\cup\mKer(\lambda_2\mId_V-f)\). Dann gilt \(f(v)=\lambda_1v=\lambda_2v\) \(\implies(\lambda_1-\lambda_2)v = 0\implies v = 0\).
+  Sei \(\lambda_1\neq\lambda_2\), sei weiterhin \(v\in\mKer(\lambda_1\mId_V-f)\cap\mKer(\lambda_2\mId_V-f)\). Dann gilt \(f(v)=\lambda_1v=\lambda_2v\) \(\implies(\lambda_1-\lambda_2)v = 0\implies v = 0\).
+
+  (Nachtrag). Ausf"uhrlicherer Beweis dieser Aussage: Seien \(v_1,\dots,v_n\) Eigenvektoren zu Eigenwerten \(\lambda_1,\dots,\lambda_n\) (diese sollen paarweise verschieden sein). Sei \(\alpha_1 v_1+\dots + \alpha_nv_n = 0\). Wir definieren \(g_i\):
+  \begin{align*}
+    g_i := (f-\lambda_1\mId_V)\dots(f-\lambda_{i-1}\mId_V)(f-\lambda_{i+1}\mId_V)\dots(f-\lambda_n\mId_V)
+  \end{align*}
+  (Beachte hierbei: Ob dieser Ausdruck ein Produkt oder eine Funktionsverkettung ist, ist egal.)
+  \begin{align*}
+    g_i(v_k) &= (\lambda_k-\lambda_1)(\lambda_k-\lambda_2)\dots(\lambda_k-\lambda_{i-1})(\lambda_k-\lambda_{i+1})\dots(\lambda_k-\lambda_n)v_k =
+               \begin{cases}
+                 0, & k\neq i \\
+                 \beta_iv_i, & k = i
+               \end{cases} \quad ,\beta_i\neq 0
+  \end{align*}
+  \todo{Beweis vervollst"andigen, ich verstehe den letzten Schritt nicht :(}
 \end{proof}
 Insbesondere folgt f"ur (3), dass die Vereinigung von Basen in Eigenr"aumen immer eine linear unabh"angige Menge ist, aber manchmal gibt es einfach \gq{zu wenige} Eigenvektoren, damit sie zu einer Basis werden.
 \begin{exa}[Eigenwertberechnung]
@@ -2444,7 +2459,42 @@ Insbesondere folgt f"ur (3), dass die Vereinigung von Basen in Eigenr"aumen imme
   \[\implies M^{B'}_{B'}=S^{-1}\begin{pmatrix}9 & -6 \\ 2 & 2 \end{pmatrix}S = \begin{pmatrix}5 & 0 \\ 0 & 6 \end{pmatrix}\]
   \end{enumerate}
 \end{exa}
-
+Was sind m"ogliche Hindernisse zu Diagonalisierbarkeit?
+Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
+\begin{exa}[Rotation]
+  Rotation in \(\mathbb{R}^2\) um \(\frac{\pi}{2}\): \(R_{\frac{\pi}{2}}\) hat die Matrix \(
+  \begin{pmatrix}
+    0 & -1 \\
+    1 & 0
+  \end{pmatrix}
+  \).
+  \[\chi_{R_{\frac{\pi}{2}}}(\lambda) = \det
+    \begin{pmatrix}
+      \lambda & 1\\
+      -1 & \lambda
+    \end{pmatrix}
+    = \lambda^2 + 1
+\] \(\implies\) keine reellen Nullstellen \(\implies\) keine Eigenwerte, keine Eigenvektoren. Hier scheitern wir daran, dass das Polynom \(\lambda^2+1\) nicht genug Nullstellen in \(\mathbb{R}\) hat.
+\end{exa}
+\subsection{Nullstellen von Polynomen}
+\begin{definition}{Nullstelle}{}
+  Sei \(p\in K[\lambda] = \left\{\sum_{i=0}^n\alpha_i\lambda^i|\alpha_i\in K, n\in\mathbb{N} \right\}\) ein Polynom. Eine Nullstelle \(\mu\) von \(p\) ist ein Element \(\mu\in K\) so dass \(p(\mu) = 0\).
+\end{definition}
+\begin{lemma}[Bezout]
+  \(\mu\in K\) ist eine Nullstelle von \(p \iff p(\lambda) = (\lambda-\mu)\cdot p_1(\lambda)\), wobei \(p_1\) ein Polynom ist.
+\end{lemma}
+\begin{proof}[Bezout, Skizze]
+  \((\impliedby)\): offensichtlich \\
+  \((\implies)\): folgt durch Division mit Rest: Wenn man \(p\) durch \((\lambda-\mu)\) mit Rest dividiert, bekommt man \(p(\lambda) = (\lambda-\mu)p_1(\lambda) + r(\lambda)\). Es ist (siehe auch Analysis) \(\mDeg(r) < \mDeg(\lambda-\mu) = 1\) \(\implies r(\lambda)=r\) ist Konstante. \(0 = p(\mu) = 0 + r \implies r = 0\).
+\end{proof}
+\begin{beobachtung}
+  Ein Polynom von Grad \(d\) hat h"ochstens \(d\) Nullstellen.
+\end{beobachtung}
+\begin{theo}{Fundamentalsatz der Algebra}
+  Jedes Polynom \(p\in\mathbb{C}[\lambda]\) zerf"allt in Linearfaktoren:
+  \[p(\lambda) = (\lambda - \lambda_1)(\lambda-\lambda_2)\dots(\lambda-\lambda_d) \qquad d = \mDeg p\]
+  "Aquivalent: Ein Polynom \(p\in\mathbb{C}[\lambda]\) von Grad \(d\) hat genau \(d\) Nullstellen in \(\mathbb{C}\), wenn man sie mit Vielfachheiten z"ahlt (das hei"st z.B. \(p(\lambda) = (\lambda-1)^3(\lambda-4)^5\) hat eine dreifache Nullstelle 1, eine f"unffache Nullstelle 4 \(\implies\) insgesamt 8 Nullstellen)
+\end{theo}
 \subsection{Schlagworte:}
 \label{sec:orgcf8c685}
 \begin{itemize}

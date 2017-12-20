@@ -2571,42 +2571,28 @@ Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
   "Aquivalent: Ein Polynom \(p\in\mathbb{C}[\lambda]\) von Grad \(d\) hat genau \(d\) Nullstellen in \(\mathbb{C}\), wenn man sie mit Vielfachheiten z"ahlt (das hei"st z.B. \(p(\lambda) = (\lambda-1)^3(\lambda-4)^5\) hat eine dreifache Nullstelle 1, eine f"unffache Nullstelle 4 \(\implies\) insgesamt 8 Nullstellen)
 \end{theo}
 
-\begin{folgerung}
-  Sei $V$ ein $\mathbf{C}$ Vektorraum, $f: V \mapsto V$ linear. Dann hat $f$
-  einen Eigenvektor. \\
-  Ideen:
-  \begin{itemize}
-  \item Wenn $V$ nun ein $\mathbb{R}$ Vektorraum ist, k"onnen wir es zu einem
-    $\mathbb{C}$ Vektorraum aufr"usten.
-  \end{itemize}
-\end{folgerung}
-
-
-\begin{definition}
-  Sei V ein $\mathbb{R}$ Vektorraum. Die komplexifizierung $V_{\mathbb{C}}$ von
-  $V$ ist der folgende $\mathbb{C}$ Vektorraum. \[V_{\mathbb{C}}=\{(v,w) |
-    v,w\in V\}\] als Menge, Addition komplexweise, .... 
-  Man denkt an $(v,w)$ als ''$v+i\cdot w$'' 
+Folgerung: Sei \(V\) ein \(\mathbb{C}\)-Vektorraum, dann hat lineares \(f: V\to V\) einen Eigenvektor. Idee dazu: Wenn \(V\) ein \(\mathbb{R}\)-Vektorraum ist, k"onnen wir es zu einem \(\mathbb{C}\)-Vektorraum \gq{aufr"usten}. Das hilft auch, \(\mathbb{R}\)-lineare Abbildungen zu studieren.
+\begin{definition}{Komplexifizierung}{}
+  Sei \(V\) ein \(\mathbb{R}\)-Vektorraum. Die Komplexifizierung \(V_{\mathbb{C}}\) von \(V\) ist der folgende \(\mathbb{C}\)-Vektorraum: \[V_{\mathbb{C}} = \{(v, w)\mid v, w\in V\}\] als Menge, Addition komponentenweise: \[(\alpha + i\beta)\cdot (v, w) = (\alpha v - \beta w, \beta v + \alpha w)\]
+  \(\implies\) man denkt an \((v, w)\) als an \gq{\(v+iw\)}. Also schreibt man manchmal sogar \gq{\(V_{\mathbb{C}} = V\oplus iV\)}, um das hervorzuheben.
 \end{definition}
-
 \begin{lemma}
-  Sei $f: V\mapsto V$ $\mathbb{R}$ -  Linear, dann ist .... eine
-  komlexifizierung von $f$
+  Sei \(f:V \to V\) \(\mathbb{R}\)-linear, dann ist \[f_{\mathbb{C}}: V_{\mathbb{C}}\to V_{\mathbb{C}} \qquad (v, w)\mapsto (f(v), f(w))\] \(\mathbb{C}\)-linear. (\(f_{\mathbb{C}}\) hei"st Komplexifizierung von \(f\))
 \end{lemma}
 \begin{proof}
-  $f_{\mathbb{c}}$ ... 
+  \begin{align*}
+    f_{\mathbb{C}}((\alpha + i\beta)\cdot(v,w)) &= f_{\mathbb{C}}((\alpha v - \beta w, \beta v + \alpha w)) = (\alpha f(v) - \beta f(w), \beta f(v) + \alpha f(w)) \\
+    &= (\alpha + i \beta)\cdot (f(v), f(w)) = (\alpha + i \beta) \cdot f_{\mathbb{C}}((v, w))
+  \end{align*}
 \end{proof}
-
+\begin{bem}
+  (v, 0) + i(w, 0) = (v, 0) + (0, w) = (v, w)
+\end{bem}
 \begin{lemma}
-  Wenn $B$ eine Basis in $V$ ist, so ist ...
+  Wenn \(B = (b_1, \dots, b_n)\) eine Basis von \(V\) ist, so ist \((b_1, 0), \dots, (b_n, 0)\) eine Basis von \(V_{\mathbb{C}}\).
 \end{lemma}
-
 \begin{proof}
-  $(b_1,0),...,(b_n,0)$ Spannen $V_{\mathbb{C}}$ weil die reellend
-  Linearkombinationen von ... den Raum ... aufspannenn, und ... den rest
-  aufspannen. Sie sind auch linear unabh"angig "uber $\mathbb{C}$ denn, die
-  Aufspannabbildung: ... ist die Komplexifizierung der reellen
-  Aufspannabbildung. ... war injektiv $\implies$ ... inkektiv. 
+  \((b_1, 0), \dots, (b_n, 0)\) spannen \(V_{\mathbb{C}}\) auf, weil reelle Linearkombinationen von \((b_1, 0), \dots, (b_n, 0)\) den Raum \(\{(v, 0)\mid v\in V\}\) aufpsannen, \(i(b_1, 0), \dots, (b_n, 0)\) spannen \(\{(0, w)\mid w \in V\}\) auf. Sie sind auch linear unabh"angig "uber \(\mathbb{C}\), denn die Aufspannabbildung \(\varphi: \mathbb{C}^n \to V_{\mathbb{C}}, \lambda\mapsto \sum_{i=1}^n\lambda_i(b_i, 0)\) ist die Komplexifizierung der reellen Aufspannabbildung . \(\varphi_{\mathbb{R}}\) war injektiv \(\implies \varphi\) war injektiv.
 \end{proof}
 
 \begin{lemma}

@@ -2615,11 +2615,8 @@ Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
 \end{lemma}
 
 \begin{proof}
-  Inspektion der Abbildungsmatrix. \[f_{\mathbf{C}(b_i,0) = (f(b_i), 0)\]
+  Inspektion der Abbildungsmatrix. \[f_{\mathbf{C}}(b_i,0) = (f(b_i), 0)\]
 \end{proof}
-\begin{exam}
-  ...
-\end{exa}
 
 \begin{definition}
   Sei $f: V \mapsto V$ eine $K$ - Lineare Abbildung. Ein Untervektorraum
@@ -2694,17 +2691,17 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat''
   Die Behauptung oben ist ...
 \end{definition}
 
-\begin{theorem}
+\begin{theo}
   Sei ... linear. Dann ist $f$ diagonalisierbar genau dann, wenn:
   \begin{enumerate}
   \item alle Nullstellen von $\Xi_f \in K$ (Automatisch erf"ullt f"ur die
   Es ist $f$ nicht diagonalisierbarkomplexen Zahlen)
   \item f"ur jede Nullstelle $\lambda$ von $\Xi_f$ gilt: $\mu_{geo}(\lambda)=\mu_{alg}(\lambda)$
   \end{enumerate}
-\end{theorem}
+\end{theo}
 
 \begin{proof}
-  ... ist ein Polynom vom Grad $\dim V$ \rightarrow{} $\Xi_f$ hat h"ochstens $n$
+  ... ist ein Polynom vom Grad $\dim V \rightarrow{} \Xi_f$ hat h"ochstens $n$
   Es ist $f$ nicht diagonalisierbarNullstellen in $K$, gez"ahlt mit
   Es ist $f$ nicht diagonalisierbarVielfachheiten. $\implies$ ....
 
@@ -2730,7 +2727,7 @@ Zum charakteristischen Polynom:
   \begin{enumerate}
   \item $\Xi_A(0) = \det (-A) = (-1)^n \det A$
   \item $\Xi_A (\lambda) = \lambda^n + ...$, weil der Einzige Summand in ...
-  \item Der Koeffizient vor ... in ... $=\Tr (A)$
+  \item Der Koeffizient vor ... in ... \(=\text{Tr}(A)\)
   \end{enumerate}
 \end{relation}
 
@@ -2814,12 +2811,12 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
   Die Bedingungen ... sind "Aquivalent zum LGS $M_B(x) \cdot x = 0 $  auf die
   Koordinatenspalte $x$ von $v$. Dieses LGS hat genau dann nur die Null"osung,
   wenn $M_B(b)$ nicht ausgeartet ist. Der Beweis Zeigt auf $\dim V... = \dim
-  \{x|  M_B(b)= \dim V - \Rg M_B(b)\}$ insbesondere ist die Zahl $\Rg M_B(b)$
+  \{x\mid|  M_B(b)= \dim V - \mRg M_B(b)\}$ insbesondere ist die Zahl $\mRg M_B(b)$
   unabh"angig von der Basis $B$
 \end{proof}
 
-\begin{definition}
-  $Rg(b):=\dim V - \dim V = \Rg M_B(b)$
+\begin{definition}{pff}{}
+  \(\mRg(b):=\dim V - \dim V = \mRg M_B(b)\)
 \end{definition}
 
 \begin{exa}

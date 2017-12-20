@@ -70,15 +70,18 @@ halign = center,
 \usepackage{amssymb}
 \usepackage{gauss}
 \usepackage{stmaryrd}
+\theoremstyle{remark}
 \newtheorem{exa}{Beispiel}[section]
 \newtheorem{expe}{experiment}[section]
-\renewcommand*{\proofname}{\textbf{Beweis}}
 \newtheorem{beobachtung}{Beobachtung}
 \newtheorem{folgerung}{Folgerung}
 \newtheorem*{notte}{Beachte}
+\theoremstyle{definition}
+\newtheorem{prof}{Beweis}
 \newtheorem*{notation}{Notation}
 \newtheorem*{proposition}{Proposition}
 \newtheorem*{lemma}{Lemma}
+\theoremstyle{remark}
 \newtheorem*{korollar}{Korollar}
 \newtheorem*{bem}{Bemerkung}
 \author{Nebnola, Julius Quasebarth, Valentin Boettcher}
@@ -583,7 +586,7 @@ B\).
 Es gibt unendlich viele Primzahlen.
 \end{theo}
 
-\begin{proof}\
+\begin{prof}\
 \begin{enumerate}
 \item Nehmen wie an, es gibt nur endlich viele Primzahlen. \(p_1, ..., p_n\).
 \item Betrachte \(n=p_1\cdot p_2\cdot ... \cdot p_n + 1\). \(n\) geteilt durch jede
@@ -592,23 +595,23 @@ von den Primzahlen \(p_1, ..., p_n\) gibt Rest \(1\).
 \item Folglich enth"alt die Menge \({p_1,...,p_n}\) nicht alle Primzahlen.
 \end{enumerate}
 \indent\indent \(\rightarrow\) Das ist ein \textbf{Widerspruch}. (\((A\wedge \neg A) = 0\))
-\end{proof}
+\end{prof}
 
 
 \begin{exa}
 Wir werden die Aussage: wenn \(q\) eine gerade Primzahl ist \(\implies q=2\)
 beweisen.
 
-\begin{proof}[Direkter Beweis] \label{} \
+\begin{prof}[Direkter Beweis] \label{} \
 \begin{enumerate}
 \item \(q\) ist gerade \(\implies q\) ist durch \(2\) Teilbar f"ur \(k\in\mathbb{N}\)
 \item \(q\) ist aber eine Primzahl \(\implies\) einer der Faktoren in \(2\cdot k\) ist
 gerade \(1\), \(2\not= 1\)
 \item \(\implies k=1, q=2\)
 \end{enumerate}
-\end{proof}
+\end{prof}
 
-\begin{proof}[Kontraposition] \label{} \
+\begin{prof}[Kontraposition] \label{} \
 Wir m"ussen zeigen: \(q\not= 2\implies\) (\(q\) ungerade) \(\vee\) (\(q\) keine
 Primzahl). Es reicht zu zeigen: (\(q\not=2)\wedge(q\) ist eine Primzahl)
 \(\implies q\) ist ungerade!
@@ -616,9 +619,9 @@ Primzahl). Es reicht zu zeigen: (\(q\not=2)\wedge(q\) ist eine Primzahl)
 \item Wenn \(q\) gerade ist, \(q\cdot 2k\), also ist \(k>1\)
 \item also \(q\not= 2\)
 \end{enumerate}
-\end{proof}
+\end{prof}
 
-\begin{proof}[Widerspruchsbeweis] \label{} \
+\begin{prof}[Widerspruchsbeweis] \label{} \
 Annahme: \(q\) ist gerade, \(q\) ist eine Primzahl, \(q\not= 2\). Wir wollen einen
 Widerspruch herleiten.
 
@@ -627,7 +630,7 @@ Widerspruch herleiten.
 \item da \(q\not= 2\), gilt \(k>1\)
 \item aber \(q\) ist prim, also kann \(q\) kein Produkt von zwei Zahlen sein! \(\lightning\)
 \end{enumerate}
-\end{proof}
+\end{prof}
 \end{exa}
 
 \section{Komplexe Zahlen}
@@ -858,7 +861,7 @@ Einheitswurzeln in \(\mathbb{C}\). Sie sind durch die Formel
 \(z_k=e^{\frac{2\pi\cdot k\cdot i}{n}},\quad k=0,1,...,n-1\) gegeben.
 \end{proposition}
 
-\begin{proof}[] \label{} \
+\begin{prof}[] \label{} \
 \(z_k\) sind \(n\text{-te}\) Einheitswurzeln denn:
 \begin{align*}
 z_k^n & = (e^{\frac{2\cdot\pi\cdot k}{n}})^n \\ 
@@ -890,7 +893,7 @@ Also folgt:
 
 
 Da \(\varphi\) in \([0,2\pi)\implies 0\leq k < n\).
-\end{proof}
+\end{prof}
 
 Wenn wir jetzt also eine Gleichung \(z^n=a\) l"osen wollen, reicht es, eine
 L"osung \(w\) zu finden, die anderen L"osungen bekommt man als \(w\cdot z_k,\;
@@ -1043,7 +1046,7 @@ Jede Matrix kann durch elementare Zeilenumformungen auf die Stufenform gebracht
 werden.
 \end{theo}
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 Sei \(A=\begin{matrix}a_{11}&...&a_{nn}\end{matrix}\). \\
 Wenn \(A=0\) - Bewiesen. \\
 Wenn \(A\not=0\), dann gibt es eine Spalte \(\not= 0\). Sei
@@ -1058,7 +1061,7 @@ Wir erhalten dann Restmatrix \(A_1<A\) und wir wenden das selbe Verfahren auf
 \begin{notte}
 Nach diesem Verfahren gilt sogar: Pivotelemente sind alle \$=1\$1
 \end{notte}
-\end{proof}
+\end{prof}
 
 
 \begin{exa}
@@ -1177,17 +1180,17 @@ Matrixmultiplikation ist \emph{linear}: \(A\cdot (\lambda B_1 + \lambda_2 A B_2)
 Analog:
 \end{relation}
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 Sei \(C=A\cdot (\lambda_1 B_1 + \lambda_2 B_2)\)
-\end{proof}
+\end{prof}
 
 \begin{relation}
 Die Matrixmultiplikation ist assoziativ: \(A\cdot (B\cdot C)=(A\cdot B)\cdot C\)
 \end{relation}
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 
-\end{proof}
+\end{prof}
 
 \begin{definition}{Einheitsmatrix}{}
 Die Einheitsmatrix der gr"osse \(r\) ist die Matrix, die auf der Hauptdiagonale
@@ -1209,9 +1212,9 @@ F"ir alle \(A\in K^{p\times m}\) gilt:
 \end{itemize}
 \end{theo}
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 
-\end{proof}
+\end{prof}
 
 
 \begin{notation}[] \label{Vorsicht!}
@@ -1352,20 +1355,20 @@ linearkombination ergibt 0). Andernfalls heist die Menge linear abh"angig.
 \begin{exa}[] \label{}
 \(\{v_1,v_2\}\) sind linear abhaengig wenn sie Proportional sind.
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 
-\end{proof}
+\end{prof}
 \end{exa}
 
 \textbf{Lemma} Die Menge ist linear abh"angig. \(v_i\) ist eine Linearkombination von \$\$
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 Wenn \(v_i=\lambda_1 v_1\), dann \(0=\) Denn \(-1\) ist ein nicht-trivialer
 Linearfaktor.
 
 \((\implies)\) Nach Definition gibt es eine nichttriviale Linearkombination: als
 \(\exists i : \lambda_i \not= 0\) Also gilt  folglich 
-\end{proof}
+\end{prof}
 
 \begin{notte}[] \label{}
 Eine L"osung des LGS \(Ax=b\) ist eine Spalte \$\$ mit 
@@ -1376,17 +1379,17 @@ zu finden, welche \(b\) ergeben.
 \textbf{Lemma} Seien die Vektoren linear unabh"angig. Ein Vektor \(v\) ist genau dann
 eine Linearkombination von \(v_1,...,v_n\) wenn linear abh"angig ist.
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 (\(\implies\)) Sei Dann gilt , also ist linear ab"angig.
 Sei .. linear abh"angig  Dann 
 
 Es gilt: \(\lambda \not= 0\) (wenn  .. linearunabh"angig.) Also gilt \(v=-\lambda_1\)
-\end{proof}
+\end{prof}
 
 \textbf{Lemma} Sei \(v=\lambda\) eine Linearkombination von \(v_1,...,v_n\). Diese
 Darstellung ist eindeutig ganau dann, wenn linear unabh"angig sind.
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 \((\implies)\) Sei die Darstellung eindeutig \$v=..\$ Wenn jetzt \$\$, dan gilt \(v=\)
 Eindeutigkeit der Darstellung ergibt:
 
@@ -1394,7 +1397,7 @@ Seien \(v_1,..,v_n\) linear unabh"angig, sei
 Dann gilt: \(\rightarrow\) lineare Unabhaengigkeit von erzwingt Korollar: Wenn die
 Spalten von \(A\) linear unabhaenig sind, hat das LGS \(Ax=b\) h"ochstens eine
 L"osung, folglich hat \(Ax=0\) genau eine L"osung x=0.
-\end{proof}
+\end{prof}
 
 \subsection{Geometrische Deutung der linearen Abh"angigket}
 \label{sec:org95b9a1d}
@@ -1418,7 +1421,7 @@ In drei Dimensionen:
 ..., W_n \in \mathbb{V}\) so dass jedes \(w_i\) eine Linearkombination von
 \(v_1,...,v_n\) ist. Wenn \(m>n\), dann sind \(w_1,...,w_n\) linear abhaengig.
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 Seien 
 \begin{align*}
 w_1= a_{11} v_1 + a_{12} v_2 + ... + a_{nn} v_n \\
@@ -1431,16 +1434,16 @@ Dies ist nach linearer Unabhaenig von \ldots{} "Aquivalent zu:
 Das heist (*) ist "aquivalent zu einem homogenen LGS aus \(n\) Gleichungen mit \(m\)
 Variablen. \(n<m\), also gibt es eine L"osung $\ldots{}$, die ungleich \(0\) ist. \(\implies\)
 sind linear unabh"angig.
-\end{proof}
+\end{prof}
 
 \textbf{Korollar} Je drei Vektoren in \(\mathbb{R}^2\) sind linear unabh"angig, je \(n+1\)
 Vektoren in \$\$ sind linear unabh"angig.
 
-\begin{proof}[von Korollar] \label{}
+\begin{prof}[von Korollar] \label{}
 Seien \(e_i\) die Spalten der Einheitsmatrix sind linear unabh"angig. 
 
 Dies zeigt auch, dass jeder Vektor in \(R\) eine Linearkombination von \(e_i\) ist. 
-\end{proof}
+\end{prof}
 
 \begin{definition}{}{}
 Sei V ein \(K-\) Vektorraum, \(U\subseteq V\) eine Teilmenge von V. \(U\) heist
@@ -1504,7 +1507,7 @@ Jeder endlichedimensionale Vektorraum \(V\)  hat eine Basis, Je zwei Basen von \
 haben gleich viele Elemente.
 \end{theo}
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 Sei \(S\) ein endliches Erzeugendensyste von \(V\), Wenn \(S\) lin. unabh. ist, ist es
 eine Basis und wir haben gewonnen. Wenn \(S\) linear abh"angig ist $\implies$
 (Lemma) einer von den Vektoren in \(S\) ist eine Linearkombination von den
@@ -1518,7 +1521,7 @@ Seien \(S, S'\) zwei Basen. Da \(S\) eine Basis ist, ist jedes element von \(S'\
 linearkombination in \(S\). Die elemente von \(S\) sind linear unabh. (weil Basis).
 Wenn also \(m>n\), dann folgt aus der Proposition, dass \(S'\) linear abh. ist, was
 unm"oglich ist, da \(S'\) eine Basis ist. Also \(m \leq n\) und aus Symmetriegr"unden folgt auch \(n \leq m\).
-\end{proof}
+\end{prof}
 
 \begin{definition}{}{}
 Sei \(V\) ein endlichdimensionaler Vektorraum. Die Anzahl der Vektoren in einer
@@ -1542,7 +1545,7 @@ Eine Teilmenge \(S'\in V\) ist maximal linear unabh., wenn aus \(S\)
 linear unabh. folgt.
 \end{definition}
 
-\begin{proof}[1] \label{}
+\begin{prof}[1] \label{}
 Sei linear unabh.
 Zwei F"alle: entweder ist \(S\) schon maximal (dann sind wir fertig) oder man kann
 S erweitern. Wenn wir \(S\) erweitern k"onnen, f"ugen wir neue Vektoren hinzu, bis
@@ -1551,13 +1554,13 @@ wir es nicht mehr tun koennen, ohne lineare unabh. zu verletzen.
 Dieser Prozess endet, weil eine linear unabh. Teilmenge h"ochstens von \(V\)
 hoechstens \(\dim V\) viele Vektoren enthalten kann. (Prop. "uber lineare unabh.
 von vektoren aus linearkombinartionen der Basis.)
-\end{proof}
+\end{prof}
 
-\begin{proof}[2] \label{}
+\begin{prof}[2] \label{}
 Sei \(S\in V\) maximal linear unabh"angig. Wir habe zu zeigen: \(<S>=V\) (Def. einer
 Basis). Wenn $\ldots{}$ d.h. aber, aber \(S\cup {v}\) ist linear unabh. (lemma) $\implies$
 \(S\) dann nicht maximal.
-\end{proof}
+\end{prof}
 
 \textbf{Korollar} Man kann jeder lienar unabh. Teilmenge \(S\in V\) zu einer Basis
 erweitern.
@@ -1578,7 +1581,7 @@ Sei V ein endlichdimensionaler Vektorraum und \(U\in V\) ein Untervektorraum. Da
 gillt: \(\dim U \leq \dim V\).  \(\dim U = \dim V \iff U=V\)
 \end{theo}
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 Sei eine maximale linear unabh. Teilmenge in U. (so eine Teilmenge existiert
 weil V endlich ist.)
 Nach Proposition (2) ist \ldots{} eine Basis in \(U\), also gilt \(\dim U = k\) Erweitere
@@ -1587,7 +1590,7 @@ Nach Proposition (2) ist \ldots{} eine Basis in \(U\), also gilt \(\dim U = k\) 
 (2) \ldots{} trivial \ldots{} Sei \ldots{} eine Basis in U. Erweitere sie zu einer Basis in
 \(V\). Diese Basis in V muss aber wegen \ldots{} gleich viele Vektoren haben. \ldots{}. ist
 eine Basis in \(V\) \ldots{}
-\end{proof}
+\end{prof}
 
 
 \begin{definition}{}{}
@@ -1610,11 +1613,11 @@ Sei \(Ax=0\) ein h. LGS
 \textbf{Aus Uebungen} \ldots{}
 
 \textbf{Lemma} Die Spalten von \(\Phi\) bilden eine Basis in L.
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 Die Spalten von \(\Phi\) sind linear unabhaenig. (sonst abb. nicht injektiv)
 
 Ferner spannen sie das ganze L auf (Surjektiv). 
-\end{proof}
+\end{prof}
 
 \textbf{Frage} Gegeben Basen \ldots{} in \(V\), und einem Vektor \(v\in V\). Wie rechnet man die
 Koordinaten bezgl. B in Koordinaten bzgl. B' um.
@@ -1682,9 +1685,9 @@ $Im(f_A )=\{b\in K^m \:|\: \exists x \in K^n: A\cdot x=b \}=\{b\in K^m\:|\:LGS A
 
 \textbf{Proposition} Sei \(f:V\rightarrow W\) eine lineare Abbildung. Es gilt: \(f\) injektiv $\iff$ \(Ker(f)=\{0\}\)
 
-\begin{proof}[] \label{}
+\begin{prof}[] \label{}
 f injektiv $\iff v_1 \neq v_2 \in V: f(v_1)\neq f(v_2) \iff f(v_1)-f(v_2)\neq 0 \iff f(v_1 -v_2)\neq 0 \iff v_1,v_2 \in V, v_1-v_2\neq 0: f(v_1 -v_2)\neq 0 \iff v\neq 0: f(v)\neq 0 \iff Ker(f) = \{0\}$
-\end{proof}
+\end{prof}
 
 \begin{definition}{}{}
 Eine bijektive Lineare Abbildung \(f:V\rightarrow W\) heißt Vektorraumisomorphismus
@@ -1723,11 +1726,11 @@ Sei \(f:V\to W\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gil
 \begin{lemma} sei \(f\) wie oben. Sei \(U \subseteq \mKer(f)\) ein Untervektorraum mit \(U \cap \mKer(f) = \{0\}\).  Dann ist \(f|_U:U\to f(U)\) ein Isomorphismus.
 \end{lemma}
 
-\begin{proof}[Beweis des Lemmas] \label{}
+\begin{prof}[Beweis des Lemmas] \label{}
 \(f|_U:U\to f(U)\) ist surjektiv nach Konstruktion. Zu zeigen: \(f|_U\) injkektiv \(\iff \mKer f|_U = \{0\}\). Sei \(u\in \mKer f|_U \). Dann gilt \(u\in U \land u \in \mKer(f) \implies u \in U \cap \mKer f \implies u = 0\)
-\end{proof}
+\end{prof}
 
-\begin{proof}[Beweis der Dimensionsformel] \label{}
+\begin{prof}[Beweis der Dimensionsformel] \label{}
 W"ahle eine Basis \({e_1, ..., e_k}\) in \(\mKer f\) und erg"anze sie zu einer Basis
 \({e_1, ..., e_n}\) in \(V\).
 
@@ -1740,7 +1743,7 @@ f(v) = f\left(\underbrace{\sum_{i=1}^{k}\lambda_ie_i}_{\in \mKer(f)}\right) + f\
 \(\implies f(V)=f(U)\) also \(f|_U : U\to f(V) = \mIm(f) \) ist ein Isomorphismus \(\implies \mdim \mIm f = \mdim U \)
 
 Nun gilt nach Konstruktion von \(U\): \[\underbrace{\mdim \mKer(f)}_{k} + \underbrace{\mdim U}_{n-k} = \underbrace{\mdim V}_{n} \implies \mdim\mKer f + \mdim\mIm f = \mdim V \]
-\end{proof}
+\end{prof}
 
 \subsubsection{Summe von Untervektorr"aumen}
 \label{sec:org83dfe63}
@@ -1797,7 +1800,7 @@ Sind \(U_1, U_2 \subset V\) Untervektorr"aume, dann gilt: \(\dim(U_1 +U_2) =\dim
 \begin{bem}
 \(U_1\cap U_2\) ist stets ein Untervektorraum, wenn \(U_1\) und \(U_2\) Untervektorr"aume sind.
 \end{bem}
-\begin{proof}[Dimensionsformel] 
+\begin{prof}[Dimensionsformel] 
 
 Betrachte die Abbildung \(f: U_1 \times U_2 \to U_1 + U_2, (u_1, u_2) \mapsto u_1 + u_2 \). Hierbei ist \(U_1\times U_2 = \{(u_1, u_2) | u_1 \in U_1, u_2 \in U_2 \} \) der Verktorraum der Paare \((u_1, u_2)\) mit
 elementweisen Operationen:
@@ -1820,7 +1823,7 @@ Ferner gilt: \(\mIm(f) = U_1 + U_2\) per Definition. Nun ist:
 &\implies \dim\mKer (f) = \dim(U_1 \cap U_2)\\
 &\implies \underbrace{\dim(U_1 \cap U_2)}_{\dim\mKer(f)} + \underbrace{\dim(U_1 + U_2)}_{\dim\mIm(f)} = \underbrace{\dim(U_1) + \dim(U_2)}_{\dim (U_1\times U_2)}
 \end{align*}
-\end{proof}
+\end{prof}
 
 Was hat diese ganze Theorie mit Matrizen zu tun? Intuitiv: Abbildungen sind
 \gq{geometrisch} und Matrizen sind Koordinatenformen dieser geometrischen
@@ -1839,13 +1842,13 @@ Seien \(V,W\) zwei (\(\mathbb{K}\)-) Vektorr"aume. Dann nennen wir
 \begin{proposition}
 \(\mHom_\mathbb{K}(V,W)\) ist auch ein Vektorraum.
 \end{proposition}
-\begin{proof}
+\begin{prof}
 Wenn \(f_1, f_2 \in \mHom_\mathbb{K}(V,W)\):
 \begin{align*}
 (f_1 + f_2)(v) &= f_1(v) + f_2(v) \quad\text{ist linear} \\
 (\lambda f_1)(v) &= \lambda\cdot f_1(v)\quad\text{ist auch linear}
 \end{align*}
-\end{proof}
+\end{prof}
 
 Seien \(V, W\) endlichdimensional, \(B = \{b_1, \dots, b_n\}\) Basis in \(V\), \(C = \{c_1, \dots, c_m\}\) Basis in \(W\). Sei \(f \in \mHom_\mathbb{K}(V,W)\). Die Abbildungsmatrix \(F= M_C^B(f)\) in \(f\) bzgl. \(B\) und \(C\) ist definiert als
 Matrix, deren Spalten die Koordinatenspalten von \(f(b_1),\dots, f(b_n)\) bzgl. der Basis \(C\) sind:
@@ -1870,7 +1873,7 @@ M_B^B(f) = \begin{pmatrix}
  Vektorra"umen.
 \end{proposition}
 
-\begin{proof}
+\begin{prof}
 Aus Definition von \(M_C^B(f)\) folgt sofort:
 \begin{align*}
 M^B_C(f_1 + f_2) &= M_C^B(f_1) + M_C^B(f_2)\\
@@ -1890,7 +1893,7 @@ f\left(\sum_{j=1}^n\lambda_jb_j\right) = \sum_{j=1}^n\lambda_j\cdot\left(\sum_{i
 \begin{align*}
 f(b_j) = \sum_{i=1}^mF_{ij}c_i \implies M^B_C(f) = F
 \end{align*}
-\end{proof}
+\end{prof}
 
 Im Beweis haben wir unter anderem festgestellt:
 \begin{relation}
@@ -1919,12 +1922,12 @@ Seien \(V, W, Z\) drei \(\mathbb{K}\)-Vektorr"aume, \(f \in \mHom_\mathbb{K}(V, 
 	 Seien \(B,C,D\) Basen in
 	\(V,W,Z\). Dann gilt: \(M^B_D(g\circ f) = M^C_D(g)\cdot M^B_C(f)\).
 \end{proposition}
-\begin{proof}
+\begin{prof}
  Sei \(F = M^B_C(f)\), \(G = M^C_D(g)\). Dann:
  \begin{align*}
  (g\circ f)(b_j) &= g(f(b_j)) = g\left(\sum_{i=1}^m F_{ij}c_i\right) = \sum_{i=1}^mF_{ij}g(c_i) \\&= \sum_{i=1}^m F_{ij}\sum_{k=1}^lG_{ki}d_k = \sum_{k=1}^l\underbrace{\left(\sum_{i=1}^mG_{ki}F_{ij}\right)}_{M^B_D(g\circ f)}d_k
  \end{align*}
-\end{proof}
+\end{prof}
 
 Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann erhalten wir die
  Basiswechselmatrix \(S\), deren Spalten die Koordinaten von den neuen
@@ -1935,10 +1938,10 @@ Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann erhalten wir die
 \begin{lemma}[Basiswechselmatrizen sind invertierbar]
 	\(S = M^{B'}_B(\mId_V)\) ist invertierbar f"ur je zwei Basen \(B, B' \subset V\), und \(S^{-1} = M^B_{B'}(\mId_V)\).
 \end{lemma}
-\begin{proof}
+\begin{prof}
 	\(M^B_B(\mId_V)=1_n\), daher ist
 	\[\underbrace{M^{B'}_B(\mId_V)}_{S}\cdot M^B_{B'}(\mId_V) = M^B_B(\mId_V) = 1_n \]
-\end{proof}
+\end{prof}
 
 
 \subsubsection{Basen und Abbildungsmatrizen (Zusammenfassung)}
@@ -1972,9 +1975,9 @@ Sei .. eine Lineare Abbildung, ..., dann gilt:
   M^{B'}_{C'}(f)=
 \] In Anderen Worten: wenn $S$ die Basiswechselmatrix von ... so gilt
 
-\begin{proof}
+\begin{prof}
   $M^{B'}_{C'}(f)=$
-\end{proof}
+\end{prof}
 
 \begin{notte}[zur Basiswechselmatrix]
   $ M^{B'}_{B}$ ist die Basiswechselmatrix von $B$ zu $B'$: sie enth"alt die
@@ -1996,11 +1999,11 @@ Sei .. eine Lineare Abbildung, ..., dann gilt:
   F"ur jede Matrix ... gibt es invertierbare Matrizen ... , so dass
 \end{korollar}
 
-\begin{proof}
+\begin{prof}
   Sei ... w"ahle eine Basis ... im $\text{Ker}(f)$  und erweitere sie zu einer
   Basis ... in Basis. Setze: ... Beim Beweis der Dimensionsformal haben wir
   gesehen ... . Erweitere jetzt ... zu einer Basis ... in $W$. Es gilt. 
-\end{proof}
+\end{prof}
 
 \subsubsection{Konsequenzen f"ur Matrizen}
 \label{sec:konsma}
@@ -2033,15 +2036,15 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
   Seien $X,Y,Z$ Mengen, ... Dann gilt:  
 \end{lemma}
 
-\begin{proof}[Beweisschema]
+\begin{prof}[Beweisschema]
   \begin{enumerate}
   \item (0) $ \iff $ (1)
   \item (1) $ \iff $ (2): $B:=A^{-1}$
   \item (1) $ \iff $ (3): $C:=A^{-1}$
   \end{enumerate}
-\end{proof}
+\end{prof}
 
-\begin{proof}{des Satzes}\leavevmode
+\begin{prof}{des Satzes}\leavevmode
   \begin{itemize}
   \item[(0) $\implies$ (1)]  $A=M^{\varepsilon}_{\varepsilon}(f_A)$, woberi $f_A:$
   \item[(1) $\implies$ (0)] Sei $A$ invertierbar, $A=$ Betrachten wir die
@@ -2067,7 +2070,7 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
     Wenn wir ... \\
     Analog
   \end{itemize}
-\end{proof}
+\end{prof}
 
 \subsubsection{Determinanten}
 \label{sec:det}
@@ -2119,9 +2122,9 @@ $\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
   ...
 \end{notte}
 
-\begin{proof}[zur Bemerkung]
+\begin{prof}[zur Bemerkung]
   Wir lassen die Variablen ausser ... fest und rechnen.
-\end{proof}
+\end{prof}
 
 \begin{notte}
   Genau wie bei Volumina von Quadern in $\mathbb{R}^3$ die Wahl einer
@@ -2133,7 +2136,7 @@ $\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
   eine Basis in $V$. Der Wert ....  ..
 \end{lemma}
 
-\begin{proof}[des Lemmas]
+\begin{prof}[des Lemmas]
   Stelle $v_i=\sum{\lambda_{ij}b_j}$ dar ($B$ ist ja eine Basis) und benutze
   Linearit"at von $\omega$.
   \begin{align*}
@@ -2142,7 +2145,7 @@ $\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
 
   Es ueberleben nur Terme, wo $b_{j1},...,b_{ji}$ in anderer Reihenfolge sind
   $\implies$ dann ist ... $\implies$ ... Summe von Termen der Form
-\end{proof}
+\end{prof}
 \begin{proposition}
   Sei ... eine Volumenform auf V. Dann gilt:
   \begin{enumerate}
@@ -2151,12 +2154,12 @@ $\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
   \end{enumerate}
 \end{proposition}
 
-\begin{proof}
+\begin{prof}
   \begin{enumerate}
   \item Linearit"at: 
   \item Sind ... linear abh"angig, dann ist ein $V_J=\sum$
   \end{enumerate}
-\end{proof}
+\end{prof}
 
 Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 
@@ -2258,7 +2261,7 @@ V\) mit Darstellungen \(v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}\).
 \begin{proposition}
 	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
 \end{proposition}
-\begin{proof}
+\begin{prof}
 	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
 	\begin{align*}
 	\det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
@@ -2268,7 +2271,7 @@ V\) mit Darstellungen \(v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}\).
 	&\implies \det A = 0
 	\end{align*}
 	\(\implies\omega \) alternierend.
-\end{proof}
+\end{prof}
 
 \(\omega\) ist eindeutig durch den Wert (=1) auf \(B\) bestimmt \(\implies\)  wenn \(\omega'\) eine Volumenform auf \(V\) ist, so gilt \(\omega' = \underbrace{\omega'(b_1,\dots,b_n)}_{\in K}\cdot\omega\)
 
@@ -2285,12 +2288,12 @@ V\) mit Darstellungen \(v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}\).
 \begin{lemma}
 	\(\det\Delta = \det\Delta^T\quad\forall \Delta\in K^{n\times n}\)
 \end{lemma}
-\begin{proof}
+\begin{prof}
 	Es gilt: \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\quad\forall \sigma\in S_n \) (folgt z.B. aus \(\varepsilon(\sigma\circ\sigma^{-1})=1=\varepsilon(\sigma)\varepsilon(\sigma^{-1})\))
 	\begin{align*}
 	\det\Delta^T = \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{\sigma(1),1}\dots\lambda_{\sigma(n),n} = \sum_{\sigma^{-1}\in S_n}\varepsilon(\sigma^{-1})\lambda_{1,\sigma^{-1}(1)}\dots\lambda_{n,\sigma^{-1}(n)} = \det \Delta
 	\end{align*}
-\end{proof}
+\end{prof}
 \begin{proposition}
 	\begin{enumerate}
 		\item \(f, g: V\to V \) linear \(\implies\det(g\circ f) = \det(g)\det(f) \)
@@ -2300,11 +2303,11 @@ V\) mit Darstellungen \(v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}\).
 \begin{korollar}
 	Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
 \end{korollar}
-\begin{proof}
+\begin{prof}
 	\begin{align*}
 	\det(f) = \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
 	\end{align*}
-\end{proof}
+\end{prof}
 \begin{korollar}
 	Eine Matrix \(A\in K^{n\times n} \) ist genau dann invertierbar, wenn \(\det A \neq 0 \)
 \end{korollar}
@@ -2332,7 +2335,7 @@ Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnung
 \begin{proposition}
 	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
 \end{proposition}
-\begin{proof}
+\begin{prof}
 	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
 	\begin{align*}
 	\det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
@@ -2342,7 +2345,7 @@ Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnung
 	&\implies \det A = 0
 	\end{align*}
 	\(\implies\omega \) alternierend.
-\end{proof}
+\end{prof}
 
 \(\omega\) ist eindeutig durch den Wert (=1) auf \(B\) bestimmt \(\implies\)  wenn \(\omega'\) eine Volumenform auf \(V\) ist, so gilt \(\omega' = \underbrace{\omega'(b_1,\dots,b_n)}_{\in K}\cdot\omega\)
 
@@ -2359,12 +2362,12 @@ Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnung
 \begin{lemma}
 	\(\det\Delta = \det\Delta^T\quad\forall \Delta\in K^{n\times n}\)
 \end{lemma}
-\begin{proof}
+\begin{prof}
 	Es gilt: \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\quad\forall \sigma\in S_n \) (folgt z.B. aus \(\varepsilon(\sigma\circ\sigma^{-1})=1=\varepsilon(\sigma)\varepsilon(\sigma^{-1})\))
 	\begin{align*}
 	\det\Delta^T = \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{\sigma(1),1}\dots\lambda_{\sigma(n),n} = \sum_{\sigma^{-1}\in S_n}\varepsilon(\sigma^{-1})\lambda_{1,\sigma^{-1}(1)}\dots\lambda_{n,\sigma^{-1}(n)} = \det \Delta
 	\end{align*}
-\end{proof}
+\end{prof}
 \begin{proposition}
 	\begin{enumerate}
 		\item \(f, g: V\to V \) linear \(\implies\det(g\circ f) = \det(g)\det(f) \)
@@ -2374,11 +2377,11 @@ Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnung
 \begin{korollar}
 	Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
 \end{korollar}
-\begin{proof}
+\begin{prof}
 	\begin{align*}
 	\det(f) = \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
 	\end{align*}
-\end{proof}
+\end{prof}
 \begin{korollar}
 	Eine Matrix \(A\in K^{n\times n} \) ist genau dann invertierbar, wenn \(\det A \neq 0 \)
 \end{korollar}
@@ -2444,9 +2447,9 @@ Wir haben gesehen: wenn \(f: V\to W\) linear, \(V, W\) endlichdimensionale Vekto
     \]
   (\(B\) hei"st auch Eigenbasis.)
 \end{lemma}
-\begin{proof}
+\begin{prof}
   Es gilt laut Definition \(f(b_i) = \lambda_ib_i\) wobei \(i = 1, \dots, n\) \(\implies\) die Form von \(M^B_B(f)\) folgt aus den Definitionen.
-\end{proof}
+\end{prof}
 Es folgt: Wenn wir die Diagonalform von \(M^B_B(f)\) errichen m"ochten, m"ussen wir Eigenwerte und Eigenvektoren suchen!
 \begin{definition}{Diagonalisierbarkeit}{}
   Ein Endomorphismus \(f\) hei"st diagonalisierbar, wenn er eine Eigenbasis hat.
@@ -2458,7 +2461,7 @@ Es folgt: Wenn wir die Diagonalform von \(M^B_B(f)\) errichen m"ochten, m"ussen 
   \item \(\lambda\) ist ein Eigenwert von \(f\) (d.h., es existieren Eigenvektoren zum Eigenwert \(\lambda\iff\det(\lambda\mId_V-f)=0\))
   \end{enumerate}
 \end{proposition}
-\begin{proof}
+\begin{prof}
   \begin{enumerate}
   \item Sei \(v\in V\) ein Eigenvektor (Eigenvektoren sind per Definition \(\neq 0\)) zum Eigenwert \(\lambda\). Nach Definition gilt:
     \begin{align*}
@@ -2468,7 +2471,7 @@ Es folgt: Wenn wir die Diagonalform von \(M^B_B(f)\) errichen m"ochten, m"ussen 
     Andersherum: Wenn \(v \in \mKer(\lambda\mId_V -f)\setminus\{0\}\), dann ist \((\lambda\mId_V -f)(v)=0\land v\neq 0 \implies v\) ist Eigenvektor zum Eigenwert \(\lambda\).
   \item Nach (oben) ist \(\lambda\) ein Eigenwert \(\iff\mKer(\lambda\mId_V -f)\neq 0\)\(\iff \lambda\mId_V -f\) ist nicht invertierbar \(\iff\det(\lambda\mId_V - f) = 0\)
   \end{enumerate}
-\end{proof}
+\end{prof}
 F"ur die Suche nach Eigenvektoren bedeutet das:
 \begin{enumerate}
 \item Wenn wir einen Eigenwert \(\lambda\) kennen, k"onnen wir Eigenvektoren ganz einfach bestimmen, indem wir eine Basis von \(\mKer(\lambda\mId_V -f)\) finden (dazu muss man nur ein LGS l"osen).
@@ -2490,7 +2493,7 @@ Aus obigen "Uberlegungen folgt: Die Nullstellen von \(\chi_f(\lambda)\) sind gen
   Die Eigenvektoren zu verschiedenen Eigenwerten sind linear unabh"angig, genauer: \[\lambda_1\neq\lambda_2\in K\implies\mKer(\lambda_1\mId_V-f)\cap\mKer(\lambda_2\mId_V-f)=\{0\}\]
   Insbesondere ist die Summe verschiedener Eigenr"aume immer direkt.
 \end{lemma}
-\begin{proof}
+\begin{prof}
   Sei \(\lambda_1\neq\lambda_2\), sei weiterhin \(v\in\mKer(\lambda_1\mId_V-f)\cap\mKer(\lambda_2\mId_V-f)\). Dann gilt \(f(v)=\lambda_1v=\lambda_2v\) \(\implies(\lambda_1-\lambda_2)v = 0\implies v = 0\).
 (Nachtrag). Ausf"uhrlicherer Beweis dieser Aussage: Seien \(v_1,\dots,v_n\) Eigenvektoren zu Eigenwerten \(\lambda_1,\dots,\lambda_n\) (diese sollen paarweise verschieden sein). Sei \(\alpha_1 v_1+\dots + \alpha_nv_n = 0\). Wir definieren \(g_i\):
   \begin{align*}
@@ -2505,7 +2508,7 @@ Aus obigen "Uberlegungen folgt: Die Nullstellen von \(\chi_f(\lambda)\) sind gen
                \end{cases} \quad ,\beta_i\neq 0
   \end{align*}
   \todo{Beweis vervollst"andigen, ich verstehe den letzten Schritt nicht :(}
-\end{proof}
+\end{prof}
 Insbesondere folgt f"ur (3), dass die Vereinigung von Basen in Eigenr"aumen immer eine linear unabh"angige Menge ist, aber manchmal gibt es einfach \gq{zu wenige} Eigenvektoren, damit sie zu einer Basis werden.
 \begin{exa}[Eigenwertberechnung]
   \[M^B_B(f) =
@@ -2562,10 +2565,10 @@ Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
 \begin{lemma}[Bezout]
   \(\mu\in K\) ist eine Nullstelle von \(p \iff p(\lambda) = (\lambda-\mu)\cdot p_1(\lambda)\), wobei \(p_1\) ein Polynom ist.
 \end{lemma}
-\begin{proof}[Bezout, Skizze]
+\begin{prof}[Bezout, Skizze]
   \((\impliedby)\): offensichtlich \\
   \((\implies)\): folgt durch Division mit Rest: Wenn man \(p\) durch \((\lambda-\mu)\) mit Rest dividiert, bekommt man \(p(\lambda) = (\lambda-\mu)p_1(\lambda) + r(\lambda)\). Es ist (siehe auch Analysis) \(\mDeg(r) < \mDeg(\lambda-\mu) = 1\) \(\implies r(\lambda)=r\) ist Konstante. \(0 = p(\mu) = 0 + r \implies r = 0\).
-\end{proof}
+\end{prof}
 \begin{beobachtung}
   Ein Polynom von Grad \(d\) hat h"ochstens \(d\) Nullstellen.
 \end{beobachtung}
@@ -2575,43 +2578,29 @@ Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
   "Aquivalent: Ein Polynom \(p\in\mathbb{C}[\lambda]\) von Grad \(d\) hat genau \(d\) Nullstellen in \(\mathbb{C}\), wenn man sie mit Vielfachheiten z"ahlt (das hei"st z.B. \(p(\lambda) = (\lambda-1)^3(\lambda-4)^5\) hat eine dreifache Nullstelle 1, eine f"unffache Nullstelle 4 \(\implies\) insgesamt 8 Nullstellen)
 \end{theo}
 
-\begin{folgerung}
-  Sei $V$ ein $\mathbf{C}$ Vektorraum, $f: V \mapsto V$ linear. Dann hat $f$
-  einen Eigenvektor. \\
-  Ideen:
-  \begin{itemize}
-  \item Wenn $V$ nun ein $\mathbb{R}$ Vektorraum ist, k"onnen wir es zu einem
-    $\mathbb{C}$ Vektorraum aufr"usten.
-  \end{itemize}
-\end{folgerung}
-
-
-\begin{definition}
-  Sei V ein $\mathbb{R}$ Vektorraum. Die komplexifizierung $V_{\mathbb{C}}$ von
-  $V$ ist der folgende $\mathbb{C}$ Vektorraum. \[V_{\mathbb{C}}=\{(v,w) |
-    v,w\in V\}\] als Menge, Addition komplexweise, .... 
-  Man denkt an $(v,w)$ als ''$v+i\cdot w$'' 
+Folgerung: Sei \(V\) ein \(\mathbb{C}\)-Vektorraum, dann hat lineares \(f: V\to V\) einen Eigenvektor. Idee dazu: Wenn \(V\) ein \(\mathbb{R}\)-Vektorraum ist, k"onnen wir es zu einem \(\mathbb{C}\)-Vektorraum \gq{aufr"usten}. Das hilft auch, \(\mathbb{R}\)-lineare Abbildungen zu studieren.
+\begin{definition}{Komplexifizierung}{}
+  Sei \(V\) ein \(\mathbb{R}\)-Vektorraum. Die Komplexifizierung \(V_{\mathbb{C}}\) von \(V\) ist der folgende \(\mathbb{C}\)-Vektorraum: \[V_{\mathbb{C}} = \{(v, w)\mid v, w\in V\}\] als Menge, Addition komponentenweise: \[(\alpha + i\beta)\cdot (v, w) = (\alpha v - \beta w, \beta v + \alpha w)\]
+  \(\implies\) man denkt an \((v, w)\) als an \gq{\(v+iw\)}. Also schreibt man manchmal sogar \gq{\(V_{\mathbb{C}} = V\oplus iV\)}, um das hervorzuheben.
 \end{definition}
-
 \begin{lemma}
-  Sei $f: V\mapsto V$ $\mathbb{R}$ -  Linear, dann ist .... eine
-  komlexifizierung von $f$
+  Sei \(f:V \to V\) \(\mathbb{R}\)-linear, dann ist \[f_{\mathbb{C}}: V_{\mathbb{C}}\to V_{\mathbb{C}} \qquad (v, w)\mapsto (f(v), f(w))\] \(\mathbb{C}\)-linear. (\(f_{\mathbb{C}}\) hei"st Komplexifizierung von \(f\))
 \end{lemma}
-\begin{proof}
-  $f_{\mathbb{c}}$ ... 
-\end{proof}
-
+\begin{prof}
+  \begin{align*}
+    f_{\mathbb{C}}((\alpha + i\beta)\cdot(v,w)) &= f_{\mathbb{C}}((\alpha v - \beta w, \beta v + \alpha w)) = (\alpha f(v) - \beta f(w), \beta f(v) + \alpha f(w)) \\
+    &= (\alpha + i \beta)\cdot (f(v), f(w)) = (\alpha + i \beta) \cdot f_{\mathbb{C}}((v, w))
+  \end{align*}
+\end{prof}
+\begin{bem}
+  (v, 0) + i(w, 0) = (v, 0) + (0, w) = (v, w)
+\end{bem}
 \begin{lemma}
-  Wenn $B$ eine Basis in $V$ ist, so ist ...
+  Wenn \(B = (b_1, \dots, b_n)\) eine Basis von \(V\) ist, so ist \((b_1, 0), \dots, (b_n, 0)\) eine Basis von \(V_{\mathbb{C}}\).
 \end{lemma}
-
-\begin{proof}
-  $(b_1,0),...,(b_n,0)$ Spannen $V_{\mathbb{C}}$ weil die reellend
-  Linearkombinationen von ... den Raum ... aufspannenn, und ... den rest
-  aufspannen. Sie sind auch linear unabh"angig "uber $\mathbb{C}$ denn, die
-  Aufspannabbildung: ... ist die Komplexifizierung der reellen
-  Aufspannabbildung. ... war injektiv $\implies$ ... inkektiv. 
-\end{proof}
+\begin{prof}
+  \((b_1, 0), \dots, (b_n, 0)\) spannen \(V_{\mathbb{C}}\) auf, weil reelle Linearkombinationen von \((b_1, 0), \dots, (b_n, 0)\) den Raum \(\{(v, 0)\mid v\in V\}\) aufpsannen, \(i(b_1, 0), \dots, (b_n, 0)\) spannen \(\{(0, w)\mid w \in V\}\) auf. Sie sind auch linear unabh"angig "uber \(\mathbb{C}\), denn die Aufspannabbildung \(\varphi: \mathbb{C}^n \to V_{\mathbb{C}}, \lambda\mapsto \sum_{i=1}^n\lambda_i(b_i, 0)\) ist die Komplexifizierung der reellen Aufspannabbildung . \(\varphi_{\mathbb{R}}\) war injektiv \(\implies \varphi\) war injektiv.
+\end{prof}
 
 \begin{lemma}
   Wenn $f: V\mapsto V$ ... linear ist und ... die Komplexifizierung, $B$ Basis
@@ -2625,6 +2614,10 @@ Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
   ...
 \end{exa}
 
+\begin{prof}
+  Inspektion der Abbildungsmatrix. \[f_{\mathbf{C}}(b_i,0) = (f(b_i), 0)\]
+\end{prof}
+
 \begin{definition}
   Sei $f: V \mapsto V$ eine $K$ - Lineare Abbildung. Ein Untervektorraum
   $U\subseteq V$ heisst invariant, wenn $f(U) \subseteq U$.
@@ -2636,10 +2629,10 @@ Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
   mit ...
 \end{proposition}
 
-\begin{proof}
+\begin{prof}
   ... Diese Matrix hat Eigenwerte $\alpha + i\cdot\beta$ und hat keine
   Eigenvektoren.
-\end{proof}
+\end{prof}
 
 Zusammen mit der Existenz von Eigenvektoren f"ur $f_{\mathbb{C}}$ haben wir:
 
@@ -2673,18 +2666,18 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat''
   Sei ... linearer Operator $U\subseteq V$ ein invarianter Untervektorraum. Dann
   Es ist $f$ nicht diagonalisierbargilt $\Xi_{f} | $... 
 \end{proposition}
-\begin{proof}
+\begin{prof}
   Nehmen wir eine Basis $B_U$ in $U$ und erweitern sie zu einer Basis $B$ in $V$
-\end{proof}
+\end{prof}
 
 \begin{folgerung}
   Die Dimension des Eigenraumes $Ker...$ ist kleiner gleich der Vielfachheit von
   Es ist $f$ nicht diagonalisierbar $\lambda$ als Nullstelle $\Xi_f$.
 \end{folgerung}
 
-\begin{proof}
+\begin{prof}
   .... ist invariant, 
-\end{proof}
+\end{prof}
 
 \begin{definition}
   Sei ... linear $\lambda$ ein Eigenwert von $f$. Die algebraische Vielfachheit
@@ -2707,17 +2700,17 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat''
   \end{enumerate}
 \end{theo}
 
-\begin{proof}
-  ... ist ein Polynom vom Grad $\dim V \rightarrow \Xi_f$ hat h"ochstens $n$
+\begin{prof}
+  ... ist ein Polynom vom Grad $\dim V \rightarrow{} \Xi_f$ hat h"ochstens $n$
   Es ist $f$ nicht diagonalisierbarNullstellen in $K$, gez"ahlt mit
   Es ist $f$ nicht diagonalisierbarVielfachheiten. $\implies$ ....
 
   Andererseits ist $f$ genau dann diagonalisierbar, wenn es eine Basis aus
   Es ist $f$ nicht diagonalisierbarEigenvektoren gibt, also ..
-\end{proof}
+\end{prof}
 
 \begin{notte}
-  \begin{proof}[Tips und Tricks]
+  \begin{prof}[Tips und Tricks]
     Der obige Satz ist nur interessant, wenn (1) erf"ullt ist und mehrfache
     Nullstellen existieren, weil f"ur jeden Eigenwert $\lambda$ von $f$ gilt ja
     nach Definition $\mu_{geo}(\lambda)\geq 1$. D.h., wenn alle Nullstellen in
@@ -2726,7 +2719,7 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat''
 
     $\implies$ Jede Komplexe Matrix ist bis auf eine beliebeig kleine
     Pertubation diagonalisierbar. In diesen Sinne sind ''die meissten'' Matrizen diagonalisierbar.
-  \end{proof}
+  \end{prof}
 \end{notte}
 
 Zum charakteristischen Polynom:
@@ -2734,7 +2727,7 @@ Zum charakteristischen Polynom:
   \begin{enumerate}
   \item $\Xi_A(0) = \det (-A) = (-1)^n \det A$
   \item $\Xi_A (\lambda) = \lambda^n + ...$, weil der Einzige Summand in ...
-  \item Der Koeffizient vor ... in ... $=\Tr (A)$
+  \item Der Koeffizient vor ... in ... \(=\text{Tr}(A)\)
   \end{enumerate}
 \end{relation}
 
@@ -2813,17 +2806,18 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
   ausgeartet (Invertierbar)
 \end{lemma}
 
-\begin{proof}
+\begin{prof}
   Wenn ..
   Die Bedingungen ... sind "Aquivalent zum LGS $M_B(x) \cdot x = 0 $  auf die
   Koordinatenspalte $x$ von $v$. Dieses LGS hat genau dann nur die Null"osung,
   wenn $M_B(b)$ nicht ausgeartet ist. Der Beweis Zeigt auf $\dim V... = \dim
-  \{x \mid  M_B(b)= \dim V - \mRg M_B(b)\}$ insbesondere ist die Zahl $\mRg M_B(b)$
-  unabh"angig von der Basis $B$
-\end{proof}
+  \{x\mid|  M_B(b)= \dim V - \mRg M_B(b)\}$ insbesondere ist die Zahl $\mRg M_B(b)$
 
-\begin{definition}
-  $\mRg (b):=\dim V - \dim V = \mRg M_B(b)$
+  unabh"angig von der Basis $B$
+\end{prof}
+
+\begin{definition}{pff}{}
+  \(\mRg(b):=\dim V - \dim V = \mRg M_B(b)\)
 \end{definition}
 
 \begin{exa}
@@ -2836,18 +2830,17 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
   Dann gilt f"ur jeden UVR ....
 \end{proposition}
 
-\begin{proof}
+\begin{prof}
   ... 
-\end{proof}
+\end{prof}
 
 \begin{korollar}
   Wenn $b$ nicht ausgeartet ist, so gilt $(...)$ f"ur Jeden Untervektorraum
   $U\subset  V$
 \end{korollar}
-\begin{proof}
+\begin{prof}
   .... nach dem Prinzip ''Paul, wie heisst du'' Ausserdem gilt ...
-\end{proof}
-  
+\end{prof}
 
 \subsection{Schlagworte:}
 \label{sec:orgcf8c685}

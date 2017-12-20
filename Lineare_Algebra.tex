@@ -2,7 +2,6 @@
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{concmath}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{grffile}
@@ -31,6 +30,7 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 \newcommand{\gq}[1]{\glqq{}#1\grqq{}} % german quotes
+\newcommand{\mcolor}[2][red]{\begingroup\color{#1}#2\endgroup }
 \DeclareMathOperator{\mdim}{dim}
 \DeclareMathOperator{\mKer}{Ker}
 \DeclareMathOperator{\mIm}{Im}
@@ -1812,7 +1812,7 @@ Ferner gilt: \(\mIm(f) = U_1 + U_2\) per Definition. Nun ist:
 \mKer(f) &= \{(u_1, u_2) | u_1 \in U_1, u_2\in U_2, u_1 + u_2 = 0\} = \{(u, -u)| u \in U_1 \cap U_2 \}\\
 &\implies \dim\mKer (f) = \dim(U_1 \cap U_2)\\
 &\implies \underbrace{\dim(U_1 \cap U_2)}_{\dim\mKer(f)} + \underbrace{\dim(U_1 + U_2)}_{\dim\mIm(f)} = \underbrace{\dim(U_1) + \dim(U_2)}_{\dim (U_1\times U_2)}
-\end{align*}\qed
+\end{align*}
 \end{proof}
 
 Was hat diese ganze Theorie mit Matrizen zu tun? Intuitiv: Abbildungen sind
@@ -1838,7 +1838,6 @@ Wenn \(f_1, f_2 \in \mHom_\mathbb{K}(V,W)\):
 (f_1 + f_2)(v) &= f_1(v) + f_2(v) \quad\text{ist linear} \\
 (\lambda f_1)(v) &= \lambda\cdot f_1(v)\quad\text{ist auch linear}
 \end{align*}
-\qed
 \end{proof}
 
 Seien \(V, W\) endlichdimensional, \(B = \{b_1, \dots, b_n\}\) Basis in \(V\), \(C = \{c_1, \dots, c_m\}\) Basis in \(W\). Sei \(f \in \mHom_\mathbb{K}(V,W)\). Die Abbildungsmatrix \(F= M_C^B(f)\) in \(f\) bzgl. \(B\) und \(C\) ist definiert als
@@ -1883,7 +1882,7 @@ f\left(\sum_{j=1}^n\lambda_jb_j\right) = \sum_{j=1}^n\lambda_j\cdot\left(\sum_{i
 \(f\) ist linear und es gilt:
 \begin{align*}
 f(b_j) = \sum_{i=1}^mF_{ij}c_i \implies M^B_C(f) = F
-\end{align*}\qed
+\end{align*}
 \end{proof}
 
 Im Beweis haben wir unter anderem festgestellt:
@@ -1925,6 +1924,14 @@ Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann erhalten wir die
  Basisvektoren \((b_1', \dots, b_n')\) bez"uglich der alten Basis \(B = (b_1,
  \dots, b_n)\) sind. Es folgt sofort aus den Definitionen:
  \(S=M^{B'}_B(\mId_V)\)
+ 
+\begin{lemma}[Basiswechselmatrizen sind invertierbar]
+	\(S = M^{B'}_B(\mId_V)\) ist invertierbar f"ur je zwei Basen \(B, B' \subset V\), und \(S^{-1} = M^B_{B'}(\mId_V)\).
+\end{lemma}
+\begin{proof}
+	\(M^B_B(\mId_V)=1_n\), daher ist
+	\[\underbrace{M^{B'}_B(\mId_V)}_{S}\cdot M^B_{B'}(\mId_V) = M^B_B(\mId_V) = 1_n \]
+\end{proof}
 
 
 \subsubsection{Basen und Abbildungsmatrizen (Zusammenfassung)}
@@ -2029,7 +2036,7 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
 
 \begin{proof}{des Satzes}\leavevmode
   \begin{itemize}
-  \item[(0) $\implies$ (1)]  $A=M^{\epsilon}_{\epsilon}(f_A)$, woberi $f_A:$
+  \item[(0) $\implies$ (1)]  $A=M^{\varepsilon}_{\varepsilon}(f_A)$, woberi $f_A:$
   \item[(1) $\implies$ (0)] Sei $A$ invertierbar, $A=$ Betrachten wir die
     Abbildung $g$ mit ..., es gilt: 
   \item[(1) $\iff$ ($1^T$)] ...
@@ -2149,57 +2156,47 @@ Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 \subsubsection{Permutationen}
 \label{sec:perm}
 
-\begin{definition}
-  Sei $X$ eine Menge. Eine bijektion $\sigmaq: X \mapsto X$ heisst Permutation
-  von X.
-\end{definition}
-
-\begin{definition}
-  Fur  ... heisst die Permutation die symetrische Gruppe aus $n$ elementen,
-  bezeichnet als.
+\begin{definition}{Permutationen}{}
+  Sei $X$ eine Menge. Eine Bijektion $\sigma: X \to X$ heißt Permutation
+  von X. \newline
+  Für \(X = \{1,...,n\}\) heißt die Menge aller Permutationen \(\sigma: \{1,...,n\}\to\{1,...,n\}\) die symmetrische Gruppe auf n Elementen. Notation: \(S_n = \{ \sigma: \{1,...,n\}\to\{1,...,n\}|\sigma\text{ bijektiv}\}\)
 \end{definition}
 
 \begin{exa}
-  Ein Elelement ... schreibt man h"aufig als Tabelle:
+  Ein Elelement \(\sigma \in S_n\) schreibt man h"aufig als Tabelle:
+  
+  \(\left(\begin{array}{cccc}
+  	1 & 2 & ... & n\\
+  	\sigma(1) & \sigma(2) & ... & \sigma(n)\\
+  \end{array}\right)\)
 \end{exa}
 
 \begin{notte}
   $\tau\circ\sigma \not= \sigma\circ\tau$
 \end{notte}
 
-\begin{folgerung}
-  \begin{itemize}
-  \item   Da Verkn"upfungen von Bijektionen bijektiv sind, definiert ....
-  \item Ist auch assoziativ.
-  \item  Permutationen sind kommutativ.
-  \end{itemize}
-\end{folgerung}
+Da Verknüpfungen von Bijektionen bijektiv sind, definiert die Verknüpfung eine Abbildung \(\circ: S_n \times S_n \to S_n \) (Multiplikation von Permutationen). Permutationen kann man auch invertieren: \(\sigma \in S_n \implies \sigma^{-1} \in S_n \)
 
-\begin{definition}
-  Sei $P=\{\}$. Ein halbsystem in $P$ ist eine Halbmenge mit folgender
-  Eigenschaft: von den Paaren $(i,j), (j,i)\in P$ ist in $H$ jeweils genau eine enthalten.
+\begin{definition}{Halbysystem}{}
+  Sei \(P=\{(i,j) \in \{1,...,n\}^2\mid i\neq j \} \) Ein Halbsystem \(H \subseteq P \) ist eine Teilmenge mit der Eigenschaft: Von den Paaren \((i,j) \) und \((j,i) \) ist immer genau eines in P enthalten. Formal:
+  \(\forall (i,j) \in P: ((i,j) \in H \land (j,i) \notin H) \lor ((j,i) \in H \land (i,j) \notin H )\)
 \end{definition}
 
 \begin{exa}
-  $n=3$
+  Für \(n=3 \) ist \(\{(1,2), (1,3), (2,3)\} \) ein Halbsystem.
 \end{exa}
 
-\begin{definition}
-  Sei $\sigma\in S_n$. $\exists$... heisst Vorzeichen von $\sigma$
-  \begin{enumerate}
-  \item $\epsilon$ ist unabh"angig von der Wahl von $H$: Wenn $H'$ ein anderes
-    halbsystem ist, dann mann jeden Faktor ggf. $(j,i)$ statt $(i,j)$ nehmen,
-    aner ... 
-  \item $\epsilon(\sigma) \in \{0, 1\}$
-  \end{enumerate}
+\begin{definition}{Vorzeichen}{}
+  Sei \(\sigma \in S_n. \quad \varepsilon(\sigma):= \prod\limits_{(i,j)\in H} \frac{\sigma(i)-\sigma(j)}{i-j} \) heißt Vorzeichen von \(\sigma \).
 \end{definition}
 
-\begin{notte}[Interpretation f"ur $\epsilon (\sigma)$]
-  $d$ .. Anzahl der ''Reihenfolgeverst"osse'' in $\sigma$
-\end{notte}
-\begin{proof}
-  ...
-\end{proof}
+\(\varepsilon(\sigma) \) ist unabhängig von der Wahl von H, denn: Wenn \(H^\prime \) ein anderes Halbsystem ist, muss ggf. \((j,i) \) statt \((i,j) \) genommen werden, aber \(\frac{\sigma(j)-\sigma(i)}{j-i} = \frac{\sigma(i)-\sigma(j)}{i-j} \).
+Das heißt, wir können uns einfach ein Halbsystem aussuchen:
+\(\varepsilon(\sigma) = \prod\limits_{i<j}\frac{\sigma(i)-\sigma(j)}{i-j} \)
+
+\textbf{Interpretation für \(\varepsilon(\sigma) \)}:
+\[\varepsilon(\sigma) = \prod\limits_{i<j}\frac{\sigma(i)-\sigma(j)}{i-j} = \prod_{i<j} sgn(\sigma(i)-\sigma(j)) = \prod_{\substack{i<j\\ \sigma(i)>\sigma(j)}} (-1)\]\[ = \text{Minus eins hoch Anzahl der „Reihenfolgenverstöße“ von }\sigma\]
+
 
 \begin{definition}
   Die Permutationen ... heissen gerade ... ungerade.
@@ -2209,12 +2206,12 @@ Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 
 
 \begin{proposition}[das Vorzeichen ist multiplikativ]
-  $\epsilon(\sigma\circ \tau)= \epsilon (\sigma) \cdot \epsilon (\tau)$
+  $\varepsilon(\sigma\circ \tau)= \varepsilon (\sigma) \cdot \varepsilon (\tau)$
 \end{proposition}
 
 
 \begin{relation}
-  Sei $\tau_{ij}$ eine Transposition: $\epsilon(\tau_{ij})=-1$.
+  Sei $\tau_{ij}$ eine Transposition: $\varepsilon(\tau_{ij})=-1$.
 \end{relation}
 
 \begin{proposition}
@@ -2225,180 +2222,123 @@ Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
   Jede Permutation ist als Produkt von Transpositionen darstellbar ("Ubung)
 \end{notte}
 
-\begin{trivlist}
-\item Sei $v$ ein Vektorraum $b_1, ..., b_n$ eine Basis und $v_1, ..., v_n \in
-  V$ mit darstellungen $v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}$.
 
-  
-\item
-  \begin{align*}
-    \omega(v_1,...,v_n) = \omega (...) &  ... \\
-    = ... & = ... 
-   \end{align*}
- \end{trivlist}
+Sei \(V\) ein Vektorraum, \(b_1, ..., b_n\) eine Basis, \(v_1, ..., v_n \in
+V\) mit Darstellungen \(v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}\).
 
- Wenn $V=K^n, (b...$ die Standartbasis in $K^n$, und die Volumenform $\omega:
- V^n\mapsto K$ so gew"ahlt istm dass $\omega(e_1,...,e_n)$, dann bekommt man
- folgende Definition f"ur eine Matrix $A$:
+\todo{Das stand so nicht an der Tafel, aber \((-1)^\varepsilon\) kam mir spanisch vor}
+\begin{align*}
+    \omega(v_1,\dots,v_n) &= \omega\left(\sum_{j_1=1}^n\lambda_{1,j_1}b_{j_1},\dots,\sum_{j_n=1}^n\lambda_{n,j_n}b_{j_n}\right) \\
+    &= \sum_{j_1,\dots,j_n=1}^n\left(\underbrace{\lambda_{1,j_1}\dots\lambda_{n,j_n}}_{\text{Produkt}}\cdot\omega(b_{j_1},\dots,b_{j_n})\right) \\
+    &= \sum_{\sigma\in S_n}\left(\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)}\omega(b_{\sigma(1)},\dots,b_{\sigma(n)})\right) \\
+    &= \left(\sum_{\sigma\in S_n}{\varepsilon(\sigma)}\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)}\right)\omega(b_1,\dots,b_n)
+\end{align*}
+
+
+ Wenn \(V=K^n, (b_1,\dots,b_n) = (e_1,\dots,e_n)\) die Standardbasis in \(K^n\), und die Volumenform \(\omega:
+ V^n\to K\) so gew"ahlt ist, dass \(\omega(e_1,...,e_n)=1\), dann bekommt man
+ folgende Definition f"ur eine Matrix \(A\):
 
  \begin{definition}
-   Wenn ... eine Matrix mit eintr"agen $a_{ij}$. Wenn man die Zeilen als
-   Vektoren in $K^n$ auffast, dann gilt:...
+ 	Sei \(A\in K^{n\times n}\) eine Matrix mit Eintr"agen \(a_{ij}\). Wenn man die Zeilen von \(A\) (sagen wir \(\alpha_1,\dots, \alpha_n\)) als
+   Vektoren in \(K^n\) auffast, dann gilt: \[\omega(\alpha_1,\dots,\alpha_n) = \sum_{\sigma\in S_n}{\varepsilon(\sigma)a_{1,\sigma(1)}\dots a_{n,\sigma(n)}} =: \det A \]
+   Das nennen wir ab jetzt auch Leibniz-Formel.
  \end{definition}
 
  \begin{relation}
-   Geometrische Bedeutung: 
+   Geometrische Bedeutung: \(\det A\) ist das (orientierte) Volumen des Quaders / Parallelotops aufgespannt durch Zeilen von \(A\) (wenn man das Volumen des \gq{Standardquaders} aufgespannt durch Standardzeilen \(e_1^T,\dots,e_n^T\) gleich 1 setzt)
  \end{relation}
+\begin{proposition}
+	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
+\end{proposition}
+\begin{proof}
+	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
+	\begin{align*}
+	\det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
+	&= \sum_{\sigma = \sigma'\circ\tau_{ij}\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{i,\sigma(i)}\dots\lambda_{j,\sigma(j)}\dots\lambda_{n,\sigma(n)} \\
+	&= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(j)}}\dots \lambda_{n,\sigma'(n)} \\
+	&= \mcolor{-} \sum_{\sigma'\in S_n} \mcolor{\varepsilon(\sigma')} \lambda_{1,\sigma'(1)}\dots\lambda_{i,\sigma'(i)}\dots\lambda_{j,\sigma'(j)}\dots\lambda_{n,\sigma'(n)} = -\det A \\
+	&\implies \det A = 0
+	\end{align*}
+	\(\implies\omega \) alternierend.
+\end{proof}
 
- \begin{proposition}
-   Sei $V$ ein n-dimensionaler Vektorraum. Es gibt eine (bis auf vielfaches
-   eindeutige) Volumenform auf $V$.
- \end{proposition}
+\(\omega\) ist eindeutig durch den Wert (=1) auf \(B\) bestimmt \(\implies\)  wenn \(\omega'\) eine Volumenform auf \(V\) ist, so gilt \(\omega' = \underbrace{\omega'(b_1,\dots,b_n)}_{\in K}\cdot\omega\)
 
- \begin{proof}
-   W"ahle eine Bais $B=(b_1,...,b_n)\in V$, definiere $\omega (v_1,...,v_n)$
-   durch die Leibnitz Formel mit $\omega (b_1,..., b_n):=1$, dann ist $\omega
-   \not= 0$ nach Konstruktion.
-   \begin{trivlist}
-   \item $\omega$ ist linear in jeder Variable, weil $\det \Lambda$ definiert
-     durch die Leibnitz-Formel linear in jeder Zeile der Matrix $\Lambda$ ist.
-   \item $\omega (v_1,...,v_{i-1}, v, v_{i=1)$ .... wobei die i-te und j-te
-       Zeile von $\Lambda$ ubereinstimmen. Es gilt:
-     \end{trivlist}
-
-     $\implies \omega$ ist eindeutig durch den Wert (=1) auf B bestimmt
-     $\implies$ wenn $w'$
-\end{trivlist}
- \end{proof}
-
- \begin{definition}{Determinante einer Abbildung}
-   Sei $V$ ein n-dimensionaler Vektorraum, $f: V\mapsto V$ eine lineare
-   Abbildung. Die Determinanten von $f$ ist:
-   \[
-     \det (f) :=\frac{\omega(f(b_1),...,f(b_n)}{}....
-   \]
- \end{definition}
- 
- \begin{proof}
-   Doe obige Proposition zeigt, dass $\det(f)$ wohldefiniert ist. (Kommt auf
-   die Wahl von $\omega \not= 0$) und $B$ nicht an).
- \end{proof}
- 
- \begin{relation}
-   Geometrisch ist $\det(f)$ der Verzerrungsfaktor von dem Volumen (unter f).
- \end{relation}
-
- \begin{proposition}
-   \begin{enumerate}
-   \item $f,g$ linear
-   \item $f$ ist genau dann invertierbar, wenn $\det (f) \not= 0$
-   \end{enumerate}
- \end{proposition}
-
- \begin{proof}
-   \begin{enumerate}
-   \item Wenn ... linear abh"angig sind $\implies$ ... \\
-     Wenn .... linear unabh"angig sind $\implies$ bilden Basis in $V$ dann gilt
-     ...
-   \item Wenn $f$ invertierbar ist,, existiert ..., und nach ... gilt ... Wenn
-     hingegen ..., dann sind ... sind linear unabh"angig $\implies$ $\rg f = n
-     \implies f \text{ invertierbar}$ 
-   \end{enumerate}
- \end{proof}
-
- Wie h"angen Determinanten von Matrizen und Abbildungen zusammen?
-
- \begin{lemma}
-   $\det \Lambda = \det \Lambda^{-1}$ f"ur alle $\Lambda \in K^{n\times n}$
- \end{lemma}
-
- \begin{proof}
-   Es gilt $\epsilon (\sigma) = \epsilon (\sigma^{-1}) \forall \sigma\in S_n$\\
-   ...
- \end{proof}
-
- \begin{korollar}
-   Sei B eine eine Basis in $V$ ... Dann gilt:
- \end{korollar}
-
- \begin{proof}
-   ...
- \end{proof}
-
- \begin{korollar}
-   Eine Matrix $A\in K^{n\times n}$ ist genau dann invertierbar, wenn $\det A
-   \not= 0$.
- \end{korollar}
-
- \begin{notte}
-   Es gibt eine Reihe von Begriffen f"ur Matrizen, die nach unseren
-   Invertierbarkeitskriterien alle "aquivalent dazu sind , dass $A$
-   invertierbar ist. (ausgeartet, regul"ar, etc...)
- \end{notte}
-
- Wie berechnet man Determinanten? Die Leibnitz-Formel ist zu ineffizient, weil
- sie $n!$ Summanden hat. Die Berechnung macht man normalerweise unet Benutzung
- folgender Eigenschaften (da Volumenform).
- \begin{relation}
-   \begin{itemize}
-   \item Wenn man zu einer Zeile/Spalte der Matrix ein Vielfaches einer anderen
-     Zeile bzw. Spalte addiert, so "andert sich die Determinate nicht.
-   \item $\det$ ist lineat in jeder Spalte.
-   \item Bei umstellung zweier Zeilen bzw. Spalten, "andert $\det$ das
-     Vozeichen nicht.
-   \end{itemize}
- \end{relation}
-
- \begin{exa}
-   ...
- \end{exa}
-
- \begin{notte}
-   F"ur $\epsilon (\sigma)$, das Vorzeichen einer Permutation, gibt es auch
-   die '' `Physiker Notation''''': ... \\
-   ''Physiker Definition'', und es "andert das Vorzeichen, wenn man zwei
-   Indizes umstellt.
- \end{notte}
-
- \begin{notte}[Orientierung von Vektorr"aumen]
-   Volumenformen sind nach unserer Definition linear. $\implies$ selbst wenn
-   $V$ ein $\mathbb{R}$ Vektorraum ist, kann das Volumen $<0$ sein.\\
-   Die Wahl von einer Volumenform $\omega$ definiert die so genannte
-   \textit{Orientierung} von $V$ ($V$ ein $\mathbb{R}$-VR). Wenn wir $\omega$
-   fixieren, dann entstehen zwei klassen von Basen in $V$:
-   \begin{trivlist}
-   \item $B=(b_1, ..., b_n)$ heisst positiv orientiert wenn $\omega (b_1, ...,
-     b_n)>0$.
-   \item $B=(b_1, ..., b_n)$ heisst negativ orientiert wenn $\omega (b_1,
-     ...,b_n) < 0$.
-   \end{trivlist}
- \end{notte}
-
- \begin{exa}[...]
-   ...
- \end{exa}
-
- \begin{relation}
-   In diesem Sinne ist $\omega(v_1, ..., v_n)$ das orientierte Voluumen von dem
-   ''Quader'' aufgespannt durch $v_1,...,v_n)$. Wennn .... 
- \end{relation}
-
-\subsection{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
-\label{sec:eigen}
-
-Wir haben gegeben: Wenn linear ...
-
-\begin{definition}
-  Ein Endomorphismus in $V$ ist eine lineare Abbildung ....
-  Heissen auch lineare Operatoren
+\begin{definition}{Determinante}
+	Sei \(V\) ein \(n\)-dimensionaler Vektorraum, \(f: V\to V\) linear. Die Determinante von \(f\) ist
+	\[\det(f):= \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)}\]
+	wobei \(\omega \neq 0\) eine Volumenform auf \(V\) ist.
 \end{definition}
 
-Die Wahl einer Basis $B\subset V$ gibt uns eine Matrix $M^B_B(f)$. Wie findet
-man eine Basis B, so dass $M^B_B(f)$ besonders einfach ist.
+\begin{beobachtung}
+	Die obige Proposition zeigt, dass \(\det(f)\) wohldefiniert ist (= auf die Wahl von \(\omega\neq 0\) nicht ankommt). Geometrisch: \(\det(f)\) ist der Verzerrungsfaktor von dem Volumen (unter \(f\)).
+\end{beobachtung}
 
-Gegebe eine Matrix $A\in K^{n\times n}$, finde eine invertierbare matrix S, s.d.
-$S^{-1}\cdot A\cdot S$ besonders einfache form hat. (Die Suche nach $S$ ist die
-Suche nach $M^{B}_{B'}(id)$)
+\begin{lemma}
+	\(\det\Delta = \det\Delta^T\quad\forall \Delta\in K^{n\times n}\)
+\end{lemma}
+\begin{proof}
+	Es gilt: \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\quad\forall \sigma\in S_n \) (folgt z.B. aus \(\varepsilon(\sigma\circ\sigma^{-1})=1=\varepsilon(\sigma)\varepsilon(\sigma^{-1})\))
+	\begin{align*}
+	\det\Delta^T = \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{\sigma(1),1}\dots\lambda_{\sigma(n),n} = \sum_{\sigma^{-1}\in S_n}\varepsilon(\sigma^{-1})\lambda_{1,\sigma^{-1}(1)}\dots\lambda_{n,\sigma^{-1}(n)} = \det \Delta
+	\end{align*}
+\end{proof}
+\begin{proposition}
+	\begin{enumerate}
+		\item \(f, g: V\to V \) linear \(\implies\det(g\circ f) = \det(g)\det(f) \)
+		\item \(f\) ist genau dann invertierbar, wenn \(\det(f)\neq 0 \)
+	\end{enumerate}
+\end{proposition}
+\begin{korollar}
+	Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
+\end{korollar}
+\begin{proof}
+	\begin{align*}
+	\det(f) = \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
+	\end{align*}
+\end{proof}
+\begin{korollar}
+	Eine Matrix \(A\in K^{n\times n} \) ist genau dann invertierbar, wenn \(\det A \neq 0 \)
+\end{korollar}
+\begin{bem}
+	Es gibt eine Reihe von Begriffen f"ur Matrizen, die nach unseren Invertierbarkeitskriterien alle "aquivalent dazu sind, dass \(A \) invertierbar ist, z.B. nicht ausgeartet, regul"ar etc.
+\end{bem}
+\begin{korollar}
+Wie berechnet man Determinanten?
+
+Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnungen macht man normalerweise unter Benutzung folgender Eigenschaften der Determinante (die daraus folgen, dass \(\det : (K^n)^n \to K\) eine Volumenform ist):
+\begin{itemize}
+	\item Wenn man zu einer Zeile / Spalte der Matrix ein Vielfaches einer anderen Zeile bzw. Spalte addiert, so "andert sich die Determinante nicht;
+	\item \(\det \) ist linear in jeder Zeile bzw. Spalte.
+\end{itemize}
+\end{korollar}
+\begin{bem}
+	F"ur \(\varepsilon(\sigma)\), das Vorzeichen einer Permutation, gibt's auch die Physiker-Notation: \(\varepsilon_{1,\dots,n}=1\) und es ver"andert das Vorzeichen, wenn man zwei Indizes vertauscht.
+\end{bem}
+\begin{bem}[Orientierung von Vektorr"aumen]
+	Volumenformen sind laut unserer Definition linear \(\implies\) selbst wenn \(V\) ein \(\mathbb{R}\)-Vektorraum ist, kann es passieren, dass \(\omega(v_1,\dots,v_n)< 0\). Die Wahl von einer Volumenform \(\omega\) definiert die sogenannte \emph{Orientierung} von \(V\) (\(V\) ein \(mathbb{R}\)-VR). Wenn wir \(\omega\) fixieren, dann entstehen zwei Klassen von Basen in \(V\): \(B = (b_1,\dots,b_n)\) hei"st positiv (negativ) orientiert, wenn \(\omega(b_1,\dots,b_n) > (<) 0\). 
+	
+	In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
+\end{bem}
+
+\subsubsection{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
+\label{sec:eigen}
+Wir haben gesehen: wenn \(f: V\to W\) linear, \(V, W\) endlichdimensionale Vektorr"aume \(\implies \exists B\subset V, C\subset W \) Basen so dass
+\[M^B_C(f) = \begin{pmatrix}
+1_r & 0\\
+0 & 0
+\end{pmatrix}, r = \mRg f\]
+\begin{definition}
+	Ein Endomorphismus von \(V\) ist eine lineare Abbildung \(f: V\to V\). Bezeichnung: \(f\in \text{End}_K(V) = \text{H2om}_K(V,V) \)	
+	
+	Endomorphismus hei"sen auch lineare Operatoren auf \(V\). Die Wahl einer Basis \(B\subset V \) gibt uns eine Matrix \(M^B_B(f)\).
+\end{definition}
+\begin{korollar}[Hauptfrage]
+	Wenn \(f\) gegeben ist, wie findet man eine Basis \(B\), so dass \(M^B_B(f)\) eine besonders einfache Form hat?
+	
+	"Aquivalent, in Termen von Matrizen: Gegeben eine Matrix \(A\in K^{n\times n} \), finde eine invertierbare Matrix \(S\) so dass \(S^{-1}AS\) besonders einfache Form hat.
+\end{korollar}
 
 \begin{exa}
   Sei $V$ ein $\mathbb{R}$ - Vektorraum, sei $B$ eine Basis. mit ...
@@ -2685,6 +2625,207 @@ Zum charakteristischen Polynom:
 \end{relation}
 
 Folglich kann man $\Xi_1$ f"ur $2\times 2$ Matrizen direkt ablesen.
+=======
+\begin{proposition}
+	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
+\end{proposition}
+\begin{proof}
+	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
+	\begin{align*}
+	\det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
+	&= \sum_{\sigma = \sigma'\circ\tau_{ij}\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{i,\sigma(i)}\dots\lambda_{j,\sigma(j)}\dots\lambda_{n,\sigma(n)} \\
+	&= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(j)}}\dots \lambda_{n,\sigma'(n)} \\
+	&= \mcolor{-} \sum_{\sigma'\in S_n} \mcolor{\varepsilon(\sigma')} \lambda_{1,\sigma'(1)}\dots\lambda_{i,\sigma'(i)}\dots\lambda_{j,\sigma'(j)}\dots\lambda_{n,\sigma'(n)} = -\det A \\
+	&\implies \det A = 0
+	\end{align*}
+	\(\implies\omega \) alternierend.
+\end{proof}
+
+\(\omega\) ist eindeutig durch den Wert (=1) auf \(B\) bestimmt \(\implies\)  wenn \(\omega'\) eine Volumenform auf \(V\) ist, so gilt \(\omega' = \underbrace{\omega'(b_1,\dots,b_n)}_{\in K}\cdot\omega\)
+
+\begin{definition}{Determinante}
+	Sei \(V\) ein \(n\)-dimensionaler Vektorraum, \(f: V\to V\) linear. Die Determinante von \(f\) ist
+	\[\det(f):= \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)}\]
+	wobei \(\omega \neq 0\) eine Volumenform auf \(V\) ist.
+\end{definition}
+
+\begin{beobachtung}
+	Die obige Proposition zeigt, dass \(\det(f)\) wohldefiniert ist (= auf die Wahl von \(\omega\neq 0\) nicht ankommt). Geometrisch: \(\det(f)\) ist der Verzerrungsfaktor von dem Volumen (unter \(f\)).
+\end{beobachtung}
+
+\begin{lemma}
+	\(\det\Delta = \det\Delta^T\quad\forall \Delta\in K^{n\times n}\)
+\end{lemma}
+\begin{proof}
+	Es gilt: \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\quad\forall \sigma\in S_n \) (folgt z.B. aus \(\varepsilon(\sigma\circ\sigma^{-1})=1=\varepsilon(\sigma)\varepsilon(\sigma^{-1})\))
+	\begin{align*}
+	\det\Delta^T = \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{\sigma(1),1}\dots\lambda_{\sigma(n),n} = \sum_{\sigma^{-1}\in S_n}\varepsilon(\sigma^{-1})\lambda_{1,\sigma^{-1}(1)}\dots\lambda_{n,\sigma^{-1}(n)} = \det \Delta
+	\end{align*}
+\end{proof}
+\begin{proposition}
+	\begin{enumerate}
+		\item \(f, g: V\to V \) linear \(\implies\det(g\circ f) = \det(g)\det(f) \)
+		\item \(f\) ist genau dann invertierbar, wenn \(\det(f)\neq 0 \)
+	\end{enumerate}
+\end{proposition}
+\begin{korollar}
+	Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
+\end{korollar}
+\begin{proof}
+	\begin{align*}
+	\det(f) = \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
+	\end{align*}
+\end{proof}
+\begin{korollar}
+	Eine Matrix \(A\in K^{n\times n} \) ist genau dann invertierbar, wenn \(\det A \neq 0 \)
+\end{korollar}
+\begin{bem}
+	Es gibt eine Reihe von Begriffen f"ur Matrizen, die nach unseren Invertierbarkeitskriterien alle "aquivalent dazu sind, dass \(A \) invertierbar ist, z.B. nicht ausgeartet, regul"ar etc.
+\end{bem}
+\begin{korollar}
+Wie berechnet man Determinanten?
+
+Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnungen macht man normalerweise unter Benutzung folgender Eigenschaften der Determinante (die daraus folgen, dass \(\det : (K^n)^n \to K\) eine Volumenform ist):
+\begin{itemize}
+	\item Wenn man zu einer Zeile / Spalte der Matrix ein Vielfaches einer anderen Zeile bzw. Spalte addiert, so "andert sich die Determinante nicht;
+	\item \(\det \) ist linear in jeder Zeile bzw. Spalte.
+\end{itemize}
+\end{korollar}
+\begin{bem}
+	F"ur \(\varepsilon(\sigma)\), das Vorzeichen einer Permutation, gibt's auch die Physiker-Notation: \(\varepsilon_{1,\dots,n}=1\) und es ver"andert das Vorzeichen, wenn man zwei Indizes vertauscht.
+\end{bem}
+\begin{bem}[Orientierung von Vektorr"aumen]
+	Volumenformen sind laut unserer Definition linear \(\implies\) selbst wenn \(V\) ein \(\mathbb{R}\)-Vektorraum ist, kann es passieren, dass \(\omega(v_1,\dots,v_n)< 0\). Die Wahl von einer Volumenform \(\omega\) definiert die sogenannte \emph{Orientierung} von \(V\) (\(V\) ein \(mathbb{R}\)-VR). Wenn wir \(\omega\) fixieren, dann entstehen zwei Klassen von Basen in \(V\): \(B = (b_1,\dots,b_n)\) hei"st positiv (negativ) orientiert, wenn \(\omega(b_1,\dots,b_n) > (<) 0\). 
+	
+	In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
+\end{bem}
+
+\subsubsection{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
+
+Wir haben gesehen: wenn \(f: V\to W\) linear, \(V, W\) endlichdimensionale Vektorr"aume \(\implies \exists B\subset V, C\subset W \) Basen so dass
+\[M^B_C(f) = \begin{pmatrix}
+1_r & 0\\
+0 & 0
+\end{pmatrix}, r = \mRg f\]
+\begin{definition}
+	Ein Endomorphismus von \(V\) ist eine lineare Abbildung \(f: V\to V\). Bezeichnung: \(f\in \text{End}_K(V) = \text{H2om}_K(V,V) \)	
+	
+	Endomorphismus hei"sen auch lineare Operatoren auf \(V\). Die Wahl einer Basis \(B\subset V \) gibt uns eine Matrix \(M^B_B(f)\).
+\end{definition}
+\begin{korollar}[Hauptfrage]
+	Wenn \(f\) gegeben ist, wie findet man eine Basis \(B\), so dass \(M^B_B(f)\) eine besonders einfache Form hat?
+	
+	"Aquivalent, in Termen von Matrizen: Gegeben eine Matrix \(A\in K^{n\times n} \), finde eine invertierbare Matrix \(S\) so dass \(S^{-1}AS\) besonders einfache Form hat.
+\end{korollar}
+
+
+\begin{definition}
+  Sei V ein $K$ Vektorraum, ... Die Spalten von $f$ .... F"ur $\dim V < \infty$
+  giltL ... 
+\end{definition}
+Dieses Mathematische Spektrum hat f"ur viele Physikalisch motivierte Operatoren
+tats"achliche Bedeutung.
+
+\begin{notte}
+  Wir habengesehen, dass es nicht diagonalisierbare Matrizen gibt. Es gibt die
+  nahelegende Fragem was ist f"ur solche allgemeinen Matrizen/Abbildungen die
+  ''bestm"ogliche'' Form.
+\end{notte}
+\begin{relation}
+  ....
+
+  (Diagonalisierbarkeit entspricht der Bedingung, dass  alle Bl"ocke Gr"osse 1 haben.)
+\end{relation}
+
+\section{Bilineare und Quadratische Formen}
+\label{sec:bili}
+\textbf{Motivation}: Bislang haben wir Vektorr"aume ohne geometrische Strukturen
+studiert; Speziell: wir konnten den Vektoren in Vektorra"umen keine
+l"ange/Winkel zuordnen.
+
+Eine Zusatzstruktur auf $V$, die das erm"oglicht, ist das Skalarprodukt. z.B.
+im $\mathbb{R^n}$ gibt es das Standartskalarprodukt...) Dieses Skalarpordukt ist
+linear in jeder Variable $\rightarrow$ ''Bilinearform''
+
+In der Physik ist die folgene Bilinearform von Bedeutung: ...
+
+\begin{definition}
+  Sei $V$ ein $K$ - Vektorraum. Eine Bilinearform $b$ auf V ist eine Abbildung
+  $b: V\times V \mapsto K$, die linear in jeder Variable ist.
+
+  Die Zugeh"orige Quadratische Form: $q(v):=b(v,v)$
+\end{definition}
+
+////
+
+\begin{definition}
+  Sei $V$ ein $K$-Vektorraum, $B\subset V$ eine Basis, ... eine Biliniearform.
+  Die MAtrix $M_B(b)$ der Bilinearform $b$ bzgl. der Baiss $B$ ist definiert
+  durch die Eigenschaft $()M_B(b))_{ij}=b(b_i, b_j)$
+\end{definition}
+\begin{exa}
+  ...
+\end{exa}
+Wenn $x,y$ die Koordinatenspalten von $v$ bzw. $w$ bzgl. $B$ sind, so haben wir
+\[b(v,w)=b(...)=.... \implies b(v,w)\] ...
+
+Wenn $B'$ eine andere in Basis $V$ ist und $x'$, $y'$ Koordinatenspalten von $v$
+bzw. $w$ bzgl. $B'$, so haben wir: $x=M...$ ...  $\implies b(v,w)= ...$ Es
+folgt, dass $M_{B'}= (M^{B'}_{B})^T\cdot M_B(b)\cdot (M^{B'}_{B}))$
+
+Wie bei linearen Abbildungen stellt sich die Frage: ''Gibt es eine Basis
+$M_B(b)$ besonders einfach ist?'' Diese Form ist f"ur unterschiedliche
+Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
+
+\begin{definition}
+  Sei $U\subset V$ ein Untervektorraum $b$ eine Bilinearform aif $V$. Das
+  orthogonale Komplement von $U$ bzgl. $b$ ist der Untervektorraum $U={v\in
+    V|b(u,v)=0 \forall u\in U}$
+
+  Der Kern/Annulator von $b$ ist der Untervektorraum $V....$ Die Bilinearform
+  $b$ heisst nicht ausgeartet, wenn ...
+\end{definition}
+
+\begin{lemma}
+  Sei $V$ ein $K$ Vektorraum, $B\subset V$ eine Basis, $\dim V < \infty$, $b$
+  eine Bilinearform. Es gilt: $b$ nicht ausgeartet $\iff$ $M_B(b)$ nicht
+  ausgeartet (Invertierbar)
+\end{lemma}
+
+\begin{proof}
+  Wenn ..
+  Die Bedingungen ... sind "Aquivalent zum LGS $M_B(x) \cdot x = 0 $  auf die
+  Koordinatenspalte $x$ von $v$. Dieses LGS hat genau dann nur die Null"osung,
+  wenn $M_B(b)$ nicht ausgeartet ist. Der Beweis Zeigt auf $\dim V... = \dim
+  \{x|  M_B(b)= \dim V - \Rg M_B(b)\}$ insbesondere ist die Zahl $\Rg M_B(b)$
+  unabh"angig von der Basis $B$
+\end{proof}
+
+\begin{definition}
+  $$Rg(b):=\dim V - \dim V = \Rg M_B(b)$
+\end{definition}
+
+\begin{exa}
+  Skalarprodukt ist nicht ausgeartet. Geometrisch wissen wir, wenn $U$ in
+  $\mathbb{R}^3$ eine Gerade ist, dann ist, ... eine Ebene.
+\end{exa}
+
+\begin{proposition}
+  Sei $V$ ein $K$ - Vektorraum, $b$ eine nicht ausgeartete Bilinearform auf V.
+  Dann gilt f"ur jeden UVR ....
+\end{proposition}
+
+\begin{proof}
+  ... 
+\end{proof}
+
+\begin{korollar}
+  Wenn $b$ nicht ausgeartet ist, so gilt $(...)$ f"ur Jeden Untervektorraum
+  $U\subset  V$
+\end{korollar}
+\begin{proof}
+  .... nach dem Prinzip ''Paul, wie heisst du'' Ausserdem gilt ...
+\end{proof}
 \subsection{Schlagworte:}
 \label{sec:orgcf8c685}
 \begin{itemize}

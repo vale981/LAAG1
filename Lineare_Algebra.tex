@@ -18,7 +18,7 @@
 \usepackage[a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
 \setlength{\parfillskip}{0pt plus 1fil}
 \setlength{\parindent}{0pt}
-\usepackage{german}
+\usepackage[ngerman]{babel}
 \usepackage{fancyhdr}
 \usepackage{mathtools} % for xrightarrow
 \usepackage{todonotes}
@@ -38,6 +38,9 @@
 \DeclareMathOperator{\mHom}{Hom}
 \DeclareMathOperator{\mId}{id}
 \DeclareMathOperator{\mVol}{Vol}
+\DeclareMathOperator{\mDiag}{diag}
+\DeclareMathOperator{\mEnd}{End}
+\DeclareMathOperator{\mDeg}{deg}
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 \newtcbtheorem[number within=section]{definition}{Definition}%
@@ -2198,7 +2201,7 @@ Das heißt, wir können uns einfach ein Halbsystem aussuchen:
 \[\varepsilon(\sigma) = \prod\limits_{i<j}\frac{\sigma(i)-\sigma(j)}{i-j} = \prod_{i<j} sgn(\sigma(i)-\sigma(j)) = \prod_{\substack{i<j\\ \sigma(i)>\sigma(j)}} (-1)\]\[ = \text{Minus eins hoch Anzahl der „Reihenfolgenverstöße“ von }\sigma\]
 
 
-\begin{definition}
+\begin{definition}{}{}
   Die Permutationen ... heissen gerade ... ungerade.
   Sei $i\not=j$ ... Die Transposition von ... ist die Permutation: ..
   (Vertauscht $i$ und $j$, alle andere bleibt gleicht)
@@ -2239,7 +2242,7 @@ V\) mit Darstellungen \(v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}\).
  V^n\to K\) so gew"ahlt ist, dass \(\omega(e_1,...,e_n)=1\), dann bekommt man
  folgende Definition f"ur eine Matrix \(A\):
 
- \begin{definition}
+ \begin{definition}{}{}
  	Sei \(A\in K^{n\times n}\) eine Matrix mit Eintr"agen \(a_{ij}\). Wenn man die Zeilen von \(A\) (sagen wir \(\alpha_1,\dots, \alpha_n\)) als
    Vektoren in \(K^n\) auffast, dann gilt: \[\omega(\alpha_1,\dots,\alpha_n) = \sum_{\sigma\in S_n}{\varepsilon(\sigma)a_{1,\sigma(1)}\dots a_{n,\sigma(n)}} =: \det A \]
    Das nennen wir ab jetzt auch Leibniz-Formel.
@@ -2322,15 +2325,90 @@ Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnung
 	In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
 \end{bem}
 
+\begin{proposition}
+	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
+\end{proposition}
+\begin{proof}
+	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
+	\begin{align*}
+	\det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
+	&= \sum_{\sigma = \sigma'\circ\tau_{ij}\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{i,\sigma(i)}\dots\lambda_{j,\sigma(j)}\dots\lambda_{n,\sigma(n)} \\
+	&= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(j)}}\dots \lambda_{n,\sigma'(n)} \\
+	&= \mcolor{-} \sum_{\sigma'\in S_n} \mcolor{\varepsilon(\sigma')} \lambda_{1,\sigma'(1)}\dots\lambda_{i,\sigma'(i)}\dots\lambda_{j,\sigma'(j)}\dots\lambda_{n,\sigma'(n)} = -\det A \\
+	&\implies \det A = 0
+	\end{align*}
+	\(\implies\omega \) alternierend.
+\end{proof}
+
+\(\omega\) ist eindeutig durch den Wert (=1) auf \(B\) bestimmt \(\implies\)  wenn \(\omega'\) eine Volumenform auf \(V\) ist, so gilt \(\omega' = \underbrace{\omega'(b_1,\dots,b_n)}_{\in K}\cdot\omega\)
+
+\begin{definition}{Determinante}{}
+	Sei \(V\) ein \(n\)-dimensionaler Vektorraum, \(f: V\to V\) linear. Die Determinante von \(f\) ist
+	\[\det(f):= \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)}\]
+	wobei \(\omega \neq 0\) eine Volumenform auf \(V\) ist.
+\end{definition}
+
+\begin{beobachtung}
+	Die obige Proposition zeigt, dass \(\det(f)\) wohldefiniert ist (= auf die Wahl von \(\omega\neq 0\) nicht ankommt). Geometrisch: \(\det(f)\) ist der Verzerrungsfaktor von dem Volumen (unter \(f\)).
+\end{beobachtung}
+
+\begin{lemma}
+	\(\det\Delta = \det\Delta^T\quad\forall \Delta\in K^{n\times n}\)
+\end{lemma}
+\begin{proof}
+	Es gilt: \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\quad\forall \sigma\in S_n \) (folgt z.B. aus \(\varepsilon(\sigma\circ\sigma^{-1})=1=\varepsilon(\sigma)\varepsilon(\sigma^{-1})\))
+	\begin{align*}
+	\det\Delta^T = \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{\sigma(1),1}\dots\lambda_{\sigma(n),n} = \sum_{\sigma^{-1}\in S_n}\varepsilon(\sigma^{-1})\lambda_{1,\sigma^{-1}(1)}\dots\lambda_{n,\sigma^{-1}(n)} = \det \Delta
+	\end{align*}
+\end{proof}
+\begin{proposition}
+	\begin{enumerate}
+		\item \(f, g: V\to V \) linear \(\implies\det(g\circ f) = \det(g)\det(f) \)
+		\item \(f\) ist genau dann invertierbar, wenn \(\det(f)\neq 0 \)
+	\end{enumerate}
+\end{proposition}
+\begin{korollar}
+	Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
+\end{korollar}
+\begin{proof}
+	\begin{align*}
+	\det(f) = \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
+	\end{align*}
+\end{proof}
+\begin{korollar}
+	Eine Matrix \(A\in K^{n\times n} \) ist genau dann invertierbar, wenn \(\det A \neq 0 \)
+\end{korollar}
+\begin{bem}
+	Es gibt eine Reihe von Begriffen f"ur Matrizen, die nach unseren Invertierbarkeitskriterien alle "aquivalent dazu sind, dass \(A \) invertierbar ist, z.B. nicht ausgeartet, regul"ar etc.
+\end{bem}
+\begin{korollar}
+Wie berechnet man Determinanten?
+
+Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnungen macht man normalerweise unter Benutzung folgender Eigenschaften der Determinante (die daraus folgen, dass \(\det : (K^n)^n \to K\) eine Volumenform ist):
+\begin{itemize}
+	\item Wenn man zu einer Zeile / Spalte der Matrix ein Vielfaches einer anderen Zeile bzw. Spalte addiert, so "andert sich die Determinante nicht;
+	\item \(\det \) ist linear in jeder Zeile bzw. Spalte.
+\end{itemize}
+\end{korollar}
+\begin{bem}
+	F"ur \(\varepsilon(\sigma)\), das Vorzeichen einer Permutation, gibt's auch die Physiker-Notation: \(\varepsilon_{1,\dots,n}=1\) und es ver"andert das Vorzeichen, wenn man zwei Indizes vertauscht.
+\end{bem}
+\begin{bem}[Orientierung von Vektorr"aumen]
+	Volumenformen sind laut unserer Definition linear \(\implies\) selbst wenn \(V\) ein \(\mathbb{R}\)-Vektorraum ist, kann es passieren, dass \(\omega(v_1,\dots,v_n)< 0\). Die Wahl von einer Volumenform \(\omega\) definiert die sogenannte \emph{Orientierung} von \(V\) (\(V\) ein \(mathbb{R}\)-VR). Wenn wir \(\omega\) fixieren, dann entstehen zwei Klassen von Basen in \(V\): \(B = (b_1,\dots,b_n)\) hei"st positiv (negativ) orientiert, wenn \(\omega(b_1,\dots,b_n) > (<) 0\). 
+	
+	In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
+\end{bem}
+
 \subsubsection{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
-\label{sec:eigen}
+
 Wir haben gesehen: wenn \(f: V\to W\) linear, \(V, W\) endlichdimensionale Vektorr"aume \(\implies \exists B\subset V, C\subset W \) Basen so dass
 \[M^B_C(f) = \begin{pmatrix}
 1_r & 0\\
 0 & 0
 \end{pmatrix}, r = \mRg f\]
-\begin{definition}
-	Ein Endomorphismus von \(V\) ist eine lineare Abbildung \(f: V\to V\). Bezeichnung: \(f\in \text{End}_K(V) = \text{H2om}_K(V,V) \)	
+
+\begin{definition}{Endomorphismus, lineare Operatoren}{}
+	Ein Endomorphismus von \(V\) ist eine lineare Abbildung \(f: V\to V\). Bezeichnung: \(f\in \text{End}_K(V) = \text{Hom}_K(V,V) \)	
 	
 	Endomorphismus hei"sen auch lineare Operatoren auf \(V\). Die Wahl einer Basis \(B\subset V \) gibt uns eine Matrix \(M^B_B(f)\).
 \end{definition}
@@ -2339,127 +2417,159 @@ Wir haben gesehen: wenn \(f: V\to W\) linear, \(V, W\) endlichdimensionale Vekto
 	
 	"Aquivalent, in Termen von Matrizen: Gegeben eine Matrix \(A\in K^{n\times n} \), finde eine invertierbare Matrix \(S\) so dass \(S^{-1}AS\) besonders einfache Form hat.
 \end{korollar}
+  Sei \(V\) ein \(\mathbb{R}\)-Vektorraum, sei \(B\) eine Basis mit \[M^B_B(f) =
+    \begin{pmatrix}
+      1 & 0 & 0 \\
+      0 & 2 & 0 \\
+      0 & 0 & 3
+    \end{pmatrix} = \mDiag(1,2,3) \]
+  Das hei"st, \(f\) ist in diesem Fall eine Streckung mit Koeffizienten 1, 2, oder 3 in Richtung von \(b_1\), \(b_2\) oder \(b_{3}\).
 
-\begin{exa}
-  Sei $V$ ein $\mathbb{R}$ - Vektorraum, sei $B$ eine Basis. mit ...
-\end{exa}
-
-
-\begin{definition}
-  Sei $f: V\mapsto V$ eine lineare Abbildung. Ein Eigenvektor von $f$ ist ein
-  Vektor von $f$ist ein Vektor, so dass $f(v)=\lambda \cdot v$ f"ur ein ...
-  $\lambda$ heisst eigenwert. $v$ nennt man den Eigenvektor zum eigenwert
-  $\lambda$.
-\end{definition}
-
-Geometrisch: $f$ streckt $v$ mit dem koeffzienten $\lambda$.
-
-\begin{lemma}
-  Sei $f: V\mapsto V$ ein endomorphismus. Wenn .... eine Basis in $V$ aus
-  Eigenvektoren mit den Eigenwerten ... ist (Eigenbasis), so gilt:
+  \begin{definition}{Eigenvektor, Eigenwert}{}
+    Sei \(f: V\to V\) eine lineare Abbildung. Ein Eigenvektor von \(f\) ist ein Vektor \(v\neq 0\), so dass \(f(v) = \lambda v\) f"ur ein \(\lambda \in K\), \(\lambda\) hei"st \emph{Eigenwert} von \(f\). Man sagt, dass \(v\) Eigenvektor zum Eigenwert \(\lambda\) ist. Geometrisch gesehen: \(f\) streckt \(v\) mit Koeffizienten \(\lambda\).
+  \end{definition}
+  \begin{lemma}
+    Sei \(f: V\to V\) ein Endomorphismus. Wenn \(B = (b_{1},\dots,b_{n})\) eine Basis in \(V\) aus Eigenvektoren zu Eigenwerten \(\lambda_{1},\dots,\lambda_{n}\) ist, so gilt:
+    \[M^{B}_{B}(f)=
+      \begin{pmatrix}
+        \lambda_{1} & & 0 \\
+        & \ddots & \\
+        0 & & \lambda_{n}
+      \end{pmatrix}
+      = \mDiag(\lambda_{1},\dots,\lambda_{n})
+    \]
+  (\(B\) hei"st auch Eigenbasis.)
 \end{lemma}
-
 \begin{proof}
-  Es gilt laut definition $f(b_i)=\lambda_i\cdot b_i,\; i=1,n$. Die Form von ...
-  folgt aus Definition.
+  Es gilt laut Definition \(f(b_i) = \lambda_ib_i\) wobei \(i = 1, \dots, n\) \(\implies\) die Form von \(M^B_B(f)\) folgt aus den Definitionen.
 \end{proof}
-
-Es folgt: wenn wir die Diagonalform von ... erreichen m"ochten, m"ussen wir
-Eigenwerte und Eigenvektoren suchen (u. geg. finden!)
-
-\begin{proof}
-  Ein Endomorphismus $f$ heisst diagonalisierbar, wenn er eine Eigenbasis hat.
-\end{proof}
-
+Es folgt: Wenn wir die Diagonalform von \(M^B_B(f)\) errichen m"ochten, m"ussen wir Eigenwerte und Eigenvektoren suchen!
+\begin{definition}{Diagonalisierbarkeit}{}
+  Ein Endomorphismus \(f\) hei"st diagonalisierbar, wenn er eine Eigenbasis hat.
+\end{definition}
 \begin{proposition}
-  Sei ... $\lambda \in K$
+  Sei \(f\in \mEnd_K(V), \lambda\in K\).
   \begin{enumerate}
-  \item $v\in V$ ist ein Eigenvektor von $f$ zum Eigenwenwert ....
-  \item $\lambda$ ist ein Eigenwerrt von f .... 
+  \item \(v\in V\) ist ein Eigenvektor von \(f\) zum Eigenwert \(\lambda \iff v\in\mKer(\lambda\mId_V - f)\setminus\{0\}\)
+  \item \(\lambda\) ist ein Eigenwert von \(f\) (d.h., es existieren Eigenvektoren zum Eigenwert \(\lambda\iff\det(\lambda\mId_V-f)=0\))
   \end{enumerate}
 \end{proposition}
-
 \begin{proof}
   \begin{enumerate}
-  \item Sei $v\in V$ Eigenvektor zum Eigenwert $\lambda$. Dann gilt nach
-    Definition $f(v)=\lambda\cdot v$ ...
-  \item Nach (1) ist $\lambda$ ein Eigenwert $\iff$  ... 
+  \item Sei \(v\in V\) ein Eigenvektor (Eigenvektoren sind per Definition \(\neq 0\)) zum Eigenwert \(\lambda\). Nach Definition gilt:
+    \begin{align*}
+      f(v) &= \lambda v \iff f(v) - \lambda v = 0 \iff (f - \lambda\mId_V)(v) = 0 \\
+      &\iff v\in \mKer(\lambda\mId_V - f)
+    \end{align*}
+    Andersherum: Wenn \(v \in \mKer(\lambda\mId_V -f)\setminus\{0\}\), dann ist \((\lambda\mId_V -f)(v)=0\land v\neq 0 \implies v\) ist Eigenvektor zum Eigenwert \(\lambda\).
+  \item Nach (oben) ist \(\lambda\) ein Eigenwert \(\iff\mKer(\lambda\mId_V -f)\neq 0\)\(\iff \lambda\mId_V -f\) ist nicht invertierbar \(\iff\det(\lambda\mId_V - f) = 0\)
   \end{enumerate}
 \end{proof}
-\begin{relation}
-  \begin{enumerate}
-  \item F"ur Suche nach Eigenvektoren bedeutet das: Wenn wir wissen, dass
-    $\lambda$ Eigenwert ist, k"onnen wir Eigenvektoren durch die Bestimmung
-    einer Basis im ... bestimmen. (L"osung von LGS)
-  \item Um eigenwerte zu finden, m"ussen wir die Gleichung ... nach $\lambda$ l"osen.
-  \end{enumerate}
-\end{relation}
-
-\begin{definition}
-  Sei $f$ ... Das Polynom ... heisst charakteristisches Polynom von $f$. Die
-  Gleichung ... Heisst charakteristische Gleichung von $f$. Aus den obigen
-  "uberlegungen folgt: die Nullstellen von ... sind genau die Eigenwerte von $f$.
-\end{definition}
-
-Wenn wir also $f$ diagonalisieren wollen, m"ussen wir folgendes tun:
-\begin{relation}
-  \begin{enumerate}
-  \item Charakteristische Gleichung l"osen: Eigenwerte bestimmen
-  \item Finde Basen von $Ker(\lambda \cdot id - f)$ zu jedem Eigenwert
-    $\lambda$.
-  \item Hoffen, dass Vereinigung von diesen Basen eine Basis in V ergibt. 
-  \end{enumerate}
-\end{relation}
-
-\begin{definition}
-  ... heisst Eigenraum zum Eigenwert $\lambda$
-\end{definition}
-
-\begin{proof}[Ausf"uhrlicher Beweis des Lemmas]
-  Seien $v_1, ..., v_n$ Eigenvektoren zu Eigenwerten $\lambda_1,...,\lambda_n$
-  (paarweise verschieden). Sei $... = 0$  Wende ... an.
-\end{proof}
-
-Was sind m"ogliche Hindernisse zur diagonalisierbarkeit?
+F"ur die Suche nach Eigenvektoren bedeutet das:
 \begin{enumerate}
-\item Zu wenig Eigenwerte:
-  \begin{exa}
-    Rotation in $\mathbb{R}^2$ um $\frac{\pi}{2}$ .... Keine reellen
-    Nullstellen. Hier schweitern wir daran, dass das Polynom $\lambda^2 + 1$
-    nicht genug Nullstellen in $\mathbb{R}$ hat.
-  \end{exa}
-\end{enumerate}
-
-\subsubsection{Nullstellen von Polynomen}
-\label{sec:polyns}
-
-\begin{definition}
-  Sei $p\in K\[\lambda\]=\{\}$.... ein Polynom. Eine Nullstelle $\mu$ von $p$
-  ist ein Element $\mu \in K$ so dass $p(\mu)=0$
+\item Wenn wir einen Eigenwert \(\lambda\) kennen, k"onnen wir Eigenvektoren ganz einfach bestimmen, indem wir eine Basis von \(\mKer(\lambda\mId_V -f)\) finden (dazu muss man nur ein LGS l"osen).
+  \item Um Eigenwerte zu finden, m"ussen wir die Gleichung \(\det(\lambda\mId_V - f) = 0\) nach \(\lambda\) l"osen.
+  \end{enumerate}
+\begin{definition}{Charakteristisches Polynom}{}
+  Sei \(f\in\mEnd_K(V)\). Das Polynom \[\chi_f(\lambda) := \det(\lambda\mId_V-f)\] hei"st charakteristisches Polynom von \(f\). Die Gleichung \[\chi_f(\lambda) = 0\] hei"st charakteristische Gleichung von \(f\).
 \end{definition}
-
-\begin{lemma}[Bezont]
-  $\mu \in K$ ist eine Nullstelle vo $p \iff p(\lambda) = (\lambda -  \mu) \cdot
-  p_1(\lambda)$
+Aus obigen "Uberlegungen folgt: Die Nullstellen von \(\chi_f(\lambda)\) sind genau die Eigenwerte von \(f\). Wenn wir \(f\) also diagonalisieren wollen, m"ussen wir folgendes tun:
+\begin{enumerate}
+\item charakteristische Gleichung l"osen, um die Eigenwerte zu bestimmen
+\item Basen von \(\mKer(\lambda\mId_V-f)\) zu jedem Eigenwert \(\lambda\) finden
+\item hoffen, dass Vereinigung von diesen Basen eine Basis in \(V\) ergibt
+\end{enumerate}
+\begin{definition}{Eigenraum}{}
+  \(\mKer(\lambda\mId_V-f)\) hei"st Eigenraum zum Eigenwert \(\lambda\).
+\end{definition}
+\begin{lemma}
+  Die Eigenvektoren zu verschiedenen Eigenwerten sind linear unabh"angig, genauer: \[\lambda_1\neq\lambda_2\in K\implies\mKer(\lambda_1\mId_V-f)\cap\mKer(\lambda_2\mId_V-f)=\{0\}\]
+  Insbesondere ist die Summe verschiedener Eigenr"aume immer direkt.
 \end{lemma}
-
-\begin{proof}[Skizze]
-  \begin{itemize}
-  \item[$\impliedby$] Offenbar
-  \item[$\implies$] Folgt durch Polynomdivision.
-  \end{itemize}
+\begin{proof}
+  Sei \(\lambda_1\neq\lambda_2\), sei weiterhin \(v\in\mKer(\lambda_1\mId_V-f)\cap\mKer(\lambda_2\mId_V-f)\). Dann gilt \(f(v)=\lambda_1v=\lambda_2v\) \(\implies(\lambda_1-\lambda_2)v = 0\implies v = 0\).
+(Nachtrag). Ausf"uhrlicherer Beweis dieser Aussage: Seien \(v_1,\dots,v_n\) Eigenvektoren zu Eigenwerten \(\lambda_1,\dots,\lambda_n\) (diese sollen paarweise verschieden sein). Sei \(\alpha_1 v_1+\dots + \alpha_nv_n = 0\). Wir definieren \(g_i\):
+  \begin{align*}
+    g_i := (f-\lambda_1\mId_V)\dots(f-\lambda_{i-1}\mId_V)(f-\lambda_{i+1}\mId_V)\dots(f-\lambda_n\mId_V)
+  \end{align*}
+  (Beachte hierbei: Ob dieser Ausdruck ein Produkt oder eine Funktionsverkettung ist, ist egal.)
+  \begin{align*}
+    g_i(v_k) &= (\lambda_k-\lambda_1)(\lambda_k-\lambda_2)\dots(\lambda_k-\lambda_{i-1})(\lambda_k-\lambda_{i+1})\dots(\lambda_k-\lambda_n)v_k =
+               \begin{cases}
+                 0, & k\neq i \\
+                 \beta_iv_i, & k = i
+               \end{cases} \quad ,\beta_i\neq 0
+  \end{align*}
+  \todo{Beweis vervollst"andigen, ich verstehe den letzten Schritt nicht :(}
 \end{proof}
+Insbesondere folgt f"ur (3), dass die Vereinigung von Basen in Eigenr"aumen immer eine linear unabh"angige Menge ist, aber manchmal gibt es einfach \gq{zu wenige} Eigenvektoren, damit sie zu einer Basis werden.
+\begin{exa}[Eigenwertberechnung]
+  \[M^B_B(f) =
+    \begin{pmatrix}
+      9 & -6 \\
+      2 & 2
+    \end{pmatrix}\]
+  Nun suchen wir eine Eigenbasis von \(f\).
+  \begin{enumerate}
+  \item Charakteristische Gleichung: \(\det(\lambda\mId_V-f)=0\)
+    \[\chi_f(\lambda) = \det\begin{pmatrix}9-\lambda & -6 \\ 2 & 2-\lambda\end{pmatrix} = (\lambda - 9)(\lambda - 2) + 12 = \lambda^2 - 11\lambda + 30 = (\lambda-5)(\lambda-6)\]
+  \item Eigenwerte: \(\lambda_1 = 5, \lambda_2 = 6\)
+  \item Eigenvektoren:
+    \begin{enumerate}
+    \item zu \(\lambda_1 = 5\): Finde Basis zu \(\mKer(f - \lambda\mId_V)\) \(\implies\) homogenes LGS mit Matrix \(
+        \begin{pmatrix}
+          4 & -6 \\
+          2 & -3
+        \end{pmatrix}
+      \) l"osen, Basen finden \(\implies\begin{pmatrix}3\\2\end{pmatrix}\) ist L"osung
+    \item f"ur \(\lambda_2 = 6\): L"ose homogenes LGS mit Matrix \(
+        \begin{pmatrix}
+          3 & -6 \\
+          2 & -4
+        \end{pmatrix}
+\) \(\implies\begin{pmatrix}2\\1\end{pmatrix}\) ist L"osung
+\end{enumerate}
+\item Eigenbasis: \(B = (v_1, v_2)\), setze nun \(S = M^{B'}_B=\begin{pmatrix}3 & 2\\ 2 & 1\end{pmatrix}\)
+  \[\implies M^{B'}_{B'}=S^{-1}\begin{pmatrix}9 & -6 \\ 2 & 2 \end{pmatrix}S = \begin{pmatrix}5 & 0 \\ 0 & 6 \end{pmatrix}\]
+  \end{enumerate}
+\end{exa}
+Was sind m"ogliche Hindernisse zu Diagonalisierbarkeit?
+Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
+\begin{exa}[Rotation]
+  Rotation in \(\mathbb{R}^2\) um \(\frac{\pi}{2}\): \(R_{\frac{\pi}{2}}\) hat die Matrix \(
+  \begin{pmatrix}
+    0 & -1 \\
+    1 & 0
+  \end{pmatrix}
+  \).
+  \[\chi_{R_{\frac{\pi}{2}}}(\lambda) = \det
+    \begin{pmatrix}
+      \lambda & 1\\
+      -1 & \lambda
+    \end{pmatrix}
+    = \lambda^2 + 1
+\] \(\implies\) keine reellen Nullstellen \(\implies\) keine Eigenwerte, keine Eigenvektoren. Hier scheitern wir daran, dass das Polynom \(\lambda^2+1\) nicht genug Nullstellen in \(\mathbb{R}\) hat.
+\end{exa}
 
-\begin{folgerung}
-  \begin{itemize}
-  \item Ein Polynom von Grad $d$ h"ochstens $d$ Nullstellen.
-  \end{itemize}
-\end{folgerung}
-
-\begin{theorem}[Fundamentalsatz der Algebra]
-  Jedes Polynom $p\in \mathb{C}$ zerf"allt in Linearfaktoren. \[p(\lambda)= a_d
-    (\lambda-\lambda_1)\cdot (\lambda -\lambda_2) ... (\lambda - \lambda_n)\]. ...
-\end{theorem}
+\subsection{Nullstellen von Polynomen}
+\begin{definition}{Nullstelle}{}
+  Sei \(p\in K[\lambda] = \left\{\sum_{i=0}^n\alpha_i\lambda^i|\alpha_i\in K, n\in\mathbb{N} \right\}\) ein Polynom. Eine Nullstelle \(\mu\) von \(p\) ist ein Element \(\mu\in K\) so dass \(p(\mu) = 0\).
+\end{definition}
+\begin{lemma}[Bezout]
+  \(\mu\in K\) ist eine Nullstelle von \(p \iff p(\lambda) = (\lambda-\mu)\cdot p_1(\lambda)\), wobei \(p_1\) ein Polynom ist.
+\end{lemma}
+\begin{proof}[Bezout, Skizze]
+  \((\impliedby)\): offensichtlich \\
+  \((\implies)\): folgt durch Division mit Rest: Wenn man \(p\) durch \((\lambda-\mu)\) mit Rest dividiert, bekommt man \(p(\lambda) = (\lambda-\mu)p_1(\lambda) + r(\lambda)\). Es ist (siehe auch Analysis) \(\mDeg(r) < \mDeg(\lambda-\mu) = 1\) \(\implies r(\lambda)=r\) ist Konstante. \(0 = p(\mu) = 0 + r \implies r = 0\).
+\end{proof}
+\begin{beobachtung}
+  Ein Polynom von Grad \(d\) hat h"ochstens \(d\) Nullstellen.
+\end{beobachtung}
+\begin{theo}{Fundamentalsatz der Algebra}
+  Jedes Polynom \(p\in\mathbb{C}[\lambda]\) zerf"allt in Linearfaktoren:
+  \[p(\lambda) = (\lambda - \lambda_1)(\lambda-\lambda_2)\dots(\lambda-\lambda_d) \qquad d = \mDeg p\]
+  "Aquivalent: Ein Polynom \(p\in\mathbb{C}[\lambda]\) von Grad \(d\) hat genau \(d\) Nullstellen in \(\mathbb{C}\), wenn man sie mit Vielfachheiten z"ahlt (das hei"st z.B. \(p(\lambda) = (\lambda-1)^3(\lambda-4)^5\) hat eine dreifache Nullstelle 1, eine f"unffache Nullstelle 4 \(\implies\) insgesamt 8 Nullstellen)
+\end{theo}
 
 \begin{folgerung}
   Sei $V$ ein $\mathbf{C}$ Vektorraum, $f: V \mapsto V$ linear. Dann hat $f$
@@ -2625,99 +2735,6 @@ Zum charakteristischen Polynom:
 \end{relation}
 
 Folglich kann man $\Xi_1$ f"ur $2\times 2$ Matrizen direkt ablesen.
-=======
-\begin{proposition}
-	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
-\end{proposition}
-\begin{proof}
-	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
-	\begin{align*}
-	\det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
-	&= \sum_{\sigma = \sigma'\circ\tau_{ij}\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{i,\sigma(i)}\dots\lambda_{j,\sigma(j)}\dots\lambda_{n,\sigma(n)} \\
-	&= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(j)}}\dots \lambda_{n,\sigma'(n)} \\
-	&= \mcolor{-} \sum_{\sigma'\in S_n} \mcolor{\varepsilon(\sigma')} \lambda_{1,\sigma'(1)}\dots\lambda_{i,\sigma'(i)}\dots\lambda_{j,\sigma'(j)}\dots\lambda_{n,\sigma'(n)} = -\det A \\
-	&\implies \det A = 0
-	\end{align*}
-	\(\implies\omega \) alternierend.
-\end{proof}
-
-\(\omega\) ist eindeutig durch den Wert (=1) auf \(B\) bestimmt \(\implies\)  wenn \(\omega'\) eine Volumenform auf \(V\) ist, so gilt \(\omega' = \underbrace{\omega'(b_1,\dots,b_n)}_{\in K}\cdot\omega\)
-
-\begin{definition}{Determinante}
-	Sei \(V\) ein \(n\)-dimensionaler Vektorraum, \(f: V\to V\) linear. Die Determinante von \(f\) ist
-	\[\det(f):= \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)}\]
-	wobei \(\omega \neq 0\) eine Volumenform auf \(V\) ist.
-\end{definition}
-
-\begin{beobachtung}
-	Die obige Proposition zeigt, dass \(\det(f)\) wohldefiniert ist (= auf die Wahl von \(\omega\neq 0\) nicht ankommt). Geometrisch: \(\det(f)\) ist der Verzerrungsfaktor von dem Volumen (unter \(f\)).
-\end{beobachtung}
-
-\begin{lemma}
-	\(\det\Delta = \det\Delta^T\quad\forall \Delta\in K^{n\times n}\)
-\end{lemma}
-\begin{proof}
-	Es gilt: \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\quad\forall \sigma\in S_n \) (folgt z.B. aus \(\varepsilon(\sigma\circ\sigma^{-1})=1=\varepsilon(\sigma)\varepsilon(\sigma^{-1})\))
-	\begin{align*}
-	\det\Delta^T = \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{\sigma(1),1}\dots\lambda_{\sigma(n),n} = \sum_{\sigma^{-1}\in S_n}\varepsilon(\sigma^{-1})\lambda_{1,\sigma^{-1}(1)}\dots\lambda_{n,\sigma^{-1}(n)} = \det \Delta
-	\end{align*}
-\end{proof}
-\begin{proposition}
-	\begin{enumerate}
-		\item \(f, g: V\to V \) linear \(\implies\det(g\circ f) = \det(g)\det(f) \)
-		\item \(f\) ist genau dann invertierbar, wenn \(\det(f)\neq 0 \)
-	\end{enumerate}
-\end{proposition}
-\begin{korollar}
-	Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
-\end{korollar}
-\begin{proof}
-	\begin{align*}
-	\det(f) = \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
-	\end{align*}
-\end{proof}
-\begin{korollar}
-	Eine Matrix \(A\in K^{n\times n} \) ist genau dann invertierbar, wenn \(\det A \neq 0 \)
-\end{korollar}
-\begin{bem}
-	Es gibt eine Reihe von Begriffen f"ur Matrizen, die nach unseren Invertierbarkeitskriterien alle "aquivalent dazu sind, dass \(A \) invertierbar ist, z.B. nicht ausgeartet, regul"ar etc.
-\end{bem}
-\begin{korollar}
-Wie berechnet man Determinanten?
-
-Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnungen macht man normalerweise unter Benutzung folgender Eigenschaften der Determinante (die daraus folgen, dass \(\det : (K^n)^n \to K\) eine Volumenform ist):
-\begin{itemize}
-	\item Wenn man zu einer Zeile / Spalte der Matrix ein Vielfaches einer anderen Zeile bzw. Spalte addiert, so "andert sich die Determinante nicht;
-	\item \(\det \) ist linear in jeder Zeile bzw. Spalte.
-\end{itemize}
-\end{korollar}
-\begin{bem}
-	F"ur \(\varepsilon(\sigma)\), das Vorzeichen einer Permutation, gibt's auch die Physiker-Notation: \(\varepsilon_{1,\dots,n}=1\) und es ver"andert das Vorzeichen, wenn man zwei Indizes vertauscht.
-\end{bem}
-\begin{bem}[Orientierung von Vektorr"aumen]
-	Volumenformen sind laut unserer Definition linear \(\implies\) selbst wenn \(V\) ein \(\mathbb{R}\)-Vektorraum ist, kann es passieren, dass \(\omega(v_1,\dots,v_n)< 0\). Die Wahl von einer Volumenform \(\omega\) definiert die sogenannte \emph{Orientierung} von \(V\) (\(V\) ein \(mathbb{R}\)-VR). Wenn wir \(\omega\) fixieren, dann entstehen zwei Klassen von Basen in \(V\): \(B = (b_1,\dots,b_n)\) hei"st positiv (negativ) orientiert, wenn \(\omega(b_1,\dots,b_n) > (<) 0\). 
-	
-	In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
-\end{bem}
-
-\subsubsection{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
-
-Wir haben gesehen: wenn \(f: V\to W\) linear, \(V, W\) endlichdimensionale Vektorr"aume \(\implies \exists B\subset V, C\subset W \) Basen so dass
-\[M^B_C(f) = \begin{pmatrix}
-1_r & 0\\
-0 & 0
-\end{pmatrix}, r = \mRg f\]
-\begin{definition}
-	Ein Endomorphismus von \(V\) ist eine lineare Abbildung \(f: V\to V\). Bezeichnung: \(f\in \text{End}_K(V) = \text{H2om}_K(V,V) \)	
-	
-	Endomorphismus hei"sen auch lineare Operatoren auf \(V\). Die Wahl einer Basis \(B\subset V \) gibt uns eine Matrix \(M^B_B(f)\).
-\end{definition}
-\begin{korollar}[Hauptfrage]
-	Wenn \(f\) gegeben ist, wie findet man eine Basis \(B\), so dass \(M^B_B(f)\) eine besonders einfache Form hat?
-	
-	"Aquivalent, in Termen von Matrizen: Gegeben eine Matrix \(A\in K^{n\times n} \), finde eine invertierbare Matrix \(S\) so dass \(S^{-1}AS\) besonders einfache Form hat.
-\end{korollar}
-
 
 \begin{definition}
   Sei V ein $K$ Vektorraum, ... Die Spalten von $f$ .... F"ur $\dim V < \infty$
@@ -2756,7 +2773,7 @@ In der Physik ist die folgene Bilinearform von Bedeutung: ...
   Die Zugeh"orige Quadratische Form: $q(v):=b(v,v)$
 \end{definition}
 
-////
+
 
 \begin{definition}
   Sei $V$ ein $K$-Vektorraum, $B\subset V$ eine Basis, ... eine Biliniearform.
@@ -2802,7 +2819,7 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
 \end{proof}
 
 \begin{definition}
-  $$Rg(b):=\dim V - \dim V = \Rg M_B(b)$
+  $Rg(b):=\dim V - \dim V = \Rg M_B(b)$
 \end{definition}
 
 \begin{exa}
@@ -2826,6 +2843,8 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
 \begin{proof}
   .... nach dem Prinzip ''Paul, wie heisst du'' Ausserdem gilt ...
 \end{proof}
+  
+
 \subsection{Schlagworte:}
 \label{sec:orgcf8c685}
 \begin{itemize}
@@ -2839,3 +2858,8 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
 \item k-te Spalte \((A)_k\)
 \end{itemize}
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

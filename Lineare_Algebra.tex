@@ -2,6 +2,10 @@
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{beton}
+\usepackage{euler}
+\usepackage{mathpazo} % add possibly `sc` and `osf` options
+\usepackage{eulervm}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{grffile}
@@ -41,6 +45,7 @@
 \DeclareMathOperator{\mDiag}{diag}
 \DeclareMathOperator{\mEnd}{End}
 \DeclareMathOperator{\mDeg}{deg}
+\DeclareMathOperator{\Tr}{Tr}
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 \newtcbtheorem[number within=section]{definition}{Definition}%
@@ -55,8 +60,8 @@
 {title=Kommentar,colback=black!5,colframe=black!35!black,fonttitle=\bfseries}
 \newtcolorbox{relation}[1][]
 {
-colframe = red!25,
-colback  = red!10,
+colframe = blue!25,
+colback  = blue!10,
 halign = center,
 #1,
 }
@@ -67,7 +72,7 @@ halign = center,
 \usepackage{stmaryrd}
 \newtheorem{exa}{Beispiel}[section]
 \newtheorem{expe}{experiment}[section]
-\renewcommand*{\proofname}{Beweis}
+\renewcommand*{\proofname}{\textbf{Beweis}}
 \newtheorem{beobachtung}{Beobachtung}
 \newtheorem{folgerung}{Folgerung}
 \newtheorem*{notte}{Beachte}
@@ -76,16 +81,15 @@ halign = center,
 \newtheorem*{lemma}{Lemma}
 \newtheorem*{korollar}{Korollar}
 \newtheorem*{bem}{Bemerkung}
-\author{Valentin Boettcher}
+\author{Nebnola, Julius Quasebarth, Valentin Boettcher}
 \date{\today}
 \title{Lineare Algebra (f"ur Physiker) I}
 \hypersetup{
- pdfauthor={Valentin Boettcher},
- pdftitle={Lineare Algebra (f"ur Physiker) I},
+ pdfauthor={Nebnola, Julius Quasebarth, Valentin Boettcher},
+ pdftitle={Lineare Algebra (Physiker) I},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 25.3.1 (Org mode 9.1.2)}, 
- pdflang={English}}
+ pdflang={Germanq}}
 \begin{document}
 
 \maketitle
@@ -299,7 +303,7 @@ Das Bild und das Urbild f"ur eine \emph{Menge} einer Funktion ist wieder eine \e
 
 
 \begin{notte}
-\(f^{-1}\) ist keine Abbildung, sonder nur ein formales Symbol!
+\(f^{-1}\) ist keine Abbildung, sonder nur ein formales Symbol!s
 \end{notte}
 
 \subsubsection{Einige Eigenschaften von Funktionen}
@@ -2615,9 +2619,9 @@ Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
 \end{lemma}
 
 \begin{proof}
-  Inspektion der Abbildungsmatrix. \[f_{\mathbf{C}(b_i,0) = (f(b_i), 0)\]
+  Inspektion der Abbildungsmatrix. \[f_(\mathbf{C})(b_i,0) = (f(b_i), 0)\]
 \end{proof}
-\begin{exam}
+\begin{exa}
   ...
 \end{exa}
 
@@ -2694,17 +2698,17 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat''
   Die Behauptung oben ist ...
 \end{definition}
 
-\begin{theorem}
+\begin{theo}
   Sei ... linear. Dann ist $f$ diagonalisierbar genau dann, wenn:
   \begin{enumerate}
   \item alle Nullstellen von $\Xi_f \in K$ (Automatisch erf"ullt f"ur die
   Es ist $f$ nicht diagonalisierbarkomplexen Zahlen)
   \item f"ur jede Nullstelle $\lambda$ von $\Xi_f$ gilt: $\mu_{geo}(\lambda)=\mu_{alg}(\lambda)$
   \end{enumerate}
-\end{theorem}
+\end{theo}
 
 \begin{proof}
-  ... ist ein Polynom vom Grad $\dim V$ \rightarrow{} $\Xi_f$ hat h"ochstens $n$
+  ... ist ein Polynom vom Grad $\dim V \rightarrow \Xi_f$ hat h"ochstens $n$
   Es ist $f$ nicht diagonalisierbarNullstellen in $K$, gez"ahlt mit
   Es ist $f$ nicht diagonalisierbarVielfachheiten. $\implies$ ....
 
@@ -2814,12 +2818,12 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
   Die Bedingungen ... sind "Aquivalent zum LGS $M_B(x) \cdot x = 0 $  auf die
   Koordinatenspalte $x$ von $v$. Dieses LGS hat genau dann nur die Null"osung,
   wenn $M_B(b)$ nicht ausgeartet ist. Der Beweis Zeigt auf $\dim V... = \dim
-  \{x|  M_B(b)= \dim V - \Rg M_B(b)\}$ insbesondere ist die Zahl $\Rg M_B(b)$
+  \{x \mid  M_B(b)= \dim V - \mRg M_B(b)\}$ insbesondere ist die Zahl $\mRg M_B(b)$
   unabh"angig von der Basis $B$
 \end{proof}
 
 \begin{definition}
-  $Rg(b):=\dim V - \dim V = \Rg M_B(b)$
+  $\mRg (b):=\dim V - \dim V = \mRg M_B(b)$
 \end{definition}
 
 \begin{exa}

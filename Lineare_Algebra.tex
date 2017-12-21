@@ -1,6 +1,6 @@
 % Created 2017-11-19 Sun 20:51
 % Intended LaTeX compiler: pdflatex
-\documentclass[11pt]{article}
+\documentclass[11.5pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{beton}
 \usepackage{euler}
@@ -62,7 +62,6 @@
 {
 colframe = blue!25,
 colback  = blue!10,
-halign = center,
 #1,
 }
 \usepackage{etoolbox}
@@ -77,13 +76,14 @@ halign = center,
 \newtheorem{folgerung}{Folgerung}
 \newtheorem*{notte}{Beachte}
 \theoremstyle{definition}
-\newtheorem{prof}{Beweis}
 \newtheorem*{notation}{Notation}
 \newtheorem*{proposition}{Proposition}
 \newtheorem*{lemma}{Lemma}
 \theoremstyle{remark}
 \newtheorem*{korollar}{Korollar}
 \newtheorem*{bem}{Bemerkung}
+\newtheorem*{prof}{Beweis}
+\AfterEndEnvironment{prof}{\qed}
 \author{Nebnola, Julius Quasebarth, Valentin Boettcher}
 \date{\today}
 \title{Lineare Algebra (f"ur Physiker) I}
@@ -330,11 +330,7 @@ Seien \(X,Y\) Mengen, \(f: X\to Y\) eine Abbildung. \(f\) heist:
 \begin{enumerate}
 \item \(f: \mathbb{R} \to \mathbb{R}, t\mapsto t^2\) 
 \begin{itemize}
-\item ist nicht injektiv:
-\end{itemize}
-\end{enumerate}
-\(-1\mapsto 1\)
-\begin{itemize}
+\item ist nicht injektiv: \(-1\mapsto 1\)
 \item ist nicht surjektiv: f"ur \(-1\in \mathbb{R}\) gibt es kein \(t\in\mathbb{R}\)
 mit \(t^2=-1\)
 \end{itemize}
@@ -401,14 +397,6 @@ Die Verkn"upfung hat folgende Eigenschaften:
 \end{itemize}
 \end{enumerate}
 \end{relation}
-
-\subsubsection{Kommutative Diagramme}
-\label{sec:org429b8d6}
-Siehe V2\(_{\text{2}}\): 
-\begin{enumerate}
-\item Dieses Diagramm heist kommutativ, wenn \(h=g\circ f\).
-\item kommutativ wenn \(g\circ f=h\circ k\)
-\end{enumerate}
 
 \subsubsection{Eingeschr"ankte Abbildungen}
 \label{sec:org60b2559}
@@ -487,30 +475,22 @@ Mathematik operiert mit \textbf{Aussagen}.
 Eine Aussage ist eine Behauptung, die Wahr oder Falsch sein kann.
 \end{definition}
 
-\begin{notation}\
-\begin{description}
-\item[{1}] wahr
-\item[{0}] falsche
-\end{description}
+\begin{notation}
+\textbf{0} = wahr, 
+\textbf{1} = falsch
 \end{notation}
 
 \(A,B\) seien Aussagen, dann kann man folgende Aussagen betrachten:
 \begin{relation}
 \begin{itemize}
-\item ''nicht \(A\)'': \(\neg A\)
-\end{itemize}
-\begin{center}
+\item ''nicht \(A\)'': \(\neg A\)\\
 \begin{tabular}{lrr}
 \(A\) & 0 & 1\\
 \hline
 \(\neg A\) & 1 & 0\\
 \end{tabular}
-\end{center}
 
-\begin{itemize}
-\item Vernk"upfungen
-\end{itemize}
-\begin{center}
+\item Vernk"upfungen\\
 \begin{tabular}{rrrrrr}
 \(A\) & \(B\) & \(\neg A\) & \(A\wedge B\) & \(A \vee B\) & \(A\implies B\)\\
 \hline
@@ -519,21 +499,17 @@ Eine Aussage ist eine Behauptung, die Wahr oder Falsch sein kann.
 1 & 0 & 0 & 0 & 1 & 0\\
 1 & 1 & 0 & 1 & 1 & 1\\
 \end{tabular}
-\end{center}
 
-\begin{itemize}
-\item ''A "aquivalent zu B'':  \(A\iff B\)
-\end{itemize}
-\begin{center}
+\item ''A "aquivalent zu B'':  \(A\iff B\) \\
 \begin{tabular}{rrr}
-\(A\) & \(B\) & \(\iff A\)\\
+\(A\) & \(B\) & \(A \iff B\)\\
 \hline
 0 & 0 & 1\\
 0 & 1 & 0\\
 1 & 0 & 0\\
 1 & 1 & 1\\
 \end{tabular}
-\end{center}
+\end{itemize}
 \end{relation}
 
 \begin{exa}
@@ -542,7 +518,7 @@ F"ur ein Element \(x\in X\) k"onnen wir Aussagen betrachten:
 \item \(A(x)=x\in A\)
 \item \(B(x)=x\in B\)
 \end{enumerate}
-\(A(x)\wedge B(x)=x\in (A\cap B)\)
+$\longrightarrow \(A(x)\wedge B(x)=x\in (A\cap B)\)$
 \end{exa}
 
 \subsection{Identit"aten der Aussagenlogik}
@@ -566,7 +542,7 @@ F"ur ein Element \(x\in X\) k"onnen wir Aussagen betrachten:
 \end{enumerate}
 \end{relation}
 
-\subsection{Widerspruchsbeweis}
+\subsubsection{Widerspruchsbeweis}
 \label{sec:org54c9d02}
 Wenn wir die Konsequenz aus der Negation der zu beweisenden Aussage und die
 Pr"amisse zu einem widerspruch f"uhren so ist die Aussage bewiesen, denn:
@@ -639,7 +615,7 @@ Idee: Man m"ochte Quadratische Gleichungen ohne reelle Nullstellen trotzdem
 l"osen, also erweitert man die reellen Zahlen.
 
 \begin{relation}
-Die pototypische Quadratische Gleichungen ohne reelle L"osungen ist: \(x^2+1 =
+Die prototypische Quadratische Gleichungen ohne reelle L"osungen ist: \(x^2+1 =
 -1\).\\
 Man f"ugt K"unstlich die Zahl \(i\) hinzu mit \(i^2=-1\), m"oglichst unter
 Beibehaltung der "ublichen Rechenregeln: man braucht also die Zahlen \(b\cdot i :
@@ -677,7 +653,7 @@ Man "uberpr"uft, dass die "ublichen Rechenregeln aus \(\mathbb{R}\) weiterhin
 gelten (\emph{K"orperaxiome}): F"ur \(z_1, z_2, z_3 \in \mathbb{C}\) gilt, z.B.:
 \begin{relation}
 \begin{itemize}
-\item \(z_1\cdot (z_2+z_3)=z_1z_2+z_1z_3\)
+\item \(z_1\cdot (z_2+z_3)=z_1\cdot z_2+z_1\cdot z_3\)
 \item \(z_1\cdot (z_2\cdot z_3)=(z_1\cdot z_2)\cdot z_3\)
 \item \(z_1 + (z_2 + z_3)=(z_1 + z_2) + z_3\)
 \end{itemize}
@@ -691,8 +667,8 @@ der der Form \(a+0\cdot i = (a,0)\), \(a\in \mathbb{R}\).
 \begin{definition}{Real- und Imagin"aranteil}{}
 F"ur \(z=a+b\cdot i\in \mathbb{C}\) heisst:
 \begin{itemize}
-\item \(a:=:Re(z)\) Realanteil von \(z\)
-\item \(b:=:Im(z)\) Imagin"aranteil von \(z\)
+\item \(a:=Re(z)\) Realanteil von \(z\)
+\item \(b:=Im(z)\) Imagin"aranteil von \(z\)
 \end{itemize}
 
 Also ist \(z=Re(z)+ Im(z)\cdot i\).
@@ -702,8 +678,9 @@ Also ist \(z=Re(z)+ Im(z)\cdot i\).
 Die Zahlen der Form \(b\cdot i : b\in \mathbb{R}\) heissen \textbf{rein Imagin"ar}.
 \end{definition}
 
-F"ur reele Zahlen wissen wir: \(\forall a\in \mathbb{R}\) mit \$a\textlnot{}= 0 \(\exists\)
-\(a^{-1} \in \mathbb{R}\) mit \(a*a^{-1}=1\). Gilt das auch in \(\mathbb{C}\) ?
+\subsection{Inverses zu einer komplexen Zahl}
+F"ur reele Zahlen wissen wir: \(\forall a\in \mathbb{R}\) mit \(a\not= 0\;\exists\)
+\(a^{-1} \in \mathbb{R}\) mit \(a\cdot a^{-1}=1\). Gilt das auch in \(\mathbb{C}\) ?
 
 \begin{definition}{Komplexe Konjugation}{}
 F"ur \(z\in \mathbb{C}\) heisst die Zahl \(\overline{z}:=a-bi\) die komplex
@@ -722,12 +699,9 @@ konjugierte Zahl zu \(a+bi\).
 \(|z|:=\sqrt{x\cdot \overline{z}}=\sqrt{a^2+b^2}\) mit \(z=a+bi\).
 \end{definition}
 
-\subsection{Inverses zu einer komplexen Zahl}
 \label{sec:org0018acd}
-Das Inverse zu \(z\not= 0\):
-\begin{relation}
-\(z\cdot \frac{\overline{z}}{|z|^2}=1\) \\
-Also: \(\forall z\not= 0 \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}=1\)
+\begin{definition}{Inverses einer Komplexen Zahl}{ci}
+Das Inverse einer Komplexen Zahl ist gegeben durch: \(\forall z\not= 0\; \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}=1\)
 \end{relation}
 
 \begin{exa}[] \label{} \

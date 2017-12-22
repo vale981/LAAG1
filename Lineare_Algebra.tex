@@ -103,7 +103,7 @@ colback  = blue!10,
 
 \begin{document}
 \maketitle
-%--\xcomment{proposition,lemma,folgerung,notte,korrolar,Axiom,theo,satz}
+%--\xcomment{proposition,beobachtung,lemma,folgerung,notte,korollar,Axiom,theo,satz}
 \tableofcontents
 \newpage
 
@@ -1342,8 +1342,9 @@ linearkombination ergibt 0). Andernfalls heist die Menge linear abh"angig.
 \end{prof}
 \end{exa}
 
-\textbf{Lemma} Die Menge ist linear abh"angig. \(v_i\) ist eine Linearkombination von \$\$
-
+\begin{lemma}
+  Die Menge ist linear abh"angig. \(v_i\) ist eine Linearkombination von \$\$
+\end{lemma}
 \begin{prof}[] \label{}
 Wenn \(v_i=\lambda_1 v_1\), dann \(0=\) Denn \(-1\) ist ein nicht-trivialer
 Linearfaktor.
@@ -1358,8 +1359,10 @@ Deis heisst, das LGS \(Ax=b\) zu l"osen ist genau linearkombinationen von spalte
 zu finden, welche \(b\) ergeben.
 \end{notte}
 
-\textbf{Lemma} Seien die Vektoren linear unabh"angig. Ein Vektor \(v\) ist genau dann
+\begin{lemma}
+  Seien die Vektoren linear unabh"angig. Ein Vektor \(v\) ist genau dann
 eine Linearkombination von \(v_1,...,v_n\) wenn linear abh"angig ist.
+\end{lemma}
 
 \begin{prof}[] \label{}
 (\(\implies\)) Sei Dann gilt , also ist linear ab"angig.
@@ -1368,8 +1371,10 @@ Sei .. linear abh"angig  Dann
 Es gilt: \(\lambda \not= 0\) (wenn  .. linearunabh"angig.) Also gilt \(v=-\lambda_1\)
 \end{prof}
 
-\textbf{Lemma} Sei \(v=\lambda\) eine Linearkombination von \(v_1,...,v_n\). Diese
+\begin{lemma}
+  Sei \(v=\lambda\) eine Linearkombination von \(v_1,...,v_n\). Diese
 Darstellung ist eindeutig ganau dann, wenn linear unabh"angig sind.
+\end{lemma}
 
 \begin{prof}[] \label{}
 \((\implies)\) Sei die Darstellung eindeutig \$v=..\$ Wenn jetzt \$\$, dan gilt \(v=\)
@@ -1397,9 +1402,11 @@ In drei Dimensionen:
 
 \section{Lineare unabhangigkeit in R"aumen}
 \label{sec:orgea5b4b9}
-\textbf{Proposition} Seien \(v_1,...,v_n \in \mathbb{V}\) linear unabhaenig, seien \(W_1,
+\begin{proposition}
+  Seien \(v_1,...,v_n \in \mathbb{V}\) linear unabhaenig, seien \(W_1,
 ..., W_n \in \mathbb{V}\) so dass jedes \(w_i\) eine Linearkombination von
 \(v_1,...,v_n\) ist. Wenn \(m>n\), dann sind \(w_1,...,w_n\) linear abhaengig.
+\end{proposition}
 
 \begin{prof}[] \label{}
 Seien 
@@ -1416,8 +1423,10 @@ Variablen. \(n<m\), also gibt es eine L"osung $\ldots{}$, die ungleich \(0\) ist
 sind linear unabh"angig.
 \end{prof}
 
-\textbf{Korollar} Je drei Vektoren in \(\mathbb{R}^2\) sind linear unabh"angig, je \(n+1\)
+\begin{korollar}
+  Je drei Vektoren in \(\mathbb{R}^2\) sind linear unabh"angig, je \(n+1\)
 Vektoren in \$\$ sind linear unabh"angig.
+\end{korollar}
 
 \begin{prof}[von Korollar] \label{}
 Seien \(e_i\) die Spalten der Einheitsmatrix sind linear unabh"angig. 
@@ -1425,7 +1434,7 @@ Seien \(e_i\) die Spalten der Einheitsmatrix sind linear unabh"angig.
 Dies zeigt auch, dass jeder Vektor in \(R\) eine Linearkombination von \(e_i\) ist. 
 \end{prof}
 
-\begin{definition}{}{}
+\begin{definition}{Untervektorraum}{}
 Sei V ein \(K-\) Vektorraum, \(U\subseteq V\) eine Teilmenge von V. \(U\) heist
 untervektorraum wenn:
 \begin{enumerate}
@@ -1515,10 +1524,13 @@ Sei \(V\) ein endlichdimensionaler Vektorraum. Die Anzahl der Vektoren in einer
 \textbf{Frage}: kannn man eine lineare unabh"angige Menge \(S\in V\) zu eine Basis
 erweitern?.
 
-\textbf{Proposition} Jede linear unabh"angige Teilmenge \(S\in V\) eines
+\begin{proposition}
+  Jede linear unabh"angige Teilmenge \(S\in V\) eines
 endlichdimensionalen Vektorraumes \(V\) ist in einer maximalen linear
 unabh"angigen Teilmenge enthalten. Eine maximal linear unabh. Teilmenge von \(V\)
 st eine Basis von \(V\).
+\end{proposition}
+
 
 \begin{definition}{Maximal linear unabh"angige Teilmengen}{}
 Eine Teilmenge \(S'\in V\) ist maximal linear unabh., wenn aus \(S\)
@@ -1542,8 +1554,10 @@ Basis). Wenn $\ldots{}$ d.h. aber, aber \(S\cup {v}\) ist linear unabh. (lemma) 
 \(S\) dann nicht maximal.
 \end{prof}
 
-\textbf{Korollar} Man kann jeder lienar unabh. Teilmenge \(S\in V\) zu einer Basis
+\begin{korollar}
+  Man kann jeder lienar unabh. Teilmenge \(S\in V\) zu einer Basis
 erweitern.
+\end{korollar}
 
 \begin{notte}
 Wenn \(V=K^n, S\in V\) linear unabh. \(\rightarrow\) man kann zur erweiterung passende
@@ -1580,7 +1594,9 @@ dieses Vektors bzgl. \(B\).
 Die Definition einer Basis garantiert, dass hierdurch eine Bijektion \ldots{} entsteht.
 \end{definition}
 
-\textbf{Warnung} Diese Korrespondenz kommt auf die Wahl der Basis an.
+\begin{notte}
+  Diese Korrespondenz kommt auf die Wahl der Basis an.
+\end{notte}
 
 \begin{exa}[] \label{}
 
@@ -1592,7 +1608,10 @@ Sei \(Ax=0\) ein h. LGS
 
 \textbf{Aus Uebungen} \ldots{}
 
-\textbf{Lemma} Die Spalten von \(\Phi\) bilden eine Basis in L.
+\begin{lemma}
+  Die Spalten von \(\Phi\) bilden eine Basis in L.
+\end{lemma}
+  
 \begin{prof}[] \label{}
 Die Spalten von \(\Phi\) sind linear unabhaenig. (sonst abb. nicht injektiv)
 
@@ -1648,22 +1667,32 @@ $f=f_A: K^n\rightarrow K^m \quad x\mapsto A\cdot x$\\
 $Ker (f_A) = \{x\in K^n|A\cdot x = 0\}$, also die Lösung des homogenen LGS mit der Koeffizientenmatrix A.
 \end{exa}
 
-\textbf{Beobachtung} Der Kern von \(f\) ist ein Untervektorraum von \(V\):
+\begin{beobachtung}
+  Der Kern von \(f\) ist ein Untervektorraum von \(V\):
 \[v_1 , v_2 \in Ker(f) \Rightarrow f(v_1 + v_2)=f(v_1 )+f(v_2 )=0 \Rightarrow v_1 + v_2 \in Ker(f) \]
 \[v \in Ker(f), \lambda \in K \Rightarrow f(\lambda v)=\lambda f(v)=\lambda \cdot 0 = 0 \Rightarrow \lambda v \in Ker(f) \]
+\end{beobachtung}
 
-\textbf{Beobachtung} Das Bild von f $Im(f) \subseteq W$ ist Untervektorraum, wenn:
+\begin{beobachtung}
+  Das Bild von f $Im(f) \subseteq W$ ist Untervektorraum, wenn:
 \[w_1 =f(v_1 ), w_2 = f(v_2 )\in Im(f) \Rightarrow w_1 +w_2 = f(v_1 )+f(v_2 )= f(v_1 +v_2) \Rightarrow w_1 +w_2 \in Im(f) \]
 \[w=f(v)\in Im(f), \lambda \in K \Rightarrow \lambda w = \lambda f(v)=f(\lambda v) \in Im(f) \]
 $\Rightarrow$ Das Bild einer linearen Abbildung ist ein Untervektorraum.
+\end{beobachtung}
 
 \begin{exa}[] \label{}
 $Im(f_A )=\{b\in K^m \:|\: \exists x \in K^n: A\cdot x=b \}=\{b\in K^m\:|\:LGS Ax=b\; l"osbar\} $
 \end{exa}
 
-\textbf{Beobachtung} Definitionsgemäß ist $f:V\rightarrow W$ genau dann surjektiv, wenn $Im(f) = W$.
+\begin{beobachtung}
+  Definitionsgemäß ist $f:V\rightarrow W$ genau dann surjektiv, wenn $Im(f) =
+  W$.
+\end{beobachtung}
 
-\textbf{Proposition} Sei \(f:V\rightarrow W\) eine lineare Abbildung. Es gilt: \(f\) injektiv $\iff$ \(Ker(f)=\{0\}\)
+\begin{proposition}
+  Sei \(f:V\rightarrow W\) eine lineare Abbildung. Es gilt: \(f\) injektiv
+  $\iff$ \(Ker(f)=\{0\}\)
+\end{proposition}
 
 \begin{prof}[] \label{}
 f injektiv $\iff v_1 \neq v_2 \in V: f(v_1)\neq f(v_2) \iff f(v_1)-f(v_2)\neq 0 \iff f(v_1 -v_2)\neq 0 \iff v_1,v_2 \in V, v_1-v_2\neq 0: f(v_1 -v_2)\neq 0 \iff v\neq 0: f(v)\neq 0 \iff Ker(f) = \{0\}$
@@ -1751,17 +1780,10 @@ Sei $f:V\to W$ linear. Der Rang von \(f\) ist $\mRg(f) = \text{rk}(f) := \dim\mI
 
 \begin{proposition} Sei \(f:V\to W\) linear, endlichdimensional.
 Dann gilt:
-\begin{align*}
-	f injektiv &
-	\\ \mKer(f) = \{0\}  &
-	\\ \mRg(f) = \dim V &
-\end{align*}
-Andererseits gilt:
-\begin{align*}
-	\text{f surjektiv}
-	\\ \mIm(f) = W  &
-	\\ \mRg(f) = \dim W &
-\end{align*}
+\begin{itemize}
+\item $f$ injektiv $\implies \mKer(f) = \{0\}$ und $ \mRg(f) = \dim V$
+\item $f$ surjektiv $\implies \mIm(f) = W$ und $\mRg(f) = \dim W$
+\end{itemize}
 \end{proposition}
 
 \begin{korollar} Ist \(\mdim V = \mdim W \), so ist \(f\) injektiv $\iff $ \(f\) surjektiv.\end{korollar}
@@ -1949,11 +1971,12 @@ in den neuen koordinaten $\lambda'=S^{-1}\lambda$
   $\lambda=M^{B'}_{Basiswechselmatrix}\cdot \lambda ' $
 \end{notte}
 
-\textbf{Lemma}(Verhalten von Abbildungsmatrizen unter Basiswechsel)
+\begin{lemma}[Verhalten von Abbildungsmatrizen unter Basiswechsel]
 Sei .. eine Lineare Abbildung, ..., dann gilt:
 \[
   M^{B'}_{C'}(f)=
 \] In Anderen Worten: wenn $S$ die Basiswechselmatrix von ... so gilt
+\end{lemma}
 
 \begin{prof}
   $M^{B'}_{C'}(f)=$

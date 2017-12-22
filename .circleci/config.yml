@@ -14,6 +14,8 @@ jobs:
           name: Generating current version
           command: |
             latexmk Lineare_Algebra.tex;
+            sed -e 's/%--//g' Lineare_Algebra.tex  > Condensed.tex
+            latexmk Condensed.pdf
             mkdir /tmp/artifacts;
             cp Lineare_Algebra.pdf /tmp/artifacts/
       - run:
@@ -24,6 +26,7 @@ jobs:
             UPLOAD_URL=$(curl --data "$API_JSON" https://api.github.com/repos/vale981/LAAG1/releases?access_token=$TOKEN | jq -r '.upload_url')
             echo $UPLOAD_URL
             curl -H "Authorization: token $TOKEN" -H "Accept: application/vnd.github.manifold-preview" -H "Content-Type: application/pdf" --data-binary @/tmp/artifacts/Lineare_Algebra.pdf "$UPLOAD_URL=Lineare_Algebra.pdf"
+            curl -H "Authorization: token $TOKEN" -H "Accept: application/vnd.github.manifold-preview" -H "Content-Type: application/pdf" --data-binary @/tmp/artifacts/Condensed.pdf "$UPLOAD_URL=Condensed.pdf"
 
       - store_artifacts:
           path: /tmp/artifacts

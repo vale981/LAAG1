@@ -18,6 +18,7 @@ jobs:
             latexmk Condensed.tex
             mkdir /tmp/artifacts;
             cp Lineare_Algebra.pdf /tmp/artifacts/
+            cp Condensed.pdf /tmp/artifacts/
       - run:
           name: Publish to Releases
           command: |

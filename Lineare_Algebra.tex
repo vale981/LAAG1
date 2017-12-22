@@ -1,9 +1,11 @@
 % Created 2017-11-19 Sun 20:51
 % Intended LaTeX compiler: pdflatex
-\documentclass[11.5pt]{article}
+\documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage{makeidx}
+\makeindex
 \usepackage{beton}
-\usepackage{euler}
+\usepackage{eulervm}
 \usepackage{mathpazo} % add possibly `sc` and `osf` options
 \usepackage{eulervm}
 \usepackage[T1]{fontenc}
@@ -47,6 +49,7 @@
 \DeclareMathOperator{\mDeg}{deg}
 \DeclareMathOperator{\Tr}{Tr}
 \usepackage{tcolorbox}
+\usepackage{booktabs}
 \tcbuselibrary{theorems}
 \newtcbtheorem[number within=section]{definition}{Definition}%
 {colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
@@ -72,17 +75,18 @@ colback  = blue!10,
 \theoremstyle{remark}
 \newtheorem{exa}{Beispiel}[section]
 \newtheorem{expe}{experiment}[section]
+\theoremstyle{definition}
 \newtheorem{beobachtung}{Beobachtung}
 \newtheorem{folgerung}{Folgerung}
 \newtheorem*{notte}{Beachte}
-\theoremstyle{definition}
 \newtheorem*{notation}{Notation}
 \newtheorem*{proposition}{Proposition}
 \newtheorem*{lemma}{Lemma}
+\theoremstyle{proof}
+\newtheorem*{prof}{Beweis}
 \theoremstyle{remark}
 \newtheorem*{korollar}{Korollar}
 \newtheorem*{bem}{Bemerkung}
-\newtheorem*{prof}{Beweis}
 \AfterEndEnvironment{prof}{\qed}
 \author{Nebnola, Julius Quasebarth, Valentin Boettcher}
 \date{\today}
@@ -93,16 +97,14 @@ colback  = blue!10,
  pdfkeywords={},
  pdfsubject={},
  pdflang={Germanq}}
-\begin{document}
 
+\begin{document}
 \maketitle
 \tableofcontents
 
 \maketitle
 \newpage
 
-\section{Vorwort}
-\label{sec:org8d9fa1c}
 Ihr habt hier die Mitschriften Valentin Boettchers vor euch. Er teilt eben Diese
 "ausserst gern mit euch und freut sich "uber Feedback, Fehlerkorrekturen und
 Verbesserungsvorschl"age. Kontaktiert ihn am besten via \href{mailto:valentin.boettcher@mailbox.tu-dresden.de}{Email} :).
@@ -120,6 +122,7 @@ grausig: Also frisch ans Werk und Feedback geben.
 
 Viel Vergn"ugen. \textbf{Mathe ist sch"on.}
 
+\part{Grundlagen}
 \section{Mengenlehre}
 \label{sec:orgd4be270}
 In der modernen Mathematik fasst man Strukturen (R"aume, Fl"achen,
@@ -326,7 +329,7 @@ Seien \(X,Y\) Mengen, \(f: X\to Y\) eine Abbildung. \(f\) heist:
 \end{enumerate}
 \end{relation}
 
-\begin{exa}\
+\begin{exa}
 \begin{enumerate}
 \item \(f: \mathbb{R} \to \mathbb{R}, t\mapsto t^2\) 
 \begin{itemize}
@@ -334,7 +337,6 @@ Seien \(X,Y\) Mengen, \(f: X\to Y\) eine Abbildung. \(f\) heist:
 \item ist nicht surjektiv: f"ur \(-1\in \mathbb{R}\) gibt es kein \(t\in\mathbb{R}\)
 mit \(t^2=-1\)
 \end{itemize}
-\begin{enumerate}
 \item \(g: \mathbb{N}\to\mathbb{Z}, n\mapsto-n\)
 \begin{itemize}
 \item ist injektiv: \(m\ne n\implies g(m)=-m \ne -n = g(n)\)
@@ -542,7 +544,7 @@ $\longrightarrow \(A(x)\wedge B(x)=x\in (A\cap B)\)$
 \end{enumerate}
 \end{relation}
 
-\subsubsection{Widerspruchsbeweis}
+\subsection{Widerspruchsbeweis}
 \label{sec:org54c9d02}
 Wenn wir die Konsequenz aus der Negation der zu beweisenden Aussage und die
 Pr"amisse zu einem widerspruch f"uhren so ist die Aussage bewiesen, denn:
@@ -1250,7 +1252,8 @@ Die Menge der Polynome vom Grad h"ochstens \(n\) mit Koeffizienten in \(K\) ist
 durch \(K[t]_n\) berechnet.
 \end{definition}
 
-\section{Vektorra"ume}
+\part{Vektorr"aume}
+\section{Grundlagen}
 \label{sec:org4906e00}
 \begin{definition}{Vektorraum}{}
 Ein \(k\) - Vektorraum \(V\) ist eine Menge zusammen mit den Operationen und mit
@@ -1303,7 +1306,7 @@ Bei der Entwicklung der Vektorraumtheorie ist es oft n"utzlich, an das Beispiel
 \(V=K^n\) zu denken.
 \end{notte}
 
-\subsection{Vektorraumtheorie}
+\section{Vektorraumtheorie}
 \label{sec:org432e282}
 Sei \(V\) ein K-Vektorraum.
 
@@ -1373,8 +1376,6 @@ Spalten von \(A\) linear unabhaenig sind, hat das LGS \(Ax=b\) h"ochstens eine
 L"osung, folglich hat \(Ax=0\) genau eine L"osung x=0.
 \end{prof}
 
-\subsection{Geometrische Deutung der linearen Abh"angigket}
-\label{sec:org95b9a1d}
 \begin{notte}[zu geometrischer Interpretation] \label{}
 Wichitige Beispiele von Vektorr"aumen sind: \(V=\mathbb{R}^2\) (Ebene),
 \(V=\mathbb{R}^3\) (3D-Raum).
@@ -1389,7 +1390,7 @@ In drei Dimensionen:
 \end{itemize}
 \end{relation}
 
-\subsection{Lineare unabhangigkeit in R"aumen}
+\section{Lineare unabhangigkeit in R"aumen}
 \label{sec:orgea5b4b9}
 \textbf{Proposition} Seien \(v_1,...,v_n \in \mathbb{V}\) linear unabhaenig, seien \(W_1,
 ..., W_n \in \mathbb{V}\) so dass jedes \(w_i\) eine Linearkombination von
@@ -1609,7 +1610,7 @@ Also gilt: \ldots{}
 
 \textbf{Frage} Ist \(D\) in diesem Fall immer invertierbar? (Ja, aber wir brauchen mehr Theorie.)
 
-\subsection{Lineare Abbildungen zwischen Vektorr"aumen}
+\section{Lineare Abbildungen zwischen Vektorr"aumen}
 \label{sec:orgb4c03c4}
 \begin{definition}{Lineare Abbildung}{}
 Seien \(V, W\) zwei K-Vektorr"aume. Eine Abbildung \(f: V\rightarrow W\) heißt linear, wenn:
@@ -1691,7 +1692,7 @@ Aufspannabbildung $\varphi_S: K^n \rightarrow V$ wird definiert als $\varphi_S(\
 	Wenn \(f:V\rightarrow W\) Isomorphismus $\implies f^{-1}:W\rightarrow V $ ist auch ein Isomorphismus.
 \end{beobachtung}
 
-\subsubsection{Dimensionsformel}
+\subsection{Dimensionsformel}
 \label{sec:org9a58004}
 \begin{theo}{}{}
 Sei \(f:V\to W\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gilt: \(\mdim\mKer f + \mdim\mIm f = \mdim V\).
@@ -1719,7 +1720,7 @@ f(v) = f\left(\underbrace{\sum_{i=1}^{k}\lambda_ie_i}_{\in \mKer(f)}\right) + f\
 Nun gilt nach Konstruktion von \(U\): \[\underbrace{\mdim \mKer(f)}_{k} + \underbrace{\mdim U}_{n-k} = \underbrace{\mdim V}_{n} \implies \mdim\mKer f + \mdim\mIm f = \mdim V \]
 \end{prof}
 
-\subsubsection{Summe von Untervektorr"aumen}
+\subsection{Summe von Untervektorr"aumen}
 \label{sec:org83dfe63}
 \begin{definition}{}{}
 	Sei V ein Vektorraum, $U_1, U_2 \subseteq V$ Untervektorräume.
@@ -1808,10 +1809,10 @@ Strecken in Richtung von \(l_2\) mit Faktor 2. Wie beschreibt man \(f\) in
 Koordinaten?
 \end{exa}
 
-\subsubsection{Abbildunngsmatrix}
-\begin{definition}{}{}
-Seien \(V,W\) zwei (\(\mathbb{K}\)-) Vektorr"aume. Dann nennen wir
-\(\mHom_\mathbb{K}(V,W) = \{f: V\to W | f \text{ist }\mathbb{K}\text{-linear}\}\).
+\subsection{Abbildunngsmatrix}
+\begin{definition}{Raum der Homomorphismen}{}
+Seien \(V,W\) zwei (\(\mathbb{K}\)-) Vektorr"aume.
+\[\mHom_\mathbb{K}(V,W) = \{f: V\to W \mid f \text{ ist }\mathbb{K}\text{-linear}\}\].
 \end{definition}
 \begin{proposition}
 \(\mHom_\mathbb{K}(V,W)\) ist auch ein Vektorraum.
@@ -1918,7 +1919,7 @@ Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann erhalten wir die
 \end{prof}
 
 
-\subsubsection{Basen und Abbildungsmatrizen (Zusammenfassung)}
+\subsection{Basen und Abbildungsmatrizen (Zusammenfassung)}
 \label{sec:baab}
 Jede Basis in V definiert eine Bijektion $\phi_B^{-1}V\rightarrow K^n, v\mapsto C$
 \begin{relation}
@@ -1929,7 +1930,7 @@ Jede Basis in V definiert eine Bijektion $\phi_B^{-1}V\rightarrow K^n, v\mapsto 
 $B'$'' ist $M^{B'}_B$, also dr"uckt die meue Basis in der alten aus und ist
 nicht die einzige!
 
-\subsubsection{Physikerdefinition eines Vektors}
+\subsection{Physikerdefinition eines Vektors}
 \label{sec:phyv}
 
 Ein (kontravarianter) Vektor ist ein Objekt, welches durch ein n-Tuperl \(\lambda\)
@@ -1979,7 +1980,7 @@ Sei .. eine Lineare Abbildung, ..., dann gilt:
   gesehen ... . Erweitere jetzt ... zu einer Basis ... in $W$. Es gilt. 
 \end{prof}
 
-\subsubsection{Konsequenzen f"ur Matrizen}
+\subsection{Konsequenzen f"ur Matrizen}
 \label{sec:konsma}
 
 Sei ...
@@ -2046,7 +2047,7 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
   \end{itemize}
 \end{prof}
 
-\subsubsection{Determinanten}
+\section{Determinanten}
 \label{sec:det}
 
 Motivation: Wir haben viele Kriterien f"ur invertierbarkeit, aber bislang kein
@@ -2137,7 +2138,7 @@ $\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
 
 Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 
-\subsubsection{Permutationen}
+\subsection{Permutationen}
 \label{sec:perm}
 
 \begin{definition}{Permutationen}{}
@@ -2149,10 +2150,10 @@ Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 \begin{exa}
   Ein Elelement \(\sigma \in S_n\) schreibt man h"aufig als Tabelle:
   
-  \(\left(\begin{array}{cccc}
+  \[\left(\begin{array}{cccc}
   	1 & 2 & ... & n\\
   	\sigma(1) & \sigma(2) & ... & \sigma(n)\\
-  \end{array}\right)\)
+  \end{array}\right)\]
 \end{exa}
 
 \begin{notte}
@@ -2380,7 +2381,7 @@ Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnung
 	In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
 \end{bem}
 
-\subsubsection{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
+\section{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
 
 Wir haben gesehen: wenn \(f: V\to W\) linear, \(V, W\) endlichdimensionale Vektorr"aume \(\implies \exists B\subset V, C\subset W \) Basen so dass
 \[M^B_C(f) = \begin{pmatrix}
@@ -2725,7 +2726,8 @@ tats"achliche Bedeutung.
   (Diagonalisierbarkeit entspricht der Bedingung, dass  alle Bl"ocke Gr"osse 1 haben.)
 \end{relation}
 
-\section{Bilineare und Quadratische Formen}
+\part{Bilineare und Quadratische Formen}
+\section{Grundlagen}
 \label{sec:bili}
 \textbf{Motivation}: Bislang haben wir Vektorr"aume ohne geometrische Strukturen
 studiert; Speziell: wir konnten den Vektoren in Vektorra"umen keine

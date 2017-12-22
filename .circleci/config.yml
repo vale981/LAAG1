@@ -14,8 +14,8 @@ jobs:
           name: Generating current version
           command: |
             latexmk Lineare_Algebra.tex;
-            sed -e 's/%--//g' Lineare_Algebra.tex  > Condensed.tex
-            latexmk Condensed.pdf
+            sed -e 's/%--//g' Lineare_Algebra.tex > Condensed.tex
+            latexmk Condensed.tex
             mkdir /tmp/artifacts;
             cp Lineare_Algebra.pdf /tmp/artifacts/
       - run:

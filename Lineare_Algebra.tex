@@ -2,10 +2,12 @@
 % Intended LaTeX compiler: pdflatex
 \documentclass[11.5pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{beton}
-\usepackage{euler}
-\usepackage{mathpazo} % add possibly `sc` and `osf` options
-\usepackage{eulervm}
+%\usepackage{beton}
+%\usepackage{euler}
+%\usepackage{mathpazo} % add possibly `sc` and `osf` options
+%\usepackage{mathpple}
+\usepackage{fourier}
+%\usepackage{eulervm}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{grffile}
@@ -52,7 +54,7 @@
 {colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
 \newtcbtheorem[number within=section]{axiom}{Axiom}%
 {colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
-\newtcbtheorem[number within=section]{theo}{Satz}%
+\newtcbtheorem[number within=section]{theo}{Theorem}%
 {colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{th}
 \newtcbtheorem[number within=section]{satz}{Satz}%
 {colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
@@ -79,11 +81,11 @@ colback  = blue!10,
 \newtheorem*{notation}{Notation}
 \newtheorem*{proposition}{Proposition}
 \newtheorem*{lemma}{Lemma}
+\newtheorem*{prof}{Beweis}
 \theoremstyle{remark}
 \newtheorem*{korollar}{Korollar}
 \newtheorem*{bem}{Bemerkung}
-\newtheorem*{prof}{Beweis}
-\AfterEndEnvironment{prof}{\qed}
+%\AfterEndEnvironment{prof}{\qed}
 \author{Nebnola, Julius Quasebarth, Valentin Boettcher}
 \date{\today}
 \title{Lineare Algebra (f"ur Physiker) I}
@@ -2480,9 +2482,10 @@ Aus obigen "Uberlegungen folgt: Die Nullstellen von \(\chi_f(\lambda)\) sind gen
                \begin{cases}
                  0, & k\neq i \\
                  \beta_iv_i, & k = i
-               \end{cases} \quad ,\beta_i\neq 0
+               \end{cases} \quad ,\beta_i\neq 0 \\
+    &\implies \text{auf }\alpha_1v_1+\dots +\alpha_nv_n = 0\text{ angewendet}: \alpha_i\beta_iv_i = 0 \xRightarrow{\beta_i \neq 0} \alpha_i = 0
   \end{align*}
-  \todo{Beweis vervollst"andigen, ich verstehe den letzten Schritt nicht :(}
+  Und das kann man f"ur jedes \(i\) machen \(\implies\) alle \(v_i\) sind linear unabh"angig.
 \end{prof}
 Insbesondere folgt f"ur (3), dass die Vereinigung von Basen in Eigenr"aumen immer eine linear unabh"angige Menge ist, aber manchmal gibt es einfach \gq{zu wenige} Eigenvektoren, damit sie zu einer Basis werden.
 \begin{exa}[Eigenwertberechnung]
@@ -2578,30 +2581,42 @@ Folgerung: Sei \(V\) ein \(\mathbb{C}\)-Vektorraum, dann hat lineares \(f: V\to 
 \end{prof}
 
 \begin{lemma}
-  Wenn $f: V\mapsto V$ ... linear ist und ... die Komplexifizierung, $B$ Basis
-  in $V$, dann gilt: ... (Wir nehmen reelle Matrizen als Complexe war.)
+  Wenn $f: V\mapsto V$ linear ist und \(f_{\mathbb{C}}: V_{\mathbb{C}} \to V_{\mathbb{C}}\) die Komplexifizierung, $B$ Basis
+  in $V$, dann gilt: \[M^B_B(f_{\mathbb{C}}) = M^B_B(f)\] (Informell: bei Komplexifizierung nehmen wir Matrizen "uber \(\mathbb{R}\) als die "uber \(\mathbb{C}\) war)
 \end{lemma}
 
-\begin{proof}
-  Inspektion der Abbildungsmatrix. \[f_(\mathbf{C})(b_i,0) = (f(b_i), 0)\]
-\end{proof}
+\begin{prof}
+  Inspektion der Abbildungsmatrix. \[f_{\mathbb{C}}(b_i,0) = (f(b_i), 0)\]
+\end{prof}
 \begin{exa}
-  ...
+  \(R_{\frac{\pi}{2}}: \mathbb{R}^2\to\mathbb{R}^2\) mit Abbildungsmatrix
+  \[
+    \begin{pmatrix}
+      0 & -1 \\
+      1 & 0
+    \end{pmatrix}
+    \rightarrow \chi_{R_{\frac{\pi}{2}}}(\lambda) = \lambda^2 + 1
+\]
 \end{exa}
 
 \begin{prof}
-  Inspektion der Abbildungsmatrix. \[f_{\mathbf{C}}(b_i,0) = (f(b_i), 0)\]
+  Inspektion der Abbildungsmatrix. \[f_{\mathbb{C}}(b_i,0) = (f(b_i), 0)\]
 \end{prof}
 
 \begin{definition}
-  Sei $f: V \mapsto V$ eine $K$ - Lineare Abbildung. Ein Untervektorraum
-  $U\subseteq V$ heisst invariant, wenn $f(U) \subseteq U$.
+  Sei $f: V \mapsto V$ eine $K$-lineare Abbildung. Ein Untervektorraum
+  $U\subseteq V$ hei"st invariant, wenn $f(U) \subseteq U$.
 \end{definition}
 
 \begin{proposition}
-  Sei $f: V\mapsto V$ eine ... Abbildung. Eim Vektor ... ist genau dann eine
-  Eigenvektor von ... mit dem Eogenwert ..., wenn .... invariant unter $f$ ist
-  mit ...
+  Sei $f: V\to V$ eine \(\mathbb{R}\)-lineare Abbildung. Eim Vektor \(u = v + iw \in V_{\mathbb{C}}\) (\(v, w \in V\)) ist genau dann ein
+  Eigenvektor von \(f_{\mathbb{C}}\) mit dem Eigenwert \(\lambda = \alpha + i\beta, \beta\neq 0\), wenn \(U = \langle v, w\rangle\subseteq V\) invariant unter $f$ ist
+  mit \(f(v) = \alpha v - \beta w, f(w) = \beta v + \alpha w\) (das hei"st, die Abbildung \(f|_U\) hat die Matrix \(
+  \begin{pmatrix}
+    \alpha & \beta \\
+    -\beta & \alpha
+  \end{pmatrix}
+\) in der Basis \(v, w\))
 \end{proposition}
 
 \begin{prof}

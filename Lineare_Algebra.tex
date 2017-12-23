@@ -1,6 +1,6 @@
 % Created 2017-11-19 Sun 20:51
 % Intended LaTeX compiler: pdflatex
-\documentclass[11pt]{article}
+\documentclass[fontsize=11pt,paper=a4]{scrartcl}
 \usepackage[utf8]{inputenc}
 %\usepackage{beton}
 %\usepackage{euler}
@@ -21,9 +21,6 @@
 \usepackage{capt-of}
 \usepackage{hyperref}
 \usepackage{nicefrac}
-\usepackage[a4paper, left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
-\setlength{\parfillskip}{0pt plus 1fil}
-\setlength{\parindent}{0pt}
 \usepackage[ngerman]{babel}
 \usepackage{fancyhdr}
 \usepackage{mathtools} % for xrightarrow
@@ -73,7 +70,6 @@ colback  = blue!10,
 \usepackage{gauss}
 \usepackage{stmaryrd}
 \theoremstyle{remark}
-\newtheorem{exa}{Beispiel}[section]
 \newtheorem{expe}{experiment}[section]
 \theoremstyle{definition}
 \newtheorem{beobachtung}{Beobachtung}
@@ -81,16 +77,17 @@ colback  = blue!10,
 \newtheorem*{notte}{Beachte}
 \newtheorem*{notation}{Notation}
 \newtheorem*{proposition}{Proposition}
-\newtheorem*{lemma}{Lemma}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{exa}{Beispiel}[section]
+\newtheorem*{korollar}{Korollar}
 \theoremstyle{proof}
 \newtheorem*{prof}{Beweis}
 \theoremstyle{remark}
-\newtheorem*{korollar}{Korollar}
 \newtheorem*{bem}{Bemerkung}
-\AfterEndEnvironment{prof}{\qed}
+\AfterEndEnvironment{prof}{\qed\\}
 \author{Nebnola, Julius Quasebarth, Valentin Boettcher}
 \date{\today}
-\title{Lineare Algebra (f"ur Physiker) I}
+\title{Lineare Algebra (für Physiker) I}
 \hypersetup{
  pdfauthor={Nebnola, Julius Quasebarth, Valentin Boettcher},
  pdftitle={Lineare Algebra (Physiker) I},
@@ -2757,11 +2754,11 @@ Folglich kann man $\Xi_1$ f"ur $2\times 2$ Matrizen direkt ablesen.
 Dieses Mathematische Spektrum hat f"ur viele Physikalisch motivierte Operatoren
 tats"achliche Bedeutung.
 
-\begin{notte}
+\begin{bem}
   Wir habengesehen, dass es nicht diagonalisierbare Matrizen gibt. Es gibt die
   nahelegende Fragem was ist f"ur solche allgemeinen Matrizen/Abbildungen die
   ''bestm"ogliche'' Form.
-\end{notte}
+\end{bem}
 \begin{relation}
   ....
 

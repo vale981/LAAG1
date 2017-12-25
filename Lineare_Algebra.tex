@@ -2605,7 +2605,7 @@ Folgerung: Sei \(V\) ein \(\mathbb{C}\)-Vektorraum, dann hat lineares \(f: V\to 
 \end{prof}
 
 \begin{lemma}
-  Wenn $f: V\mapsto V$ linear ist und \(f_{\mathbb{C}}: V_{\mathbb{C}} \to V_{\mathbb{C}}\) die Komplexifizierung, $B$ Basis
+  Wenn $f: V\to V$ linear ist und \(f_{\mathbb{C}}: V_{\mathbb{C}} \to V_{\mathbb{C}}\) die Komplexifizierung, $B$ Basis
   in $V$, dann gilt: \[M^B_B(f_{\mathbb{C}}) = M^B_B(f)\] (Informell: bei Komplexifizierung nehmen wir Matrizen "uber \(\mathbb{R}\) als die "uber \(\mathbb{C}\) war)
 \end{lemma}
 
@@ -2627,7 +2627,7 @@ Folgerung: Sei \(V\) ein \(\mathbb{C}\)-Vektorraum, dann hat lineares \(f: V\to 
   Inspektion der Abbildungsmatrix. \[f_{\mathbb{C}}(b_i,0) = (f(b_i), 0)\]
 \end{prof}
 
-\begin{definition}
+\begin{definition}{Invarianter Untervektorraum}{}
   Sei $f: V \mapsto V$ eine $K$-lineare Abbildung. Ein Untervektorraum
   $U\subseteq V$ hei"st invariant, wenn $f(U) \subseteq U$.
 \end{definition}
@@ -2642,85 +2642,147 @@ Folgerung: Sei \(V\) ein \(\mathbb{C}\)-Vektorraum, dann hat lineares \(f: V\to 
   \end{pmatrix}
 \) in der Basis \(v, w\))
 \end{proposition}
-
+\todo{Hier fehlt Zeug}
 \begin{prof}
   ... Diese Matrix hat Eigenwerte $\alpha + i\cdot\beta$ und hat keine
   Eigenvektoren.
 \end{prof}
 
-Zusammen mit der Existenz von Eigenvektoren f"ur $f_{\mathbb{C}}$ haben wir:
-
 \begin{proposition}
-  ... ein linearer Operator auf einem $\mathbb{R}$ VR. Dann hat $f$ einen 1,
-  oder 2 dimensionalen invarianten Unterraum.
+  Sei \(f: V\to V\) linear und \(V\) ein \(\mathbb{R}\)-Vektorraum, sei \(u = v + i w \in V_{\mathbb{C}}\) ein Eigenvektor von \(f_{\mathbb{C}}\) zum Eigenwert \(\lambda = \alpha + i \beta \not\in \mathbb{R} (\beta \neq 0)\). Dann ist der Raum \(U = \langle v, w\rangle\subseteq V\) invariant unter \(f\), und es gilt
+  \begin{align*}
+    f(v) = \alpha v - \beta w\\
+    f(w) = \beta v + \alpha w
+  \end{align*}
+  (also ist \(U\) ein 2-dimensionaler Unterraum von \(f\))
 \end{proposition}
 
-Geometrisch:
+\begin{prof}
+  \begin{align*}
+    f_{\mathbb{C}}(u) &= \lambda u = (\alpha + i \beta) u = (\alpha + i\beta)(v + iw) = (\alpha v - \beta w) + i(\beta v + \alpha w)\\
+    f_{\mathbb{C}}(u) &= f_{\mathbb{C}}(v+iw) = f(v) + if(w) \rightarrow \text{Formeln von oben}
+  \end{align*}
+  Die Matrix von \(f|_U\) bez"uglich der Basis \(v, w\) ist
+  \[
+    \begin{pmatrix}
+      \alpha & \beta \\
+      -\beta & \alpha
+    \end{pmatrix}
+  \]
+  Diese Matrix hat Eigenwerte \(\alpha \pm i\beta\) (einfach nachrechnen) \(\implies f|_U\) hat keine Eigenvektoren in \(V\) (in \(V_{\mathbb{C}}\) schon: \((i\quad 1)^T\) und \((-i\quad 1)^T\) zum Beispiel bez"uglich der Basis \(v, w\))
+\end{prof}
+
+Zusammen mit der Existenz von Eigenvektoren f"ur $f_{\mathbb{C}}$ (Folgerung des Hauptsatzes der Algebra) haben wir:
+
+\begin{proposition}
+  \(f: V\to V\) ein linearer Operator auf einem $\mathbb{R}$-Vektorraum. Dann hat $f$ einen 1-
+  oder 2-dimensionalen invarianten Unterraum.
+\end{proposition}
+
 \begin{relation}
+  Geometrisch:
   \begin{itemize}
-  \item[1 - Dimensional] = Eigenraum
-  \item[2 - Dimensional] = Drehstreckung
+  \item 1-dimensional \(\hat{=}\) Eigenraum
+  \item 2-dimensional \(\hat{=}\) Drehstreckung
   \end{itemize}
 \end{relation}
 
-Diese Proposition beantwortet auf die bestm"ogliche Weise die Frage: ''Was
-passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat''
+Diese Proposition beantwortet auf die bestm"ogliche Weise die Frage: \gq{Was
+passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat}
 
 \begin{exa}
-  ...
-  Es ist $f$ nicht diagonalisierbar.
+  Wir hatten noch die Frage, ob es passieren kann, dass man \gq{genug} Eigenwerte hat, aber nicht genug Eigenvektoren? Antwort: Ja, das kann auch passieren.
+
+  Sei \(K = \mathbb{R}\) oder \(\mathbb{C}\), \(V = K[t]_1 = \{a_0 + a_1 t\mid a_i\in K\}\). Dann sei
+  \[f = \frac{\text{d}}{\text{d}t}: V\to V; B = (1, t) \implies M^B_B(f) =
+    \begin{pmatrix}
+      0 & 1 \\
+      0 & 0
+    \end{pmatrix}
+   \implies \chi_f(\lambda) = \det
+   \begin{pmatrix}
+     \lambda & -1 \\
+     0 & \lambda
+   \end{pmatrix} = \lambda^2
+\] \(\implies \lambda = 0\) ist der Eigenwert (der ist doppelt belegt), 1 ist der einzige Eigenvektor zu \(\lambda = 0\)
+
+  \(\implies f\) ist nicht diagnoalisierbar :(
 \end{exa}
 
 \begin{definition}
-  Seien $p,q\in K[\lambda]$ zwei Polynome. $p$ teilt $q$ ($p|q$), wenn $\exists
-  Es ist $f$ nicht diagonalisierbarp_1 \in K[t]$ s.d. $q= p\cdot p_1$. 
+  Seien $p,q\in K[\lambda]$ zwei Polynome. $p$ teilt $q$ ($p\mid q$), wenn \(\exists p_1 \in K[t]\) so dass \(q = pp_1\)
+  (man sagt auch, \(q\) spaltet einen Faktor \(p\) ab)
 \end{definition}
 
 \begin{proposition}
-  Sei ... linearer Operator $U\subseteq V$ ein invarianter Untervektorraum. Dann
-  Es ist $f$ nicht diagonalisierbargilt $\Xi_{f} | $... 
+  Sei \(f: V\to V\) linearer Operator, $U\subseteq V$ ein invarianter Untervektorraum. Dann gilt \(\chi_{f|_U} \mid \chi_f\) (\(f|_U:U\to U\) ist die Einschr"ankung von \(f\) auf \(U\))
 \end{proposition}
 \begin{prof}
-  Nehmen wir eine Basis $B_U$ in $U$ und erweitern sie zu einer Basis $B$ in $V$
+  Nehmen wir eine Basis $B'$ in $U$ und erweitern sie zu einer Basis $B$ in $V$
+  \begin{align*}
+    M^B_B(f) =
+    \begin{pmatrix}
+      M^{B'}_{B'}(f|_U') & * \\
+      0 & C
+    \end{pmatrix}
+  \end{align*}
+  Folglich ist
+  \begin{align*}
+    \chi_f(\lambda) &= \det(\lambda\cdot\mId_V - f) = \det
+    \begin{pmatrix}
+      \lambda\cdot\mId_{\dim U} - M^{B'}_{B'}(f|_U) & *\\
+      0 & \lambda\cdot\mId_m - C
+    \end{pmatrix}\\
+    &= \det(\lambda\cdot\mId_{\dim U} - M^{B'}_{B'}(f|_U))\det(\lambda\cdot\mId_m  - C) = \chi_{f|_U}(\lambda)\cdot\det(\lambda\cdot\mId_m - C)
+  \end{align*}
+  mit \(m = \dim V - \dim U\).
 \end{prof}
 
 \begin{folgerung}
-  Die Dimension des Eigenraumes $Ker...$ ist kleiner gleich der Vielfachheit von
-  Es ist $f$ nicht diagonalisierbar $\lambda$ als Nullstelle $\Xi_f$.
+  Die Dimension des Eigenraumes \(\mKer(\lambda\cdot\mId - f)\) ist kleiner gleich der Vielfachheit von \(\lambda\) als Nullstelle von \(\chi_f\).
 \end{folgerung}
 
 \begin{prof}
-  .... ist invariant, 
+  \(U:= \mKer(\lambda\cdot\mId - f)\) ist invariant,
+  \(\chi_{f|_U} \mid \chi_f\) \(\implies\) die Vielfachheit der Nullstelle \(\lambda\) in \(\chi_f\) (das ist gleich der Dimension von \(\mKer(\lambda\cdot\mId - f)\)) ist gr"o"ser gleich der Vielfachheit der Nullstelle \(\lambda\) in \(\chi_{f|_U}\), da \(\exists p\in K[t]: \chi_f = p\chi_{f|_U}\)
 \end{prof}
 
-\begin{definition}
-  Sei ... linear $\lambda$ ein Eigenwert von $f$. Die algebraische Vielfachheit
-  Es ist $f$ nicht diagonalisierbar von $\lambda$, $\mu_{alg}(\lambda)$ ist die
-  Es ist $f$ nicht diagonalisierbarVielfachheit von $\lambda$ als Nullstelle von $\Xi_f$.
+\begin{definition}{Algebraische Vielfachheit einer Nullstelle}{}
+  Sei \(f: V\to V\) linear, $\lambda$ ein Eigenwert von $f$. Die algebraische Vielfachheit von \(\lambda\), \(\mu_{alg}(\lambda)\), ist die Vielfachheit von \(\lambda\) als Nullstelle von \(\chi_f\).
 \end{definition}
 
-\begin{definition}
-  Sei ... linear, $\lambda$ ein Eigenwert von $f$. Die geometrische Vielfachheit
-  Es ist $f$ nicht diagonalisierbarvon $\lambda$ ist ...
-  Die Behauptung oben ist ...
+\begin{definition}{Geometrische Vielfachheit einer Nullstelle}{}
+  Sei \(f:V \to V\) linear, $\lambda$ ein Eigenwert von $f$. Die geometrische Vielfachheit von \(\lambda\) ist \(\mu_{geo}(\lambda) = \dim(\lambda\cdot\mId_V - f)\)
+  Die Behauptung oben ist: \(\mu_{geo}(\lambda) \leq \mu_{alg}(\lambda)\) f"ur jeden Eigenwert \(\lambda\).
 \end{definition}
 
-\begin{theo}
-  Sei ... linear. Dann ist $f$ diagonalisierbar genau dann, wenn:
+\begin{satz}{Vielfachheiten von Nullstellen, Diagonalisierbarkeit}{}
+  Sei \(f: V\to V\) linear (\(V\) ist ein \(K\)-Vektorraum). Dann ist \(f\) diagonalisierbar genau dann, wenn folgendes erf"ullt ist:
   \begin{enumerate}
-  \item alle Nullstellen von $\Xi_f \in K$ (Automatisch erf"ullt f"ur die
-  Es ist $f$ nicht diagonalisierbarkomplexen Zahlen)
-  \item f"ur jede Nullstelle $\lambda$ von $\Xi_f$ gilt: $\mu_{geo}(\lambda)=\mu_{alg}(\lambda)$
+  \item alle Nullstellen von \(\chi_f\) liegen in \(K\) (Bemerkung: automatisch erf"ullt f"ur \(K = \mathbb{C}\) nach dem Fundamentalsatz der Algebra)
+  \item f"ur jede Nullstelle \(\lambda\) von \(\chi_f\) gilt \(\mu_{geo}(\lambda) = \mu_{alg}(\lambda)\)
   \end{enumerate}
-\end{theo}
+\end{satz}
 
 \begin{prof}
-  ... ist ein Polynom vom Grad $\dim V \rightarrow{} \Xi_f$ hat h"ochstens $n$
-  Es ist $f$ nicht diagonalisierbarNullstellen in $K$, gez"ahlt mit
-  Es ist $f$ nicht diagonalisierbarVielfachheiten. $\implies$ ....
+  \[\chi_f(\lambda) = \det(\lambda\cdot\mId - f) = \det
+    \begin{pmatrix}
+      \lambda - a_1 & & * \\
+      & \ddots & \\
+      * & & \lambda - a_n
+    \end{pmatrix}
+  \] ist ein Polynom vom Grad $\dim V = n \implies \chi_f$ hat h"ochstens $n$ Nullstellen in $K$, gez"ahlt mit Vielfachheiten (f"ur \(K = \mathbb{C}\) genau \(n\) Nullstellen mit Vielfachheiten).
+  \begin{align*}
+    \implies \sum_{\lambda \text{ Nst von } \chi_f}\mu_{alg}(\lambda) \leq n = \dim V \implies \sum_{\lambda\text{ Nst von }\chi_f} \mu_{geo}(\lambda) \leq \sum_{\lambda\text{ Nst von }\chi_f}\mu_{alg}(\lambda) \leq \dim V
+  \end{align*}
+  mit Gleichheit \todo{Hier weitermachen}genau dann, wenn\dots
+  \begin{enumerate}
+  \item \(\sum\mu_{alg}(\lambda) = n\)\todo{nicht doch eher \(\mu_{geo}\)?}
+  \item \(\mu_{geo}(\lambda) = \mu_{alg}(\lambda) \quad\forall\lambda\)
+  \end{enumerate}
 
   Andererseits ist $f$ genau dann diagonalisierbar, wenn es eine Basis aus
-  Es ist $f$ nicht diagonalisierbarEigenvektoren gibt, also ..
+  Eigenvektoren gibt, also ..
 \end{prof}
 
 \begin{notte}

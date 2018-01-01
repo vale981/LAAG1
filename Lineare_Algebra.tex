@@ -1,6 +1,6 @@
 % Created 2017-11-19 Sun 20:51
 % Intended LaTeX compiler: pdflatex
-\documentclass[fontsize=11pt,paper=a4,BCOR=0mm,DIV=11]{scrbook}
+\documentclass[fontsize=11pt,paper=a4,BCOR=0mm,DIV=11,automark,headsepline]{scrbook}
 \usepackage[utf8]{inputenc}
 %\usepackage{beton}
 %\usepackage{euler}
@@ -22,16 +22,8 @@
 \usepackage{hyperref}
 \usepackage{nicefrac}
 \usepackage[ngerman]{babel}
-\usepackage{fancyhdr}
 \usepackage{mathtools} % for xrightarrow
 \usepackage{todonotes}
-\pagestyle{fancy}
-\fancyhead{}
-\fancyfoot{}
-\fancyhead[L]{\rightmark}
-\fancyhead[R]{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0pt}
 \newcommand{\gq}[1]{\glqq{}#1\grqq{}} % german quotes
 \newcommand{\mcolor}[2][red]{\begingroup\color{#1}#2\endgroup }
 \DeclareMathOperator{\mdim}{dim}
@@ -704,7 +696,7 @@ konjugierte Zahl zu \(a+bi\).
 
 \label{sec:org0018acd}
 \begin{definition}{Inverses einer Komplexen Zahl}{ci}
-Das Inverse einer Komplexen Zahl ist gegeben durch: \[\forall z\not= 0\; \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}=1\]
+Das Inverse einer Komplexen Zahl ist gegeben durch: \(\forall z\not= 0\; \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}=1\)
 \end{definition}
 
 \begin{exa}[] \label{} \
@@ -807,20 +799,16 @@ Mit dieser Notation folgt:
 \end{relation}
 
 \begin{exa}[] \label{}\
-\begin{equation*}
   \begin{align*}
-    \cos(\varphi)+i\cdot \sin(\varphi))^2 & =\cos^2(\varphi)-\sin^2(\varphi)+2\cdot i\cdot\sin(\varphi)\cdot\cos(\varphi) \\
-                                          & = \cos(2\varphi) + 2\cdot i \cdot\sin(2\varphi)
+    (\cos(\varphi)+i\cdot \sin(\varphi))^2 & = \cos^2(\varphi)-\sin^2(\varphi)+2\cdot i\cdot\sin(\varphi)\cdot\cos(\varphi) \\
+                                           & = \cos(2\varphi) + 2\cdot i \cdot\sin(2\varphi) \\
   \end{align*}
-
-  \begin{center}
     \[  \implies 
       \begin{cases}
         \cos(2\varphi)=\cos^2(\varphi)-\sin^2(\varphi) \\
         \sin(2\varphi)=2\cdot\sin(\varphi)\cdot\cos(\varphi)
       \end{cases}
     \]
-\end{equation*}
 \end{exa}
 
 \section{Einscheitswurzeln}

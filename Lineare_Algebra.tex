@@ -1,6 +1,6 @@
 % Created 2017-11-19 Sun 20:51
 % Intended LaTeX compiler: pdflatex
-\documentclass[fontsize=11pt,paper=a4]{scrartcl}
+\documentclass[fontsize=11pt,paper=a4,BCOR=0mm,DIV=11]{scrbook}
 \usepackage[utf8]{inputenc}
 %\usepackage{beton}
 %\usepackage{euler}
@@ -122,7 +122,7 @@ grausig: Also frisch ans Werk und Feedback geben.
 Viel Vergn"ugen. \textbf{Mathe ist sch"on.}
 
 \part{Grundlagen}
-\section{Mengenlehre}
+\chapter{Mengenlehre}
 \label{sec:orgd4be270}
 In der modernen Mathematik fasst man Strukturen (R"aume, Fl"achen,
 Zahlensysteme) als \emph{Mengen} und \emph{Abbildungen} auf.
@@ -152,7 +152,7 @@ also eindeutig dadurch bestimmt, welche Elemente sie enth"alt.
 \end{itemize}
 \end{exa}
 
-\subsection{Wichtige Mengen}
+\section{Wichtige Mengen}
 \label{sec:orga565e26}
 \begin{itemize}
 \item \(\mathbb{N}=\{\text{Nat"urliche Zahlen}\} = \{1,2,...\}\)
@@ -162,7 +162,7 @@ also eindeutig dadurch bestimmt, welche Elemente sie enth"alt.
 \item \(\mathbb{R}=\{\text{Reelle Zahlen}\}\)
 \end{itemize}
 
-\subsection{Beziehungen zwischen Mengen}
+\section{Beziehungen zwischen Mengen}
 \label{sec:orgcffbbc3}
 \begin{definition}{Mengenbeziehungen}{def-teilmenge}
 Seien \(A,B\) zwei Mengen. 
@@ -249,7 +249,7 @@ Es gelten auch alle Identit"aten f"ur Mengen.
 \end{notte}
 
 
-\subsection{Abbildungen zwischen Mengen}
+\section{Abbildungen zwischen Mengen}
 \label{sec:org4ef8946}
 \begin{definition}{Abbildung}{}
 Seien \(X,Y\) Mengen. Eine Abbildung \(f\) von \(X\) nach \(Y\) (Bez: \(f:X\rightarrow
@@ -272,7 +272,7 @@ X\) wird ein \(f(x)\in Y\) zugeordnet.''
 \end{itemize}
 \end{exa}
 
-\subsubsection{Spezielle Abbildungen}
+\subsection{Spezielle Abbildungen}
 \label{sec:orge512a75}
 \begin{relation}
 \begin{enumerate}
@@ -292,7 +292,7 @@ X\) wird ein \(f(x)\in Y\) zugeordnet.''
 \end{itemize}
 \end{exa}
 
-\subsubsection{Bild und Urbild}
+\subsection{Bild und Urbild}
 \label{sec:org006b051}
 \begin{definition}{Bild und Urbild einer Funktion}{}
 Sei \(f: X\to Y\) eine Abbildung.
@@ -311,7 +311,7 @@ Das Bild und das Urbild f"ur eine \emph{Menge} einer Funktion ist wieder eine \e
 \(f^{-1}\) ist keine Abbildung, sonder nur ein formales Symbol!s
 \end{notte}
 
-\subsubsection{Einige Eigenschaften von Funktionen}
+\subsection{Einige Eigenschaften von Funktionen}
 \label{sec:org1909a84}
 Seien \(X,Y\) Mengen, \(f: X\to Y\) eine Abbildung. \(f\) heist:
 \begin{relation}
@@ -346,7 +346,7 @@ mit \(-n=1\)
 \end{enumerate}
 \end{exa}
 
-\subsubsection{Inverse Abbildung zu einer bijektiven Abbildung}
+\subsection{Inverse Abbildung zu einer bijektiven Abbildung}
 \label{sec:orgaae7124}
 \begin{definition}{Inverse Abbildung}{}
 Sei \(f:X\to Y\) bijektiv. Sei \(y\in Y\). Definiere eine Abbildung \(f^{-1}:
@@ -378,7 +378,7 @@ Wenn \(f\) bijektiv ist, stimmen aber diese Mengen "uberein. (Bew. "Ubung)
 \textbf{Aber}: Wenn \(f\) nicht bijektiv ist, hat \(f^{-1}\) nur einen Sinn: Urbild!
 \end{notte}
 
-\subsubsection{Verkn"upfung von Abbildungen}
+\subsection{Verkn"upfung von Abbildungen}
 \label{sec:org540b965}
 \begin{definition}{Verkn"upfung}{}
 \(f: X\to Y, g: Y\to Z\) ist die verkn"upfung \(g\circ: X\to Z\) definiert
@@ -399,7 +399,7 @@ Die Verkn"upfung hat folgende Eigenschaften:
 \end{enumerate}
 \end{relation}
 
-\subsubsection{Eingeschr"ankte Abbildungen}
+\subsection{Eingeschr"ankte Abbildungen}
 \label{sec:org60b2559}
 \begin{definition}{Einschr"ankung}{}
 Sei \(f: X\to Y\) eine Abbildung.\\
@@ -412,7 +412,7 @@ Die Einschr"ankung von \(f\) auf eine Teilmenge \(A\subseteq X\) ist die  Abbild
 \infty)}\) ist injektiv.
 \end{exa}
 
-\subsubsection{Quantoren}
+\subsection{Quantoren}
 \label{sec:orgd2b2557}
 \begin{definition}{Quantoren}{}
 \begin{itemize}
@@ -438,7 +438,7 @@ F"ur die Negation der Quantoren gilt:
 Also: \(f: X\to Y\) ist \textbf{nicht} surjektiv \(\iff \exists y\in Y \forall x\in X : f(x)\not=y\).
 \end{exa}
 
-\subsection{Schlagworte}
+\section{Schlagworte}
 \label{sec:org0cab6a2}
 \begin{itemize}
 \item Venn Diagram - Kreise und Schnittmengen
@@ -468,7 +468,7 @@ Also: \(f: X\to Y\) ist \textbf{nicht} surjektiv \(\iff \exists y\in Y \forall x
 \end{itemize}
 \end{itemize}
 
-\section{Logik und Beweisf"uhrung}
+\chapter{Logik und Beweisf"uhrung}
 \label{sec:orgc083250}
 Mathematik operiert mit \textbf{Aussagen}.
 
@@ -522,7 +522,7 @@ F"ur ein Element \(x\in X\) k"onnen wir Aussagen betrachten:
 \(\longrightarrow A(x)\wedge B(x)=x\in (A\cap B)\)
 \end{exa}
 
-\subsection{Identit"aten der Aussagenlogik}
+\section{Identit"aten der Aussagenlogik}
 \label{sec:orgd743b6e}
 \begin{relation}
 \begin{enumerate}
@@ -543,7 +543,7 @@ F"ur ein Element \(x\in X\) k"onnen wir Aussagen betrachten:
 \end{enumerate}
 \end{relation}
 
-\subsection{Widerspruchsbeweis}
+\section{Widerspruchsbeweis}
 \label{sec:org54c9d02}
 Wenn wir die Konsequenz aus der Negation der zu beweisenden Aussage und die
 Pr"amisse zu einem widerspruch f"uhren so ist die Aussage bewiesen, denn:
@@ -610,14 +610,14 @@ Widerspruch herleiten.
 \end{prof}
 \end{exa}
 
-\section{Komplexe Zahlen}
+\chapter{Komplexe Zahlen}
 \label{sec:org73b0a26}
 Idee: Man m"ochte Quadratische Gleichungen ohne reelle Nullstellen trotzdem
 l"osen, also erweitert man die reellen Zahlen.
 
 \begin{relation}
-Die prototypische Quadratische Gleichungen ohne reelle L"osungen ist: \(x^2+1 =
--1\).\\
+Die prototypische Quadratische Gleichungen ohne reelle L"osungen ist: \[x^2+1 =
+0\]
 Man f"ugt K"unstlich die Zahl \(i\) hinzu mit \(i^2=-1\), m"oglichst unter
 Beibehaltung der "ublichen Rechenregeln: man braucht also die Zahlen \(b\cdot i :
 b\in \mathbb{R}\) und \(a+b\cdot i :  a,b\in \mathbb{R}\).
@@ -668,18 +668,18 @@ der der Form \(a+0\cdot i = (a,0)\), \(a\in \mathbb{R}\).
 \begin{definition}{Real- und Imagin"aranteil}{}
 F"ur \(z=a+b\cdot i\in \mathbb{C}\) heisst:
 \begin{itemize}
-\item \(a:=Re(z)\) Realanteil von \(z\)
-\item \(b:=Im(z)\) Imagin"aranteil von \(z\)
+\item \(a:=\Re(z)\) Realanteil von \(z\)
+\item \(b:=\Im(z)\) Imagin"aranteil von \(z\)
 \end{itemize}
 
-Also ist \(z=Re(z)+ Im(z)\cdot i\).
+Also ist \(z=\Re(z)+ \Im(z)\cdot i\).
 \end{definition}
 
 \begin{definition}{Rein Imagin"are Zahlen}{}
 Die Zahlen der Form \(b\cdot i : b\in \mathbb{R}\) heissen \textbf{rein Imagin"ar}.
 \end{definition}
 
-\subsection{Inverses zu einer komplexen Zahl}
+\section{Inverses zu einer komplexen Zahl}
 F"ur reele Zahlen wissen wir: \(\forall a\in \mathbb{R}\) mit \(a\not= 0\;\exists\)
 \(a^{-1} \in \mathbb{R}\) mit \(a\cdot a^{-1}=1\). Gilt das auch in \(\mathbb{C}\) ?
 
@@ -693,16 +693,18 @@ konjugierte Zahl zu \(a+bi\).
 \end{exa}
 
 \begin{relation}
-\(z*\overline{z}=(a+bi)(a-bi)=a^2+b^2\geq -\) mit Gleichheit genau dann, wenn \(z=0\).
+  \(z\cdot\overline{z}=(a+bi)(a-bi)=a^2+b^2\geq 0\) mit Gleichheit genau dann,
+  wenn \(z=0\)
 \end{relation}
 
 \begin{definition}{Betrag der Komplexen Zahl}{}
-\(|z|:=\sqrt{x\cdot \overline{z}}=\sqrt{a^2+b^2}\) mit \(z=a+bi\).
+    Der betrag der Komplexen Zahl \(z=a+bi\) ist gegeben durch:
+    \[|z|:=\sqrt{x\cdot \overline{z}}=\sqrt{a^2+b^2}\] 
 \end{definition}
 
 \label{sec:org0018acd}
 \begin{definition}{Inverses einer Komplexen Zahl}{ci}
-Das Inverse einer Komplexen Zahl ist gegeben durch: \(\forall z\not= 0\; \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}=1\)
+Das Inverse einer Komplexen Zahl ist gegeben durch: \[\forall z\not= 0\; \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}=1\]
 \end{definition}
 
 \begin{exa}[] \label{} \
@@ -714,7 +716,7 @@ Mnemonische Rechenregel, Multipliziere mit dem Inversen:
 \(\frac{1}{1+i}=\frac{1-i}{(1+i)(1-i)}=\frac{1-i}{2}\)
 \end{relation}
 
-\subsection{Geometrische Interpretation von \(\mathbb{C}\)}
+\section{Geometrische Interpretation von \(\mathbb{C}\)}
 \label{sec:org992fe0c}
 Siehe Zeichung \(C_1\).
 
@@ -742,15 +744,19 @@ vielfachen von \(2\pi\).
 \(\mathbb{C}\) "aquivalent.
 \end{exa}
 
-\begin{definition}{}{}
-Der wert von \(\varphi\), welcher in \([0, 2\pi)\) liegt, heisst Hauptargument von \(z\),
-\(arg(z)=\varphi\).\\
-Das Argument von \(z\) ist die Menge von allen \(\varphi \in R\),4
-\(z=|z|(\cos(\varphi)+i\cdot \sin(\varphi))\), \(Arg\, z = {\varphi \in R : |z|(\cos(\varphi)+i\cdot \sin(\varphi))}\).
+\begin{definition}{Argument einer Komplexen Zahl}{}
+  Sei \(z=|z|(\cos(\varphi)+i\cdot \sin(\varphi)\).
+  Der wert von \(\varphi\), welcher in \([0, 2\pi)\) liegt, heisst Hauptargument von \(z\):
+\[\operatorname{arg}z =\varphi\]
+Das Argument von \(z\) ist die Menge von allen \(\varphi \in R\) mit
+\[
+  \operatorname{arg}z = \varphi \in \mathbb{R} \text{ sodass }
+  |z|(\cos(\varphi)+i\cdot \sin(\varphi)) = z
+\]
 \end{definition}
 
 \begin{notte}[] \label{}
-\(Arg\, z= {arg(z)+2\pi\cdot k : k\in \mathbb{Z}}\)
+  \(\operatorname{arg}z= {\operatorname{arg}z +2\pi k\; \forall k\in \mathbb{Z}}\)
 \end{notte}
 
 \begin{exa}[] \label{} \
@@ -771,7 +777,7 @@ F"ur geometrische Interpretation: Siehe \(C_2\).
 Besonders n"utzlich ist dies f"ur die Multiplikation einer komplexen Zahl vom
 Betrag \(1\):
 \begin{align*}
-|z|=1\iff z=\cos(\varphi)+i\cdot \sin(\varphi) \text{f"ur ein} \varphi \in \mathbb{R}
+|z|=1\iff z=\cos(\varphi)+i\cdot \sin(\varphi) \text{ f"ur ein } \varphi \in \mathbb{R}
 \end{align*}
 
 \begin{relation}
@@ -780,40 +786,44 @@ Die Multiplikation mit von komplexen Zahlen Zahlen mit dem Betrag 1 entspricht
 also der Rotation gegen den Urzeigersinn um \(\varphi\).
 \end{relation}
 
-\subsection{Exponentialform der komplexen Zahlen}
+\section{Exponentialform der komplexen Zahlen}
 \label{sec:orgb4d9f14}
 \begin{notation}[] \label{} \
 \begin{itemize}
 \item Exponentialform: \(\cos(\varphi)+i\cdot \sin(\varphi):=e^{i\cdot \varphi}\)
-\item es gilt \(e^{i(\varphi_k)}, k\in\mathbb{R}\) sind die Zahlen auf dem Einheitskreis
+\item es gilt \(e^{i(\varphi_k)},\; k\in\mathbb{R}\) sind die Zahlen auf dem Einheitskreis
 \end{itemize}
 \end{notation}
 
-\begin{definition}{Exponentialform der komplexen Zahlen}{}
-Die Exponentialform f"ur jede komplexe Zahl \(z\in\mathbb{C}\) lautet \(z=|z|e^{i\cdot arg\,z}\).
+\begin{definition}{Exponentialform der Komplexen Zahlen}{}
+  Die Exponentialform f"ur jede komplexe Zahl \(z\in\mathbb{C}\) lautet
+  \(z=|z|e^{i\cdot \operatorname{arg} z}\).
 \end{definition}
 
 Mit dieser Notation folgt:
 \begin{relation}
 \((e^{i\varphi})^n=(\cos(\varphi)+i\cdot\sin(\varphi))^2=e^{n\cdot i\cdot
- \varphi}=\cos(n\varphi)+i\cdot\sin(n\varphi)\) f"ur alle \(n\in\mathbb{N}\)
+ \varphi}=\cos(n\cdot\varphi)+i\cdot\sin(n\cdot\varphi)\) f"ur alle \(n\in\mathbb{N}\)
 \end{relation}
 
 \begin{exa}[] \label{}\
 \begin{equation*}
-%\begin{split}
-(\cos(\varphi)+i\cdot \sin(\varphi))^2 =\cos^2(\varphi)-\sin^2(\varphi)+2\cdot\sin(\varphi)\cdot\cos(\varphi) 
- = \cos(2\varphi) + 2\sin(2\varphi) 
- \implies 
-\begin{cases}
-\cos(2\varphi)=\cos^2(\varphi)-\sin^2(\varphi) \\
-\sin(2\varphi)=2\cdot\sin(\varphi)\cdot\cos(\varphi)
-\end{cases}
-%\end{split}
+  \begin{align*}
+    \cos(\varphi)+i\cdot \sin(\varphi))^2 & =\cos^2(\varphi)-\sin^2(\varphi)+2\cdot i\cdot\sin(\varphi)\cdot\cos(\varphi) \\
+                                          & = \cos(2\varphi) + 2\cdot i \cdot\sin(2\varphi)
+  \end{align*}
+
+  \begin{center}
+    \[  \implies 
+      \begin{cases}
+        \cos(2\varphi)=\cos^2(\varphi)-\sin^2(\varphi) \\
+        \sin(2\varphi)=2\cdot\sin(\varphi)\cdot\cos(\varphi)
+      \end{cases}
+    \]
 \end{equation*}
 \end{exa}
 
-\subsection{Einscheitswurzeln}
+\section{Einscheitswurzeln}
 \label{sec:org0755105}
 Sei die gleichung \(x^n=a\) "uber \(\mathbb{R}\) gegeben. Je nach Vorzeichen von
 \(a\) und Parit"at von \(n\), gibt es Varianten f"ur die Anzahl der L"osungen.
@@ -833,7 +843,7 @@ Eine Zahl \(z\in \mathbb{C}\) heisst \(n\text{-te}\) Einheitswurzel, wenn \(z^n=
 \begin{proposition}[] \label{}
 F"ur jedes \(n\geq, n\in\mathbb{N}\) existieren genau \(n\)
 Einheitswurzeln in \(\mathbb{C}\). Sie sind durch die Formel
-\(z_k=e^{\frac{2\pi\cdot k\cdot i}{n}},\quad k=0,1,...,n-1\) gegeben.
+\(z_k=e^{\frac{2\pi\cdot k\cdot i}{n}} \text{ mit } k=0,1,...,n-1\) gegeben.
 \end{proposition}
 
 \begin{prof}[] \label{} \
@@ -894,7 +904,7 @@ Gemetrische Interpretation: regul"ares \(n\text{-Eck}\).
 
 \newpage
 
-\section{Lineare Gleichungsysteme}
+\chapter{Lineare Gleichungsysteme}
 \label{sec:org4c2c71d}
 Wir werden die Bezeichung \(K\) f"ur \(\mathbb{R}\) oder \(\mathbb{C}\) verwenden.
 
@@ -1101,7 +1111,7 @@ Errinnerung: ein LGS hatte die erweiterte Koeffizientenmatrix \((A|b)\). Das LGS
 l"asst sich dann auch so aufschreiben:$\backslash$\ \(:=A\cdot x\), wobei \(x=\)
 
 
-\subsection{Matrizenrechnung}
+\section{Matrizenrechnung}
 \label{sec:org0f3e63e}
 \begin{definition}{Matrix-Spaltenvektor Produkt}{}
 Das Produkt von einer \(m\times n\) Matrix \(A\) und einer Spalte (in dieser
@@ -1133,7 +1143,7 @@ Produkt \(A\cdot B\) definieren: \\
 mit \(A\cdot B \in K^{p\times n}\)
 \end{definition}
 
-\subsection{Eigenschaften der Matrix-Multiplikation}
+\section{Eigenschaften der Matrix-Multiplikation}
 \label{sec:org8eaaee0}
 \begin{notation}[] \label{}
 \begin{itemize}
@@ -1255,7 +1265,7 @@ durch \(K[t]_n\) berechnet.
 \end{definition}
 
 \part{Vektorr"aume}
-\section{Grundlagen}
+\chapter{Grundlagen}
 \label{sec:org4906e00}
 \begin{definition}{Vektorraum}{}
 Ein \(k\) - Vektorraum \(V\) ist eine Menge zusammen mit den Operationen und mit
@@ -1308,7 +1318,7 @@ Bei der Entwicklung der Vektorraumtheorie ist es oft n"utzlich, an das Beispiel
 \(V=K^n\) zu denken.
 \end{notte}
 
-\section{Vektorraumtheorie}
+\chapter{Vektorraumtheorie}
 \label{sec:org432e282}
 Sei \(V\) ein K-Vektorraum.
 
@@ -1397,7 +1407,7 @@ In drei Dimensionen:
 \end{itemize}
 \end{relation}
 
-\section{Lineare unabhangigkeit in R"aumen}
+\chapter{Lineare unabhangigkeit in R"aumen}
 \label{sec:orgea5b4b9}
 \begin{proposition}
   Seien \(v_1,...,v_n \in \mathbb{V}\) linear unabhaenig, seien \(W_1,
@@ -1631,7 +1641,7 @@ Also gilt: \ldots{}
 
 \textbf{Frage} Ist \(D\) in diesem Fall immer invertierbar? (Ja, aber wir brauchen mehr Theorie.)
 
-\section{Lineare Abbildungen zwischen Vektorr"aumen}
+\chapter{Lineare Abbildungen zwischen Vektorr"aumen}
 \label{sec:orgb4c03c4}
 \begin{definition}{Lineare Abbildung}{}
 Seien \(V, W\) zwei K-Vektorr"aume. Eine Abbildung \(f: V\rightarrow W\) heißt linear, wenn:
@@ -1723,7 +1733,7 @@ Aufspannabbildung $\varphi_S: K^n \rightarrow V$ wird definiert als $\varphi_S(\
 	Wenn \(f:V\rightarrow W\) Isomorphismus $\implies f^{-1}:W\rightarrow V $ ist auch ein Isomorphismus.
 \end{beobachtung}
 
-\subsection{Dimensionsformel}
+\section{Dimensionsformel}
 \label{sec:org9a58004}
 \begin{theo}{}{}
 Sei \(f:V\to W\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gilt: \(\mdim\mKer f + \mdim\mIm f = \mdim V\).
@@ -1751,7 +1761,7 @@ f(v) = f\left(\underbrace{\sum_{i=1}^{k}\lambda_ie_i}_{\in \mKer(f)}\right) + f\
 Nun gilt nach Konstruktion von \(U\): \[\underbrace{\mdim \mKer(f)}_{k} + \underbrace{\mdim U}_{n-k} = \underbrace{\mdim V}_{n} \implies \mdim\mKer f + \mdim\mIm f = \mdim V \]
 \end{prof}
 
-\subsection{Summe von Untervektorr"aumen}
+\section{Summe von Untervektorr"aumen}
 \label{sec:org83dfe63}
 \begin{definition}{}{}
 	Sei V ein Vektorraum, $U_1, U_2 \subseteq V$ Untervektorräume.
@@ -1834,7 +1844,7 @@ Strecken in Richtung von \(l_2\) mit Faktor 2. Wie beschreibt man \(f\) in
 Koordinaten?
 \end{exa}
 
-\subsection{Abbildunngsmatrix}
+\section{Abbildunngsmatrix}
 \begin{definition}{Raum der Homomorphismen}{}
 Seien \(V,W\) zwei (\(\mathbb{K}\)-) Vektorr"aume.
 \[\mHom_\mathbb{K}(V,W) = \{f: V\to W \mid f \text{ ist }\mathbb{K}\text{-linear}\}\].
@@ -1944,7 +1954,7 @@ Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann erhalten wir die
 \end{prof}
 
 
-\subsection{Basen und Abbildungsmatrizen (Zusammenfassung)}
+\section{Basen und Abbildungsmatrizen (Zusammenfassung)}
 \label{sec:baab}
 Jede Basis in V definiert eine Bijektion $\phi_B^{-1}V\rightarrow K^n, v\mapsto C$
 \begin{relation}
@@ -1955,7 +1965,7 @@ Jede Basis in V definiert eine Bijektion $\phi_B^{-1}V\rightarrow K^n, v\mapsto 
 $B'$'' ist $M^{B'}_B$, also dr"uckt die meue Basis in der alten aus und ist
 nicht die einzige!
 
-\subsection{Physikerdefinition eines Vektors}
+\section{Physikerdefinition eines Vektors}
 \label{sec:phyv}
 
 Ein (kontravarianter) Vektor ist ein Objekt, welches durch ein n-Tuperl \(\lambda\)
@@ -2006,7 +2016,7 @@ Sei .. eine Lineare Abbildung, ..., dann gilt:
   gesehen ... . Erweitere jetzt ... zu einer Basis ... in $W$. Es gilt. 
 \end{prof}
 
-\subsection{Konsequenzen f"ur Matrizen}
+\section{Konsequenzen f"ur Matrizen}
 \label{sec:konsma}
 
 Sei ...
@@ -2073,7 +2083,7 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
   \end{itemize}
 \end{prof}
 
-\section{Determinanten}
+\chapter{Determinanten}
 \label{sec:det}
 
 Motivation: Wir haben viele Kriterien f"ur invertierbarkeit, aber bislang kein
@@ -2164,7 +2174,7 @@ $\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
 
 Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 
-\subsection{Permutationen}
+\section{Permutationen}
 \label{sec:perm}
 
 \begin{definition}{Permutationen}{}
@@ -2407,7 +2417,7 @@ Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnung
 	In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
 \end{bem}
 
-\section{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
+\chapter{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
 
 Wir haben gesehen: wenn \(f: V\to W\) linear, \(V, W\) endlichdimensionale Vektorr"aume \(\implies \exists B\subset V, C\subset W \) Basen so dass
 \[M^B_C(f) = \begin{pmatrix}
@@ -2560,7 +2570,7 @@ Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
 \] \(\implies\) keine reellen Nullstellen \(\implies\) keine Eigenwerte, keine Eigenvektoren. Hier scheitern wir daran, dass das Polynom \(\lambda^2+1\) nicht genug Nullstellen in \(\mathbb{R}\) hat.
 \end{exa}
 
-\subsection{Nullstellen von Polynomen}
+\section{Nullstellen von Polynomen}
 \begin{definition}{Nullstelle}{}
   Sei \(p\in K[\lambda] = \left\{\sum_{i=0}^n\alpha_i\lambda^i|\alpha_i\in K, n\in\mathbb{N} \right\}\) ein Polynom. Eine Nullstelle \(\mu\) von \(p\) ist ein Element \(\mu\in K\) so dass \(p(\mu) = 0\).
 \end{definition}
@@ -2801,13 +2811,13 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat}
 Zum charakteristischen Polynom:
 \begin{relation}
   \begin{enumerate}
-  \item $\Xi_A(0) = \det (-A) = (-1)^n \det A$
-  \item $\Xi_A (\lambda) = \lambda^n + ...$, weil der Einzige Summand in ...
+  \item $\chi_A(0) = \det (-A) = (-1)^n \det A$
+  \item $\chi_A (\lambda) = \lambda^n + ...$, weil der Einzige Summand in ...
   \item Der Koeffizient vor ... in ... \(=\text{Tr}(A)\)
   \end{enumerate}
 \end{relation}
 
-Folglich kann man $\Xi_1$ f"ur $2\times 2$ Matrizen direkt ablesen.
+Folglich kann man $\chi_1$ f"ur $2\times 2$ Matrizen direkt ablesen.
 
 \begin{definition}
   Sei V ein $K$ Vektorraum, ... Die Spalten von $f$ .... F"ur $\dim V < \infty$
@@ -2828,7 +2838,7 @@ tats"achliche Bedeutung.
 \end{relation}
 
 \part{Bilineare und Quadratische Formen}
-\section{Grundlagen}
+\chapter{Grundlagen}
 \label{sec:bili}
 \textbf{Motivation}: Bislang haben wir Vektorr"aume ohne geometrische Strukturen
 studiert; Speziell: wir konnten den Vektoren in Vektorra"umen keine
@@ -2919,7 +2929,7 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
   .... nach dem Prinzip ''Paul, wie heisst du'' Ausserdem gilt ...
 \end{prof}
 
-\subsection{Schlagworte:}
+\section{Schlagworte:}
 \label{sec:orgcf8c685}
 \begin{itemize}
 \item \(A\cdot B\) Zeilen von \(A\) mal Spalten von \(B\)

@@ -92,7 +92,7 @@ colback  = blue!10,
 \newtheorem*{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem*{korollar}{Korollar}
-\theoremstyle{proof}
+\theoremstyle{definition}
 \newtheorem*{prof}{Beweis}
 \theoremstyle{remark}
 \newtheorem*{bem}{Bemerkung}
@@ -1036,25 +1036,32 @@ Folge.
 \]
 \end{exa}
 
-\begin{theo}{Gauss}{}
+\begin{theo}{Gausssches Eliminationsverfahren}{}
 Jede Matrix kann durch elementare Zeilenumformungen auf die Stufenform gebracht
 werden.
 \end{theo}
 
-\begin{prof}[] \label{}
-Sei \(A=\begin{matrix}a_{11}&...&a_{nn}\end{matrix}\). \\
-Wenn \(A=0\) - Bewiesen. \\
-Wenn \(A\not=0\), dann gibt es eine Spalte \(\not= 0\). Sei
-\(j_1\) die Nummer dieser Spalte. Durch vertausche von Zeilen erreichen wir
-zun"achst \(a_{1j_1}\not= 0\). Multiplaktion der ersten Zeule mit
-\(\frac{1}{j_1}\). Jetzt Subtrahiere von jeder Zeile ab der Zweiten die erste
-Zeile multipliziert mit \(a_{kj_1}\) (\(k=\) Nummer der Zeile). \\
-
-Wir erhalten dann Restmatrix \(A_1<A\) und wir wenden das selbe Verfahren auf
-\(A_1\) an. Da \(A_1\) weniger Zeilen hat, stoppt der ganze Prozess.
-
+\begin{prof}[]
+	Sei \(A=
+	\begin{pmatrix}
+	a_{11} & \cdots & a_{1n} \\
+	\vdots & \ddots & \vdots \\
+	a_{n1} & \cdots & a_{nn} \\
+	
+	\end{pmatrix}\).
+	\begin{itemize}
+		\item Wenn \(A=0 \implies\) Bewiesen.
+		\item Wenn \(A\not=0\), dann gibt es eine Spalte \(\not= 0\). Sei
+		\(j_1\) die Nummer dieser Spalte. Durch vertausche von Zeilen erreichen wir
+		zun"achst \(a_{1j_1}\not= 0\). Multiplaktion der ersten Zeile mit
+		\(\frac{1}{a_{1j_1}}\). Jetzt Subtrahiere von jeder Zeile ab der Zweiten die erste
+		Zeile multipliziert mit \(a_{kj_1}\) (\(k=\) Nummer der Zeile).\\
+	
+		Wir erhalten dann Restmatrix \(A_1<A\) und wir wenden das selbe Verfahren auf
+		\(A_1\) an. Da \(A_1\) weniger Zeilen hat, stoppt der ganze Prozess.
+	\end{itemize}
 \begin{notte}
-Nach diesem Verfahren gilt sogar: Pivotelemente sind alle \$=1\$1
+Nach diesem Verfahren gilt sogar: Pivotelemente sind alle \(=1\)
 \end{notte}
 \end{prof}
 
@@ -1076,12 +1083,6 @@ Nach diesem Verfahren gilt sogar: Pivotelemente sind alle \$=1\$1
   \Rightarrow & \begin{gmatrix}[p]
       1 & 2 \\
       0 & 1
-      \rowops
-      \add[-2]{1}{0}
-    \end{gmatrix} \\
-  \Rightarrow & \begin{gmatrix}[p]
-      1 & 0 \\
-      0 & 1
     \end{gmatrix}
 \end{align*}
 \end{exa}
@@ -1089,7 +1090,7 @@ Nach diesem Verfahren gilt sogar: Pivotelemente sind alle \$=1\$1
 \begin{definition}{Reduzierte Zeilenstufenform}{}
 Nachdem wir die Zeilenstufenform mit Pivotelementen \(=1\) erreicht haben, k"onnen
 wir durch weitere Zeilenumformungen die eintr"age zu Null f"uhren, die oberhalb
-von Pivotelementen stehen; Die Finalform heisst dann \textbf{reduzierte
+von Pivotelementen stehen. Die Finalform heisst dann \textbf{reduzierte
 Zeilenstufenform}.
 \end{definition}
 
@@ -1114,6 +1115,7 @@ Basisvariablen werden dann durch Freie Variablen ausgedr"uckt.
 \end{enumerate}
 \end{relation}
 
+\todo{Ergaenzen!!}
 In unserem Beispiel l"asst sich die L"osung so aufschreiben: 
 
 
@@ -1124,34 +1126,58 @@ l"asst sich dann auch so aufschreiben:$\backslash$\ \(:=A\cdot x\), wobei \(x=\)
 \section{Matrizenrechnung}
 \label{sec:org0f3e63e}
 \begin{definition}{Matrix-Spaltenvektor Produkt}{}
-Das Produkt von einer \(m\times n\) Matrix \(A\) und einer Spalte (in dieser
-Reihenfolge) wird definiert durch \(A\cdot x =\). In dieser Spalte wird das LGS
-\(A\cdot b\).
+Das Produkt von einer \(m\times n\) Matrix \(A\) und einer Spalte \(x=\begin{pmatrix}
+x_1\\\vdots\\x_n
+\end{pmatrix}\) (in dieser
+Reihenfolge) wird definiert durch \[A\cdot x = 
+\begin{pmatrix}
+a_{11}x_1 + \cdots + a_{1n}x_n \\
+\cdots \\
+a_{m1}x_1 + \cdots + a_{mn}x_n
+\end{pmatrix}
+=x_1\cdot\begin{pmatrix}
+a_{11}\\\vdots\\a_{m1}
+\end{pmatrix} + \cdots + 
+x_n\cdot\begin{pmatrix}
+a_{n1}\\\vdots\\x_{mn}
+\end{pmatrix}
+\]
 \end{definition}
 
-Die Menge von Matrizen der Gr"osse \(m\times n\) mit Eintr"agen in \(K\) wird durch
-\(M(m\times n, k)\) oder \(K^{m\times n}\) bezeichnet. Matrizen der Gr"osse \(1\times
-n\) heissen Spalten der L"ange \(n\). Matrizen der Gr"osse \(n\times 1\) heissen
-Zeilen der L"ange \(n\).
+\begin{exa}
+	 In dieser Schreibweise wird das LGS
+	\(A\cdot x = b\).
+\end{exa}
+\todo{Besipiel Ergaenzen}
+\begin{notation}$ $\newline
+	\begin{itemize}
+		\item Die Menge von Matrizen der Gr"osse \(m\times n\) mit Eintr"agen in \(K\) wird durch \(M(m\times n, K)\) oder \(K^{m\times n}\) bezeichnet. 
+		\item Matrizen der Gr"osse \(1\times
+		n\) heissen \textbf{Spalten} der L"ange \(n\). 
+		\item Matrizen der Gr"osse \(n\times 1\) heissen
+		\textbf{Zeilen} der L"ange \(n\).
+	\end{itemize}
+\end{notation}
 
-\begin{definition}{Addition}{}
-Matrizen gleicher Gr"osse kann man eintragsweise Addieren: \$A,B \(\in\) K\(^{\text{m}\texttimes{}\text{
-n}}\) \(\rightarrow\) (A+B)\(_{\text{ij}}\):=\$A\(_{\text{ij}}\)+B\(_{\text{ij}}\)\$\$
+\begin{definition}{Addition von Matrizen}{}
+Matrizen gleicher Gr"osse kann man eintragsweise Addieren. Seien \(A,B \in K^{m\times n}\), dann ist ihre Summe: \[(A+B)_{ij}:=A_{ij}+B_{ij}\]
 \end{definition}
 
-\begin{definition}{Multiplikation}{}
+\begin{definition}{Skalarmultiplikation von Matrizen}{}
 Matrizen kann man mit Zahlen multiplizieren (indem man jeden eintrag mit dieser
 Zahl multipliziert).
-
-\((\lambda \cdot A)_{ij}:=\lambda \cdot A_{ij}\).
+\[(\lambda \cdot A)_{ij}:=\lambda \cdot A_{ij}\]
 \end{definition}
 
-\begin{definition}{Produkt}{}
+\begin{definition}{Matrix-Multiplikation}{}
 Wenn die Breite von \(A\) mit der H"ohe von \(B\) "ubereinstimmt, kann man das
 Produkt \(A\cdot B\) definieren: \\
 \(A\cdot B:=(A\cdot b_1\; \cdots \; A\cdot b_n)\) mit \(B=(b_1\; \cdots\; b_n)\) (Spalten)
 mit \(A\cdot B \in K^{p\times n}\)
 \end{definition}
+\begin{exa}
+	\({\begin{pmatrix}1&1\\{\color {red}0}&{\color {red}1}\\1&0\end{pmatrix}}{\begin{pmatrix}4&6&{\color {red}8}&2\\5&7&{\color {red}9}&3\end{pmatrix}}={\begin{pmatrix}9&13&17&5\\5&7&{\color {red}9}&3\\4&6&8&2\end{pmatrix}}\)
+\end{exa}
 
 \section{Eigenschaften der Matrix-Multiplikation}
 \label{sec:org8eaaee0}

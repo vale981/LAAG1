@@ -37,16 +37,16 @@
 \DeclareMathOperator{\mEnd}{End}
 \DeclareMathOperator{\mDeg}{deg}
 \DeclareMathOperator{\Tr}{Tr}
-\usepackage{tcolorbox}
+\usepackage[most]{tcolorbox}
 \usepackage{booktabs}
 \tcbuselibrary{theorems}
-\newtcbtheorem[number within=section]{definition}{Definition}%
+\newtcbtheorem[number within=section,list inside=definition]{definition}{Definition}%
 {colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
-\newtcbtheorem[number within=section]{axiom}{Axiom}%
+\newtcbtheorem[number within=section. list inside=definition]{axiom}{Axiom}%
 {colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
-\newtcbtheorem[number within=section]{theo}{Theorem}%
+\newtcbtheorem[number within=section, list inside=definition]{theo}{Theorem}%
 {colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{th}
-\newtcbtheorem[number within=section]{satz}{Satz}%
+\newtcbtheorem[number within=section, list inside=definition]{satz}{Satz}%
 {colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
 \newtcolorbox{comm}[1][]
 {title=Kommentar,colback=black!5,colframe=black!35!black,fonttitle=\bfseries}
@@ -56,6 +56,27 @@ colframe = blue!25,
 colback  = blue!10,
 #1,
 }
+\newtcolorbox[number within=section]{exa}{%
+	% Example Frame Start
+	empty,% Empty previously set parameters
+	title={Beispiel},% use \thetcbcounter to access the qikexample counter text
+	% Attaching a box requires an overlay
+	    attach boxed title to top left,
+	% (boxed title style requires an overlay)
+	boxed title style={empty,size=minimal,toprule=0pt,top=4pt,overlay={}},
+	coltitle=black,fonttitle=\bfseries,
+	before=\par\medskip\noindent,parbox=false,boxsep=0pt,left=0pt,right=3mm,top=2pt,breakable,pad at break=0mm,
+	before upper=\csname @totalleftmargin\endcsname0pt, % Use instead of parbox=true. This ensures parskip is inherited by box.
+	% Handles box when it exists on one page only
+	overlay unbroken={\draw[black,line width=.5pt] ([xshift=-10pt]title.north west) -- ([xshift=-10pt]frame.south west); },
+	% Handles multipage box: first page
+	overlay first={\draw[black,line width=.5pt] ([xshift=-10pt]title.north west) -- ([xshift=-10pt]frame.south west); },
+	% Handles multipage box: middle page
+	overlay middle={\draw[black,line width=.5pt] ([xshift=-10pt]frame.north west) -- ([xshift=-10pt]frame.south west); },
+	% Handles multipage box: last page
+	overlay last={\draw[black,line width=.5pt] ([xshift=-10pt]frame.north west) -- ([xshift=-10pt]frame.south west); },%
+}
+
 \usepackage{etoolbox}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -70,7 +91,6 @@ colback  = blue!10,
 \newtheorem*{notation}{Notation}
 \newtheorem*{proposition}{Proposition}
 \newtheorem{lemma}{Lemma}[section]
-\newtheorem{exa}{Beispiel}[section]
 \newtheorem*{korollar}{Korollar}
 \theoremstyle{proof}
 \newtheorem*{prof}{Beweis}
@@ -88,7 +108,9 @@ colback  = blue!10,
  pdflang={Germanq}}
 
 \usepackage{xcomment}
-
+\makeatletter
+\renewcommand*\l@tcolorbox{\@dottedtocline{1}{1.5em}{3.5em}}
+\makeatother
 
 \begin{document}
 \maketitle
@@ -425,7 +447,7 @@ F"ur die Negation der Quantoren gilt:
 \end{itemize}
 \end{relation}
 
-\begin{exa}[] \label{} \
+\begin{exa} \label{} \
 \(f: X\to Y\) ist surjektiv \(\iff \forall y\in Y \exists x\in X : f(x)=y\).\\
 Also: \(f: X\to Y\) ist \textbf{nicht} surjektiv \(\iff \exists y\in Y \forall x\in X : f(x)\not=y\).
 \end{exa}
@@ -680,7 +702,7 @@ F"ur \(z\in \mathbb{C}\) heisst die Zahl \(\overline{z}:=a-bi\) die komplex
 konjugierte Zahl zu \(a+bi\).
 \end{definition}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 \(\overline{1+i}=1-i\)
 \end{exa}
 
@@ -699,7 +721,7 @@ konjugierte Zahl zu \(a+bi\).
 Das Inverse einer Komplexen Zahl ist gegeben durch: \(\forall z\not= 0\; \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}=1\)
 \end{definition}
 
-\begin{exa}[] \label{} \
+\begin{exa} \label{} \
 \((1+i)^{-1}=\frac{1-i}{2}\)
 \end{exa}
 
@@ -731,7 +753,7 @@ Es folgt:
 vielfachen von \(2\pi\).
 \end{notte}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 \(\varphi=\frac{\pi}{4}\) und \(\varphi=-\frac{7\pi}{4}\) sind im geometrischen Bild von
 \(\mathbb{C}\) "aquivalent.
 \end{exa}
@@ -751,7 +773,7 @@ Das Argument von \(z\) ist die Menge von allen \(\varphi \in R\) mit
   \(\operatorname{arg}z= {\operatorname{arg}z +2\pi k\; \forall k\in \mathbb{Z}}\)
 \end{notte}
 
-\begin{exa}[] \label{} \
+\begin{exa} \label{} \
 Seien \(z_1=|z_1|\cdot \cos(\varphi_1)+i\cdot \sin(\varphi_1)\), \(z_2=|z_2|\cdot
 \cos(\varphi_2)+i\cdot \sin(\varphi_2)\) zwei komplexe Zahlen.\\
 
@@ -798,7 +820,7 @@ Mit dieser Notation folgt:
  \varphi}=\cos(n\cdot\varphi)+i\cdot\sin(n\cdot\varphi)\) f"ur alle \(n\in\mathbb{N}\)
 \end{relation}
 
-\begin{exa}[] \label{}\
+\begin{exa} \label{}\
   \begin{align*}
     (\cos(\varphi)+i\cdot \sin(\varphi))^2 & = \cos^2(\varphi)-\sin^2(\varphi)+2\cdot i\cdot\sin(\varphi)\cdot\cos(\varphi) \\
                                            & = \cos(2\varphi) + 2\cdot i \cdot\sin(2\varphi) \\
@@ -943,7 +965,7 @@ mit Elementen aus \(K\).
 \[A=(a_{ij})_{\substack{i=1,\cdots,m \\ j=1,\cdots,n}}\]
 \end{definition}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 \[
   A=\left( \begin{matrix} 1& 1\\ 2& -3\end{matrix} \right)
 \]
@@ -1004,7 +1026,7 @@ Folge.
 \end{enumerate}
 \end{definition}
 
-\begin{exa}[] \label{} \
+\begin{exa} \label{} \
 \[
 \begin{pmatrix}
  0 & a_{12} & a_{13} \\
@@ -1196,7 +1218,7 @@ Allgemeinen, selbst wenn beide Produkte definiert sind und die gleiche Gr"osse
 haben.
 \end{notation}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 
 \end{exa}
 
@@ -1241,7 +1263,7 @@ t \}\) fuer ein \(r\geq 0, \phi\)
 0\) (es gibt mindestens eine freie Variable).
 \end{bem}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 Finde ein reelles Polynom von Grad 2.
 
 Die Frage ist aequivalent zu dem LGS:
@@ -1274,7 +1296,7 @@ folgenden Eigenschaften:
 \end{itemize}
 \end{definition}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 \begin{enumerate}
 \item \(K\) ist selbst ein Vektorraum mit \(+\) und \(\cdot\)
 \item \(K^{n}:=K^{n\times 1}\) ist ein K-Vektorraum mit:
@@ -1325,11 +1347,11 @@ Die Menge der Vektoren heist linear Unabh"angig wenn: \$\$ (Nur die Triviale
 linearkombination ergibt 0). Andernfalls heist die Menge linear abh"angig.
 \end{definition}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 \(\begin{pmatrix}1\\0\end{pmatrix}\begin{pmatrix}0\\1\end{pmatrix}\)
 \end{exa}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 \(\{v_1,v_2\}\) sind linear abhaengig wenn sie Proportional sind.
 
 \begin{prof}[] \label{}
@@ -1459,7 +1481,7 @@ Alternative Notation: \(<s>=\text{span S}\).
 \(<\varnothing >:=\{0\}\)
 \end{notte}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 Seien \(v_1, v_2 \in \mathbb{R}^3\).
 \(<v1,v2>\) ist eine Gerade wenn \(v_1,v_2\) linear abh. Ist Ebene wenn \(v_1,v_2\)
 linear unbh.
@@ -1593,11 +1615,11 @@ Die Definition einer Basis garantiert, dass hierdurch eine Bijektion \ldots{} en
   Diese Korrespondenz kommt auf die Wahl der Basis an.
 \end{notte}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 
 \end{exa}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 Sei \(Ax=0\) ein h. LGS
 \end{exa}
 
@@ -1641,15 +1663,15 @@ Seien \(V, W\) zwei K-Vektorr"aume. Eine Abbildung \(f: V\rightarrow W\) heißt 
 
 \end{definition}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 $f_{A}: K^n\rightarrow K^m, x\mapsto A\cdot x$, für $A \in K^{m\times n}$ ist eine lineare Abbildung.
 \end{exa}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 \(V=\mathbb{R}[x]_5,\;W=\mathbb{R}[x]_4\). $f: V\rightarrow W, p \mapsto \frac{dp}{dx}$ ist eine lineare Abbildung, die jedem Polynom seine Ableitung zuordnet.
 \end{exa}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 $V=W=\{f:\mathbb{R}\rightarrow\mathbb{R}\}$ die Menge aller reellen, reellwertiger Funktionen. Für eine gegebene Abbildung $g:\mathbb{R}\rightarrow\mathbb{R}$ ist die Abbildung $mg: V\rightarrow W, f\mapsto g\cdot f, (g\cdot f)(x)=g(x)\cdot f(x)$ linear.
 \end{exa}
 
@@ -1657,7 +1679,7 @@ $V=W=\{f:\mathbb{R}\rightarrow\mathbb{R}\}$ die Menge aller reellen, reellwertig
 Sei $f:V\rightarrow W$eine Lineare Abbildung. Der Kern von \(f\) wird definiert als \[Ker\: f := f^{-1}(0) = \{v\in V|f(v)=0\}\] Der Kern der Abbildung f ist also die Menge aller Elemente in V, die auf das Nullelement von W abgebildet werden.
 \end{definition}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 $f=f_A: K^n\rightarrow K^m \quad x\mapsto A\cdot x$\\
 $Ker (f_A) = \{x\in K^n|A\cdot x = 0\}$, also die Lösung des homogenen LGS mit der Koeffizientenmatrix A.
 \end{exa}
@@ -1675,7 +1697,7 @@ $Ker (f_A) = \{x\in K^n|A\cdot x = 0\}$, also die Lösung des homogenen LGS mit 
 $\Rightarrow$ Das Bild einer linearen Abbildung ist ein Untervektorraum.
 \end{beobachtung}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 $Im(f_A )=\{b\in K^m \:|\: \exists x \in K^n: A\cdot x=b \}=\{b\in K^m\:|\:LGS Ax=b\; l"osbar\} $
 \end{exa}
 
@@ -1699,7 +1721,7 @@ zwischen \(V\) und \(W\). \(V\) und \(W\) heißen isomorph, wenn es einen
 Vektorraumisomorphismus \(f: V\rightarrow W\) gibt.
 \end{definition}
 
-\begin{exa}[] \label{}
+\begin{exa} \label{}
 Sei \(V\) ein Vektorraum, \(S\subseteq V = \{v_1, v_2, ..., v_n\}\). Die
 Aufspannabbildung $\varphi_S: K^n \rightarrow V$ wird definiert als $\varphi_S(\lambda)=\sum_{i=1}^{n}\lambda_i v_i$
 
@@ -2929,6 +2951,7 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
 \item Transposition vertauscht faktoren.
 \item k-te Spalte \((A)_k\)
 \end{itemize}
+\tcblistof[\chapter]{definition}{Defintionen, S"atze und Theoreme}
 \end{document}
 
 %%% Local Variables:

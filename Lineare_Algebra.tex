@@ -41,13 +41,13 @@
 \usepackage{booktabs}
 \tcbuselibrary{theorems}
 \newtcbtheorem[number within=section,list inside=definition]{definition}{Definition}%
-{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+{code={\boldmath},colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
 \newtcbtheorem[number within=section. list inside=definition]{axiom}{Axiom}%
-{colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
+{code={\boldmath},colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
 \newtcbtheorem[number within=section, list inside=definition]{theo}{Theorem}%
-{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{th}
+{code={\boldmath},colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{th}
 \newtcbtheorem[number within=section, list inside=definition]{satz}{Satz}%
-{colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
+{code={\boldmath},colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{th}
 \newtcolorbox{comm}[1][]
 {title=Kommentar,colback=black!5,colframe=black!35!black,fonttitle=\bfseries}
 \newtcolorbox{relation}[1][]
@@ -59,7 +59,7 @@ colback  = blue!10,
 \newtcolorbox[number within=section]{exa}{%
 	% Example Frame Start
 	empty,% Empty previously set parameters
-	title={Beispiel},% use \thetcbcounter to access the qikexample counter text
+	title={Beispiel.},% use \thetcbcounter to access the qikexample counter text
 	% Attaching a box requires an overlay
 	    attach boxed title to top left,
 	% (boxed title style requires an overlay)
@@ -117,7 +117,6 @@ colback  = blue!10,
 %--\xcomment{definition,proposition,beobachtung,lemma,folgerung,notte,korollar,Axiom,theo,satz}
 \tableofcontents
 \newpage
-
 Ihr habt hier die Mitschriften Valentin Boettchers vor euch. Er teilt eben Diese
 "ausserst gern mit euch und freut sich "uber Feedback, Fehlerkorrekturen und
 Verbesserungsvorschl"age. Kontaktiert ihn am besten via \href{mailto:valentin.boettcher@mailbox.tu-dresden.de}{Email} :).

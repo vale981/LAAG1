@@ -2958,13 +2958,232 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
 \end{prof}
 
 \begin{korollar}
-  Wenn $b$ nicht ausgeartet ist, so gilt $(...)$ f"ur Jeden Untervektorraum
-  $U\subset  V$
+  Wenn $b$ nicht ausgeartet und syetrisch/schiefsymetrisch ist, so gilt
+  $(U^\perp)^\perp = U$ f"ur Jeden Untervektorraum $U\subset V$.
 \end{korollar}
 \begin{prof}
   .... nach dem Prinzip ''Paul, wie heisst du'' Ausserdem gilt ...
+  Wegen der Dimensinsformel aus der Proposition reicht wes zu zeigen:
+  $U\subseteq (U^\perp)^\perp$
 \end{prof}
 
+Sie frage war: gegben $b$, finde eine Basis in $V$, s.d. $M_B(b)$ m"oglichst
+einfach aussieht.
+
+\begin{proposition}
+  Sei $b$ nicht ausgeartet und symetrisch oder schiefsymetrisch. Sei $U\subseteq
+  V$ ein untervektorraum. Dann giltL $V=U\bigoplus U^\perp \iff B_{\mid U}
+  \text{nicht ausgeartet}$.
+\end{proposition}
+
+\begin{prof}
+  \begin{align*}
+    U^\perp = {v\in V \mid b(f_i,v)=0\; \forall i=\bar{1,k}}
+  \end{align*}
+  Das heisst, $\dim U^\perp \geq \dim V - \dim U$, egal ob b ausgeartet ist.
+  Andererseits gilt: \[U\cap U\perp = {u\in U \mid \forall u'\in U,\; b(u,u')=0}
+  = \text{das orthogonale kmplement von U bzgl. } b_{\mid u}\]
+Es gilt also: wenn $V=U \bigoplus U^\perp$
+\end{prof}
+
+\begin{definition}{Orthogonale Basis}
+  Sei $b$ einne symetrische Bilinearform auf $V$, $e_1,\ldots, e_n$ eine Basis
+  in V. Basis heisst \textbf{orthogonal} (bzgl. $b$), wenn $b(e_i,e_j)=0$ f"ur
+  $i\not= j$.
+\end{definition}
+
+\begin{exa}
+  Im $\mathbb{R}^3$ ist es mit dem Skalarprodukt genau geometrische orthogonalit"at.
+\end{exa}
+
+\begin{satz}{Existenz von Orthogonalbasen}
+  Sei $V$ ein $K$ - Vektorraum, $b$ eine symetrische Bilinearform. Es gibt eine
+  orthogonale Basis in $V$ bzgl. $b$.
+\end{satz}
+
+\begin{prof} {Vorbereitung}
+  Sei $q(x)=b(x,x)$ die quadratische Form, die zu $b$ geh"ort. Da $b$ symetrisch
+  ist, kann man $b$ aus $q$ durch folgende Formel wiederherstellen.
+  (Polarisierungsidentit"at)
+  \[
+    b(x,y) = \frac{1}{2} (q(x+y) - q(x) - q(y))
+  \]
+\end{prof}
+\begin{prof}[des Satzes]
+  Induktion "uber $n=\dim V$.\\
+  \begin{itemize}
+  \item[IA] Wenn $n=1$ nichts zu zeigen.
+  \item[IS] Sei $n>1$ und es sei die Aussage f"ur alle VR mit Dimension $<n$
+    gezeigt.
+    \begin{itemize}
+    \item[1. Fall] $b=0\rightarrow$ Jede Basis ist orthogonal.
+    \item[2. Fall] $b\not= 0\xRightarrow[]{Polarisiergun} \exists e_1\in V$ mit
+      $q(e_1)=b(e_1,e_1)\not= 0$. Es sei $U=\langle {U} \rangle$
+    \end{itemize}
+  \end{itemize}
+\end{prof}
+
+\begin{relation}
+  $\Epsilon=(e_1,\ldots, e_n) \subset V$ ist eine Orthogonalbasis $\iff
+  M_\Epsolon(b)=
+  \begin{pmatrix}
+    b_{11}
+  \end{pmatrix}
+  $ eine Diagonalmatrix.
+
+  Also: f"ur jede symetrische Matrix $A$ gibt es eine invertierbare Matrix $S$
+  mit $S^T\cdot A\cdot S = D$ (Diagonalmatrix). Wenn $K=\mathbb{R}$, kann man
+  erreichen, dass die Diagonaleintr"age aus ${0,1,-1}$ bestshen. (wenn
+  $b(e_i,e_i)\not= 0$, ersetze $e_i=\frac{e_i}{\sqrt{(|b(e_i, e_i)|}}$)
+\end{relation}
+
+Der Satz "uber die Existenz von Orthogonalbasen ist nicht besonders konstruktiv.
+
+\begin{relation}
+  Sei $F=(f_1, \ldots, f_n)\subset V$ eine Basis..
+  \[\text{Sei } A:= M_F(b)=...\] Sei $A_k$ die ''obere linke'' ($k\times k$) -
+  Untermatrix von A, also ...
+  Sei $\delta_l:= \det A_k$ der Eckminor von $A$. Sei ausserdem $V_K=\langle
+  {f_1,\ldots, f_k} \rangle, V_0:={0}, \delta_0=1$...
+\end{relation}
+
+\begin{satz}{Gr"au-Schmidt-Verfahren}
+  Sei $b$ eine Bilinearform auf $V$, $F\supset V$ eine Basis in V wie oben. Sei
+  ausserdem $\delta_k \not=0,; l=\bar{0,n}$. Dann existiert eine eindeutig
+  bestimmte Orthogonalbasis $(e_1,\ldots,e_n)$ in $V$  ..
+\end{satz}
+
+
+\begin{prof}
+  Induktion "uber $n=\dim V$
+  \begin{itemize}
+  \item[IA, $n=1$] $V=\langle {f_1} \rangle$ ...
+  \item[Induktionsschritt] nach IV gibt die gilt die Aussage f"ur
+    $V_{n-1}=\langle {f_1,\ldots,f_{n-1} \rangle$ ...
+  \end{itemize}
+\end{prof}
+
+\begin{exa}
+  $f_1=\begin{pmatrix}1\\ 1\\ 1\\\end{pmatrix},\;f_2=\begin{pmatrix}1\\ 2\\ 1\\\end{pmatrix},\;f_3=\begin{pmatrix}0\\ 0\\ 1\\\end{pmatrix}$
+\end{exa}
+
+Geometrische Interpreatation:
+\begin{relation}
+  Man subtrahiert passende Linearkombinationen von bereits orthogonalisierten
+  Vektoren, um Orthogonalit"at erzwingen.
+  
+\end{relation}
+
+\begin{notte}
+  Symetrische Bilinearformen entsprechen ihren quadratischen Formen:
+  \[
+    b(x,y) = \frac{1}{2}(q(x+y)-q(x)-q(y))
+  \].
+  Daher benutzen wir diese Begriffe fortan Synonym.
+\end{notte}
+
+\begin{relation}
+  Diagonalformen f"ur $b$ entsprechen der Tatsache, dass $q$ in Koordinaten derr
+  Basis $\Epsilon'$ eine Summe von Quadraten ist.
+
+  Wir haben bereits gesehen, dass bei Basiswechsel die Matrix der Bilinearform
+  so transformiert:
+  \[
+    M_{B'}=S^T\cdot M_B(b)\cdot S \\
+    \implies \Rg M_B(b)=\Rg (b) \text{ist eine Invariantevon } b
+  \]
+  In Diagonalform ist der Rang gleich der Anzahl von Nicht-Null-Eintr"agen. In
+  $\mathbb{}$ folgt: Der Rang ist die einzige IInvariante der (symetrsichen)
+  Bilinearforme''.
+
+  "Uber $\mathbb{R}$ taucht die folgende Frage auf: Ist die Anzahl von $1$ und
+  $-1$ auf der Diagonale unabh"angig von der Basis?
+\end{relation}
+
+\begin{definition}{Positive Definiertheit}{}
+  Sei $V$ ein $\mathbb{R}$ Vektorraum , $q(x)=b(x,y)$ eine quadratische Form auf
+  V. Sei $U\supseteq V$ ein Untervektorraum.
+
+  \begin{itemize}
+  \item $q$ heisst \textbf{positiv definit} auf $U$, wenn $q(u) > 0\; \forall
+    u\in U\setminus\{0\}$
+  \item $q$ heisst \textbf{negativ definit} auf $U$, wenn $q(u) < 0\; \forall
+    u\in U\setminus\{0\}$
+  \item $q$ heisst \textbf{indefinit} sonst
+  \end{itemize}
+\end{definition}
+
+
+\begin{relation}
+  Wenn ....
+\end{relation}
+
+\begin{satz}{Bestimmung von $r_+, r_-$ durch Definiertheit}
+  Sei $V$ ein $\mathbb{R}$ Vektorraum, $b: V\times V \rightarrow \mathbb{R}$.
+  Sei $\Epsilon$ eine Basis mit ...
+
+  Dan gilt:
+  \begin{align*}
+    r_+=\max
+  \end{align*}
+\end{satz}
+
+\begin{definition}{Signatur}{}
+  Das Paar ($r_+,r_-$) heisst \textbf{Signatur} von $b$.
+\end{definition}
+
+\begin{prof}
+  Sei $U:=$...
+\end{prof}
+
+\begin{satz}{Jakobi}{}
+  Sei $V$ ein $\mathbb{R}$ Vektorraum, $b: V\times V \rightarrow \mathbb{R}$
+  eine Bilinearforme, so dass: ...
+
+  wobei ....
+
+  Betrachte die Folge....
+
+  Dann gilt $r_-=\text{Anzahl der Vorzeichenwechsel in dieser Folge}$. Ein
+  Vorzeichenwechsel liegt vor, wenn  .... 
+\end{satz}
+
+\begin{prof}
+  ....
+\end{prof}
+
+\begin{korollar}{Sylvester-Kriterium}
+  Sei $V$ ein $\mathbb{R}$ Vektorraum, $b: V\times V \rightarrow \mathbb{R}$
+  eine symetrische Bilinearform, $A=M_B(b)$, $\delta_k = \det A_k$ - Eckminore
+  von $A$.
+
+  Es giltL $q$ positiv definiert auf $v \iff \delta_K > 0 \forall k=\bar{1,n}$.
+\end{korollar}
+
+\begin{prof}
+  Wenn $q$ pos. def. $\iff$ alle $\delta_k\not= 0$, weil man sonst einen Vektor
+  $v\in V$ mit $q(v)=0$ h"atte ($q$ w"ahre ausgeartet); wenden nun den Satz von
+  Jakobi an.
+\end{prof}
+
+\begin{exa}
+  
+\end{exa}
+
+
+\section{Euklidische Vektorr"aume}
+\label{sec:evr}
+
+Sei $V$ ein $\mathbb{R}$ Vektorraum. Das Paar $(V, <\cdot,\cdot>)$ heisst
+euklidischer Vektorraum, wenn $<\cdot,\cdot>: V\times V \rightarrow \mathbb{R}$
+eine positiv definierte Bilinearform ist. $<\cdot, \cdot>$ heisst Skalarprodukt.
+
+Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von
+L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.
+
+\begin{definition}{Orthogonalit"at}{}
+  $x,y\in V$ heissen \textbf{orthogonal}, wenn $<x,y>=0$
+\end{definition}
 \section{Schlagworte:}
 \label{sec:orgcf8c685}
 \begin{itemize}

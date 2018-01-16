@@ -24,6 +24,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{mathtools} % for xrightarrow
 \usepackage{todonotes}
+\usepackage{commath} % differential stuff
 \newcommand{\gq}[1]{\glqq{}#1\grqq{}} % german quotes
 \newcommand{\mcolor}[2][red]{\begingroup\color{#1}#2\endgroup }
 \DeclareMathOperator{\mdim}{dim}
@@ -3024,8 +3025,8 @@ Es gilt also: wenn $V=U \bigoplus U^\perp$
 \end{prof}
 
 \begin{relation}
-  $\Epsilon=(e_1,\ldots, e_n) \subset V$ ist eine Orthogonalbasis $\iff
-  M_\Epsolon(b)=
+  $\epsilon=(e_1,\ldots, e_n) \subset V$ ist eine Orthogonalbasis $\iff
+  M_\epsilon(b)=
   \begin{pmatrix}
     b_{11}
   \end{pmatrix}
@@ -3059,7 +3060,7 @@ Der Satz "uber die Existenz von Orthogonalbasen ist nicht besonders konstruktiv.
   \begin{itemize}
   \item[IA, $n=1$] $V=\langle {f_1} \rangle$ ...
   \item[Induktionsschritt] nach IV gibt die gilt die Aussage f"ur
-    $V_{n-1}=\langle {f_1,\ldots,f_{n-1} \rangle$ ...
+    $V_{n-1}=\langle f_1,\ldots,f_{n-1} \rangle$ ...
   \end{itemize}
 \end{prof}
 
@@ -3084,13 +3085,13 @@ Geometrische Interpreatation:
 
 \begin{relation}
   Diagonalformen f"ur $b$ entsprechen der Tatsache, dass $q$ in Koordinaten derr
-  Basis $\Epsilon'$ eine Summe von Quadraten ist.
+  Basis $\epsilon'$ eine Summe von Quadraten ist.
 
   Wir haben bereits gesehen, dass bei Basiswechsel die Matrix der Bilinearform
   so transformiert:
   \[
     M_{B'}=S^T\cdot M_B(b)\cdot S \\
-    \implies \Rg M_B(b)=\Rg (b) \text{ist eine Invariantevon } b
+    \implies \mRg M_B(b)=\mRg (b) \text{ist eine Invariantevon } b
   \]
   In Diagonalform ist der Rang gleich der Anzahl von Nicht-Null-Eintr"agen. In
   $\mathbb{}$ folgt: Der Rang ist die einzige IInvariante der (symetrsichen)
@@ -3120,7 +3121,7 @@ Geometrische Interpreatation:
 
 \begin{satz}{Bestimmung von $r_+, r_-$ durch Definiertheit}
   Sei $V$ ein $\mathbb{R}$ Vektorraum, $b: V\times V \rightarrow \mathbb{R}$.
-  Sei $\Epsilon$ eine Basis mit ...
+  Sei $\epsilon$ eine Basis mit ...
 
   Dan gilt:
   \begin{align*}
@@ -3196,6 +3197,85 @@ L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.
 \item Transposition vertauscht faktoren.
 \item k-te Spalte \((A)_k\)
 \end{itemize}
+
+% DEF: Euklidischer VR
+
+\begin{exa}
+  \(\mathbb{R}^n\) mit \(\langle x, y\rangle_{st} = \sum_{i=1}^nx_iy_i\) ist ein euklidischer VR.
+\end{exa}
+
+% DEF: Norm, Cauchy-Schwarz
+
+\begin{exa}
+  \(V = C([0, 1], \mathbb{R}), \langle f, g\rangle := \int_0^1f(x)g(x)\dif x \forall f, g \in V\)
+  \begin{align*}
+    (\int_0^1f(x)g(x)\dif x)^2 &\leq \int f(x)^2\dif x\int g(x)^2\dif x \\
+    \implies (\int_0^1 f(x))
+  \end{align*}
+\end{exa}
+
+% DEF: Gram-Matrix, Satz: Positivität
+
+\begin{prof}
+  Wenn eine nichttriviale Linearkombination \(\sum_{i=1}^k \lambda_iv_i\) gleich null ist, dann gilt aufgrund der Linearit"at von \(\langle ., .\rangle\) in der 1. Variable \begin{align*}\sum_{i=1}^k \lambda_i\langle v_i, v_j\rangle &= 0 \forall j\in \{1, \dots, n\} \\ \implies \det G(v_1, \dots, v_n) &= 0\end{align*} (Linearit"at von \(\det\) in Zeilen)
+
+  Sind \(v_1, \dots, v_k\) linear unabh"angig, dann bilden sie eine Basis ihrer linearen H"ulle \(U = span(v_1, \dots, v_k)\) (mit \(k \in \{1,\dots, n\}\)). Die Gram-Matrix ist genau die Matrix des Skalarproduktes bez"uglich dieser Basis. Nach dem Silvester-Kriterium ist sie positiv.
+\end{prof}
+
+% DEF Orthonomalbasis
+
+Sei \(E\) eine Orthogonalbasis (ONB), \(B\) eine weitere Basis von \(V\). Sei \(S = M_E^B\) die Basiswechselmatrix von \(E\) zu \(B\). Nach Transformationsregel f"ur Matrizen von Bilinearformen gilt \[G(B) = S^T\underbrace{1_n}_{=G(E)}S = S^TS\] \(\implies B\) ist ONB \(\iff S^TS = 1_n \iff S^T = S^{-1} \quad (SS^T = 1_n)\)
+
+% DEF orthogonale Matrix
+
+  \emph{"Ubung:} Beweisen Sie, dass eine \(n\times n\)-Matrix genau dann orthogonal ist, wenn ihre Spalten (oder Zeilen) eine ONB bez"uglich des Standardskalaproduktes bilden
+
+  Sei \(U\subseteq V\) ein Unterraum. Dann ist die Einschr"ankung von \(\langle ., .\rangle\) auf \(U\) eine positiv definite (also nicht ausgeartete) Bilinearform nach dem Silvester-Kriterium. \(\implies\) Direkte Summenzerlegung \(V = U\oplus U^\perp\) \(\implies\) jedes \(v\in V\) ist eindeutig darstellbar als \(v = u + u^\perp\) mit \(u\in U, u^\perp \in U^\perp\). \(u\) hei"st orthogonale Projektion von \(v\) auf \(U\). \(\implies\) Lineare Abbildung \(p_U: V\to U, p_U(v = u + u^\perp) = u\). \(p_U\) hei"st orthogonale Projektion auf \(U\).
+
+\begin{lemma}[Explizite Formel f"ur orthogonale Projektion]
+  Sei \(e_1, \dots, e_n\) ONB von \(U \subseteq V\). Dann gilt f"ur \(v\in V\):
+  \begin{align*}
+    p_U(v) = \sum_{i=1}^k\langle e_i, v\rangle e_i
+  \end{align*}
+\end{lemma}
+\begin{korollar}
+  Wenn \(e_1,\dots, e_n\) ONB von \(V\) ist, dann gilt f"ur jedes \(v \in V\):
+  \begin{align*}
+    v = \sum_{i=1}^n\langle e_i, v\rangle e_i
+  \end{align*}
+\end{korollar}
+\begin{prof}[des Lemmas]
+  \(\sum_{i=1}^k \langle e_i, v\rangle e_i\) liegt in \(U\). Wir m"ussen also noch zeigen, dass \(v - \sum_{i=1}^k\langle e_i, v\rangle e_i\) orthogonal zu \(U\) ist. Es reicht zu zeigen, dass dieser Vektor orthogonal zu jedem \(e_j \quad\forall j \in \{1,\dots, n\}\) ist. Das folgt aus der Orthonormalit"at der Basis \(\langle e_j, v\rangle - \sum_{i=1}^k \langle e_j, e_i\rangle\langle e_i, v\rangle = \langle e_j, v\rangle - \langle e_j, v\rangle = 0\).
+\end{prof}
+
+\emph{"Ubung:} "Uberzeugen Sie sich, dass das Gram-Schmidt-Verfahren in einem euklidischen VR so beschrieben werden kann: wenn \(f_1, \dots, f_n \in V\) eine beliebige Basis von \(V\) ist, und \(V_k = span(f_1, \dots, f_k)\), dann bilden die Vektoren \begin{align*}e_k := p_{V_{k-1}^\perp}(f_k) = f_k - p_{V_{k-1}}(f_k) = f_k - \sum_{i=1}^{k-1}\frac{\langle e_i, f_k\rangle}{\langle e_i, e_i\rangle}e_i\end{align*} eine Orthogonalbasis von \(V\). Eine ONB erh"alt man, indem man \(e'_k = \frac{e_k}{||e_k||} \quad\forall k\in \{1,\dots,n\}\)
+
+\emph{"Ubung:} "Uberpr"ufen Sie, dass das Gram-Schmidt-Verfahren angewandt auf die Basis \(1, x, x^2, x^3\) von \(C[-1, -1]\) mit dem Skalarprodukt \(\langle f, g\rangle = \int_{-1}^1f(x)g(x)\dif x\) die Vielfachen der Legendre-Polynome
+\begin{align*}
+  p_0(x) = 1, p_1(x) = x, p_2(x) = \frac{1}{2}(3x^2 - 1), p_3(x) = \frac{1}{2}(5x^3 - 3x)
+\end{align*}
+liefert.
+
+\begin{bem}
+  Skalarprodukt \(\langle . , .\rangle \implies ||x|| = \sqrt{\langle x, x\rangle}\) ist eine Norm \(\implies d(x, y) = ||x-y||\) ist eine Metrik \(\implies\) Topologie, Konvergenz.
+\end{bem}
+
+% SATZ: aBSTAND IST GLEICH L"ANGE DES LOTES 
+
+\begin{prof}
+  Sei \(v = u + u^\perp\) mit \(u = P_U(v) \in U, u^\perp \in U^\perp\). F"ur jedes \(u' \in U\) gilt \(z = u - u' \in U\).
+  \begin{align*}
+    ||v - u'||^2 = ||z + u^\perp||^2 = \langle z, z\rangle + \langle u^\perp , u^\perp\rangle = ||z||^2 + ||u^\perp||^2 \geq ||u^\perp||^2
+  \end{align*}
+  mit Gleichheit genau dann, wenn \(u' = u\).
+\end{prof}
+
+% SATZ: Abstand mit Gram-Matrix
+
+\begin{prof}[Abstandsformel f"ur Gram-Matrizen]
+  Gilt \(v\in U\), dann sind beide Seiten gleich null (Determinante hat dann linear abh"angige Spalten). Sonst (\(v \not\in U\)) sei \(z = p_{U^\perp}(v)\). Dann ist \(f_1, \dots, f_k, v\) eine Basis von \(U\oplus \langle v\rangle\). (Wir orthogonalisieren diese Basis mit dem Gram-Schmidt-Verfahren und erhalten eine orthogonale Basis \(e_1, \dots, e_k, z\).) Nach dem Satz "uber das Gram-Schmidt-Verfahren k"onnen wir jetzt den Wert \(\langle z, z\rangle\) durch die Eckminore der Gram-Matrix ausdr"ucken. \(\langle z,z\rangle = \frac{\delta_{k+1}}{\delta_k} = \frac{\det G(f_1,\dots, f_k, v)}{\det G(f_1, \dots, f_k)} = ||z||^2 = d(v, U)^2\)
+\end{prof}
+
 \tcblistof[\chapter]{definition}{Defintionen, S"atze und Theoreme}
 \end{document}
 

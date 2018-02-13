@@ -3025,8 +3025,8 @@ Es gilt also: wenn $V=U \bigoplus U^\perp$
 \end{prof}
 
 \begin{relation}
-  $\epsilon=(e_1,\ldots, e_n) \subset V$ ist eine Orthogonalbasis $\iff
-  M_\epsilon(b)=
+  $\mathcal{E}=(e_1,\ldots, e_n) \subset V$ ist eine Orthogonalbasis $\iff
+  M_\mathcal{E}(b)=
   \begin{pmatrix}
     b_{11}
   \end{pmatrix}
@@ -3085,7 +3085,7 @@ Geometrische Interpreatation:
 
 \begin{relation}
   Diagonalformen f"ur $b$ entsprechen der Tatsache, dass $q$ in Koordinaten derr
-  Basis $\epsilon'$ eine Summe von Quadraten ist.
+  Basis $\mathcal{E}'$ eine Summe von Quadraten ist.
 
   Wir haben bereits gesehen, dass bei Basiswechsel die Matrix der Bilinearform
   so transformiert:
@@ -3121,7 +3121,7 @@ Geometrische Interpreatation:
 
 \begin{satz}{Bestimmung von $r_+, r_-$ durch Definiertheit}
   Sei $V$ ein $\mathbb{R}$ Vektorraum, $b: V\times V \rightarrow \mathbb{R}$.
-  Sei $\epsilon$ eine Basis mit ...
+  Sei $\mathcal{E}$ eine Basis mit ...
 
   Dan gilt:
   \begin{align*}
@@ -3172,29 +3172,23 @@ Geometrische Interpreatation:
 \end{exa}
 
 
-\section{Euklidische Vektorr"aume}
+\chapter{Euklidische Vektorr"aume}
 \label{sec:evr}
 
-Sei $V$ ein $\mathbb{R}$ Vektorraum. Das Paar $(V, <\cdot,\cdot>)$ heisst
-euklidischer Vektorraum, wenn $<\cdot,\cdot>: V\times V \rightarrow \mathbb{R}$
-eine positiv definierte Bilinearform ist. $<\cdot, \cdot>$ heisst Skalarprodukt.
-
-Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von
-L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.
+\begin{definition}{Euklidischer Vektorraum}{}
+	Sei $V$ ein $\mathbb{R}$ Vektorraum. Das Paar $(V, \langle\cdot,\cdot\rangle)$ heisst
+	euklidischer Vektorraum, wenn $\langle\cdot,\rangle: V\times V \rightarrow \mathbb{R}$
+	eine positiv definierte Bilinearform ist. $\langle\cdot,\rangle$ heisst Skalarprodukt.
+	
+	
+	Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von
+	L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.  
+\end{definition}
 
 \begin{definition}{Orthogonalit"at}{}
-  $x,y\in V$ heissen \textbf{orthogonal}, wenn $<x,y>=0$
+  $x,y\in V$ heissen \textbf{orthogonal}, wenn $\langle x,y\rangle=0$
 \end{definition}
 
-
-\begin{definition}{Euklidischer Vektorraum}{}
-Sei $V$ ein $\mathbb{R}$ Vektorraum. Das Paar $(V, <\cdot,\cdot>)$ heisst
-euklidischer Vektorraum, wenn $<\cdot,\cdot>: V\times V \rightarrow \mathbb{R}$
-eine positiv definierte Bilinearform ist. $<\cdot, \cdot>$ heisst Skalarprodukt.
-
-Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von
-L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.  
-\end{definition}
 
 
 \begin{exa}
@@ -3202,11 +3196,11 @@ L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.
 \end{exa}
 
 \begin{definition}{Orthogonalit"at}{}
-  $x,y\in V$ heissen \textbf{orthogonal}, wenn $<x,y>=0$
+  $x,y\in V$ heissen \textbf{orthogonal}, wenn $\langle x,y \rangle=0$
 \end{definition}
 
-\begin{satz}{Cauchy Schwarz}
-  \[|\langle {x,y} \rangle|\leq ||x||\cdot ||y||\]  
+\begin{satz}{Cauchy Schwarz}{}
+  \[\langle x,y \rangle\leq ||x||\cdot ||y||\]
 \end{satz}
 
 
@@ -3221,7 +3215,7 @@ L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.
 \begin{definition}{Winkel}{}
   Sei $(V, \langle {\cdot,\cdot} \rangle)$ ein eukl. VR. Der \textbf{Winkel}
   $\Theta_{v,w}$ zwischen zwei Winkeln $v,w\in V$ wird gegeben durch die Gleichung: \[\cos
-    \Theta_{v,w} = \frac{\langle{v,w}}{||v||\cdot ||w||\]
+    \Theta_{v,w} = \frac{\langle{v,w}}{||v||\cdot ||w||}\]
 \end{definition}
 
 \begin{definition}{Gram Matrix}{}
@@ -3244,7 +3238,7 @@ L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.
 
 
 \begin{definition}{Orthonormalbasis}{}
-  Eine Basis $\Epsilon = \{e_1, \ldots, e_n\} \subset V$ heisst
+  Eine Basis $\mathcal{E} = \{e_1, \ldots, e_n\} \subset V$ heisst
   \textbf{Orthonomalbasis}, wenn $G(e_1, \ldots, e_n) = 1_n$ ist. ($\iff \langle
   {e_i, e_jede} \rangle = \delta_{ij} \forall i,j = \overline{1,n}$)
 \end{definition}
@@ -3255,7 +3249,7 @@ L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.
 
 \begin{relation}
   Sei $\xi$ eine Orthonormalbasis (=ONB), $B$ eine weitere Basis von $V$. Sei
-  $S=M^B_\Epsilon$ die Basiswechselmatrix von $\Epsilon$ zu $B$. Nach
+  $S=M^B_\mathcal{E}$ die Basiswechselmatrix von $\mathcal{E}$ zu $B$. Nach
   Transformationsregel f"ur Matrizen von Bilinearformen gilt:
   \begin{align*}
     G(B) =  S^T\cdot 1_n \cdot S = S^T\cdot S\\
@@ -3333,7 +3327,7 @@ liefert.
 
 
 
-\subsection{Lineare Abbildungen zwischen Vektorräumen mit Skalarprodukt }
+\section{Lineare Abbildungen zwischen Vektorräumen mit Skalarprodukt }
 \label{sec:vsk}
 \textbf{Fragen}:
 \begin{enumerate}
@@ -3343,7 +3337,7 @@ liefert.
 
 \begin{notte}
   Sei $(V, \langle {\cdot, \cdot} \rangle)$ ein eukl./unit. Vektorraum. Sei
-  $\Epsilon=(e_1,...,e_n)$ eine Orthonormalbasis in $V$, $f: V\mapsto V $
+  $\mathcal{E}=(e_1,...,e_n)$ eine Orthonormalbasis in $V$, $f: V\mapsto V $
   linear. Dann gilt ...
 
   Insbesondere gilt: eine Beliebige Matrix $A\in K^{m\times n}$ ist die Matrix
@@ -3359,7 +3353,7 @@ liefert.
 \end{lemma}
 
 \begin{exa}
-  Wenn $V=(K^n, \langle {\cdotm \cdot} \rangle _{st})$ $f$ ist gegeben durch
+  Wenn $V=(K^n, \langle {\cdot, \cdot} \rangle _{st})$ $f$ ist gegeben durch
   eine Matrix $A$, und die definierende Eigenschaft der adjungierten Abbildung
   $A'$:
   \[ \lambda*\cdot A \cdot \mu = (A'\cdot \lambda)^*\cdot\]
@@ -3375,12 +3369,12 @@ liefert.
 \end{prof}
 
 \begin{notte}
-  WEnn $\Espilon=(e_1, ..., e_n)$ eine Orthonoermalbasis in V ...
+  WEnn $\mathcal{E}=(e_1, ..., e_n)$ eine Orthonoermalbasis in V ...
 \end{notte}
 
 \begin{definition}
    Sei $(V, \langle {\cdot, \cdot} \rangle)$ ein eukl./unit. Vektorraum. Sei
-  $\Epsilon=(e_1,...,e_n)$ eine Orthonormalbasis in $V$, $f: V\mapsto V $
+  $\mathcal{E}=(e_1,...,e_n)$ eine Orthonormalbasis in $V$, $f: V\mapsto V $
   linear. 
   \begin{itemize}
   \item selbstadjungiert, wenn $f^*=f$
@@ -3398,16 +3392,14 @@ liefert.
 
 \begin{prof}
   \begin{itemize}
-  \item[\implies] 
-  \item[\impliedb]
   \end{itemize}
 \end{prof}
 \begin{notation}
   \begin{itemize}
- \item $O(V)=\{f\in\End (V) \mid f\text{ Orthogonal}\}$ ($V$ eukl)
+ \item $O(V)=\{f\in\mEnd (V) \mid f\text{ Orthogonal}\}$ ($V$ eukl)
   \item $O(n):= O(\mathbb{R}^n, \langle{\cdot, \cdot} = \{A\in
     \mathbb{R}^{n\times  n} \mid A \text{ Orthogonal}\})$
-    \item $U(V)=\{f\in\End (V) \mid f\text{ Unit"ar}\}$ ($V$ unit"ar)
+    \item $U(V)=\{f\in\mEnd (V) \mid f\text{ Unit"ar}\}$ ($V$ unit"ar)
   \item $U(n):= O(\mathbb{C}^n, \langle{\cdot, \cdot} = \{A\in
     \mathbb{C}^{n\times  n} \mid A \text{ Orthogonal}\})$
   \item $S O(n) = {A\in O(u) \mid \det A = 1}$ - spez. Orth. Gruppe
@@ -3416,7 +3408,7 @@ liefert.
   \end{itemize}
 
   Alle Mengen in dieser Liste sind Teilmengen von bijektiven Abbildungen von
-  $V\rightarrow V$, s.d. $f,g\in G \implies g\cir f \in G; f\in G \implies
+  $V\rightarrow V$, s.d. $f,g\in G \implies g\circ f \in G; f\in G \implies
   f^{-1}\in G$. Solche Teilmengen $G$ heissen Transformationsgruppen.
 \end{notation}
 
@@ -3435,7 +3427,7 @@ liefert.
   \item wenn $U\subseteq V$ ein UVR ist, $p_U: V\rightarrow U$ die Orthogonale
     Projektion auf $U$ dann gilt: $p_U=p_U^2 p_u^*= p_U$
     
-  \item $p\in \End (V)$ eine Orthogonale Projektion $\implies p = p_U $ wobei
+  \item $p\in \mEnd (V)$ eine Orthogonale Projektion $\implies p = p_U $ wobei
     $U=\Im p$
   \end{enumerate}
 \end{proposition}
@@ -3447,16 +3439,16 @@ liefert.
 
 \subsection{Spektralsatz f"ur normale Operatoren}
 \label{sec:spekt}
-Erinnerung: $f\in \End(V)$ ehisst normal, wenn $f^*\cdot f = f\cdot f^*$
+Erinnerung: $f\in \mEnd (V)$ ehisst normal, wenn $f^*\cdot f = f\cdot f^*$
 
 \begin{definition}{Spektrum}{}
-  Das Spektrum um $f\in \End(V)$ ist die Menge $\sigma (f) = \{\lambda \mid
+  Das Spektrum um $f\in \mEnd (V)$ ist die Menge $\sigma (f) = \{\lambda \mid
   \lambda \text{ Eigenwert von } f\}$
 \end{definition}
 
 \begin{satz}{Spektralsatz f"ur normale Operatoren}
   Sei $V$ ein unit"arer Vektorraum
-  . Ein Operator $f\in \End(V)$ ist genau dann normal, wenn eine
+  . Ein Operator $f\in \mEnd (V)$ ist genau dann normal, wenn eine
   Orthonormalbasis aus Eigenwerten von $f$ existiert (d.h., f ist
   diagonalisierbar in einer Orthonormalbasis).
 \end{satz}
@@ -3466,7 +3458,7 @@ Erinnerung: $f\in \End(V)$ ehisst normal, wenn $f^*\cdot f = f\cdot f^*$
   diagonalisierbar sind. (Sog. in OMB)
 \end{notte}
 \begin{lemma}
-  Sei $V$ ein unit"arer Vektorraum $u\subseteq V$ UVR, $f\in \End(V)$ normal. Es
+  Sei $V$ ein unit"arer Vektorraum $u\subseteq V$ UVR, $f\in \mEnd (V)$ normal. Es
   gilt: $U$ Eigenraum (ist damit $f$ invariant $(f(U)\subseteq U) $) $\implies $ dann ist $U^\perp$
   $f$ invariant:
   $U^\perp\subseteq U$ 
@@ -3477,12 +3469,12 @@ Erinnerung: $f\in \End(V)$ ehisst normal, wenn $f^*\cdot f = f\cdot f^*$
   und die Eigenwerte sind reell. (Wenn unt"ar, Eigenwerte auf Einheitskreis)
 \end{korollar}
 \begin{relation}
-  Sei $f\in \End(V)$ normal, $\Epsilon$ eine Orthonormalbasis aus Eigenwerten,
+  Sei $f\in \mEnd (V)$ normal, $\mathcal{E}$ eine Orthonormalbasis aus Eigenwerten,
   $\phi: \mathbb{C} \rightarrow \mathbb{C}$ beliebig. Definiere $(\phi(f))(v)=\phi(\lambda)*v$
 \end{relation}
 
 \begin{proposition}
-  Sei $V$ ein eukl./unit. VR. $f\in \End(v) \implies f^* f, ff^*$
+  Sei $V$ ein eukl./unit. VR. $f\in \mEnd (V) \implies f^* f, ff^*$
   selbstadjungierte Operatoren auf $V$ mit nochtnegativen Eigenwerten. Wenn $f$
   invertierbar ist, sind die Eigenwerte positiv.
 \end{proposition}
@@ -3494,7 +3486,7 @@ Erinnerung: $f\in \End(V)$ ehisst normal, wenn $f^*\cdot f = f\cdot f^*$
 \end{prof}
 
 \begin{definition}{Operatornorm}{}
-  Sei $f\in \End(V)$: $|f|:= \sqrt{f^*\circ f}$.
+  Sei $f\in \mEnd (V)$: $|f|:= \sqrt{f^*\circ f}$.
 \end{definition}
 \begin{relation}
   Wenn $f$ invertierbar ist $\implies f^*$ invertierbar $\implies f^* f$
@@ -3511,11 +3503,11 @@ Erinnerung: $f\in \End(V)$ ehisst normal, wenn $f^*\cdot f = f\cdot f^*$
   Orthogonale Abbildungen sind (anders als unit"are!) nicht immer Diagonalisierbar.
 \end{relation}
 \begin{satz}{Spektralsatz / $\mathbb{R}$}
-  Sei $V$ ein eukl. VR, $f=f^* \in \End{V}$ slebstadjungiert. Dann existiert
+  Sei $V$ ein eukl. VR, $f=f^* \in \mEnd (V)$ slebstadjungiert. Dann existiert
   eine Orthonormalbasis aus Eigenvektoren von $f$.
 \end{satz}
 \begin{prof}
-  Sei $V_{\mathbb{C}}=V \plusdot iV$ die Komplexifizierung von $V$,
+  Sei $V_{\mathbb{C}}=V \oplus iV$ die Komplexifizierung von $V$,
   $f_{\mathbb{C}}: V_{\mathbb{C}} \rightarrow V_{\mathbb{C}}$ die
   Komplezifizierung von $f$. Definiere auf $V_{\mathbb{C}}$ das Skalarpordukt
   $\langle {v_1+ iv_2, w_1+ iw_2} \rangle := \langle {v_1, w_1} \rangle + i
@@ -3531,12 +3523,12 @@ Erinnerung: $f\in \End(V)$ ehisst normal, wenn $f^*\cdot f = f\cdot f^*$
 \end{notte}
 
 
-\subsection{Drehungen des $\mathbb{R}^3 = SO(3)$}
+\section{Drehungen des $\mathbb{R}^3 = SO(3)$}
 Errinerung: $SO(3) = \{A\in \mathbb{R}^{3\times r}\mid A^T \cdot A = 1_3, \det A
 = 1\}$
 
 \begin{proposition}
-  $SO(3)$ sind gerade drehungen von $(\mathbb{R}^3, \scalars)$.
+  $SO(3)$ sind gerade drehungen von $(\mathbb{R}^3, \langle\cdot  , \cdot \rangle)$.
 \end{proposition}
 
 Probleme:
@@ -3555,10 +3547,10 @@ Ausweg: Quarternione
   \item $ki=j=-ik$
   \end{itemize}
 \end{definition}
-\begin{definition}{Skalarpordukt auf $\mathbb{H}$}
+\begin{definition}{Skalarpordukt auf $\mathbb{H}$}{}
   \begin{itemize}
   \item Konjugation $h=t+xi+yj+zk \implies \bar{h}=t-xi-yj-zk$
-  \item $\langle {h, h\} := \Re (h, \bar{h'})$
+  \item $\langle {h, h} \rangle := \Re (h, \bar{h'})$
   \end{itemize}
 \end{definition}
 
@@ -3569,7 +3561,7 @@ Ziel: Drehungen im $\mathbb{R}^3$ durch Quarternione darstellen.
     \in \mathbb{H}, = 0 \text{ wenn } h=0}$
 \end{notte}
 
-\begin{definition}
+\begin{definition}{Quarternion Konjugation}{}
   $||h||^2 = h\cdot \bar{h}$
 \end{definition}
 
@@ -3609,9 +3601,9 @@ Wir betrachten nun $Sp(1)=\{h\in \mathbb{H} \mid ||h|| = 1\}$
   \item $\phi_q$ ist surj. $\forall R\in So(3) \exists q\in Sp(1): \phi_q = R$
     $n$ ist rot. Achse von $R$, $\varphi$ der Winkel der Rotation.
 
-    Sei $\Epsilon = (h, e_1, e_2)$ eine Basis in $\mathbb{R}^3$ s.d.
-    Sei $q=\cos \frac{\varPhi}{2} + \sin \frac{\varPhi}{2}\cdot n$ Da $\Epsilon$
-    ONB gilt: ... Wenn $\Epsilon$ pos. orientierte ONB in $\mathbb{R}^3$ ist es
+    Sei $\mathcal{E} = (h, e_1, e_2)$ eine Basis in $\mathbb{R}^3$ s.d.
+    Sei $q=\cos \frac{\varPhi}{2} + \sin \frac{\varPhi}{2}\cdot n$ Da $\mathcal{E}$
+    ONB gilt: ... Wenn $\mathcal{E}$ pos. orientierte ONB in $\mathbb{R}^3$ ist es
     auch eine Standartbasis in $\mathbb{H}$
   \end{enumerate}
 

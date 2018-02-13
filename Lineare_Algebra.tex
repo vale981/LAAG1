@@ -3185,26 +3185,30 @@ L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.
 \begin{definition}{Orthogonalit"at}{}
   $x,y\in V$ heissen \textbf{orthogonal}, wenn $<x,y>=0$
 \end{definition}
-\section{Schlagworte:}
-\label{sec:orgcf8c685}
-\begin{itemize}
-\item \(A\cdot B\) Zeilen von \(A\) mal Spalten von \(B\)
-\item LGS L"osungen als Vektor!
-\begin{itemize}
-\item Keine nicht offensichtlich Schritte ueberspringen!
-\item Paramatervektor und sine Elemente genau definieren!
-\end{itemize}
-\item Transposition vertauscht faktoren.
-\item k-te Spalte \((A)_k\)
-\end{itemize}
 
-% DEF: Euklidischer VR
+
+\begin{definition}{Euklidischer Vektorraum}{}
+Sei $V$ ein $\mathbb{R}$ Vektorraum. Das Paar $(V, <\cdot,\cdot>)$ heisst
+euklidischer Vektorraum, wenn $<\cdot,\cdot>: V\times V \rightarrow \mathbb{R}$
+eine positiv definierte Bilinearform ist. $<\cdot, \cdot>$ heisst Skalarprodukt.
+
+Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von
+L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.  
+\end{definition}
+
 
 \begin{exa}
   \(\mathbb{R}^n\) mit \(\langle x, y\rangle_{st} = \sum_{i=1}^nx_iy_i\) ist ein euklidischer VR.
 \end{exa}
 
-% DEF: Norm, Cauchy-Schwarz
+\begin{definition}{Orthogonalit"at}{}
+  $x,y\in V$ heissen \textbf{orthogonal}, wenn $<x,y>=0$
+\end{definition}
+
+\begin{satz}{Cauchy Schwarz}
+  \[|\langle {x,y} \rangle|\leq ||x||\cdot ||y||\]  
+\end{satz}
+
 
 \begin{exa}
   \(V = C([0, 1], \mathbb{R}), \langle f, g\rangle := \int_0^1f(x)g(x)\dif x \forall f, g \in V\)
@@ -3214,7 +3218,23 @@ L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.
   \end{align*}
 \end{exa}
 
-% DEF: Gram-Matrix, Satz: Positivität
+\begin{definition}{Winkel}{}
+  Sei $(V, \langle {\cdot,\cdot} \rangle)$ ein eukl. VR. Der \textbf{Winkel}
+  $\Theta_{v,w}$ zwischen zwei Winkeln $v,w\in V$ wird gegeben durch die Gleichung: \[\cos
+    \Theta_{v,w} = \frac{\langle{v,w}}{||v||\cdot ||w||\]
+\end{definition}
+
+\begin{definition}{Gram Matrix}{}
+  Die \textbf{Gram Matrix} der Vektoren $v_1, \ldots, v_n \in V$ ist definiert
+  als die Matrix ihrer Paarweisen Skalarprodukte:
+  \[G(v_1, \ldots, v_n):= (\langle {v_i, v_j} \rangle)_{i,j=1\ldots n}\]
+\end{definition}
+
+\begin{satz}{Positivit"at der Determinante der Gram Matrix}
+  Es gilt stets $\det G(v_1, \ldots, v_n) \geq 0$. Gleichheit gilt wenn Vektoren
+  linear abha"ngig sind.
+\end{satz}
+
 
 \begin{prof}
   Wenn eine nichttriviale Linearkombination \(\sum_{i=1}^k \lambda_iv_i\) gleich null ist, dann gilt aufgrund der Linearit"at von \(\langle ., .\rangle\) in der 1. Variable \begin{align*}\sum_{i=1}^k \lambda_i\langle v_i, v_j\rangle &= 0 \forall j\in \{1, \dots, n\} \\ \implies \det G(v_1, \dots, v_n) &= 0\end{align*} (Linearit"at von \(\det\) in Zeilen)
@@ -3222,11 +3242,32 @@ L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.
   Sind \(v_1, \dots, v_k\) linear unabh"angig, dann bilden sie eine Basis ihrer linearen H"ulle \(U = span(v_1, \dots, v_k)\) (mit \(k \in \{1,\dots, n\}\)). Die Gram-Matrix ist genau die Matrix des Skalarproduktes bez"uglich dieser Basis. Nach dem Silvester-Kriterium ist sie positiv.
 \end{prof}
 
-% DEF Orthonomalbasis
 
-Sei \(E\) eine Orthogonalbasis (ONB), \(B\) eine weitere Basis von \(V\). Sei \(S = M_E^B\) die Basiswechselmatrix von \(E\) zu \(B\). Nach Transformationsregel f"ur Matrizen von Bilinearformen gilt \[G(B) = S^T\underbrace{1_n}_{=G(E)}S = S^TS\] \(\implies B\) ist ONB \(\iff S^TS = 1_n \iff S^T = S^{-1} \quad (SS^T = 1_n)\)
+\begin{definition}{Orthonormalbasis}{}
+  Eine Basis $\Epsilon = \{e_1, \ldots, e_n\} \subset V$ heisst
+  \textbf{Orthonomalbasis}, wenn $G(e_1, \ldots, e_n) = 1_n$ ist. ($\iff \langle
+  {e_i, e_jede} \rangle = \delta_{ij} \forall i,j = \overline{1,n}$)
+\end{definition}
 
-% DEF orthogonale Matrix
+
+%Sei \(E\) eine Orthogonalbasis (ONB), \(B\) eine weitere Basis von \(V\). Sei \(S = M_E^B\) die Basiswechselmatrix von \(E\) zu \(B\). Nach Transformationsregel f"ur Matrizen von Bilinearformen gilt \[G(B) = S^T\underbrace{1_n}_{=G(E)}S = S^TS\] \(\implies B\) ist ONB \(\iff S^TS = 1_n \iff S^T = S^{-1} \quad (SS^T = 1_n)\)
+
+
+\begin{relation}
+  Sei $\xi$ eine Orthonormalbasis (=ONB), $B$ eine weitere Basis von $V$. Sei
+  $S=M^B_\Epsilon$ die Basiswechselmatrix von $\Epsilon$ zu $B$. Nach
+  Transformationsregel f"ur Matrizen von Bilinearformen gilt:
+  \begin{align*}
+    G(B) =  S^T\cdot 1_n \cdot S = S^T\cdot S\\
+    \iff \text{ B ist ONB } \iff S^T\cdot S = 1_n \iff S^T = S^{-1}
+  \end{align*}
+\end{relation}
+
+\begin{definition}{Orthogonale Matrix}
+  Eine Matriz $S$ heisst \textbf{Orthogonal} wenn $S^T=S^{-1} \iff S$  ist
+  invertierbar und $\det S = \pm 1$.
+\end{definition}
+
 
   \emph{"Ubung:} Beweisen Sie, dass eine \(n\times n\)-Matrix genau dann orthogonal ist, wenn ihre Spalten (oder Zeilen) eine ONB bez"uglich des Standardskalaproduktes bilden
 
@@ -3248,6 +3289,7 @@ Sei \(E\) eine Orthogonalbasis (ONB), \(B\) eine weitere Basis von \(V\). Sei \(
   \(\sum_{i=1}^k \langle e_i, v\rangle e_i\) liegt in \(U\). Wir m"ussen also noch zeigen, dass \(v - \sum_{i=1}^k\langle e_i, v\rangle e_i\) orthogonal zu \(U\) ist. Es reicht zu zeigen, dass dieser Vektor orthogonal zu jedem \(e_j \quad\forall j \in \{1,\dots, n\}\) ist. Das folgt aus der Orthonormalit"at der Basis \(\langle e_j, v\rangle - \sum_{i=1}^k \langle e_j, e_i\rangle\langle e_i, v\rangle = \langle e_j, v\rangle - \langle e_j, v\rangle = 0\).
 \end{prof}
 
+
 \emph{"Ubung:} "Uberzeugen Sie sich, dass das Gram-Schmidt-Verfahren in einem euklidischen VR so beschrieben werden kann: wenn \(f_1, \dots, f_n \in V\) eine beliebige Basis von \(V\) ist, und \(V_k = span(f_1, \dots, f_k)\), dann bilden die Vektoren \begin{align*}e_k := p_{V_{k-1}^\perp}(f_k) = f_k - p_{V_{k-1}}(f_k) = f_k - \sum_{i=1}^{k-1}\frac{\langle e_i, f_k\rangle}{\langle e_i, e_i\rangle}e_i\end{align*} eine Orthogonalbasis von \(V\). Eine ONB erh"alt man, indem man \(e'_k = \frac{e_k}{||e_k||} \quad\forall k\in \{1,\dots,n\}\)
 
 \emph{"Ubung:} "Uberpr"ufen Sie, dass das Gram-Schmidt-Verfahren angewandt auf die Basis \(1, x, x^2, x^3\) von \(C[-1, -1]\) mit dem Skalarprodukt \(\langle f, g\rangle = \int_{-1}^1f(x)g(x)\dif x\) die Vielfachen der Legendre-Polynome
@@ -3260,7 +3302,17 @@ liefert.
   Skalarprodukt \(\langle . , .\rangle \implies ||x|| = \sqrt{\langle x, x\rangle}\) ist eine Norm \(\implies d(x, y) = ||x-y||\) ist eine Metrik \(\implies\) Topologie, Konvergenz.
 \end{bem}
 
-% SATZ: aBSTAND IST GLEICH L"ANGE DES LOTES 
+\begin{definition}{Abstand zwischen Teilmengen $X,Y \subseteq V$}{}
+  $d(X,Y)= \inf_{x\in X, y\in Y} d(x,y)=||x-y||$.
+\end{definition}
+
+\begin{satz}{Abstand ist gleich L"ange des Lotes}
+  Sei $(V, \langle {\cdot, \cdot} \rangle$ ein eukl. VR, $Y\subseteq V$ ein UVR
+  und $v\in V$. Dann gilt: \[d(v, U) = ||P_{U^\perp}(v)||\] und der zu $v$ am
+  n"achsten gelegene Vektor $u\in U$ ist $u=P_U(v)$
+\end{satz}
+
+
 
 \begin{prof}
   Sei \(v = u + u^\perp\) mit \(u = P_U(v) \in U, u^\perp \in U^\perp\). F"ur jedes \(u' \in U\) gilt \(z = u - u' \in U\).
@@ -3270,11 +3322,317 @@ liefert.
   mit Gleichheit genau dann, wenn \(u' = u\).
 \end{prof}
 
-% SATZ: Abstand mit Gram-Matrix
+\begin{satz}{Abstandsformel f"ur Gram-Matrizen}
+  Sei $V$ ein eukl. VR, $U\subseteq V$ ein UVR, $v\in V$. Dann gilt f"ur jede
+  Basis $f_1, \ldots, f_k$ von $U$: \[d(v,U)^2 = \frac{det(G(f_1, \ldots, f_km, v)}{det(G(f_1, \ldots, f_km)}\]
+\end{satz}
 
 \begin{prof}[Abstandsformel f"ur Gram-Matrizen]
   Gilt \(v\in U\), dann sind beide Seiten gleich null (Determinante hat dann linear abh"angige Spalten). Sonst (\(v \not\in U\)) sei \(z = p_{U^\perp}(v)\). Dann ist \(f_1, \dots, f_k, v\) eine Basis von \(U\oplus \langle v\rangle\). (Wir orthogonalisieren diese Basis mit dem Gram-Schmidt-Verfahren und erhalten eine orthogonale Basis \(e_1, \dots, e_k, z\).) Nach dem Satz "uber das Gram-Schmidt-Verfahren k"onnen wir jetzt den Wert \(\langle z, z\rangle\) durch die Eckminore der Gram-Matrix ausdr"ucken. \(\langle z,z\rangle = \frac{\delta_{k+1}}{\delta_k} = \frac{\det G(f_1,\dots, f_k, v)}{\det G(f_1, \dots, f_k)} = ||z||^2 = d(v, U)^2\)
 \end{prof}
+
+
+
+\subsection{Lineare Abbildungen zwischen Vektorräumen mit Skalarprodukt }
+\label{sec:vsk}
+\textbf{Fragen}:
+\begin{enumerate}
+\item Welche Geometrie von Abbildungen liefert das Skalarprodukt?
+\item Welche Eigenschaften folgen f"ur Vektorra"ume und Eigenr"aume?
+\end{enumerate}
+
+\begin{notte}
+  Sei $(V, \langle {\cdot, \cdot} \rangle)$ ein eukl./unit. Vektorraum. Sei
+  $\Epsilon=(e_1,...,e_n)$ eine Orthonormalbasis in $V$, $f: V\mapsto V $
+  linear. Dann gilt ...
+
+  Insbesondere gilt: eine Beliebige Matrix $A\in K^{m\times n}$ ist die Matrix
+  eine Lineare Abbildung bez. der Standartorthonormalbasis.
+\end{notte}
+
+\begin{lemma}{Adjungierte Abbildung}
+  Sei $(V, \langle {\cdot, \cdot} \rangle)$ ein eukl./unit. Vektorraum, $(\dim V
+  < \infty)$, $V$, $f: V\mapsto V $ linear. Dann gibt es eine eindeutig bestimme
+  linearte Abbildung $f*: V\mapsto V $ mit: \[
+    \langle {v, f(w} \rangle \langle {f*(v), w} \rangle\; \forall v, w \in V
+  \]
+\end{lemma}
+
+\begin{exa}
+  Wenn $V=(K^n, \langle {\cdotm \cdot} \rangle _{st})$ $f$ ist gegeben durch
+  eine Matrix $A$, und die definierende Eigenschaft der adjungierten Abbildung
+  $A'$:
+  \[ \lambda*\cdot A \cdot \mu = (A'\cdot \lambda)^*\cdot\]
+\end{exa}
+
+\begin{prof}
+  \begin{enumerate}
+  \item F"ur ein $v\in V$ fest bekommen wir eine Lineare Abbildung: $\alpha_v:
+    V\rightarrow \; w \mapsto $... Das heisst
+  \item Setze jetzt $f^*(v):=u$ mit $\langle {u, w} \rangle = \alpha_v(w)\forall
+    w\in V$. 
+  \end{enumerate}
+\end{prof}
+
+\begin{notte}
+  WEnn $\Espilon=(e_1, ..., e_n)$ eine Orthonoermalbasis in V ...
+\end{notte}
+
+\begin{definition}
+   Sei $(V, \langle {\cdot, \cdot} \rangle)$ ein eukl./unit. Vektorraum. Sei
+  $\Epsilon=(e_1,...,e_n)$ eine Orthonormalbasis in $V$, $f: V\mapsto V $
+  linear. 
+  \begin{itemize}
+  \item selbstadjungiert, wenn $f^*=f$
+  \item orthogonal bzw. unit"ar, wenn $f^*\circ f = f\circ f^*=id_v$
+  \item normal, wenn $f^*\circ f = f\circ f^* $ ($f$ kommutiert mit $f^*$)
+  \item orthogonale Projektion, wenn $f^*=f, f^2=f$
+  \end{itemize}
+\end{definition}
+
+
+\begin{lemma}
+  $f$ ist orthogonal/unit"ar $iff \forall v\in V$ git $\langle {f(v), f(w)}
+  \rangle = \langle {v,w} \rangle$
+\end{lemma}
+
+\begin{prof}
+  \begin{itemize}
+  \item[\implies] 
+  \item[\impliedb]
+  \end{itemize}
+\end{prof}
+\begin{notation}
+  \begin{itemize}
+ \item $O(V)=\{f\in\End (V) \mid f\text{ Orthogonal}\}$ ($V$ eukl)
+  \item $O(n):= O(\mathbb{R}^n, \langle{\cdot, \cdot} = \{A\in
+    \mathbb{R}^{n\times  n} \mid A \text{ Orthogonal}\})$
+    \item $U(V)=\{f\in\End (V) \mid f\text{ Unit"ar}\}$ ($V$ unit"ar)
+  \item $U(n):= O(\mathbb{C}^n, \langle{\cdot, \cdot} = \{A\in
+    \mathbb{C}^{n\times  n} \mid A \text{ Orthogonal}\})$
+  \item $S O(n) = {A\in O(u) \mid \det A = 1}$ - spez. Orth. Gruppe
+  \item $S  O(n) = {A\in U(u) \mid \det A = 1}$ - spez. Unit"are. Gruppe
+  \item $GL(V)=\{f\in End(Vektorraum | f \text{ invertierbar})\}$, $GL(u, K)=GL(K^n)$
+  \end{itemize}
+
+  Alle Mengen in dieser Liste sind Teilmengen von bijektiven Abbildungen von
+  $V\rightarrow V$, s.d. $f,g\in G \implies g\cir f \in G; f\in G \implies
+  f^{-1}\in G$. Solche Teilmengen $G$ heissen Transformationsgruppen.
+\end{notation}
+
+\begin{notte}
+  F"ur die Physik sind folgende dieser Gruppen besonders releveant:
+  \begin{itemize}
+  \item $SO(3)$ - Rotation von $\mathbb{R}^3$
+  \item $SO(2)$ - Rotation von Teilchen mit Spin
+  \item $U(1)$ EM, $SU(2)$ Schwache WW, $SU(3)$ Starke WW - Eichgruppen f"ur fundamentale Wechselwirkungen
+  \end{itemize}
+\end{notte}
+
+\begin{proposition}
+  Sei $V$ eukl./unit. Vektorraum . Dann gilt:
+  \begin{enumerate}
+  \item wenn $U\subseteq V$ ein UVR ist, $p_U: V\rightarrow U$ die Orthogonale
+    Projektion auf $U$ dann gilt: $p_U=p_U^2 p_u^*= p_U$
+    
+  \item $p\in \End (V)$ eine Orthogonale Projektion $\implies p = p_U $ wobei
+    $U=\Im p$
+  \end{enumerate}
+\end{proposition}
+\begin{prof}
+  \begin{itemize}
+  \item $P$
+  \end{itemize}
+\end{prof}
+
+\subsection{Spektralsatz f"ur normale Operatoren}
+\label{sec:spekt}
+Erinnerung: $f\in \End(V)$ ehisst normal, wenn $f^*\cdot f = f\cdot f^*$
+
+\begin{definition}{Spektrum}{}
+  Das Spektrum um $f\in \End(V)$ ist die Menge $\sigma (f) = \{\lambda \mid
+  \lambda \text{ Eigenwert von } f\}$
+\end{definition}
+
+\begin{satz}{Spektralsatz f"ur normale Operatoren}
+  Sei $V$ ein unit"arer Vektorraum
+  . Ein Operator $f\in \End(V)$ ist genau dann normal, wenn eine
+  Orthonormalbasis aus Eigenwerten von $f$ existiert (d.h., f ist
+  diagonalisierbar in einer Orthonormalbasis).
+\end{satz}
+
+\begin{notte}
+  Das heisst insbesondere, dass selbstadjungierte und unit"are Operatoren
+  diagonalisierbar sind. (Sog. in OMB)
+\end{notte}
+\begin{lemma}
+  Sei $V$ ein unit"arer Vektorraum $u\subseteq V$ UVR, $f\in \End(V)$ normal. Es
+  gilt: $U$ Eigenraum (ist damit $f$ invariant $(f(U)\subseteq U) $) $\implies $ dann ist $U^\perp$
+  $f$ invariant:
+  $U^\perp\subseteq U$ 
+\end{lemma}
+
+\begin{korollar}
+  $f$ selbstadjungiert $\implies$ $f$ diagonalisierbar in einer Orthogonalbasis
+  und die Eigenwerte sind reell. (Wenn unt"ar, Eigenwerte auf Einheitskreis)
+\end{korollar}
+\begin{relation}
+  Sei $f\in \End(V)$ normal, $\Epsilon$ eine Orthonormalbasis aus Eigenwerten,
+  $\phi: \mathbb{C} \rightarrow \mathbb{C}$ beliebig. Definiere $(\phi(f))(v)=\phi(\lambda)*v$
+\end{relation}
+
+\begin{proposition}
+  Sei $V$ ein eukl./unit. VR. $f\in \End(v) \implies f^* f, ff^*$
+  selbstadjungierte Operatoren auf $V$ mit nochtnegativen Eigenwerten. Wenn $f$
+  invertierbar ist, sind die Eigenwerte positiv.
+\end{proposition}
+
+\begin{prof}
+  \begin{enumerate}
+  \item Es gilt f"ur $g$
+  \end{enumerate}
+\end{prof}
+
+\begin{definition}{Operatornorm}{}
+  Sei $f\in \End(V)$: $|f|:= \sqrt{f^*\circ f}$.
+\end{definition}
+\begin{relation}
+  Wenn $f$ invertierbar ist $\implies f^*$ invertierbar $\implies f^* f$
+  invertierbar $\implies |f| $ invertierbar.
+  Damit $u:= f\circ |f|^{-1}$ Dann $u* \cdot u=id \implies u$ unit./orth.
+\end{relation}
+
+\begin{proposition}{Polarzerlegung}
+  Wenn $f$ invertierbar $\implies \exists u$ unit./orth. mit $f=u\cdot |f|$.
+  (Auch fuer nicht invertierbare Operatoren.)
+\end{proposition}
+
+\begin{relation}
+  Orthogonale Abbildungen sind (anders als unit"are!) nicht immer Diagonalisierbar.
+\end{relation}
+\begin{satz}{Spektralsatz / $\mathbb{R}$}
+  Sei $V$ ein eukl. VR, $f=f^* \in \End{V}$ slebstadjungiert. Dann existiert
+  eine Orthonormalbasis aus Eigenvektoren von $f$.
+\end{satz}
+\begin{prof}
+  Sei $V_{\mathbb{C}}=V \plusdot iV$ die Komplexifizierung von $V$,
+  $f_{\mathbb{C}}: V_{\mathbb{C}} \rightarrow V_{\mathbb{C}}$ die
+  Komplezifizierung von $f$. Definiere auf $V_{\mathbb{C}}$ das Skalarpordukt
+  $\langle {v_1+ iv_2, w_1+ iw_2} \rangle := \langle {v_1, w_1} \rangle + i
+  \langle {v_2, w_1} \rangle - i \langle {v_2, w_1} \rangle + \langle {v_2, w_2}
+  \rangle$. Damit haben wir einen unit. Raum.
+\end{prof}
+
+\begin{notte}
+  F"ur Matrizen koennte man den Bew. so f"uhren: wenn $A=A^* \in \mathbb{R}^{n
+    \times n} \subset \mathbb{C}^{n\times n}$, hat eine Orthonormalbasis aus EV
+  in $\mathbb{C}^n$ aus Eigenvektoren $\implies$ Komponenten dieser
+  Eingenvektoren liefern EV in $\mathbb{R}^n$
+\end{notte}
+
+
+\subsection{Drehungen des $\mathbb{R}^3 = SO(3)$}
+Errinerung: $SO(3) = \{A\in \mathbb{R}^{3\times r}\mid A^T \cdot A = 1_3, \det A
+= 1\}$
+
+\begin{proposition}
+  $SO(3)$ sind gerade drehungen von $(\mathbb{R}^3, \scalars)$.
+\end{proposition}
+
+Probleme:
+\begin{itemize}
+\item Matrixmultiplikation un"ubersichtlich
+\item Bestimmung der Drehachse aufwendig
+\end{itemize}
+
+Ausweg: Quarternione
+\begin{definition}{Quarternione}{}
+  $\mathbb{H} =\{t+xi+yj+zk \mid t,x,y,z \in \mathbb{R}\}$ mit Regeln:
+  \begin{itemize}
+  \item $i^2=j^2=k^2 = -1$
+  \item $ij=k=-ji$
+  \item $jk = i = -kj$
+  \item $ki=j=-ik$
+  \end{itemize}
+\end{definition}
+\begin{definition}{Skalarpordukt auf $\mathbb{H}$}
+  \begin{itemize}
+  \item Konjugation $h=t+xi+yj+zk \implies \bar{h}=t-xi-yj-zk$
+  \item $\langle {h, h\} := \Re (h, \bar{h'})$
+  \end{itemize}
+\end{definition}
+
+Ziel: Drehungen im $\mathbb{R}^3$ durch Quarternione darstellen.
+
+\begin{notte}
+  $h\in \mathbb{H} \implies h\cdot \bar{haben = t^2+x^2+y^2+z^2 \geq 0 \forall h
+    \in \mathbb{H}, = 0 \text{ wenn } h=0}$
+\end{notte}
+
+\begin{definition}
+  $||h||^2 = h\cdot \bar{h}$
+\end{definition}
+
+\begin{relation}
+  ....
+
+  Jedes Quarternion hat ein Inverses.
+
+  $\mathbb{H}$ ist isomorph zu $\mathbb{R}^4$. $\Im (h) \tilde{} \mathbb{R}^3$
+
+  \begin{itemize}
+  \item $\forall h \not= 0$  ist $\frac{\bar{h}}{||h||^2}$ das inverse
+  \item Multipl. Assoziativ aber nicht kommutativ (Schiefk"ortper)
+  \end{itemize}
+\end{relation}
+
+Wir betrachten nun $Sp(1)=\{h\in \mathbb{H} \mid ||h|| = 1\}$
+
+\begin{relation}
+  Es gilt $\overline{(h_1\cdot h_2}=\bar{h_2}\cdot \bar{h_1} \implies ||h_1
+  \cdot h_2||^2 = (h_1 \cdot h_2) \cdot \overline{(h_1 \cdot h_2)} = h_1\cdot
+  h_2 \cdot \bar{h_2} \bar{h_1} = ||h_1||^2 + ||h_2||^2$
+
+
+  Sei $h\in \Im \mathbb{H}, q\in Sp(1): \overline{q\cdot h }$
+\end{relation}
+
+...
+
+\begin{relation}
+  \begin{enumerate}
+  \item $\phi_{q_1 \cdot q_2} = \phi_{q_1} \cdot \phi_{q_2} $
+  \item $\phi_q$ ist invertierbar $\forall q \in Sp(1)$
+  \item $\phi_q \in O(\Im \mathbb{H}) \tilde{=} O(3)$
+  \item $\phi_q$ ist stets eine Rotation, also $\phi_q \in SO(\Im \mathbb{H})
+    \tilde{=} SO(3)$  
+  \item $\phi_q$ ist surj. $\forall R\in So(3) \exists q\in Sp(1): \phi_q = R$
+    $n$ ist rot. Achse von $R$, $\varphi$ der Winkel der Rotation.
+
+    Sei $\Epsilon = (h, e_1, e_2)$ eine Basis in $\mathbb{R}^3$ s.d.
+    Sei $q=\cos \frac{\varPhi}{2} + \sin \frac{\varPhi}{2}\cdot n$ Da $\Epsilon$
+    ONB gilt: ... Wenn $\Epsilon$ pos. orientierte ONB in $\mathbb{R}^3$ ist es
+    auch eine Standartbasis in $\mathbb{H}$
+  \end{enumerate}
+
+$Sp(1)$ ist einheitssph"are in $\mathbb{R}^4$ Da man je zwei Punkte auf der
+Sph"are durch eine stetige Kurve verbinden kann ist $\det \phi$ konstant ($=1$)
+\end{relation}
+
+
+
+\section{Schlagworte:}
+\label{sec:orgcf8c685}
+\begin{itemize}
+\item \(A\cdot B\) Zeilen von \(A\) mal Spalten von \(B\)
+\item LGS L"osungen als Vektor!
+\begin{itemize}
+\item Keine nicht offensichtlich Schritte ueberspringen!
+\item Paramatervektor und sine Elemente genau definieren!
+\end{itemize}
+\item Transposition vertauscht faktoren.
+\item k-te Spalte \((A)_k\)
+\end{itemize}
 
 \tcblistof[\chapter]{definition}{Defintionen, S"atze und Theoreme}
 \end{document}

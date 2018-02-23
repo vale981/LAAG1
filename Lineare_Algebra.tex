@@ -38,6 +38,7 @@
 \DeclareMathOperator{\mEnd}{End}
 \DeclareMathOperator{\mDeg}{deg}
 \DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\spn}{span}
 \usepackage[most]{tcolorbox}
 \usepackage{booktabs}
 \tcbuselibrary{theorems}
@@ -2315,8 +2316,8 @@ V\) mit Darstellungen \(v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}\).
 	\det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
 	&= \sum_{\sigma = \sigma'\circ\tau_{ij}\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{i,\sigma(i)}\dots\lambda_{j,\sigma(j)}\dots\lambda_{n,\sigma(n)} \\
 	&= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(j)}}\dots \lambda_{n,\sigma'(n)} \\
-	&= \mcolor{-} \sum_{\sigma'\in S_n} \mcolor{\varepsilon(\sigma')} \lambda_{1,\sigma'(1)}\dots\lambda_{i,\sigma'(i)}\dots\lambda_{j,\sigma'(j)}\dots\lambda_{n,\sigma'(n)} = -\det A \\
-	&\implies \det A = 0
+	&= \mcolor{-} \sum_{\sigma'\in S_n} \mcolor{\varepsilon(\sigma')} \lambda_{1,\sigma'(1)}\dots\lambda_{i,\sigma'(i)}\dots\lambda_{j,\sigma'(j)}\dots\lambda_{n,\sigma'(n)} = -\det \Delta \\
+	&\implies \det \Delta = 0
 	\end{align*}
 	\(\implies\omega \) alternierend.
 \end{prof}
@@ -2380,8 +2381,7 @@ Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnung
 	In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
 \end{bem}
 
-\begin{proposition}
-	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
+\begin{proposition}	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
 \end{proposition}
 \begin{prof}
 	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
@@ -2399,7 +2399,7 @@ Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnung
 
 \begin{definition}{Determinante}{}
 	Sei \(V\) ein \(n\)-dimensionaler Vektorraum, \(f: V\to V\) linear. Die Determinante von \(f\) ist
-	\[\det(f):= \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)}\]
+	\[\det(f):= \frac{\omega(f(b_1),\dots,f(b_n))}{\omega(b_1,\dots,b_n)}\]
 	wobei \(\omega \neq 0\) eine Volumenform auf \(V\) ist.
 \end{definition}
 
@@ -2422,12 +2422,23 @@ Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnung
 		\item \(f\) ist genau dann invertierbar, wenn \(\det(f)\neq 0 \)
 	\end{enumerate}
 \end{proposition}
+\begin{prof}
+  \begin{enumerate}
+  \item Wenn \(f\) oder \(g\) nicht bijektiv sind, dann ist \(g\circ f\) auch nicht bijektiv. Daher ist \(\det g\circ f = 0 = \det g \det f\). Sonst gilt:
+    \begin{align*}
+      \det (f\circ g) &= \frac{\omega (g\circ f(v_1), \dots, g\circ f(v_n))}{\omega (v_1, \dots, v_n)} \\
+      &= \frac{\omega (g\circ f(v_1), \dots, g\circ f(v_n))}{\omega (f(v_1), \dots, f(v_n))}\cdot\frac{\omega (f(v_1), \dots, f(v_n))}{\omega (v_1,\dots ,v_n)} = \det f\det g
+    \end{align*}
+    Wobei der letzte Schritt nur funktioniert, weil \(f\) bijektiv sein soll und damit \(f(v_1), \dots ,f(v_n)\) auch eine Basis in \(V\) ist.
+  \item \(f\) invertierbar \(\iff f\) bijektiv \(\iff f(v_1), \dots, f(v_n)\) ist eine Basis, wenn \(v_1, \dots, v_n\) eine Basis ist \(\iff\) \(f(v_1), \dots, f(v_n)\) sind linear unabh"angig f"ur linear unabh"angige \(v_1,\dots, v_n\) \(\iff \det f \neq 0\)
+  \end{enumerate}
+\end{prof}
 \begin{korollar}
 	Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
 \end{korollar}
 \begin{prof}
 	\begin{align*}
-	\det(f) = \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
+	\det(f) = \frac{\omega(f(b_1),\dots,f(b_n))}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
 	\end{align*}
 \end{prof}
 \begin{korollar}
@@ -2528,6 +2539,9 @@ F"ur die Suche nach Eigenvektoren bedeutet das:
 \begin{definition}{Charakteristisches Polynom}{}
   Sei \(f\in\mEnd_K(V)\). Das Polynom \[\chi_f(\lambda) := \det(\lambda\mId_V-f)\] hei"st charakteristisches Polynom von \(f\). Die Gleichung \[\chi_f(\lambda) = 0\] hei"st charakteristische Gleichung von \(f\).
 \end{definition}
+\begin{comm}
+  Man kann sich leicht denken, dass \(\lambda\) ein Eigenwert von \(f\) ist genau dann, wenn \(\lambda\) auch ein Eigenwert zur \emph{Matrix} \(M_B^B(f)\) mit einer \emph{beliebigen} Basis \(B\) ist. Aus dieser "Uberlegung folgt auch, dass \(\chi_{M_B^B(f)}\) die gleichen Nullstellen haben sollte wie \(\chi_{M_{B'}^{B'}(f)}\). Diesen Umstand benutzen wir sp"ater in ein paar Beweisen.
+\end{comm}
 Aus obigen "Uberlegungen folgt: Die Nullstellen von \(\chi_f(\lambda)\) sind genau die Eigenwerte von \(f\). Wenn wir \(f\) also diagonalisieren wollen, m"ussen wir folgendes tun:
 \begin{enumerate}
 \item charakteristische Gleichung l"osen, um die Eigenwerte zu bestimmen
@@ -2623,7 +2637,7 @@ Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
 \end{beobachtung}
 \begin{theo}{Fundamentalsatz der Algebra}
   Jedes Polynom \(p\in\mathbb{C}[\lambda]\) zerf"allt in Linearfaktoren:
-  \[p(\lambda) = (\lambda - \lambda_1)(\lambda-\lambda_2)\dots(\lambda-\lambda_d) \qquad d = \mDeg p\]
+  \[p(\lambda) = a(\lambda - \lambda_1)(\lambda-\lambda_2)\dots(\lambda-\lambda_d) \qquad d = \mDeg p\]
   "Aquivalent: Ein Polynom \(p\in\mathbb{C}[\lambda]\) von Grad \(d\) hat genau \(d\) Nullstellen in \(\mathbb{C}\), wenn man sie mit Vielfachheiten z"ahlt (das hei"st z.B. \(p(\lambda) = (\lambda-1)^3(\lambda-4)^5\) hat eine dreifache Nullstelle 1, eine f"unffache Nullstelle 4 \(\implies\) insgesamt 8 Nullstellen)
 \end{theo}
 
@@ -2680,23 +2694,7 @@ Folgerung: Sei \(V\) ein \(\mathbb{C}\)-Vektorraum, dann hat lineares \(f: V\to 
 \end{definition}
 
 \begin{proposition}
-  Sei $f: V\to V$ eine \(\mathbb{R}\)-lineare Abbildung. Eim Vektor \(u = v + iw \in V_{\mathbb{C}}\) (\(v, w \in V\)) ist genau dann ein
-  Eigenvektor von \(f_{\mathbb{C}}\) mit dem Eigenwert \(\lambda = \alpha + i\beta, \beta\neq 0\), wenn \(U = \langle v, w\rangle\subseteq V\) invariant unter $f$ ist
-  mit \(f(v) = \alpha v - \beta w, f(w) = \beta v + \alpha w\) (das hei"st, die Abbildung \(f|_U\) hat die Matrix \(
-  \begin{pmatrix}
-    \alpha & \beta \\
-    -\beta & \alpha
-  \end{pmatrix}
-\) in der Basis \(v, w\))
-\end{proposition}
-\todo{Hier fehlt Zeug}
-\begin{prof}
-  ... Diese Matrix hat Eigenwerte $\alpha + i\cdot\beta$ und hat keine
-  Eigenvektoren.
-\end{prof}
-
-\begin{proposition}
-  Sei \(f: V\to V\) linear und \(V\) ein \(\mathbb{R}\)-Vektorraum, sei \(u = v + i w \in V_{\mathbb{C}}\) ein Eigenvektor von \(f_{\mathbb{C}}\) zum Eigenwert \(\lambda = \alpha + i \beta \not\in \mathbb{R} (\beta \neq 0)\). Dann ist der Raum \(U = \langle v, w\rangle\subseteq V\) invariant unter \(f\), und es gilt
+  Sei \(f: V\to V\) linear und \(V\) ein \(\mathbb{R}\)-Vektorraum, sei \(u = v + i w \in V_{\mathbb{C}}\) ein Eigenvektor von \(f_{\mathbb{C}}\) zum Eigenwert \(\lambda = \alpha + i \beta \not\in \mathbb{R} (\beta \neq 0)\). Genau dann ist der Raum \(U = \langle v, w\rangle\subseteq V\) invariant unter \(f\), und es gilt
   \begin{align*}
     f(v) = \alpha v - \beta w\\
     f(w) = \beta v + \alpha w
@@ -2756,7 +2754,7 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat}
   \(\implies f\) ist nicht diagnoalisierbar :(
 \end{exa}
 
-\begin{definition}
+\begin{definition}{}{}
   Seien $p,q\in K[\lambda]$ zwei Polynome. $p$ teilt $q$ ($p\mid q$), wenn \(\exists p_1 \in K[t]\) so dass \(q = pp_1\)
   (man sagt auch, \(q\) spaltet einen Faktor \(p\) ab)
 \end{definition}
@@ -2791,7 +2789,7 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat}
 
 \begin{prof}
   \(U:= \mKer(\lambda\cdot\mId - f)\) ist invariant,
-  \(\chi_{f|_U} \mid \chi_f\) \(\implies\) die Vielfachheit der Nullstelle \(\lambda\) in \(\chi_f\) (das ist gleich der Dimension von \(\mKer(\lambda\cdot\mId - f)\)) ist gr"o"ser gleich der Vielfachheit der Nullstelle \(\lambda\) in \(\chi_{f|_U}\), da \(\exists p\in K[t]: \chi_f = p\chi_{f|_U}\)
+  \(\chi_{f|_U} \mid \chi_f\) \(\implies\) die Vielfachheit der Nullstelle \(\lambda\) in \(\chi_f\) (das bezeichnen wir als \glqq{}algebraische\grqq{} Vielfachheit von \(\lambda\)) ist gr"o"ser gleich der Vielfachheit der Nullstelle \(\lambda\) in \(\chi_{f|_U}\) (das ist die \glqq{}geometrische\grqq{} Vielfachheit von \(\lambda\)), da \(\exists p\in K[t]: \chi_f = p\chi_{f|_U}\)
 \end{prof}
 
 \begin{definition}{Algebraische Vielfachheit einer Nullstelle}{}
@@ -2802,6 +2800,10 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat}
   Sei \(f:V \to V\) linear, $\lambda$ ein Eigenwert von $f$. Die geometrische Vielfachheit von \(\lambda\) ist \(\mu_{geo}(\lambda) = \dim(\lambda\cdot\mId_V - f)\)
   Die Behauptung oben ist: \(\mu_{geo}(\lambda) \leq \mu_{alg}(\lambda)\) f"ur jeden Eigenwert \(\lambda\).
 \end{definition}
+
+\begin{comm}
+  Warum ist die geometrische Vielfachheit eines Eigenwerts \(\lambda\) nun gleich der Nullstellen von \(\chi_{f|_U}\)? Nun, wir wissen, dass die geometrische Vielfachheit eines Eigenwerts \(\lambda\) ja gleich der Dimension des zugeh"origen Eigenraums \(\mKer (\lambda\cdot\mId_V - f) = U\) ist. Daher k"onnen wir eine Basis \(B\) f"ur diesen Eigenraum basteln, mit Vektoren \(v_1,\dots , v_{\mu_{geo}(\lambda)}\). Weil das alles Eigenvektoren sind, ist die Matrix \(M_B^B(f|_U) = \lambda\cdot 1_{\mu_{geo}(\lambda)}\). Das charakteristische Polynom dieser Matrix hat eine \(\mu_{geo}(\lambda)\)-fache Nullstelle bei \(\lambda\) (und sonst keine). In einem fr"uheren Kommentar haben wir gesagt, dass \(\chi_{M_B^B(f)}(\lambda) = \chi_{M_{B'}^{B'}}(\lambda)\) ist, also hat auch \(\chi_{f|_U}\) genau \(\mu_{geo}(\lambda)\) viele Nullstellen bei \(\lambda\).
+\end{comm}
 
 \begin{satz}{Vielfachheiten von Nullstellen, Diagonalisierbarkeit}{}
   Sei \(f: V\to V\) linear (\(V\) ist ein \(K\)-Vektorraum). Dann ist \(f\) diagonalisierbar genau dann, wenn folgendes erf"ullt ist:
@@ -2822,56 +2824,68 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat}
   \begin{align*}
     \implies \sum_{\lambda \text{ Nst von } \chi_f}\mu_{alg}(\lambda) \leq n = \dim V \implies \sum_{\lambda\text{ Nst von }\chi_f} \mu_{geo}(\lambda) \leq \sum_{\lambda\text{ Nst von }\chi_f}\mu_{alg}(\lambda) \leq \dim V
   \end{align*}
-  mit Gleichheit \todo{Hier weitermachen}genau dann, wenn\dots
+  mit Gleichheit genau dann, wenn\dots
   \begin{enumerate}
-  \item \(\sum\mu_{alg}(\lambda) = n\)\todo{nicht doch eher \(\mu_{geo}\)?}
+  \item \(\sum\mu_{alg}(\lambda) = n\)
   \item \(\mu_{geo}(\lambda) = \mu_{alg}(\lambda) \quad\forall\lambda\)
   \end{enumerate}
 
   Andererseits ist $f$ genau dann diagonalisierbar, wenn es eine Basis aus
-  Eigenvektoren gibt, also ..
+  Eigenvektoren gibt, also \(\iff\) die Vereinigung von Basen in Eigenr"aumen eine Basis in \(V\) ergibt, was gleichbedeutend ist mit \(\sum_{\lambda \text{ Eigenwert von } f}\mu_{geo}(\lambda) = \dim V\).
 \end{prof}
 
-\begin{notte}
-  \begin{prof}[Tips und Tricks]
+\begin{notte}[Tips und Tricks]
     Der obige Satz ist nur interessant, wenn (1) erf"ullt ist und mehrfache
     Nullstellen existieren, weil f"ur jeden Eigenwert $\lambda$ von $f$ gilt ja
     nach Definition $\mu_{geo}(\lambda)\geq 1$. D.h., wenn alle Nullstellen in
-    $K$ liegen und ..., f"ur alle Eigenwerte $\lambda$ dann gilt: ... f"ur alle
+    $K$ liegen und \(\mu_{alg}(\lambda) = 1\) f"ur alle Eigenwerte $\lambda$ dann gilt: \(\mu_{geo}(\lambda) = 1\) f"ur alle
     Eigenwerte $\lambda$, und $f$ ist dann diagonalisierbar.
 
     $\implies$ Jede Komplexe Matrix ist bis auf eine beliebeig kleine
-    Pertubation diagonalisierbar. In diesen Sinne sind ''die meissten'' Matrizen diagonalisierbar.
-  \end{prof}
+    Pertubation diagonalisierbar. In diesen Sinne sind \glqq{}die meissten\grqq{} Matrizen diagonalisierbar.
 \end{notte}
 
 Zum charakteristischen Polynom:
 \begin{relation}
   \begin{enumerate}
   \item $\chi_A(0) = \det (-A) = (-1)^n \det A$
-  \item $\chi_A (\lambda) = \lambda^n + ...$, weil der Einzige Summand in ...
-  \item Der Koeffizient vor ... in ... \(=\text{Tr}(A)\)
+  \item $\chi_A (\lambda) = \lambda^n + \dots$, weil der Einzige Summand in \(\det (\lambda\cdot 1_n-A)\), wo \(n\) Faktoren mit \(\lambda\) zusammenkommen, gleich \((\lambda- a_{11})\dots (\lambda - a_{nn})\) ist
+  \item Der Koeffizient vor \(\lambda^{n-1}\) in \(\chi_A(\lambda)=\text{Tr}(A)\) (dabei ist \(\text{Tr}(A) = \sum_{i=1}^n a_{ii}\)), denn wegen der Leibniz-Formel kann \(\lambda^{n-1}\) auch nur durch Ausdr"ucke der Form \((\lambda - a_{11})\dots (\lambda - a_{nn})\) zustande kommen.
   \end{enumerate}
 \end{relation}
 
-Folglich kann man $\chi_1$ f"ur $2\times 2$ Matrizen direkt ablesen.
+Folglich kann man $\chi_A$ f"ur $2\times 2$ Matrizen direkt ablesen: \(\chi_A(\lambda) = \lambda^2 - \text{Tr}(A)\cdot \lambda + \det A\)
 
-\begin{definition}
-  Sei V ein $K$ Vektorraum, ... Die Spalten von $f$ .... F"ur $\dim V < \infty$
-  giltL ... 
+\begin{definition}{}{}
+  Sei V ein $K$ Vektorraum, \(f: V\to V\) linear. Das Spektrum von \(f\) ist \[\sigma(f) = \langle \lambda\in K \mid \lambda\cdot\mId_V -f \text{ nicht invertierbar}\rangle\]
+  F"ur \(\dim V < \infty\) gilt \(\sigma(f) = \langle \lambda \mid \lambda \text{ Eigenwert von }f\rangle\).
 \end{definition}
 Dieses Mathematische Spektrum hat f"ur viele Physikalisch motivierte Operatoren
 tats"achliche Bedeutung.
 
 \begin{bem}
-  Wir habengesehen, dass es nicht diagonalisierbare Matrizen gibt. Es gibt die
-  nahelegende Fragem was ist f"ur solche allgemeinen Matrizen/Abbildungen die
-  ''bestm"ogliche'' Form.
+  Wir haben gesehen, dass es nicht-diagonalisierbare Abbildungen / Matrizen gibt. Es gibt die
+  nahelegende Frage: was ist f"ur solche allgemeinen Matrizen/Abbildungen die
+  \gq{bestm"ogliche} Form?
 \end{bem}
 \begin{relation}
-  ....
-
-  (Diagonalisierbarkeit entspricht der Bedingung, dass  alle Bl"ocke Gr"osse 1 haben.)
+  Antwort: Die Jordan-Normalform: Blockform mit Bl"ocken \[J_k(\lambda) =
+    \begin{pmatrix}
+      \lambda & 1 &  & 0 \\
+       & \ddots & \ddots &  \\
+       &  & \ddots & 1 \\
+      0 &  &  & \lambda
+    \end{pmatrix}
+\]
+Die Jordan-Normalform ist dann:
+\[ J= 
+  \begin{pmatrix}
+    J_1 & & 0 \\
+    & \ddots & \\
+    0 & & J_n
+  \end{pmatrix}
+\]
+  Diagonalisierbarkeit entspricht der Bedingung, dass  alle Bl"ocke Gr"osse 1 haben.
 \end{relation}
 
 \part{Bilineare und Quadratische Formen}
@@ -2887,85 +2901,114 @@ linear in jeder Variable $\rightarrow$ ''Bilinearform''
 
 In der Physik ist die folgene Bilinearform von Bedeutung: ...
 
-\begin{definition}
+\begin{definition}{}{}
   Sei $V$ ein $K$ - Vektorraum. Eine Bilinearform $b$ auf V ist eine Abbildung
-  $b: V\times V \mapsto K$, die linear in jeder Variable ist.
-
-  Die Zugeh"orige Quadratische Form: $q(v):=b(v,v)$
+  $b: V\times V \mapsto K$, die linear in jeder Variable ist:
+  \begin{align*}
+    b(v_1 + \lambda v_2, w) = b(v_1, w) + \lambda b(v_2, w) \qquad v_1, v_2, w \in V, \lambda \in K\\
+    b(v, w_1+\lambda w_2) = b(v, w_1) + \lambda b(v, w_2) \qquad v, w_1, w_2 \in V, \lambda \in K
+  \end{align*}
+  Die Zugeh"orige quadratische Form: $q(v):=b(v,v)$ 
 \end{definition}
 
+\begin{definition}{}{}
+  Eine Bilinearform \(b: V\times V \to K\) hei"st:
+  \begin{itemize}
+  \item symmetrisch, wenn \(b(v, w) = b(w, v)\qquad \forall v, w\in V\)
+  \item schiefsymmetrisch, wenn \(b(v, w) = -b(w, v)\qquad \forall v, w\in V\)
+  \end{itemize}
+\end{definition}
 
-
-\begin{definition}
-  Sei $V$ ein $K$-Vektorraum, $B\subset V$ eine Basis, ... eine Biliniearform.
-  Die MAtrix $M_B(b)$ der Bilinearform $b$ bzgl. der Baiss $B$ ist definiert
-  durch die Eigenschaft $()M_B(b))_{ij}=b(b_i, b_j)$
+\begin{definition}{}{}
+  Sei $V$ ein $K$-Vektorraum, $B\subset V$ eine Basis, \(b: V\times V\to K\) eine Biliniearform.
+  Die Matrix $M_B(b)$ der Bilinearform $b$ bzgl. der Baiss $B$ ist definiert
+  durch die Eigenschaft $(M_B(b))_{ij}=b(b_i, b_j)$
 \end{definition}
 \begin{exa}
-  ...
+  \(b = \langle\cdot , \cdot\rangle_{st}\) auf \(\mathbb{R}^n\): \(\langle x, y\rangle_{st} = \sum_{i=1}^nx_i y_i, B = (e_1, \dots, e_n)\subset \mathbb{R}^n\) \[\implies M_B(b) =
+    \begin{pmatrix}
+      1 & & 0 \\
+      &\ddots & \\
+      0 & & 1
+    \end{pmatrix}
+\] Dieses Skalarprodukt ist linear in jeder Variable und daher eine Bilinearform.
 \end{exa}
-Wenn $x,y$ die Koordinatenspalten von $v$ bzw. $w$ bzgl. $B$ sind, so haben wir
-\[b(v,w)=b(...)=.... \implies b(v,w)\] ...
+Wenn $x,y$ die Koordinatenspalten von $v$ bzw. $w$ bzgl. $B = \{b_1,\dots, b_n\}$ sind, so haben wir
+\begin{align*}
+  b(v,w) = b\left(\sum_{i=1}^nx_ib_i, \sum_{j=1}^ny_jb_j\right) = \sum_{i=1}^n\sum_{j=1}^nx_ib\underbrace{(b_i, b_j)}_{M_B(b)_{ij}}y_j
+\end{align*}
 
 Wenn $B'$ eine andere in Basis $V$ ist und $x'$, $y'$ Koordinatenspalten von $v$
-bzw. $w$ bzgl. $B'$, so haben wir: $x=M...$ ...  $\implies b(v,w)= ...$ Es
-folgt, dass $M_{B'}= (M^{B'}_{B})^T\cdot M_B(b)\cdot (M^{B'}_{B}))$
+bzw. $w$ bzgl. $B'$, so haben wir: $x=M_{B}^{B'}x', y = M_{B}^{B'}y'$  $\implies b(v,w)= (x')^T(M_B^{B'})^TM_B(b)M_B^{B'}y'$. Es
+folgt, dass $M_{B'}= (M^{B'}_{B})^T\cdot M_B(b)\cdot (M^{B'}_{B})$.
 
-Wie bei linearen Abbildungen stellt sich die Frage: ''Gibt es eine Basis
-$M_B(b)$ besonders einfach ist?'' Diese Form ist f"ur unterschiedliche
+Wie bei linearen Abbildungen stellt sich die Frage: \gq{Gibt es eine Basis so dass
+$M_B(b)$ besonders einfach ist?} Diese Form ist f"ur unterschiedliche
 Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
 
-\begin{definition}
-  Sei $U\subset V$ ein Untervektorraum $b$ eine Bilinearform aif $V$. Das
-  orthogonale Komplement von $U$ bzgl. $b$ ist der Untervektorraum $U={v\in
-    V|b(u,v)=0 \forall u\in U}$
+\begin{definition}{}{}
+  Sei $U\subset V$ ein Untervektorraum, $b$ eine Bilinearform auf $V$. Das
+  orthogonale Komplement von $U$ bzgl. $b$ ist der Untervektorraum \[U^\perp = \{v\in V\mid b(u, v) = 0\quad \forall u \in U\}\]
 
-  Der Kern/Annulator von $b$ ist der Untervektorraum $V....$ Die Bilinearform
-  $b$ heisst nicht ausgeartet, wenn ...
+  Der Kern/Annulator von $b$ ist der Untervektorraum $V^\perp = \{v\in V \mid b(u, w) = 0 \quad \forall u\in V\}$. Die Bilinearform $b$ hei"st nicht ausgeartet, wenn \(V^\perp = \{0\}\).
 \end{definition}
 
 \begin{lemma}
   Sei $V$ ein $K$ Vektorraum, $B\subset V$ eine Basis, $\dim V < \infty$, $b$
   eine Bilinearform. Es gilt: $b$ nicht ausgeartet $\iff$ $M_B(b)$ nicht
-  ausgeartet (Invertierbar)
+  ausgeartet (also invertierbar)
 \end{lemma}
 
 \begin{prof}
-  Wenn ..
-  Die Bedingungen ... sind "Aquivalent zum LGS $M_B(x) \cdot x = 0 $  auf die
+  Wenn \(B = (b_1, \dots, b_n)\), so gilt:
+  \begin{align*}
+    V^\perp = \{v \in V \mid b(u, v) = 0\quad \forall u \in V\} = \spn \{ v\in V \mid b(b_i, v) = 0, i = 1,\dots, n\}
+  \end{align*}
+  Weil \(B\) eine Basis ist.
+  Die Bedingungen \(b(b_i, v) = 0, i = 1,\dots, n\) sind "aquivalent zum LGS $M_B(b) \cdot x = 0 $  auf die
   Koordinatenspalte $x$ von $v$. Dieses LGS hat genau dann nur die Null"osung,
-  wenn $M_B(b)$ nicht ausgeartet ist. Der Beweis Zeigt auf $\dim V... = \dim
-  \{x\mid|  M_B(b)= \dim V - \mRg M_B(b)\}$ insbesondere ist die Zahl $\mRg M_B(b)$
-
-  unabh"angig von der Basis $B$
+  wenn $M_B(b)$ nicht ausgeartet ist (wenn sie also invertierbar ist).
 \end{prof}
-
-\begin{definition}{pff}{}
-  \(\mRg(b):=\dim V - \dim V = \mRg M_B(b)\)
+Der Beweis Zeigt auch, dass $\dim V^\perp = \dim
+  \{x\in K^n\mid  M_B(b)x= 0\} = \dim V - \mRg M_B(b)$. Insbesondere ist die Zahl $\mRg M_B(b)$
+  unabh"angig von der Basis $B$
+\begin{definition}{}{}
+  \(\mRg(b):=\dim V - \dim V^\perp = \mRg M_B(b)\)
 \end{definition}
 
 \begin{exa}
-  Skalarprodukt ist nicht ausgeartet. Geometrisch wissen wir, wenn $U$ in
-  $\mathbb{R}^3$ eine Gerade ist, dann ist, ... eine Ebene.
+  Das Skalarprodukt ist nicht ausgeartet, und \(\mRg
+  \begin{pmatrix}
+    1 & & 0 \\
+    & \ddots & \\
+    0 & & 1
+  \end{pmatrix}
+ = n\). Geometrisch wissen wir: wenn $U$ in
+  $\mathbb{R}^3$ eine Gerade ist, dann ist \(U^\perp\) eine Ebene und umgekehrt.
 \end{exa}
 
 \begin{proposition}
-  Sei $V$ ein $K$ - Vektorraum, $b$ eine nicht ausgeartete Bilinearform auf V.
-  Dann gilt f"ur jeden UVR ....
+  Sei $V$ ein $K$ - Vektorraum, \(\dim V < \infty\), $b$ eine nicht ausgeartete Bilinearform auf V.
+  Dann gilt f"ur jeden Untervektorraum \(U\subset V\):
+  \[\dim U^\perp = \dim V - \dim U\]
 \end{proposition}
-
 \begin{prof}
-  ... 
+  Sei \((b_1, \dots, b_k)\) eine Basis in \(U\), erweitert zu Basis \((b_1,\dots, b_n)\) von \(V\).
+  \begin{align*}
+    U^\perp = \{v\in V \mid b(u, v) = 0\quad \forall u\in U\} = \spn \{v\in V\mid b(b_i, v) = 0, i=1,\dots, k\}
+  \end{align*}
+  Wenn man diese Bedingungen als LGS auf den Koordinatenvektor \(x\) von \(v\) aufschreibt, haben wir \(k\) lineare Gleichungen
+  \begin{align*}
+    \sum_{j=1}^nb(b_i, b_j)x_j = 0\quad i = 1,\dots, k
+  \end{align*}
+  Die Matrix dieses LGS besteht aus den ersten \(k\) Zeilen von \(M_B(b)\), die sind linear unabh"angig (weil \(b\) nicht ausgeartet war und deshalb die Matrix invertierbar ist, daher sind die Zeilen stets linear unabh"angig), daher ist der Rang der Matrix vom LGS \(k\). Es folgt, dass \(\dim U^\perp = n - k = \dim V - \dim U\)
 \end{prof}
-
 \begin{korollar}
-  Wenn $b$ nicht ausgeartet und syetrisch/schiefsymetrisch ist, so gilt
-  $(U^\perp)^\perp = U$ f"ur Jeden Untervektorraum $U\subset V$.
+  Wenn $b$ nicht ausgeartet ist, so gilt
+  $(U^\perp)^\perp = U$ f"ur jeden Untervektorraum $U\subset V$.
 \end{korollar}
 \begin{prof}
-  .... nach dem Prinzip ''Paul, wie heisst du'' Ausserdem gilt ...
-  Wegen der Dimensinsformel aus der Proposition reicht wes zu zeigen:
-  $U\subseteq (U^\perp)^\perp$
+  \(U\subseteq (U^\perp)^\perp\) nach dem Prinzip \gq{Paul, wie heisst du?}. Au"serdem gilt nach der obigen Formel \(\dim (U^\perp)^\perp = \dim U\)
 \end{prof}
 
 Sie frage war: gegben $b$, finde eine Basis in $V$, s.d. $M_B(b)$ m"oglichst

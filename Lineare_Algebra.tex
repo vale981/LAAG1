@@ -2540,7 +2540,7 @@ F"ur die Suche nach Eigenvektoren bedeutet das:
   Sei \(f\in\mEnd_K(V)\). Das Polynom \[\chi_f(\lambda) := \det(\lambda\mId_V-f)\] hei"st charakteristisches Polynom von \(f\). Die Gleichung \[\chi_f(\lambda) = 0\] hei"st charakteristische Gleichung von \(f\).
 \end{definition}
 \begin{comm}
-  Man kann sich leicht denken, dass \(\lambda\) ein Eigenwert von \(f\) ist genau dann, wenn \(\lambda\) auch ein Eigenwert zur \emph{Matrix} \(M_B^B(f)\) mit einer \emph{beliebigen} Basis \(B\) ist. Aus dieser "Uberlegung folgt auch, dass \(\chi_{M_B^B(f)}\) die gleichen Nullstellen haben sollte wie \(\chi_{M_{B'}^{B'}(f)}\). Diesen Umstand benutzen wir sp"ater in ein paar Beweisen.
+  Wir haben bewiesen, dass die Determinante eines Endomorphismus gleich der Determinante der \emph{Matrix} dieses Endomorphismus ist: \(\det f = \det M_B^B(f)\). Daraus folgt auch, dass \(\det M_B^B(f) = \det M_{B'}^{B'}(f)\) (sp"ater werden wir Matrizen, die den gleichen Endomorphismus nur in unterschiedlichen Basen beschreiben, \gq{"ahnlich} nennen -- also sagen wir: "ahnliche Matrizen haben gleiche Determinanten).
 \end{comm}
 Aus obigen "Uberlegungen folgt: Die Nullstellen von \(\chi_f(\lambda)\) sind genau die Eigenwerte von \(f\). Wenn wir \(f\) also diagonalisieren wollen, m"ussen wir folgendes tun:
 \begin{enumerate}
@@ -2952,7 +2952,14 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
 
   Der Kern/Annulator von $b$ ist der Untervektorraum $V^\perp = \{v\in V \mid b(u, w) = 0 \quad \forall u\in V\}$. Die Bilinearform $b$ hei"st nicht ausgeartet, wenn \(V^\perp = \{0\}\).
 \end{definition}
-
+\begin{comm}
+  Zuerst einmal bemerken wir, dass \(U^\perp\) tats"achlich ein Untervektorraum ist, denn aus \(v\in U^\perp, w\in U^\perp\) folgt
+  \begin{align*}
+    &b(f_i, v) = 0\;\forall i=\overline{1,k}\qquad b(f_i, w) = 0\;\forall i=\overline{1,k}\qquad f_i\text{ bilden Basis in }U \\
+    &\implies b(f_i, v) + b(f_i, w) = b(f_i, v+ w) = 0\;\forall i=\overline{1, k}
+  \end{align*}
+  und \(b(f_i, \lambda v) = \lambda b(f_i, v) = 0\). \(U^\perp\) enth"alt au"serdem immer den Nullvektor \(\vec{0}\) wegen \(b(\vec{0}, u) = b(0\cdot \vec{0}, u) = 0\cdot b(\vec{0}, u) = 0\). Man kann sich au"serdem "uberlegen, dass ausgeartete Bilinearformen immer Vektoren haben m"ussen, f"ur die \(b(v, v) = 0\) gilt. Der Umkehrschluss muss nicht stimmen -- ein Beispiel ist die Bilinearform mit der Matrix \[M_B(b) = \begin{pmatrix}0 & 1\\ 1& 0\end{pmatrix}\]
+\end{comm}
 \begin{lemma}
   Sei $V$ ein $K$ Vektorraum, $B\subset V$ eine Basis, $\dim V < \infty$, $b$
   eine Bilinearform. Es gilt: $b$ nicht ausgeartet $\iff$ $M_B(b)$ nicht
@@ -2962,7 +2969,7 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
 \begin{prof}
   Wenn \(B = (b_1, \dots, b_n)\), so gilt:
   \begin{align*}
-    V^\perp = \{v \in V \mid b(u, v) = 0\quad \forall u \in V\} = \spn \{ v\in V \mid b(b_i, v) = 0, i = 1,\dots, n\}
+    V^\perp = \{v \in V \mid b(u, v) = 0\quad \forall u \in V\} = \{ v\in V \mid b(b_i, v) = 0, i = 1,\dots, n\}
   \end{align*}
   Weil \(B\) eine Basis ist.
   Die Bedingungen \(b(b_i, v) = 0, i = 1,\dots, n\) sind "aquivalent zum LGS $M_B(b) \cdot x = 0 $  auf die
@@ -2971,7 +2978,7 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
 \end{prof}
 Der Beweis Zeigt auch, dass $\dim V^\perp = \dim
   \{x\in K^n\mid  M_B(b)x= 0\} = \dim V - \mRg M_B(b)$. Insbesondere ist die Zahl $\mRg M_B(b)$
-  unabh"angig von der Basis $B$
+  unabh"angig von der Basis $B$.
 \begin{definition}{}{}
   \(\mRg(b):=\dim V - \dim V^\perp = \mRg M_B(b)\)
 \end{definition}
@@ -2995,7 +3002,7 @@ Der Beweis Zeigt auch, dass $\dim V^\perp = \dim
 \begin{prof}
   Sei \((b_1, \dots, b_k)\) eine Basis in \(U\), erweitert zu Basis \((b_1,\dots, b_n)\) von \(V\).
   \begin{align*}
-    U^\perp = \{v\in V \mid b(u, v) = 0\quad \forall u\in U\} = \spn \{v\in V\mid b(b_i, v) = 0, i=1,\dots, k\}
+    U^\perp = \{v\in V \mid b(u, v) = 0\quad \forall u\in U\} = \{v\in V\mid b(b_i, v) = 0, i=1,\dots, k\}
   \end{align*}
   Wenn man diese Bedingungen als LGS auf den Koordinatenvektor \(x\) von \(v\) aufschreibt, haben wir \(k\) lineare Gleichungen
   \begin{align*}
@@ -3004,107 +3011,119 @@ Der Beweis Zeigt auch, dass $\dim V^\perp = \dim
   Die Matrix dieses LGS besteht aus den ersten \(k\) Zeilen von \(M_B(b)\), die sind linear unabh"angig (weil \(b\) nicht ausgeartet war und deshalb die Matrix invertierbar ist, daher sind die Zeilen stets linear unabh"angig), daher ist der Rang der Matrix vom LGS \(k\). Es folgt, dass \(\dim U^\perp = n - k = \dim V - \dim U\)
 \end{prof}
 \begin{korollar}
-  Wenn $b$ nicht ausgeartet ist, so gilt
-  $(U^\perp)^\perp = U$ f"ur jeden Untervektorraum $U\subset V$.
+  Wenn $b$ nicht ausgeartet und symmetrisch oder schiefsymmetrisch ist, so gilt
+  $(U^\perp)^\perp = U$ f"ur jeden Untervektorraum $U\subseteq V$.
 \end{korollar}
 \begin{prof}
-  \(U\subseteq (U^\perp)^\perp\) nach dem Prinzip \gq{Paul, wie heisst du?}. Au"serdem gilt nach der obigen Formel \(\dim (U^\perp)^\perp = \dim U\)
+  \(U\subseteq (U^\perp)^\perp\) nach dem Prinzip \gq{Paul, wie hei"st du?}: Denn \[(U^\perp)^\perp = \{v\in V \mid b(u', v) = 0\;\forall u\in U^\perp\}\] Aber f"ur alle \(u'\in U^\perp\) gilt ja schon \(b(u, u') = b(u', u) = 0\;\forall u\in U\), also ist \(U\subseteq (U^\perp)^\perp\). Au"serdem gilt nach der obigen Formel \(\dim (U^\perp)^\perp = \dim U\).
 \end{prof}
 
-Sie frage war: gegben $b$, finde eine Basis in $V$, s.d. $M_B(b)$ m"oglichst
+Die Frage war: gegeben $b$, finde eine Basis in $V$, s.d. $M_B(b)$ m"oglichst
 einfach aussieht.
 
 \begin{proposition}
-  Sei $b$ nicht ausgeartet und symetrisch oder schiefsymetrisch. Sei $U\subseteq
-  V$ ein untervektorraum. Dann giltL $V=U\bigoplus U^\perp \iff B_{\mid U}
-  \text{nicht ausgeartet}$.
+  Sei $b$ nicht ausgeartet und symmetrisch oder schiefsymmetrisch. Sei $U\subseteq
+  V$ ein Untervektorraum. Dann gilt $V=U\oplus U^\perp \iff b|_U
+  \text{ nicht ausgeartet}$.
 \end{proposition}
 
 \begin{prof}
   \begin{align*}
-    U^\perp = {v\in V \mid b(f_i,v)=0\; \forall i=\bar{1,k}}
+    U^\perp = \{v\in V \mid b(f_i,v)=0\; \forall i=\overline{1,k}\}\qquad f_1,\dots, f_k\text{ Basis in } U
   \end{align*}
-  Das heisst, $\dim U^\perp \geq \dim V - \dim U$, egal ob b ausgeartet ist.
-  Andererseits gilt: \[U\cap U\perp = {u\in U \mid \forall u'\in U,\; b(u,u')=0}
-  = \text{das orthogonale kmplement von U bzgl. } b_{\mid u}\]
-Es gilt also: wenn $V=U \bigoplus U^\perp$
+  Das hei"st, $\dim U^\perp \geq \dim V - \dim U$, egal ob \(b\) ausgeartet ist.
+  Andererseits gilt: \[U\cap U^\perp = \{u\in U \mid b(u,u')=0\;\forall u'\in U \}
+  = \text{das orthogonale Komplement von U bzgl. } b|_U\]
+Es gilt also: wenn $V=U \oplus U^\perp \implies U\cap U^\perp = \{0\} \implies b|_U$ ist nicht ausgeartet. Andererseits: wenn \(b|_U\) nicht ausgeartet, dann ist \(U\cap U^\perp = 0\) also ist die Summe von \(U\) und \(U^\perp\) direkt, \(\dim U + \dim U^\perp \geq \dim V \implies \dim U + \dim U^\perp = \dim V \implies U\oplus U^\perp = V\).
 \end{prof}
 
-\begin{definition}{Orthogonale Basis}
-  Sei $b$ einne symetrische Bilinearform auf $V$, $e_1,\ldots, e_n$ eine Basis
-  in V. Basis heisst \textbf{orthogonal} (bzgl. $b$), wenn $b(e_i,e_j)=0$ f"ur
+\begin{definition}{Orthogonale Basis}{}
+  Sei $b$ eine symmetrische Bilinearform auf $V$, $e_1,\dots, e_n$ eine Basis
+  in V. Basis heisst \emph{orthogonal} (bzgl. $b$), wenn $b(e_i,e_j)=0$ f"ur
   $i\not= j$.
 \end{definition}
 
 \begin{exa}
-  Im $\mathbb{R}^3$ ist es mit dem Skalarprodukt genau geometrische orthogonalit"at.
+  Im $\mathbb{R}^3$ ist es mit dem Skalarprodukt genau geometrische Orthogonalit"at.
 \end{exa}
 
 \begin{satz}{Existenz von Orthogonalbasen}
-  Sei $V$ ein $K$ - Vektorraum, $b$ eine symetrische Bilinearform. Es gibt eine
+  Sei $V$ ein $K$ - Vektorraum, $b$ eine symmetrische Bilinearform. Es gibt eine
   orthogonale Basis in $V$ bzgl. $b$.
 \end{satz}
 
-\begin{prof} {Vorbereitung}
-  Sei $q(x)=b(x,x)$ die quadratische Form, die zu $b$ geh"ort. Da $b$ symetrisch
-  ist, kann man $b$ aus $q$ durch folgende Formel wiederherstellen.
+\begin{prof}[Vorbereitung]
+  Sei $q(x)=b(x,x)$ die quadratische Form, die zu $b$ geh"ort. Da $b$ symmetrisch
+  ist, kann man $b$ aus $q$ durch folgende Formel wiederherstellen:
   (Polarisierungsidentit"at)
   \[
     b(x,y) = \frac{1}{2} (q(x+y) - q(x) - q(y))
   \]
 \end{prof}
 \begin{prof}[des Satzes]
-  Induktion "uber $n=\dim V$.\\
-  \begin{itemize}
-  \item[IA] Wenn $n=1$ nichts zu zeigen.
-  \item[IS] Sei $n>1$ und es sei die Aussage f"ur alle VR mit Dimension $<n$
+  Induktion "uber $n=\dim V$. 
+  (IA) Wenn $n=1$ nichts zu zeigen.
+  (IS) Sei $n>1$ und es sei die Aussage f"ur alle Vektorr"aume mit Dimension $<n$
     gezeigt.
     \begin{itemize}
-    \item[1. Fall] $b=0\rightarrow$ Jede Basis ist orthogonal.
-    \item[2. Fall] $b\not= 0\xRightarrow[]{Polarisiergun} \exists e_1\in V$ mit
-      $q(e_1)=b(e_1,e_1)\not= 0$. Es sei $U=\langle {U} \rangle$
+    \item[1. Fall] $b=0$: Jede Basis ist orthogonal, fertig.
+    \item[2. Fall] $b\neq 0\xRightarrow{\text{Polarisierung}} \exists e_1\in V$ mit
+      $q(e_1)=b(e_1,e_1)\neq 0$. Es sei $U=\langle e_1 \rangle$, also ist \(b|_U\) nicht ausgeartet. Aus der Proposition folgt daher \(V = U\oplus U^\perp = \langle e_1\rangle\oplus\langle e_1\rangle^\perp\). Die Induktionsvoraussetzung angewandt auf \(\langle e_1\rangle^\perp\) liefert \(e_2,\dots,e_n\in \langle e_1\rangle^\perp\), daher ist \(e_1,\dots, e_n\) eine Orthogonalbasis in \(V\).
     \end{itemize}
-  \end{itemize}
 \end{prof}
 
 \begin{relation}
-  $\mathcal{E}=(e_1,\ldots, e_n) \subset V$ ist eine Orthogonalbasis $\iff
-  M_\mathcal{E}(b)=
+  $\mathcal{E}=(e_1,\ldots, e_n) \subset V$ ist eine Orthogonalbasis genau dann, wenn \[
+  M_{\mathcal{E}}(b)=
   \begin{pmatrix}
-    b_{11}
+    b_{11} & & 0 \\
+    & \ddots & \\
+    0 & & b_{nn} \\
   \end{pmatrix}
-  $ eine Diagonalmatrix.
-
-  Also: f"ur jede symetrische Matrix $A$ gibt es eine invertierbare Matrix $S$
+  \] eine Diagonalmatrix ist. Also: f"ur jede symmetrische Matrix $A$ gibt es eine invertierbare Matrix $S$
   mit $S^T\cdot A\cdot S = D$ (Diagonalmatrix). Wenn $K=\mathbb{R}$, kann man
-  erreichen, dass die Diagonaleintr"age aus ${0,1,-1}$ bestshen. (wenn
-  $b(e_i,e_i)\not= 0$, ersetze $e_i=\frac{e_i}{\sqrt{(|b(e_i, e_i)|}}$)
+  erreichen, dass die Diagonaleintr"age aus ${0,1,-1}$ bestshen (wenn
+  $b(e_i,e_i)\not= 0$, ersetze $e_i\rightarrow\frac{e_i}{\sqrt{|b(e_i, e_i)|}}$). Wenn \(K = \mathbb{C}\), erreicht man sogar Diagonaleintr"age aus \(\{0, 1\}\).
 \end{relation}
 
-Der Satz "uber die Existenz von Orthogonalbasen ist nicht besonders konstruktiv.
+Der Satz "uber die Existenz von Orthogonalbasen ist nicht besonders konstruktiv, was das Finden angeht.
 
 \begin{relation}
-  Sei $F=(f_1, \ldots, f_n)\subset V$ eine Basis..
-  \[\text{Sei } A:= M_F(b)=...\] Sei $A_k$ die ''obere linke'' ($k\times k$) -
-  Untermatrix von A, also ...
-  Sei $\delta_l:= \det A_k$ der Eckminor von $A$. Sei ausserdem $V_K=\langle
-  {f_1,\ldots, f_k} \rangle, V_0:={0}, \delta_0=1$...
+  Sei $F=(f_1, \dots, f_n)\subset V$ eine Basis, sei
+  \[A:= M_F(b)=\begin{pmatrix}a_{11} & \cdots & a_{1n} \\ \vdots & \ddots & \vdots \\ a_{n1} & \cdots & a_{nn}\end{pmatrix}\] Sei $A_k$ die \gq{obere linke} ($k\times k$) -
+  Untermatrix von \(A\), also \((A_k)_{ij} = A_{ij}\;\forall i,j=\overline{1,k}\).
+  Sei $\delta_k:= \det A_k$ der Eckminor von $A$. Sei ausserdem $V_K=\langle
+  f_1,\ldots, f_k \rangle, V_0:=\{0\}, \delta_0=1$. Daher ist \(A_k = M_{\{f_1,\dots, f_k\}}(b|_{V_k})\).
 \end{relation}
-
-\begin{satz}{Gr"au-Schmidt-Verfahren}
-  Sei $b$ eine Bilinearform auf $V$, $F\supset V$ eine Basis in V wie oben. Sei
-  ausserdem $\delta_k \not=0,; l=\bar{0,n}$. Dann existiert eine eindeutig
-  bestimmte Orthogonalbasis $(e_1,\ldots,e_n)$ in $V$  ..
+\begin{comm}
+  Die Forderung im Gram-Schmidt-Verfahren, dass \(\delta_k\neq 0\) sein soll, impliziert, dass \(b\) nicht ausgeartet ist.
+\end{comm}
+\begin{satz}{Gram-Schmidt-Verfahren}{}
+  Sei $b$ eine Bilinearform auf $V$, $F\subset V$ eine Basis in V wie oben. Sei
+  au"serdem $\delta_k \neq 0\;\forall k=\overline{0,n}$. Dann existiert eine eindeutig
+  bestimmte Orthogonalbasis $(e_1,\ldots,e_n)$ in $V$, so dass \(e_k\in (f_k + V_{k-1})\;\forall k =1,\dots, n\), zudem gilt \(q(e_k) = b(e_k, e_k) = \frac{\delta_k}{\delta_{k-1}}\)
 \end{satz}
-
-
 \begin{prof}
-  Induktion "uber $n=\dim V$
-  \begin{itemize}
-  \item[IA, $n=1$] $V=\langle {f_1} \rangle$ ...
-  \item[Induktionsschritt] nach IV gibt die gilt die Aussage f"ur
-    $V_{n-1}=\langle f_1,\ldots,f_{n-1} \rangle$ ...
-  \end{itemize}
+  Induktion "uber $n=\dim V$: (IA, $n=1$) $V=\langle f_1 \rangle, \delta_1 = \frac{\delta_1}{\delta_0} = b(f_1, f_1) \neq 0$ (IS) nach Induktionsvoraussetzung gilt die gilt die Aussage f"ur
+    $V_{n-1}=\langle f_1,\ldots,f_{n-1} \rangle\implies e_1,\dots, e_{n-1}$, eine Orthogonalbasis in \(V_{n-1}\), die die Aussagen des Satzes erf"ullt. Wir suchen nun \(e_n = f_n + \sum_{i=1}^{n-1}\lambda_i e_i\). F"ur \(i=1,\dots,n-1\) gilt \(q(e_i) = \frac{\delta_i}{\delta_{i-1}} \neq 0\):
+      \begin{align*}
+        0 \overset{!}{=} b(e_n, e_j) &= b(f_n, e_j) + \sum_{i=1}^n\lambda_i\underbrace{b(e_i,e_j)}_{=0\iff i\neq j} \\
+        &= b(f_n, e_j) + \lambda_j\underbrace{b(e_j, e_j)}_{\neq 0} \\
+        \lambda_j &= -\frac{b(f_n, e_j)}{b(e_j, e_j)}
+      \end{align*}
+      Bleibt zu zeigen: \(q(e_i) = \frac{\delta_n}{\delta_{n-1}}\) -- Wir wissen bereits: \(e_k \in f_k + V_{k-1}\;\forall k=1,\dots,n\). Die Basiswechselmatrix von \(F = (f_1,\dots, f_n)\) zu \(\mathcal{E} = (e_1, \dots, e_n)\) sieht so aus:
+      \[ S=
+        \begin{pmatrix}
+          1 & & * \\
+          & \ddots & \\
+          0 & & 1
+        \end{pmatrix} \implies \det S = 1\]
+      Andererseits gilt
+      \begin{align*}
+        M_{\mathcal{E}}(b) &= \begin{pmatrix}q(e_1) & & 0\\ & \ddots & \\ 0 & & q(e_n)\end{pmatrix} = S^TAS \\
+                           &\implies \det M_{\mathcal{E}}(b) = \underline{q(e_1)\cdot\dots\cdot q(e_n)} = 1\cdot\det A\cdot 1 = \det A = \underline{\delta_n} \\
+        &\implies q(e_n) = \frac{q(e_1)\cdot\dots\cdot q(e_n)}{q(e_1)\cdot\dots\cdot q(e_{n-1})} = \frac{\delta_n}{\delta_{n-1}}
+      \end{align*}
 \end{prof}
 
 \begin{exa}

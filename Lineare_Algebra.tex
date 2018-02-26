@@ -3261,7 +3261,7 @@ Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von L"
 \begin{exa}
   \(V = C([0, 1], \mathbb{R}), \langle f, g\rangle := \int_0^1f(x)g(x)\dif x \forall f, g \in V\)
   \begin{align*}
-    \left(\int_0^1f(x)g(x)\dif x\right)^2 &\leq \sqrt{\int_0^1 f(x)^2\dif x\int_0^1 g(x)^2\dif x} \\
+    \left(\int_0^1f(x)g(x)\dif x\right)^2 &\leq \int_0^1 f(x)^2\dif x\int_0^1 g(x)^2\dif x \\
     \implies (\int_0^1 f(x))
   \end{align*}
 \end{exa}
@@ -3289,7 +3289,7 @@ Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von L"
 \begin{definition}{Orthonormalbasis}{}
   Eine Basis $\mathcal{E} = \{e_1, \ldots, e_n\} \subset V$ heisst
   \textbf{Orthonomalbasis}, wenn $G(e_1, \ldots, e_n) = 1_n$ ist. ($\iff \langle
-  {e_i, e_jede} \rangle = \delta_{ij} \forall i,j = \overline{1,n}$)
+  e_i, e_j \rangle = \delta_{ij} \forall i,j = \overline{1,n}$)
 \end{definition}
 
 
@@ -3297,7 +3297,7 @@ Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von L"
 
 
 \begin{relation}
-  Sei $\xi$ eine Orthonormalbasis (=ONB), $B$ eine weitere Basis von $V$. Sei
+  Sei $\mathcal{E}$ eine Orthonormalbasis (=ONB), $B$ eine weitere Basis von $V$. Sei
   $S=M^B_\mathcal{E}$ die Basiswechselmatrix von $\mathcal{E}$ zu $B$. Nach
   Transformationsregel f"ur Matrizen von Bilinearformen gilt:
   \begin{align*}
@@ -3307,17 +3307,16 @@ Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von L"
 \end{relation}
 
 \begin{definition}{Orthogonale Matrix}
-  Eine Matriz $S$ heisst \textbf{Orthogonal} wenn $S^T=S^{-1} \iff S$  ist
+  Eine Matriz $S$ hei"st \emph{orthogonal} wenn $S^T=S^{-1} \implies S$  ist
   invertierbar und $\det S = \pm 1$.
 \end{definition}
-
 
   \emph{"Ubung:} Beweisen Sie, dass eine \(n\times n\)-Matrix genau dann orthogonal ist, wenn ihre Spalten (oder Zeilen) eine ONB bez"uglich des Standardskalaproduktes bilden
 
   Sei \(U\subseteq V\) ein Unterraum. Dann ist die Einschr"ankung von \(\langle ., .\rangle\) auf \(U\) eine positiv definite (also nicht ausgeartete) Bilinearform nach dem Silvester-Kriterium. \(\implies\) Direkte Summenzerlegung \(V = U\oplus U^\perp\) \(\implies\) jedes \(v\in V\) ist eindeutig darstellbar als \(v = u + u^\perp\) mit \(u\in U, u^\perp \in U^\perp\). \(u\) hei"st orthogonale Projektion von \(v\) auf \(U\). \(\implies\) Lineare Abbildung \(p_U: V\to U, p_U(v = u + u^\perp) = u\). \(p_U\) hei"st orthogonale Projektion auf \(U\).
 
 \begin{lemma}[Explizite Formel f"ur orthogonale Projektion]
-  Sei \(e_1, \dots, e_n\) ONB von \(U \subseteq V\). Dann gilt f"ur \(v\in V\):
+  Sei \(e_1, \dots, e_k\) ONB von \(U \subseteq V\). Dann gilt f"ur \(v\in V\):
   \begin{align*}
     p_U(v) = \sum_{i=1}^k\langle e_i, v\rangle e_i
   \end{align*}
@@ -3329,11 +3328,10 @@ Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von L"
   \end{align*}
 \end{korollar}
 \begin{prof}[des Lemmas]
-  \(\sum_{i=1}^k \langle e_i, v\rangle e_i\) liegt in \(U\). Wir m"ussen also noch zeigen, dass \(v - \sum_{i=1}^k\langle e_i, v\rangle e_i\) orthogonal zu \(U\) ist. Es reicht zu zeigen, dass dieser Vektor orthogonal zu jedem \(e_j \quad\forall j \in \{1,\dots, n\}\) ist. Das folgt aus der Orthonormalit"at der Basis \(\langle e_j, v\rangle - \sum_{i=1}^k \langle e_j, e_i\rangle\langle e_i, v\rangle = \langle e_j, v\rangle - \langle e_j, v\rangle = 0\).
+  \(\sum_{i=1}^k \langle e_i, v\rangle e_i\) liegt in \(U\). Wir m"ussen also noch zeigen, dass \(v - \sum_{i=1}^k\langle e_i, v\rangle e_i\) orthogonal zu \(U\) ist. Es reicht zu zeigen, dass dieser Vektor orthogonal zu jedem \todo{Nicht 100\% sicher}\(e_j \;\forall j \in \{1,\dots, k\}\) ist. Das folgt aus der Orthonormalit"at der Basis: \(\langle e_j, v\rangle - \sum_{i=1}^k \langle e_j, e_i\rangle\langle e_i, v\rangle = \langle e_j, v\rangle - \langle e_j, v\rangle = 0\).
 \end{prof}
 
-
-\emph{"Ubung:} "Uberzeugen Sie sich, dass das Gram-Schmidt-Verfahren in einem euklidischen VR so beschrieben werden kann: wenn \(f_1, \dots, f_n \in V\) eine beliebige Basis von \(V\) ist, und \(V_k = span(f_1, \dots, f_k)\), dann bilden die Vektoren \begin{align*}e_k := p_{V_{k-1}^\perp}(f_k) = f_k - p_{V_{k-1}}(f_k) = f_k - \sum_{i=1}^{k-1}\frac{\langle e_i, f_k\rangle}{\langle e_i, e_i\rangle}e_i\end{align*} eine Orthogonalbasis von \(V\). Eine ONB erh"alt man, indem man \(e'_k = \frac{e_k}{||e_k||} \quad\forall k\in \{1,\dots,n\}\)
+\emph{"Ubung:} "Uberzeugen Sie sich, dass das Gram-Schmidt-Verfahren in einem euklidischen VR so beschrieben werden kann: wenn \(f_1, \dots, f_n \in V\) eine beliebige Basis von \(V\) ist, und \(V_k = span(f_1, \dots, f_k)\), dann bilden die Vektoren \begin{align*}e_k := p_{V_{k-1}^\perp}(f_k) = f_k - p_{V_{k-1}}(f_k) = f_k - \sum_{i=1}^{k-1}\frac{\langle e_i, f_k\rangle}{\langle e_i, e_i\rangle}e_i\end{align*} eine Orthogonalbasis von \(V\). Eine ONB erh"alt man, indem man \(e'_k = \frac{e_k}{||e_k||} \quad\forall k\in \{1,\dots,n\}\) setzt.
 
 \emph{"Ubung:} "Uberpr"ufen Sie, dass das Gram-Schmidt-Verfahren angewandt auf die Basis \(1, x, x^2, x^3\) von \(C[-1, -1]\) mit dem Skalarprodukt \(\langle f, g\rangle = \int_{-1}^1f(x)g(x)\dif x\) die Vielfachen der Legendre-Polynome
 \begin{align*}
@@ -3346,36 +3344,54 @@ liefert.
 \end{bem}
 
 \begin{definition}{Abstand zwischen Teilmengen $X,Y \subseteq V$}{}
-  $d(X,Y)= \inf_{x\in X, y\in Y} d(x,y)=||x-y||$.
+  $d(X,Y)= \inf_{x\in X, y\in Y} \underbrace{d(x,y)}_{\Vert x - y\Vert}$.
 \end{definition}
 
-\begin{satz}{Abstand ist gleich L"ange des Lotes}
-  Sei $(V, \langle {\cdot, \cdot} \rangle$ ein eukl. VR, $Y\subseteq V$ ein UVR
-  und $v\in V$. Dann gilt: \[d(v, U) = ||P_{U^\perp}(v)||\] und der zu $v$ am
-  n"achsten gelegene Vektor $u\in U$ ist $u=P_U(v)$
+\begin{satz}{Abstand ist gleich L"ange des Lotes}{}
+  Sei $(V, \langle {\cdot, \cdot} \rangle$ ein eukl. VR, $U\subseteq V$ ein UVR
+  und $v\in V$. Dann gilt: \[d(v, U) = \Vert p_{U^\perp}(v)\Vert\] und der zu $v$ am
+  n"achsten gelegene Vektor $u\in U$ ist $u=p_U(v)$
 \end{satz}
 
-
-
 \begin{prof}
-  Sei \(v = u + u^\perp\) mit \(u = P_U(v) \in U, u^\perp \in U^\perp\). F"ur jedes \(u' \in U\) gilt \(z = u - u' \in U\).
+  Sei \(v = u + u^\perp\) mit \(u = p_U(v) \in U, u^\perp \in U^\perp\). F"ur jedes \(u' \in U\) gilt \(z = u - u' \in U\).
   \begin{align*}
-    ||v - u'||^2 = ||z + u^\perp||^2 = \langle z, z\rangle + \langle u^\perp , u^\perp\rangle = ||z||^2 + ||u^\perp||^2 \geq ||u^\perp||^2
+    \Vert v - u'\Vert^2 = \Vert z + u^\perp\Vert^2 = \langle z, z\rangle + \langle u^\perp , u^\perp\rangle = \Vert z\Vert^2 + \Vert u^\perp\Vert^2 \geq \Vert u^\perp\Vert^2
   \end{align*}
   mit Gleichheit genau dann, wenn \(u' = u\).
 \end{prof}
 
-\begin{satz}{Abstandsformel f"ur Gram-Matrizen}
+\begin{satz}{Abstandsformel f"ur Gram-Matrizen}{}
   Sei $V$ ein eukl. VR, $U\subseteq V$ ein UVR, $v\in V$. Dann gilt f"ur jede
-  Basis $f_1, \ldots, f_k$ von $U$: \[d(v,U)^2 = \frac{det(G(f_1, \ldots, f_km, v)}{det(G(f_1, \ldots, f_km)}\]
+  Basis $f_1, \ldots, f_k$ von $U$: \[d(v,U)^2 = \frac{\det G(f_1, \ldots, f_k, v)}{det G(f_1, \ldots, f_k)}\]
 \end{satz}
 
 \begin{prof}[Abstandsformel f"ur Gram-Matrizen]
-  Gilt \(v\in U\), dann sind beide Seiten gleich null (Determinante hat dann linear abh"angige Spalten). Sonst (\(v \not\in U\)) sei \(z = p_{U^\perp}(v)\). Dann ist \(f_1, \dots, f_k, v\) eine Basis von \(U\oplus \langle v\rangle\). (Wir orthogonalisieren diese Basis mit dem Gram-Schmidt-Verfahren und erhalten eine orthogonale Basis \(e_1, \dots, e_k, z\).) Nach dem Satz "uber das Gram-Schmidt-Verfahren k"onnen wir jetzt den Wert \(\langle z, z\rangle\) durch die Eckminore der Gram-Matrix ausdr"ucken. \(\langle z,z\rangle = \frac{\delta_{k+1}}{\delta_k} = \frac{\det G(f_1,\dots, f_k, v)}{\det G(f_1, \dots, f_k)} = ||z||^2 = d(v, U)^2\)
+  Gilt \(v\in U\), dann sind beide Seiten gleich null (Determinante hat dann linear abh"angige Spalten). Sonst (\(v \not\in U\)) sei \(z = p_{U^\perp}(v)\). Dann ist \(f_1, \dots, f_k, v\) eine Basis von \(U\oplus \langle v\rangle\). (Wir orthogonalisieren diese Basis mit dem Gram-Schmidt-Verfahren und erhalten eine orthogonale Basis \(e_1, \dots, e_k, z\).) Nach dem Satz "uber das Gram-Schmidt-Verfahren k"onnen wir jetzt den Wert \(\langle z, z\rangle\) durch die Eckminore der Gram-Matrix ausdr"ucken. \(\langle z,z\rangle = \frac{\delta_{k+1}}{\delta_k} = \frac{\det G(f_1,\dots, f_k, v)}{\det G(f_1, \dots, f_k)} = \Vert z\Vert^2 = d(v, U)^2\)
 \end{prof}
-
-
-
+\begin{satz}{W"urfel aufgespannt durch Orthonormalbasen haben Volumen 1}{}
+  Sei \(\mathcal{E} = (e_1,\dots,e_n)\) eine Orthonormalbasis in einem euklidischen Vektorraum \(V\) und \(\omega : V^n\to\mathbb{R}\) die eindeutig bestimmte Volumenform mit \(\omega (e_1,\dots,e_n) = 1\). Dann gilt \(|\omega (\mathcal{E'})| = 1\) f"ur jede Orthonormalbasis \(\mathcal{E}'\) von \(V\).
+\end{satz}
+\begin{prof}
+  Es gilt: \(\omega (\mathcal{E}') = \det (S)\cdot\omega (\mathcal{E})\), wobei \(S\) die Basiswechselmatrix von \(\mathcal{E}\) zu \(\mathcal{E}'\) ist. Nun ist \(S\) aber orthogonal, \(\det S = \pm 1\), also \(|\omega (\mathcal{E}')| = 1\).
+\end{prof}
+\begin{definition}{Volumen}{}
+  Seien \(v_1,\dots, v_n\in V\) (\(V\) ist ein euklidischer Vektorraum). Das \epmh{Volumen} des von \(v_1,\dots, v_n\) aufgespannten Parallelepipeds definieren wir als \[\text{vol}(v_1,\dots,v_n) := |\omega (v_1,\dots,v_n)|\] wobei \(\omega\) eine Volumenform ist mit \(\omega (\mathcal{E}) = 1\) f"ur eine (und damit jede) ONB.
+\end{definition}
+\begin{satz}{Volumen durch die Determinante der Gram-Matrix}{}
+  Seien \(v_1,dots,v_n\in V\) Vektoren in einem \(n\)-dimensionalen euklidischen Vektorraum. Dann gilt: \(\text{vol}(v_1,\dots,v_n)^2 = \det G(v_1,\dots,v_n)\)
+\end{satz}
+\begin{prof}
+  Seien \(v_1,\dots,v_n\) linear abh"angig, dann stimmt die Formel, denn beide Seiten sind 0. Sind sie jedoch linear unabh"angig, bilden sie eine Basis von \(V\). Sei \(S\) die Basiswechselmatrix zu einer ONB \(\mathcal{E}\), also:
+  \begin{align*}
+    G(v_1,\dots,v_n) &= S^T1_nS = S^TS \\
+    \det G(v_1,\dots,v_n) &= \det (S^TS) = \left(\det (S)\right)^2 = \text{vol}(v_1,\dots,v_n)^2
+  \end{align*}
+\end{prof}
+\begin{bem}
+  Abstandsformel von \(v\in V\) zu einem UVR \(U\subseteq V\) mit Basis \(f_1,\dots, f_k\):
+  \[\text{vol}(f_1,\dots,f_k,v) = \text{vol}(f_1,\dots,f_k)\cdot d(v,U)\]
+\end{bem}
 \section{Lineare Abbildungen zwischen Vektorräumen mit Skalarprodukt }
 \label{sec:vsk}
 \textbf{Fragen}:

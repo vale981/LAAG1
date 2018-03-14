@@ -2,12 +2,12 @@
 % Intended LaTeX compiler: pdflatex
 \documentclass[oneside,fontsize=11pt,paper=a4,BCOR=0mm,DIV=12,automark,headsepline]{scrbook}
 \usepackage[utf8]{inputenc}
-%\usepackage{beton}
-%\usepackage{euler}
-%\usepackage{mathpazo} % add possibly `sc` and `osf` options
-%\usepackage{mathpple}
+% \usepackage{beton}
+% \usepackage{euler}
+% \usepackage{mathpazo} % add possibly `sc` and `osf` options
+% \usepackage{mathpple}
 \usepackage{fourier}
-%\usepackage{eulervm}
+% \usepackage{eulervm}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{grffile}
@@ -24,6 +24,8 @@
 \usepackage[ngerman]{babel}
 \usepackage{mathtools} % for xrightarrow
 \usepackage{todonotes}
+\usepackage{xifthen}
+\usepackage{xargs}
 \usepackage{commath} % differential stuff
 \newcommand{\gq}[1]{\glqq{}#1\grqq{}} % german quotes
 \newcommand{\mcolor}[2][red]{\begingroup\color{#1}#2\endgroup }
@@ -39,6 +41,10 @@
 \DeclareMathOperator{\mDeg}{deg}
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\spn}{span}
+
+\newcommandx{\linn}[4][3=1,4=n]{\ensuremath{#1_{#3}\cdot #2_{#3} + \dots + #1_{#4} \cdot #2_{#4}}}
+\newcommandx{\setdot}[3][2=1,3=n]{\ensuremath{\{#1_{#n} ,\dots , #1_{#n}\}}}
+\newcommandx{\lldot}[3][2=1,3=n]{\ensuremath{#1_{#n} ,\dots , #1_{#n}}}
 \usepackage[most]{tcolorbox}
 \usepackage{booktabs}
 \tcbuselibrary{theorems}
@@ -54,29 +60,29 @@
 {title=Kommentar,colback=black!5,colframe=black!35!black,fonttitle=\bfseries}
 \newtcolorbox{relation}[1][]
 {
-colframe = blue!25,
-colback  = blue!10,
-#1,
+  colframe = blue!25,
+  colback  = blue!10,
+  #1,
 }
 \newtcolorbox[number within=section]{exa}{%
-	% Example Frame Start
-	empty,% Empty previously set parameters
-	title={Beispiel.},% use \thetcbcounter to access the qikexample counter text
-	% Attaching a box requires an overlay
-	    attach boxed title to top left,
-	% (boxed title style requires an overlay)
-	boxed title style={empty,size=minimal,toprule=0pt,top=4pt,overlay={}},
-	coltitle=black,fonttitle=\bfseries,
-	before=\par\medskip\noindent,parbox=false,boxsep=0pt,left=0pt,right=3mm,top=2pt,breakable,pad at break=0mm,
-	before upper=\csname @totalleftmargin\endcsname0pt, % Use instead of parbox=true. This ensures parskip is inherited by box.
-	% Handles box when it exists on one page only
-	overlay unbroken={\draw[black,line width=.5pt] ([xshift=-10pt]title.north west) -- ([xshift=-10pt]frame.south west); },
-	% Handles multipage box: first page
-	overlay first={\draw[black,line width=.5pt] ([xshift=-10pt]title.north west) -- ([xshift=-10pt]frame.south west); },
-	% Handles multipage box: middle page
-	overlay middle={\draw[black,line width=.5pt] ([xshift=-10pt]frame.north west) -- ([xshift=-10pt]frame.south west); },
-	% Handles multipage box: last page
-	overlay last={\draw[black,line width=.5pt] ([xshift=-10pt]frame.north west) -- ([xshift=-10pt]frame.south west); },%
+  % Example Frame Start
+  empty,% Empty previously set parameters
+  title={Beispiel.},% use \thetcbcounter to access the qikexample counter text
+  % Attaching a box requires an overlay
+  attach boxed title to top left,
+  % (boxed title style requires an overlay)
+  boxed title style={empty,size=minimal,toprule=0pt,top=4pt,overlay={}},
+  coltitle=black,fonttitle=\bfseries,
+  before=\par\medskip\noindent,parbox=false,boxsep=0pt,left=0pt,right=3mm,top=2pt,breakable,pad at break=0mm,
+  before upper=\csname @totalleftmargin\endcsname0pt, % Use instead of parbox=true. This ensures parskip is inherited by box.
+  % Handles box when it exists on one page only
+  overlay unbroken={\draw[black,line width=.5pt] ([xshift=-10pt]title.north west) -- ([xshift=-10pt]frame.south west); },
+  % Handles multipage box: first page
+  overlay first={\draw[black,line width=.5pt] ([xshift=-10pt]title.north west) -- ([xshift=-10pt]frame.south west); },
+  % Handles multipage box: middle page
+  overlay middle={\draw[black,line width=.5pt] ([xshift=-10pt]frame.north west) -- ([xshift=-10pt]frame.south west); },
+  % Handles multipage box: last page
+  overlay last={\draw[black,line width=.5pt] ([xshift=-10pt]frame.north west) -- ([xshift=-10pt]frame.south west); },%
 }
 
 \usepackage{etoolbox}
@@ -103,11 +109,11 @@ colback  = blue!10,
 \date{\today}
 \title{Lineare Algebra (für Physiker) I}
 \hypersetup{
- pdfauthor={Nebnola, Julius Quasebarth, Valentin Boettcher},
- pdftitle={Lineare Algebra (Physiker) I},
- pdfkeywords={},
- pdfsubject={},
- pdflang={Germanq}}
+  pdfauthor={Nebnola, Julius Quasebarth, Valentin Boettcher},
+  pdftitle={Lineare Algebra (Physiker) I},
+  pdfkeywords={},
+  pdfsubject={},
+  pdflang={Germanq}}
 
 \usepackage{xcomment}
 \makeatletter
@@ -117,7 +123,7 @@ colback  = blue!10,
 
 \begin{document}
 \maketitle
-%--\xcomment{definition,proposition,beobachtung,lemma,folgerung,notte,korollar,Axiom,theo,satz}
+% --\xcomment{definition,proposition,beobachtung,lemma,folgerung,notte,korollar,Axiom,theo,satz}
 \tableofcontents
 \newpage
 Ihr habt hier die Mitschriften Valentin Boettchers vor euch. Er teilt eben Diese
@@ -144,28 +150,28 @@ In der modernen Mathematik fasst man Strukturen (R"aume, Fl"achen,
 Zahlensysteme) als \emph{Mengen} und \emph{Abbildungen} auf.
 
 \begin{definition}{Menge}{def-meng}
-Eine Zusammenfassung von Objekten die \textbf{Elemente} der Menge heissen. Eine Menge ist
-also eindeutig dadurch bestimmt, welche Elemente sie enth"alt.
+  Eine Zusammenfassung von Objekten die \textbf{Elemente} der Menge heissen. Eine Menge ist
+  also eindeutig dadurch bestimmt, welche Elemente sie enth"alt.
 \end{definition}
 
 \begin{notation}\
-\begin{itemize}
-\item \(M=\{m_1,m_2,m_3,...\}\) - Aufz"ahlung
-\begin{itemize}
-\item \(\{...\}\) - Mengenklammern
-\end{itemize}
-\item \(M=\{x| P(x)\}\) - Eigenschaft
-\begin{itemize}
-\item Alle \(x\) mit der Eigenschaft \(P(x)\)
-\end{itemize}
-\end{itemize}
+  \begin{itemize}
+  \item \(M=\{m_1,m_2,m_3,...\}\) - Aufz"ahlung
+    \begin{itemize}
+    \item \(\{...\}\) - Mengenklammern
+    \end{itemize}
+  \item \(M=\{x| P(x)\}\) - Eigenschaft
+    \begin{itemize}
+    \item Alle \(x\) mit der Eigenschaft \(P(x)\)
+    \end{itemize}
+  \end{itemize}
 \end{notation}
 
 \begin{exa}\
-\begin{itemize}
-\item \(n=\{\text{Nat"urliche Zahlen}\} = \{0,1,2,...\}\)
-\item \(E=\{x|\text{x hat die Eigenschaft } P(x)\}\)
-\end{itemize}
+  \begin{itemize}
+  \item \(n=\{\text{Nat"urliche Zahlen}\} = \{0,1,2,...\}\)
+  \item \(E=\{x|\text{x hat die Eigenschaft } P(x)\}\)
+  \end{itemize}
 \end{exa}
 
 \section{Wichtige Mengen}
@@ -174,284 +180,284 @@ also eindeutig dadurch bestimmt, welche Elemente sie enth"alt.
 \item \(\mathbb{N}=\{\text{Nat"urliche Zahlen}\} = \{1,2,...\}\)
 \item \(\mathbb{Z}=\{\text{Ganze Zahlen}\} = \{...,-2,-1,0,1,2,...\}\)
 \item \(\mathbb{Q}=\{\text{Rationale
-   Zahlen}\}=\left\{\left.\displaystyle\frac{p}{q}\;\right\vert\begin{array}{c}p \in \mathbb{Z} \\ q \in \mathbb{N} \setminus \{0\}\end{array}\right\}\)
+    Zahlen}\}=\left\{\left.\displaystyle\frac{p}{q}\;\right\vert\begin{array}{c}p \in \mathbb{Z} \\ q \in \mathbb{N} \setminus \{0\}\end{array}\right\}\)
 \item \(\mathbb{R}=\{\text{Reelle Zahlen}\}\)
 \end{itemize}
 
 \section{Beziehungen zwischen Mengen}
 \label{sec:orgcffbbc3}
 \begin{definition}{Mengenbeziehungen}{def-teilmenge}
-Seien \(A,B\) zwei Mengen. 
-\begin{enumerate}
-\item \(A\) heisst \textbf{Teilmenge} von B, wenn f"ur jedes Element \(a\in A\) gilt: \(a\in B\).
-\item Es sei die Menge \(C = \{a|a\in A \text{ und } b\in B\}\), so heisst \(C\) \textbf{Durchschnitt} von \(A\) und \(B\).
-\item Es sei die Menge \(C = \{a|a\in A \text{ oder } b\in B\}\), so heisst \(C\) \textbf{Vereinigung} von \(A\) und \(B\).
-\end{enumerate}
+  Seien \(A,B\) zwei Mengen. 
+  \begin{enumerate}
+  \item \(A\) heisst \textbf{Teilmenge} von B, wenn f"ur jedes Element \(a\in A\) gilt: \(a\in B\).
+  \item Es sei die Menge \(C = \{a|a\in A \text{ und } b\in B\}\), so heisst \(C\) \textbf{Durchschnitt} von \(A\) und \(B\).
+  \item Es sei die Menge \(C = \{a|a\in A \text{ oder } b\in B\}\), so heisst \(C\) \textbf{Vereinigung} von \(A\) und \(B\).
+  \end{enumerate}
 \end{definition}
 
 \begin{notation}\
-\begin{itemize}
-\item \(\in\) Element von: \(x\in X\) - \gq{x ist Element von X}
-\item \(\subseteq\) Teilmenge: \(A\subseteq B\) - \gq{A ist eine Teilmenge von B}
-\item \(\subset\) echte Teilmenge: \(A\subset B \iff A\subseteq B \land A \neq B\)
-\item \(\cap\) Durchschnitt: \(A\cap B = \{a|a\in A \text{ und } b\in B\}\)
-\item \(\cup\) Vereinigung: \(A\cup B = \{a|a\in A \text{ oder } b\in B\}\)
-\item \(\varnothing\) Leere Menge: enth"alt keine Elemente und ist Teilmenge aller Mengen
-\item \(\setminus\) Mengendifferenz: \( A\setminus B = \{a|a\in A \land a\notin B \} \)
-\item \(A\times B\) Direktes Produkt: \(A \times B = \{(a,b)|a\in A\land b\in B \} \)
-\begin{itemize}
-	\item \((a,b)\): geordentes Paar mit dem ersten Element \(a\) und dem zweiten
-	Element \(b\).
-\end{itemize}
-\end{itemize}
+  \begin{itemize}
+  \item \(\in\) Element von: \(x\in X\) - \gq{x ist Element von X}
+  \item \(\subseteq\) Teilmenge: \(A\subseteq B\) - \gq{A ist eine Teilmenge von B}
+  \item \(\subset\) echte Teilmenge: \(A\subset B \iff A\subseteq B \land A \neq B\)
+  \item \(\cap\) Durchschnitt: \(A\cap B = \{a|a\in A \text{ und } b\in B\}\)
+  \item \(\cup\) Vereinigung: \(A\cup B = \{a|a\in A \text{ oder } b\in B\}\)
+  \item \(\varnothing\) Leere Menge: enth"alt keine Elemente und ist Teilmenge aller Mengen
+  \item \(\setminus\) Mengendifferenz: \( A\setminus B = \{a|a\in A \land a\notin B \} \)
+  \item \(A\times B\) Direktes Produkt: \(A \times B = \{(a,b)|a\in A\land b\in B \} \)
+    \begin{itemize}
+    \item \((a,b)\): geordentes Paar mit dem ersten Element \(a\) und dem zweiten
+      Element \(b\).
+    \end{itemize}
+  \end{itemize}
 \end{notation}
 
 \begin{exa}
-\(\mathbb{N}\subseteq \mathbb{Z}\), aber \(\mathbb{Q} \nsubseteq \mathbb{Z}\): \(\frac{1}{2} \notin \mathbb{Z}\)
+  \(\mathbb{N}\subseteq \mathbb{Z}\), aber \(\mathbb{Q} \nsubseteq \mathbb{Z}\): \(\frac{1}{2} \notin \mathbb{Z}\)
 \end{exa}
 
 \begin{exa}
-F"ur \(A = \{1,2,3,4,5\}\) und \(B = \{2,3,10\}\):
-\begin{itemize}
-\item \(A\cap B = \{2,3\}\)
-\item \(A\cup B = \{1,2,3,4,5,10\}\)
-\end{itemize}
+  F"ur \(A = \{1,2,3,4,5\}\) und \(B = \{2,3,10\}\):
+  \begin{itemize}
+  \item \(A\cap B = \{2,3\}\)
+  \item \(A\cup B = \{1,2,3,4,5,10\}\)
+  \end{itemize}
 \end{exa}
 
 \begin{definition}{Leere Menge}{}
-Die leere Menge \(\varnothing\) ist die (eindeutig bestimmte) Menge, die kein Element enth"alt.
+  Die leere Menge \(\varnothing\) ist die (eindeutig bestimmte) Menge, die kein Element enth"alt.
 \end{definition}
 
 \begin{exa}
-\(\{\pi\} \cap Q = \varnothing\)
+  \(\{\pi\} \cap Q = \varnothing\)
 \end{exa}
 
 \begin{definition}{Differenz}{}
-Die Differenz zweier Mengen \(A, B\) wird definiert als \(A\setminus B = \{a\in A | a\not\in
-B\}\) (Elemente aus \(A\), die nicht in \(B\) liegen). 
+  Die Differenz zweier Mengen \(A, B\) wird definiert als \(A\setminus B = \{a\in A | a\not\in
+  B\}\) (Elemente aus \(A\), die nicht in \(B\) liegen). 
 \end{definition}
 
 \begin{definition}{Direktes/Kartesisches Produkt}{}
-Wenn \(A,B\) zwei Mengen sind dann ist die Menge der Paare \((a,b)\) und \(a\in A,
-b\in B\) das direkte (kartesische) Produkt von \(A\) und \(B\) (\(A\times B\)).
+  Wenn \(A,B\) zwei Mengen sind dann ist die Menge der Paare \((a,b)\) und \(a\in A,
+  b\in B\) das direkte (kartesische) Produkt von \(A\) und \(B\) (\(A\times B\)).
 \end{definition}
 
 Analog gilt: \(A_1\times A_2\times ... \times A_n = \{(a_1,...,a_n)| a_1\in A_1,...,a_n\in A_n\}\)
 
 \begin{exa}
-\(\mathbb{R}^n=\mathbb{R}\times ... \times \mathbb{R} =  \{(x_1,...,x_n)| x_1\in \mathbb{R},...,x_n\in \mathbb{R}\}\)
+  \(\mathbb{R}^n=\mathbb{R}\times ... \times \mathbb{R} =  \{(x_1,...,x_n)| x_1\in \mathbb{R},...,x_n\in \mathbb{R}\}\)
 \end{exa}
 
 Geometrie \(m\) der Ebene mit Koordinaten \(=\) Untersuchung von Konstruktionen in
 \(\mathbb{R}^2=\mathbb{R}\cdot\mathbb{R}\).
 
 \begin{definition}{Komplemen"armenge}
-Seien \(A,M\) Mengen und \(A\subseteq B\) so ist \(A^c = M\setminus A\) und heisst
-\textbf{Komplement"armenge} zu \(M\).
+  Seien \(A,M\) Mengen und \(A\subseteq B\) so ist \(A^c = M\setminus A\) und heisst
+  \textbf{Komplement"armenge} zu \(M\).
 \end{definition}
 
 Seien \(A,B,M\) Mengen und \(A\subseteq M\) und \(B\subseteq M\), so gilt:
 \begin{relation}
-\begin{enumerate}
-\item \((A\cup B)^c = A^c \cap B^c\)
-\item \((A\cap B)^c = A^c \cup B^c\)
-\item \((A^c)^c = A\)
-\item \(A\cup A^c = M\)
-\end{enumerate}
+  \begin{enumerate}
+  \item \((A\cup B)^c = A^c \cap B^c\)
+  \item \((A\cap B)^c = A^c \cup B^c\)
+  \item \((A^c)^c = A\)
+  \item \(A\cup A^c = M\)
+  \end{enumerate}
 \end{relation}
 
 \begin{notte}
-Es gelten auch alle Identit"aten f"ur Mengen.
+  Es gelten auch alle Identit"aten f"ur Mengen.
 \end{notte}
 
 
 \section{Abbildungen zwischen Mengen}
 \label{sec:org4ef8946}
 \begin{definition}{Abbildung}{}
-Seien \(X,Y\) Mengen. Eine Abbildung \(f\) von \(X\) nach \(Y\) (Bez: \(f:X\rightarrow
-Y\)) ist eine Vorschrift, die jedem Element \(x\in X\) ein Element von
-\(y\in Y\) Zuordnet.
+  Seien \(X,Y\) Mengen. Eine Abbildung \(f\) von \(X\) nach \(Y\) (Bez: \(f:X\rightarrow
+  Y\)) ist eine Vorschrift, die jedem Element \(x\in X\) ein Element von
+  \(y\in Y\) Zuordnet.
 \end{definition}
 
 
 \begin{notation}
-Man schreibt: \(x\mapsto f(x)\) - ''x wird auf \(f(x)\) abgebildet'' = ''dem \(x\in
-X\) wird ein \(f(x)\in Y\) zugeordnet.''
+  Man schreibt: \(x\mapsto f(x)\) - ''x wird auf \(f(x)\) abgebildet'' = ''dem \(x\in
+  X\) wird ein \(f(x)\in Y\) zugeordnet.''
 \end{notation}
 
 \begin{exa}\
-\begin{itemize}
-\item \(f(t)=t^2+1\) definiert eine Abbildung \(f: \mathbb{R}\to \mathbb{R}, t\mapsto f(t)=t^2+1\)
-\item \(g(t)= \frac{t^2+1}{t-1}\) definiert eine Abbildung \(g: \mathbb{R}\setminus\{
-   1\}\to \mathbb{R}, t\mapsto  \frac{t^2+1}{t-1}\)
-\item \(h: S=\{\text{Teilnehmer der Vorlesung}\}\to N, s\mapsto \text{Geburtsjahr(s)}\)
-\end{itemize}
+  \begin{itemize}
+  \item \(f(t)=t^2+1\) definiert eine Abbildung \(f: \mathbb{R}\to \mathbb{R}, t\mapsto f(t)=t^2+1\)
+  \item \(g(t)= \frac{t^2+1}{t-1}\) definiert eine Abbildung \(g: \mathbb{R}\setminus\{
+    1\}\to \mathbb{R}, t\mapsto  \frac{t^2+1}{t-1}\)
+  \item \(h: S=\{\text{Teilnehmer der Vorlesung}\}\to N, s\mapsto \text{Geburtsjahr(s)}\)
+  \end{itemize}
 \end{exa}
 
 \subsection{Spezielle Abbildungen}
 \label{sec:orge512a75}
 \begin{relation}
-\begin{enumerate}
-\item F"ur jede Menge \(X\) ist die \textbf{Indentit"atsabbildung} auf \(X\) definiert durch \(Id_x:X\to X, x\mapsto x\).
-\item Gegeben seien Mengen \(A,B\). Die Abbildung \(\pi_A: A\times B \to A, (a,b)
+  \begin{enumerate}
+  \item F"ur jede Menge \(X\) ist die \textbf{Indentit"atsabbildung} auf \(X\) definiert durch \(Id_x:X\to X, x\mapsto x\).
+  \item Gegeben seien Mengen \(A,B\). Die Abbildung \(\pi_A: A\times B \to A, (a,b)
     \mapsto a\) heisst \textbf{Projektionsabbildung} von \(A\times B\) auf \(A\).
-\item Seien \(X,Y\) Mengen, sei \(y_0 \in Y\). Dann heisst die Abbildung \(f: X\to
+  \item Seien \(X,Y\) Mengen, sei \(y_0 \in Y\). Dann heisst die Abbildung \(f: X\to
     Y, x\mapsto y_0\) eine \textbf{konstante Abbildung} (mit dem wert \(y_0\)).
-\end{enumerate}
+  \end{enumerate}
 \end{relation}
 
 \begin{exa}\
-\begin{itemize}
-\item Identit"atsabbildung: \(f(x)=x\)
-\item konstante Abbildung: \(f(x)=1\)
-\item Projektionsabbildung: \(f(x,y)=x\)
-\end{itemize}
+  \begin{itemize}
+  \item Identit"atsabbildung: \(f(x)=x\)
+  \item konstante Abbildung: \(f(x)=1\)
+  \item Projektionsabbildung: \(f(x,y)=x\)
+  \end{itemize}
 \end{exa}
 
 \subsection{Bild und Urbild}
 \label{sec:org006b051}
 \begin{definition}{Bild und Urbild einer Funktion}{}
-Sei \(f: X\to Y\) eine Abbildung.
-\begin{itemize}
-\item Sei \(A\subseteq X\). Dann heisst \(f(A):=\{f(a)|a\in A\}\) das Bild von A.
-\item Sei \(B\subseteq Y\). Dann heisst \(f^{-1}(B):=\{a\in A|f(a)\in B\}\) das Urbild von \(B\).
-\end{itemize}
+  Sei \(f: X\to Y\) eine Abbildung.
+  \begin{itemize}
+  \item Sei \(A\subseteq X\). Dann heisst \(f(A):=\{f(a)|a\in A\}\) das Bild von A.
+  \item Sei \(B\subseteq Y\). Dann heisst \(f^{-1}(B):=\{a\in A|f(a)\in B\}\) das Urbild von \(B\).
+  \end{itemize}
 \end{definition}
 
 \begin{notte}
-Das Bild und das Urbild f"ur eine \emph{Menge} einer Funktion ist wieder eine \emph{Menge}.
+  Das Bild und das Urbild f"ur eine \emph{Menge} einer Funktion ist wieder eine \emph{Menge}.
 \end{notte}
 
 
 \begin{notte}
-\(f^{-1}\) ist keine Abbildung, sonder nur ein formales Symbol!s
+  \(f^{-1}\) ist keine Abbildung, sonder nur ein formales Symbol!s
 \end{notte}
 
 \subsection{Einige Eigenschaften von Funktionen}
 \label{sec:org1909a84}
 Seien \(X,Y\) Mengen, \(f: X\to Y\) eine Abbildung. \(f\) heist:
 \begin{relation}
-\begin{enumerate}
-\item \textbf{Injektiv}, wenn f"ur \(x\in X\not = x' \in X\) gilt: \(f(x) \not = f(x')\)
-\begin{itemize}
-\item Keine Verklebung von Punkten!
-\end{itemize}
-\item \textbf{Surjektiv}, wenn f"ur \(y\in Y\) ein \(x\in X\) existiert mit \(f(x)=y\).
-\begin{itemize}
-\item Keine Abbildung auf eine echte Teilmenge von \(Y\)!
-\end{itemize}
-\item \textbf{Bijektiv}, wenn \(f\) injektiv und surjektiv ist.
-\end{enumerate}
+  \begin{enumerate}
+  \item \textbf{Injektiv}, wenn f"ur \(x\in X\not = x' \in X\) gilt: \(f(x) \not = f(x')\)
+    \begin{itemize}
+    \item Keine Verklebung von Punkten!
+    \end{itemize}
+  \item \textbf{Surjektiv}, wenn f"ur \(y\in Y\) ein \(x\in X\) existiert mit \(f(x)=y\).
+    \begin{itemize}
+    \item Keine Abbildung auf eine echte Teilmenge von \(Y\)!
+    \end{itemize}
+  \item \textbf{Bijektiv}, wenn \(f\) injektiv und surjektiv ist.
+  \end{enumerate}
 \end{relation}
 
 \begin{exa}
-\begin{enumerate}
-\item \(f: \mathbb{R} \to \mathbb{R}, t\mapsto t^2\) 
-\begin{itemize}
-\item ist nicht injektiv: \(-1\mapsto 1\)
-\item ist nicht surjektiv: f"ur \(-1\in \mathbb{R}\) gibt es kein \(t\in\mathbb{R}\)
-mit \(t^2=-1\)
-\end{itemize}
-\item \(g: \mathbb{N}\to\mathbb{Z}, n\mapsto-n\)
-\begin{itemize}
-\item ist injektiv: \(m\ne n\implies g(m)=-m \ne -n = g(n)\)
-\item ist nicht surjektiv: f"ur \(1\in \mathbb{Z}\) gibt es kein \(n\in \mathbb{N}\)
-mit \(-n=1\)
-\end{itemize}
-\item \(h: \mathbb{R}\to\mathbb{R},t\mapsto t^3\) ist Bijektiv ("Ubung)
-\end{enumerate}
+  \begin{enumerate}
+  \item \(f: \mathbb{R} \to \mathbb{R}, t\mapsto t^2\) 
+    \begin{itemize}
+    \item ist nicht injektiv: \(-1\mapsto 1\)
+    \item ist nicht surjektiv: f"ur \(-1\in \mathbb{R}\) gibt es kein \(t\in\mathbb{R}\)
+      mit \(t^2=-1\)
+    \end{itemize}
+  \item \(g: \mathbb{N}\to\mathbb{Z}, n\mapsto-n\)
+    \begin{itemize}
+    \item ist injektiv: \(m\ne n\implies g(m)=-m \ne -n = g(n)\)
+    \item ist nicht surjektiv: f"ur \(1\in \mathbb{Z}\) gibt es kein \(n\in \mathbb{N}\)
+      mit \(-n=1\)
+    \end{itemize}
+  \item \(h: \mathbb{R}\to\mathbb{R},t\mapsto t^3\) ist Bijektiv ("Ubung)
+  \end{enumerate}
 \end{exa}
 
 \subsection{Inverse Abbildung zu einer bijektiven Abbildung}
 \label{sec:orgaae7124}
 \begin{definition}{Inverse Abbildung}{}
-Sei \(f:X\to Y\) bijektiv. Sei \(y\in Y\). Definiere eine Abbildung \(f^{-1}:
-Y\to X\) so: \(f^{-1}(y)=x\) mit der Eigenschaft \(f(x)=y\).
+  Sei \(f:X\to Y\) bijektiv. Sei \(y\in Y\). Definiere eine Abbildung \(f^{-1}:
+  Y\to X\) so: \(f^{-1}(y)=x\) mit der Eigenschaft \(f(x)=y\).
 \end{definition}
 
 Dies ist wohldefiniert (diese Vorschrift definiert tats"achlich eine Abbildung)
 weil:
 
 \begin{relation}
-\begin{itemize}
-\item Das x mit der gew"unschten Eigenschaft existiert f"ur jedes \(y\in Y\), weil
-\(f\) surjectiv ist.
-\item F"ur jedes \(y\in Y\) existiert h"ochstens ein \(x\in X\) mit der gew"unschten
-Eigenschaft, weil \(f\) injektiv ist.
-\end{itemize}
+  \begin{itemize}
+  \item Das x mit der gew"unschten Eigenschaft existiert f"ur jedes \(y\in Y\), weil
+    \(f\) surjectiv ist.
+  \item F"ur jedes \(y\in Y\) existiert h"ochstens ein \(x\in X\) mit der gew"unschten
+    Eigenschaft, weil \(f\) injektiv ist.
+  \end{itemize}
 \end{relation}
 
 \begin{notte}
-Wenn die Abbildung \(f\) bijektiv ist, hat \(f^{-1}(A)\) f"ur ein \(A\subseteq Y\) a
-priori zwei Bedeutungen:
-\begin{itemize}
-\item Urbild von \(A\) unter f
-\item Bild von \(A\) von \(f^{-1}\)
-\end{itemize}
+  Wenn die Abbildung \(f\) bijektiv ist, hat \(f^{-1}(A)\) f"ur ein \(A\subseteq Y\) a
+  priori zwei Bedeutungen:
+  \begin{itemize}
+  \item Urbild von \(A\) unter f
+  \item Bild von \(A\) von \(f^{-1}\)
+  \end{itemize}
 
-Wenn \(f\) bijektiv ist, stimmen aber diese Mengen "uberein. (Bew. "Ubung)
+  Wenn \(f\) bijektiv ist, stimmen aber diese Mengen "uberein. (Bew. "Ubung)
 
-\textbf{Aber}: Wenn \(f\) nicht bijektiv ist, hat \(f^{-1}\) nur einen Sinn: Urbild!
+  \textbf{Aber}: Wenn \(f\) nicht bijektiv ist, hat \(f^{-1}\) nur einen Sinn: Urbild!
 \end{notte}
 
 \subsection{Verkn"upfung von Abbildungen}
 \label{sec:org540b965}
 \begin{definition}{Verkn"upfung}{}
-\(f: X\to Y, g: Y\to Z\) ist die verkn"upfung \(g\circ: X\to Z\) definiert
-als \(g\circ f(x)=g(f(x))\). Diagramme Siehe V2\(_{\text{1}}\).
+  \(f: X\to Y, g: Y\to Z\) ist die verkn"upfung \(g\circ: X\to Z\) definiert
+  als \(g\circ f(x)=g(f(x))\). Diagramme Siehe V2\(_{\text{1}}\).
 \end{definition}
 
 
 Die Verkn"upfung hat folgende Eigenschaften:
 \begin{relation}
-\begin{enumerate}
-\item Sie ist Assoziativ: \(h\circ (g\circ f) = (h \circ g) \circ f\) f"ur alle Abb. \(f: X\to Y, g:Y\to Z\), \(h:Z\to V\)
-\item F"ur jede abbildung \(f: X\to Y\) gilt: \(f\circ id_X=id_Y\circ f = f\).
-\item Wenn \(f:X\to Y\) bijektiv ist, dann gilt: \(f\circ f^{-1}=id_Y\):
-\begin{itemize}
-\item \(f^{-1}\circ f=id_X\) weil: \(f(f^{-1}(y))=y\):
-\item \(f^{-1}(f(x))=x'\) mit \(f(x')=f(x)\implies x=x'\) wenn \emph{Bijektiv}
-\end{itemize}
-\end{enumerate}
+  \begin{enumerate}
+  \item Sie ist Assoziativ: \(h\circ (g\circ f) = (h \circ g) \circ f\) f"ur alle Abb. \(f: X\to Y, g:Y\to Z\), \(h:Z\to V\)
+  \item F"ur jede abbildung \(f: X\to Y\) gilt: \(f\circ id_X=id_Y\circ f = f\).
+  \item Wenn \(f:X\to Y\) bijektiv ist, dann gilt: \(f\circ f^{-1}=id_Y\):
+    \begin{itemize}
+    \item \(f^{-1}\circ f=id_X\) weil: \(f(f^{-1}(y))=y\):
+    \item \(f^{-1}(f(x))=x'\) mit \(f(x')=f(x)\implies x=x'\) wenn \emph{Bijektiv}
+    \end{itemize}
+  \end{enumerate}
 \end{relation}
 
 \subsection{Eingeschr"ankte Abbildungen}
 \label{sec:org60b2559}
 \begin{definition}{Einschr"ankung}{}
-Sei \(f: X\to Y\) eine Abbildung.\\
-Die Einschr"ankung von \(f\) auf eine Teilmenge \(A\subseteq X\) ist die  Abbildung:
-\(f|_A:\begin{matrix}A\to Y\\ a\mapsto f(a)\end{matrix}\)
+  Sei \(f: X\to Y\) eine Abbildung.\\
+  Die Einschr"ankung von \(f\) auf eine Teilmenge \(A\subseteq X\) ist die  Abbildung:
+  \(f|_A:\begin{matrix}A\to Y\\ a\mapsto f(a)\end{matrix}\)
 \end{definition}
 
 \begin{exa}
-\(f: \mathbb{R}\to \mathbb{R}, t\mapsto t^{2}\) ist nicht injektiv, \(f|_{[0,
-\infty)}\) ist injektiv.
+  \(f: \mathbb{R}\to \mathbb{R}, t\mapsto t^{2}\) ist nicht injektiv, \(f|_{[0,
+    \infty)}\) ist injektiv.
 \end{exa}
 
 \subsection{Quantoren}
 \label{sec:orgd2b2557}
 \begin{definition}{Quantoren}{}
-\begin{itemize}
-\item f"ur alle \(x\) in \(X\) - \(\forall x \in X\)
-\item es existiert \(x \in X\) - \(\exists x \in X\)
-\end{itemize}
+  \begin{itemize}
+  \item f"ur alle \(x\) in \(X\) - \(\forall x \in X\)
+  \item es existiert \(x \in X\) - \(\exists x \in X\)
+  \end{itemize}
 \end{definition}
 
 \begin{exa}
-\(f:X\to Y\) ist surjektiv, wenn \(\forall y \in Y \exists x\in X\) mit \(f(x)=y\).
+  \(f:X\to Y\) ist surjektiv, wenn \(\forall y \in Y \exists x\in X\) mit \(f(x)=y\).
 \end{exa}
 
 F"ur die Negation der Quantoren gilt:
 \begin{relation}
-\begin{itemize}
-\item \(\neg(\forall x\in X : A(x)) = \exists x\in X : \neq A(x)\)
-\item \(\neg(\exists x\in X : A(x)) = \forall x\in X : \neq A(x)\)
-\end{itemize}
+  \begin{itemize}
+  \item \(\neg(\forall x\in X : A(x)) = \exists x\in X : \neq A(x)\)
+  \item \(\neg(\exists x\in X : A(x)) = \forall x\in X : \neq A(x)\)
+  \end{itemize}
 \end{relation}
 
 \begin{exa} \
-\(f: X\to Y\) ist surjektiv \(\iff \forall y\in Y \exists x\in X : f(x)=y\).\\
-Also: \(f: X\to Y\) ist \textbf{nicht} surjektiv \(\iff \exists y\in Y \forall x\in X : f(x)\not=y\).
+  \(f: X\to Y\) ist surjektiv \(\iff \forall y\in Y \exists x\in X : f(x)=y\).\\
+  Also: \(f: X\to Y\) ist \textbf{nicht} surjektiv \(\iff \exists y\in Y \forall x\in X : f(x)\not=y\).
 \end{exa}
 
 \section{Schlagworte}
@@ -459,29 +465,29 @@ Also: \(f: X\to Y\) ist \textbf{nicht} surjektiv \(\iff \exists y\in Y \forall x
 \begin{itemize}
 \item Venn Diagram - Kreise und Schnittmengen
 \item Zeigen von "Aquivalenz zweier Zusammengeseten Mengen:
-\begin{itemize}
-\item Wahrheitstafel
-\item Zur"uckf"uhren auf Aussagenlogik
-\end{itemize}
+  \begin{itemize}
+  \item Wahrheitstafel
+  \item Zur"uckf"uhren auf Aussagenlogik
+  \end{itemize}
 \item Zeigen das \(p,q,r\) "aquivalent sind:
-\begin{itemize}
-\item \(p\implies q \implies r \implies q\)
-\end{itemize}
+  \begin{itemize}
+  \item \(p\implies q \implies r \implies q\)
+  \end{itemize}
 \item \emph{Injektivit"at} zeigen:
-\begin{itemize}
-\item nicht I. wenn Gegenbeispiel existiert
-\item Zeigen das Funktion streng monoton steigt.
-\end{itemize}
+  \begin{itemize}
+  \item nicht I. wenn Gegenbeispiel existiert
+  \item Zeigen das Funktion streng monoton steigt.
+  \end{itemize}
 \item \emph{Surjektivit"at} zeigen:
-\begin{itemize}
-\item nicht S. wenn Gegenbeispiel existiert
-\item Zeigen das Funktion streng monoton steigt und gegen \(+-\infty\) strebt.
-\end{itemize}
+  \begin{itemize}
+  \item nicht S. wenn Gegenbeispiel existiert
+  \item Zeigen das Funktion streng monoton steigt und gegen \(+-\infty\) strebt.
+  \end{itemize}
 \item \(A\setminus (A\setminus B) = A \cap B\)
 \item Beweise mit Abbildungen \(M\) sei Menge, \(f\) sei Abbildung:
-\begin{itemize}
-\item \(y \in f(M) \implies \exists x \in M : f(x)=y\)
-\end{itemize}
+  \begin{itemize}
+  \item \(y \in f(M) \implies \exists x \in M : f(x)=y\)
+  \end{itemize}
 \end{itemize}
 
 \chapter{Logik und Beweisf"uhrung}
@@ -489,74 +495,74 @@ Also: \(f: X\to Y\) ist \textbf{nicht} surjektiv \(\iff \exists y\in Y \forall x
 Mathematik operiert mit \textbf{Aussagen}.
 
 \begin{definition}{Aussage}{}
-Eine Aussage ist eine Behauptung, die Wahr oder Falsch sein kann.
+  Eine Aussage ist eine Behauptung, die Wahr oder Falsch sein kann.
 \end{definition}
 
 \begin{notation}
-\textbf{0} = wahr, 
-\textbf{1} = falsch
+  \textbf{0} = wahr, 
+  \textbf{1} = falsch
 \end{notation}
 
 \(A,B\) seien Aussagen, dann kann man folgende Aussagen betrachten:
 \begin{relation}
-\begin{itemize}
-\item ''nicht \(A\)'': \(\neg A\)\\
-\begin{tabular}{lrr}
-\(A\) & 0 & 1\\
-\hline
-\(\neg A\) & 1 & 0\\
-\end{tabular}
+  \begin{itemize}
+  \item ''nicht \(A\)'': \(\neg A\)\\
+    \begin{tabular}{lrr}
+      \(A\) & 0 & 1\\
+      \hline
+      \(\neg A\) & 1 & 0\\
+    \end{tabular}
 
-\item Vernk"upfungen\\
-\begin{tabular}{rrrrrr}
-\(A\) & \(B\) & \(\neg A\) & \(A\wedge B\) & \(A \vee B\) & \(A\implies B\)\\
-\hline
-0 & 0 & 1 & 0 & 0 & 1\\
-0 & 1 & 1 & 0 & 1 & 1\\
-1 & 0 & 0 & 0 & 1 & 0\\
-1 & 1 & 0 & 1 & 1 & 1\\
-\end{tabular}
+  \item Vernk"upfungen\\
+    \begin{tabular}{rrrrrr}
+      \(A\) & \(B\) & \(\neg A\) & \(A\wedge B\) & \(A \vee B\) & \(A\implies B\)\\
+      \hline
+      0 & 0 & 1 & 0 & 0 & 1\\
+      0 & 1 & 1 & 0 & 1 & 1\\
+      1 & 0 & 0 & 0 & 1 & 0\\
+      1 & 1 & 0 & 1 & 1 & 1\\
+    \end{tabular}
 
-\item ''A "aquivalent zu B'':  \(A\iff B\) \\
-\begin{tabular}{rrr}
-\(A\) & \(B\) & \(A \iff B\)\\
-\hline
-0 & 0 & 1\\
-0 & 1 & 0\\
-1 & 0 & 0\\
-1 & 1 & 1\\
-\end{tabular}
-\end{itemize}
+  \item ''A "aquivalent zu B'':  \(A\iff B\) \\
+    \begin{tabular}{rrr}
+      \(A\) & \(B\) & \(A \iff B\)\\
+      \hline
+      0 & 0 & 1\\
+      0 & 1 & 0\\
+      1 & 0 & 0\\
+      1 & 1 & 1\\
+    \end{tabular}
+  \end{itemize}
 \end{relation}
 
 \begin{exa}
-F"ur ein Element \(x\in X\) k"onnen wir Aussagen betrachten:
-\begin{enumerate}
-\item \(A(x)=x\in A\)
-\item \(B(x)=x\in B\)
-\end{enumerate}
-\(\longrightarrow A(x)\wedge B(x)=x\in (A\cap B)\)
+  F"ur ein Element \(x\in X\) k"onnen wir Aussagen betrachten:
+  \begin{enumerate}
+  \item \(A(x)=x\in A\)
+  \item \(B(x)=x\in B\)
+  \end{enumerate}
+  \(\longrightarrow A(x)\wedge B(x)=x\in (A\cap B)\)
 \end{exa}
 
 \section{Identit"aten der Aussagenlogik}
 \label{sec:orgd743b6e}
 \begin{relation}
-\begin{enumerate}
-\item Direkter Beweis 
-\begin{itemize}
-\item \((A\implies B) = (\neg A)\vee B\)
-\item Vorraussetzung \(\rightarrow\) logische Aussage \(\rightarrow\) Behauptung
-\end{itemize}
-\item Beweis in Schritten
-\begin{itemize}
-\item \(((A\implies B)\wedge (B\implies C))\implies (A\implies C)\) \\
-\(\rightarrow\) Konstant \(=1\) (\emph{Tautologie})
-\end{itemize}
-\item Beweis durch Kontraposition
-\begin{itemize}
-\item \((A\implies B) \iff (\neg B \implies \neg A)\) - \emph{Tautologie}
-\end{itemize}
-\end{enumerate}
+  \begin{enumerate}
+  \item Direkter Beweis 
+    \begin{itemize}
+    \item \((A\implies B) = (\neg A)\vee B\)
+    \item Vorraussetzung \(\rightarrow\) logische Aussage \(\rightarrow\) Behauptung
+    \end{itemize}
+  \item Beweis in Schritten
+    \begin{itemize}
+    \item \(((A\implies B)\wedge (B\implies C))\implies (A\implies C)\) \\
+      \(\rightarrow\) Konstant \(=1\) (\emph{Tautologie})
+    \end{itemize}
+  \item Beweis durch Kontraposition
+    \begin{itemize}
+    \item \((A\implies B) \iff (\neg B \implies \neg A)\) - \emph{Tautologie}
+    \end{itemize}
+  \end{enumerate}
 \end{relation}
 
 \section{Widerspruchsbeweis}
@@ -564,66 +570,66 @@ F"ur ein Element \(x\in X\) k"onnen wir Aussagen betrachten:
 Wenn wir die Konsequenz aus der Negation der zu beweisenden Aussage und die
 Pr"amisse zu einem widerspruch f"uhren so ist die Aussage bewiesen, denn:
 \begin{relation}
-\[(A\wedge \neg A)=0\]
+  \[(A\wedge \neg A)=0\]
 \end{relation}
 
 
 Wir wollen \(A\implies B\) zeigen.
 Nehmen an \(\neg B\) und leiten her:\\
 \begin{relation}
-\((\neg B \wedge A)\implies 0\), also \(\neg B\wedge A = 0\), und daher \(A\implies
-B\).
+  \((\neg B \wedge A)\implies 0\), also \(\neg B\wedge A = 0\), und daher \(A\implies
+  B\).
 \end{relation}
 
 \begin{theo}{Satz von Euklid}{}
-Es gibt unendlich viele Primzahlen.
+  Es gibt unendlich viele Primzahlen.
 \end{theo}
 
 \begin{prof}\
-\begin{enumerate}
-\item Nehmen wie an, es gibt nur endlich viele Primzahlen. \(p_1, ..., p_n\).
-\item Betrachte \(n=p_1\cdot p_2\cdot ... \cdot p_n + 1\). \(n\) geteilt durch jede
-von den Primzahlen \(p_1, ..., p_n\) gibt Rest \(1\).
-\item Also ist \(n\) eine Primzahl, aber \(n\not=p_1 ... p_n\) weil gr"osser.
-\item Folglich enth"alt die Menge \({p_1,...,p_n}\) nicht alle Primzahlen.
-\end{enumerate}
-\indent\indent \(\rightarrow\) Das ist ein \textbf{Widerspruch}. (\((A\wedge \neg A) = 0\))
+  \begin{enumerate}
+  \item Nehmen wie an, es gibt nur endlich viele Primzahlen. \(p_1, ..., p_n\).
+  \item Betrachte \(n=p_1\cdot p_2\cdot ... \cdot p_n + 1\). \(n\) geteilt durch jede
+    von den Primzahlen \(p_1, ..., p_n\) gibt Rest \(1\).
+  \item Also ist \(n\) eine Primzahl, aber \(n\not=p_1 ... p_n\) weil gr"osser.
+  \item Folglich enth"alt die Menge \({p_1,...,p_n}\) nicht alle Primzahlen.
+  \end{enumerate}
+  \indent\indent \(\rightarrow\) Das ist ein \textbf{Widerspruch}. (\((A\wedge \neg A) = 0\))
 \end{prof}
 
 
 \begin{exa}
-Wir werden die Aussage: wenn \(q\) eine gerade Primzahl ist \(\implies q=2\)
-beweisen.
+  Wir werden die Aussage: wenn \(q\) eine gerade Primzahl ist \(\implies q=2\)
+  beweisen.
 
-\begin{prof}[Direkter Beweis] \
-\begin{enumerate}
-\item \(q\) ist gerade \(\implies q\) ist durch \(2\) Teilbar f"ur \(k\in\mathbb{N}\)
-\item \(q\) ist aber eine Primzahl \(\implies\) einer der Faktoren in \(2\cdot k\) ist
-gerade \(1\), \(2\not= 1\)
-\item \(\implies k=1, q=2\)
-\end{enumerate}
-\end{prof}
+  \begin{prof}[Direkter Beweis] \
+    \begin{enumerate}
+    \item \(q\) ist gerade \(\implies q\) ist durch \(2\) Teilbar f"ur \(k\in\mathbb{N}\)
+    \item \(q\) ist aber eine Primzahl \(\implies\) einer der Faktoren in \(2\cdot k\) ist
+      gerade \(1\), \(2\not= 1\)
+    \item \(\implies k=1, q=2\)
+    \end{enumerate}
+  \end{prof}
 
-\begin{prof}[Kontraposition] \
-Wir m"ussen zeigen: \(q\not= 2\implies\) (\(q\) ungerade) \(\vee\) (\(q\) keine
-Primzahl). Es reicht zu zeigen: (\(q\not=2)\wedge(q\) ist eine Primzahl)
-\(\implies q\) ist ungerade!
-\begin{enumerate}
-\item Wenn \(q\) gerade ist, \(q\cdot 2k\), also ist \(k>1\)
-\item also \(q\not= 2\)
-\end{enumerate}
-\end{prof}
+  \begin{prof}[Kontraposition] \
+    Wir m"ussen zeigen: \(q\not= 2\implies\) (\(q\) ungerade) \(\vee\) (\(q\) keine
+    Primzahl). Es reicht zu zeigen: (\(q\not=2)\wedge(q\) ist eine Primzahl)
+    \(\implies q\) ist ungerade!
+    \begin{enumerate}
+    \item Wenn \(q\) gerade ist, \(q\cdot 2k\), also ist \(k>1\)
+    \item also \(q\not= 2\)
+    \end{enumerate}
+  \end{prof}
 
-\begin{prof}[Widerspruchsbeweis] \
-Annahme: \(q\) ist gerade, \(q\) ist eine Primzahl, \(q\not= 2\). Wir wollen einen
-Widerspruch herleiten.
+  \begin{prof}[Widerspruchsbeweis] \
+    Annahme: \(q\) ist gerade, \(q\) ist eine Primzahl, \(q\not= 2\). Wir wollen einen
+    Widerspruch herleiten.
 
-\begin{enumerate}
-\item da \(q\) gerade ist, gilt \(q=2\cdot k\) f"ur ein \(k\in \mathbb{N}\)
-\item da \(q\not= 2\), gilt \(k>1\)
-\item aber \(q\) ist prim, also kann \(q\) kein Produkt von zwei Zahlen sein! \(\lightning\)
-\end{enumerate}
-\end{prof}
+    \begin{enumerate}
+    \item da \(q\) gerade ist, gilt \(q=2\cdot k\) f"ur ein \(k\in \mathbb{N}\)
+    \item da \(q\not= 2\), gilt \(k>1\)
+    \item aber \(q\) ist prim, also kann \(q\) kein Produkt von zwei Zahlen sein! \(\lightning\)
+    \end{enumerate}
+  \end{prof}
 \end{exa}
 
 \chapter{Komplexe Zahlen}
@@ -632,67 +638,67 @@ Idee: Man m"ochte Quadratische Gleichungen ohne reelle Nullstellen trotzdem
 l"osen, also erweitert man die reellen Zahlen.
 
 \begin{relation}
-Die prototypische Quadratische Gleichungen ohne reelle L"osungen ist: \[x^2+1 =
-0\]
-Man f"ugt K"unstlich die Zahl \(i\) hinzu mit \(i^2=-1\), m"oglichst unter
-Beibehaltung der "ublichen Rechenregeln: man braucht also die Zahlen \(b\cdot i :
-b\in \mathbb{R}\) und \(a+b\cdot i :  a,b\in \mathbb{R}\).
+  Die prototypische Quadratische Gleichungen ohne reelle L"osungen ist: \[x^2+1 =
+    0\]
+  Man f"ugt K"unstlich die Zahl \(i\) hinzu mit \(i^2=-1\), m"oglichst unter
+  Beibehaltung der "ublichen Rechenregeln: man braucht also die Zahlen \(b\cdot i :
+  b\in \mathbb{R}\) und \(a+b\cdot i :  a,b\in \mathbb{R}\).
 \end{relation}
 
 Was passiert, wenn man solche Zahlen miteinander multipliziert ''als ob'' sie
 normale Zahlen w"aren: 
 \begin{relation}
-\((a+bi)\cdot(c+di)=ac+bc\cdot i+ad\cdot i+(-bd)=(ac-bd)+(bc+ad)\cdot i\) f"ur \(a,b,c,d\in \mathbb{R}\)
+  \((a+bi)\cdot(c+di)=ac+bc\cdot i+ad\cdot i+(-bd)=(ac-bd)+(bc+ad)\cdot i\) f"ur \(a,b,c,d\in \mathbb{R}\)
 \end{relation}
 
 Addieren kann man solche Ausdr"ucke auch:
 \begin{relation}
-\((a+bi)+(c+di)=(a+c)+(b+d)\cdot i\)
+  \((a+bi)+(c+di)=(a+c)+(b+d)\cdot i\)
 \end{relation}
 
 \begin{definition}{Komplexe Zahlen}{}
-Die komplexen Zahlen \(\mathbb{C}\) sind die Menge der Paare \((a,b)\in
-\mathbb{R}^2\) versehen mit der Addition \((a,b)+(c,d)=(a+c,b+d)\) und der
-Multiplikation \((a,b)\cdot (c,d)=(ac-bd, bc+ad)\).
+  Die komplexen Zahlen \(\mathbb{C}\) sind die Menge der Paare \((a,b)\in
+  \mathbb{R}^2\) versehen mit der Addition \((a,b)+(c,d)=(a+c,b+d)\) und der
+  Multiplikation \((a,b)\cdot (c,d)=(ac-bd, bc+ad)\).
 \end{definition}
 
 \begin{notation}[] \
-\begin{itemize}
-\item Statt \((a,b)\) schreibt man auch \((a+bi)\in \mathbb{C}\).
-\item \(i:=(0,1)=0+1\cdot i\):
-\begin{itemize}
-\item nach Multiplikation erf"ullt \(i^2=-1\)
-\end{itemize}
-\end{itemize}
+  \begin{itemize}
+  \item Statt \((a,b)\) schreibt man auch \((a+bi)\in \mathbb{C}\).
+  \item \(i:=(0,1)=0+1\cdot i\):
+    \begin{itemize}
+    \item nach Multiplikation erf"ullt \(i^2=-1\)
+    \end{itemize}
+  \end{itemize}
 \end{notation}
 
 Man "uberpr"uft, dass die "ublichen Rechenregeln aus \(\mathbb{R}\) weiterhin
 gelten (\emph{K"orperaxiome}): F"ur \(z_1, z_2, z_3 \in \mathbb{C}\) gilt, z.B.:
 \begin{relation}
-\begin{itemize}
-\item \(z_1\cdot (z_2+z_3)=z_1\cdot z_2+z_1\cdot z_3\)
-\item \(z_1\cdot (z_2\cdot z_3)=(z_1\cdot z_2)\cdot z_3\)
-\item \(z_1 + (z_2 + z_3)=(z_1 + z_2) + z_3\)
-\end{itemize}
+  \begin{itemize}
+  \item \(z_1\cdot (z_2+z_3)=z_1\cdot z_2+z_1\cdot z_3\)
+  \item \(z_1\cdot (z_2\cdot z_3)=(z_1\cdot z_2)\cdot z_3\)
+  \item \(z_1 + (z_2 + z_3)=(z_1 + z_2) + z_3\)
+  \end{itemize}
 \end{relation}
 
 \begin{notte}[]
-\((\mathbb{R},+,\cdot)\subsetneq (\mathbb{C},+,\cdot)\) auf nat"urliche Weise als
-der der Form \(a+0\cdot i = (a,0)\), \(a\in \mathbb{R}\).
+  \((\mathbb{R},+,\cdot)\subsetneq (\mathbb{C},+,\cdot)\) auf nat"urliche Weise als
+  der der Form \(a+0\cdot i = (a,0)\), \(a\in \mathbb{R}\).
 \end{notte}
 
 \begin{definition}{Real- und Imagin"aranteil}{}
-F"ur \(z=a+b\cdot i\in \mathbb{C}\) heisst:
-\begin{itemize}
-\item \(a:=\Re(z)\) Realanteil von \(z\)
-\item \(b:=\Im(z)\) Imagin"aranteil von \(z\)
-\end{itemize}
+  F"ur \(z=a+b\cdot i\in \mathbb{C}\) heisst:
+  \begin{itemize}
+  \item \(a:=\Re(z)\) Realanteil von \(z\)
+  \item \(b:=\Im(z)\) Imagin"aranteil von \(z\)
+  \end{itemize}
 
-Also ist \(z=\Re(z)+ \Im(z)\cdot i\).
+  Also ist \(z=\Re(z)+ \Im(z)\cdot i\).
 \end{definition}
 
 \begin{definition}{Rein Imagin"are Zahlen}{}
-Die Zahlen der Form \(b\cdot i : b\in \mathbb{R}\) heissen \textbf{rein Imagin"ar}.
+  Die Zahlen der Form \(b\cdot i : b\in \mathbb{R}\) heissen \textbf{rein Imagin"ar}.
 \end{definition}
 
 \section{Inverses zu einer komplexen Zahl}
@@ -700,12 +706,12 @@ F"ur reele Zahlen wissen wir: \(\forall a\in \mathbb{R}\) mit \(a\not= 0\;\exist
 \(a^{-1} \in \mathbb{R}\) mit \(a\cdot a^{-1}=1\). Gilt das auch in \(\mathbb{C}\) ?
 
 \begin{definition}{Komplexe Konjugation}{}
-F"ur \(z\in \mathbb{C}\) heisst die Zahl \(\overline{z}:=a-bi\) die komplex
-konjugierte Zahl zu \(a+bi\).
+  F"ur \(z\in \mathbb{C}\) heisst die Zahl \(\overline{z}:=a-bi\) die komplex
+  konjugierte Zahl zu \(a+bi\).
 \end{definition}
 
 \begin{exa}
-\(\overline{1+i}=1-i\)
+  \(\overline{1+i}=1-i\)
 \end{exa}
 
 \begin{relation}
@@ -714,22 +720,22 @@ konjugierte Zahl zu \(a+bi\).
 \end{relation}
 
 \begin{definition}{Betrag der Komplexen Zahl}{}
-    Der betrag der Komplexen Zahl \(z=a+bi\) ist gegeben durch:
-    \[|z|:=\sqrt{x\cdot \overline{z}}=\sqrt{a^2+b^2}\] 
+  Der betrag der Komplexen Zahl \(z=a+bi\) ist gegeben durch:
+  \[|z|:=\sqrt{x\cdot \overline{z}}=\sqrt{a^2+b^2}\] 
 \end{definition}
 
 \label{sec:org0018acd}
 \begin{definition}{Inverses einer Komplexen Zahl}{ci}
-Das Inverse einer Komplexen Zahl ist gegeben durch: \(\forall z\not= 0\; \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}=1\)
+  Das Inverse einer Komplexen Zahl ist gegeben durch: \(\forall z\not= 0\; \exists z^{-1} = \frac{\overline{z}}{|z|^2}\) mit \(z \cdot z^{-1}=1\)
 \end{definition}
 
 \begin{exa} \
-\((1+i)^{-1}=\frac{1-i}{2}\)
+  \((1+i)^{-1}=\frac{1-i}{2}\)
 \end{exa}
 
 Mnemonische Rechenregel, Multipliziere mit dem Inversen: 
 \begin{relation}
-\(\frac{1}{1+i}=\frac{1-i}{(1+i)(1-i)}=\frac{1-i}{2}\)
+  \(\frac{1}{1+i}=\frac{1-i}{(1+i)(1-i)}=\frac{1-i}{2}\)
 \end{relation}
 
 \section{Geometrische Interpretation von \(\mathbb{C}\)}
@@ -737,38 +743,38 @@ Mnemonische Rechenregel, Multipliziere mit dem Inversen:
 Siehe Zeichung \(C_1\).
 
 \begin{relation}
-\begin{itemize}
-\item Addition: als Addition von Vektoren
-\item Betrag: L"ange des Vektors
-\item \(\varphi\) - Winkel zwischen der reellen Achse und dem Vektor der \(z\) entspricht,
-gez"ahlt gegen den Urzeigersinn.
-\end{itemize}
+  \begin{itemize}
+  \item Addition: als Addition von Vektoren
+  \item Betrag: L"ange des Vektors
+  \item \(\varphi\) - Winkel zwischen der reellen Achse und dem Vektor der \(z\) entspricht,
+    gez"ahlt gegen den Urzeigersinn.
+  \end{itemize}
 \end{relation}
 
 Es folgt:
 \begin{relation}
-\(a=|z|\cdot \cos(\varphi)\) und \(b=|z|\cdot \sin(\varphi)\)
+  \(a=|z|\cdot \cos(\varphi)\) und \(b=|z|\cdot \sin(\varphi)\)
 \end{relation}
 
 \begin{notte}[]
-\(\varphi\) ist nicht eindeutig bestimmt, sondern bis auf Addition von eines
-vielfachen von \(2\pi\).
+  \(\varphi\) ist nicht eindeutig bestimmt, sondern bis auf Addition von eines
+  vielfachen von \(2\pi\).
 \end{notte}
 
 \begin{exa}
-\(\varphi=\frac{\pi}{4}\) und \(\varphi=-\frac{7\pi}{4}\) sind im geometrischen Bild von
-\(\mathbb{C}\) "aquivalent.
+  \(\varphi=\frac{\pi}{4}\) und \(\varphi=-\frac{7\pi}{4}\) sind im geometrischen Bild von
+  \(\mathbb{C}\) "aquivalent.
 \end{exa}
 
 \begin{definition}{Argument einer Komplexen Zahl}{}
   Sei \(z=|z|(\cos(\varphi)+i\cdot \sin(\varphi)\).
   Der wert von \(\varphi\), welcher in \([0, 2\pi)\) liegt, heisst Hauptargument von \(z\):
-\[\operatorname{arg}z =\varphi\]
-Das Argument von \(z\) ist die Menge von allen \(\varphi \in R\) mit
-\[
-  \operatorname{arg}z = \varphi \in \mathbb{R} \text{ sodass }
-  |z|(\cos(\varphi)+i\cdot \sin(\varphi)) = z
-\]
+  \[\operatorname{arg}z =\varphi\]
+  Das Argument von \(z\) ist die Menge von allen \(\varphi \in R\) mit
+  \[
+    \operatorname{arg}z = \varphi \in \mathbb{R} \text{ sodass }
+    |z|(\cos(\varphi)+i\cdot \sin(\varphi)) = z
+  \]
 \end{definition}
 
 \begin{notte}[]
@@ -776,16 +782,16 @@ Das Argument von \(z\) ist die Menge von allen \(\varphi \in R\) mit
 \end{notte}
 
 \begin{exa} \
-Seien \(z_1=|z_1|\cdot \cos(\varphi_1)+i\cdot \sin(\varphi_1)\), \(z_2=|z_2|\cdot
-\cos(\varphi_2)+i\cdot \sin(\varphi_2)\) zwei komplexe Zahlen.\\
+  Seien \(z_1=|z_1|\cdot \cos(\varphi_1)+i\cdot \sin(\varphi_1)\), \(z_2=|z_2|\cdot
+  \cos(\varphi_2)+i\cdot \sin(\varphi_2)\) zwei komplexe Zahlen.\\
 
-So gilt: \(z_1\cdot z_2 = |z_1|\cdot |z_2|(\cos(\varphi_1+\varphi_2)+i\cdot \sin(\varphi_1 +
-\varphi_2))\)
+  So gilt: \(z_1\cdot z_2 = |z_1|\cdot |z_2|(\cos(\varphi_1+\varphi_2)+i\cdot \sin(\varphi_1 +
+  \varphi_2))\)
 \end{exa}
 
 \begin{relation}
-Bei der Multiplikation von komplexen Zahlen multiplizieren sich die Betr"age,
-und die Argumente addieren sich.
+  Bei der Multiplikation von komplexen Zahlen multiplizieren sich die Betr"age,
+  und die Argumente addieren sich.
 \end{relation}
 
 F"ur geometrische Interpretation: Siehe \(C_2\).
@@ -793,22 +799,22 @@ F"ur geometrische Interpretation: Siehe \(C_2\).
 Besonders n"utzlich ist dies f"ur die Multiplikation einer komplexen Zahl vom
 Betrag \(1\):
 \begin{align*}
-|z|=1\iff z=\cos(\varphi)+i\cdot \sin(\varphi) \text{ f"ur ein } \varphi \in \mathbb{R}
+  |z|=1\iff z=\cos(\varphi)+i\cdot \sin(\varphi) \text{ f"ur ein } \varphi \in \mathbb{R}
 \end{align*}
 
 \begin{relation}
-Es liegen \(\{z\in \mathbb{C} : |z|=1\}\) auf dem Einheitskreis.
-Die Multiplikation mit von komplexen Zahlen Zahlen mit dem Betrag 1 entspricht
-also der Rotation gegen den Urzeigersinn um \(\varphi\).
+  Es liegen \(\{z\in \mathbb{C} : |z|=1\}\) auf dem Einheitskreis.
+  Die Multiplikation mit von komplexen Zahlen Zahlen mit dem Betrag 1 entspricht
+  also der Rotation gegen den Urzeigersinn um \(\varphi\).
 \end{relation}
 
 \section{Exponentialform der komplexen Zahlen}
 \label{sec:orgb4d9f14}
 \begin{notation}[] \
-\begin{itemize}
-\item Exponentialform: \(\cos(\varphi)+i\cdot \sin(\varphi):=e^{i\cdot \varphi}\)
-\item es gilt \(e^{i(\varphi_k)},\; k\in\mathbb{R}\) sind die Zahlen auf dem Einheitskreis
-\end{itemize}
+  \begin{itemize}
+  \item Exponentialform: \(\cos(\varphi)+i\cdot \sin(\varphi):=e^{i\cdot \varphi}\)
+  \item es gilt \(e^{i(\varphi_k)},\; k\in\mathbb{R}\) sind die Zahlen auf dem Einheitskreis
+  \end{itemize}
 \end{notation}
 
 \begin{definition}{Exponentialform der Komplexen Zahlen}{}
@@ -818,8 +824,8 @@ also der Rotation gegen den Urzeigersinn um \(\varphi\).
 
 Mit dieser Notation folgt:
 \begin{relation}
-\((e^{i\varphi})^n=(\cos(\varphi)+i\cdot\sin(\varphi))^2=e^{n\cdot i\cdot
- \varphi}=\cos(n\cdot\varphi)+i\cdot\sin(n\cdot\varphi)\) f"ur alle \(n\in\mathbb{N}\)
+  \((e^{i\varphi})^n=(\cos(\varphi)+i\cdot\sin(\varphi))^2=e^{n\cdot i\cdot
+    \varphi}=\cos(n\cdot\varphi)+i\cdot\sin(n\cdot\varphi)\) f"ur alle \(n\in\mathbb{N}\)
 \end{relation}
 
 \begin{exa} \
@@ -827,12 +833,12 @@ Mit dieser Notation folgt:
     (\cos(\varphi)+i\cdot \sin(\varphi))^2 & = \cos^2(\varphi)-\sin^2(\varphi)+2\cdot i\cdot\sin(\varphi)\cdot\cos(\varphi) \\
                                            & = \cos(2\varphi) + 2\cdot i \cdot\sin(2\varphi) \\
   \end{align*}
-    \[  \implies 
-      \begin{cases}
-        \cos(2\varphi)=\cos^2(\varphi)-\sin^2(\varphi) \\
-        \sin(2\varphi)=2\cdot\sin(\varphi)\cdot\cos(\varphi)
-      \end{cases}
-    \]
+  \[  \implies 
+    \begin{cases}
+      \cos(2\varphi)=\cos^2(\varphi)-\sin^2(\varphi) \\
+      \sin(2\varphi)=2\cdot\sin(\varphi)\cdot\cos(\varphi)
+    \end{cases}
+  \]
 \end{exa}
 
 \section{Einscheitswurzeln}
@@ -840,8 +846,8 @@ Mit dieser Notation folgt:
 Sei die gleichung \(x^n=a\) "uber \(\mathbb{R}\) gegeben. Je nach Vorzeichen von
 \(a\) und Parit"at von \(n\), gibt es Varianten f"ur die Anzahl der L"osungen.
 \begin{relation}
-In \(\mathbb{C}\) hat aber die Gleichung \(z^n=a\) f"ur ein \(a\in
-\mathbb{C}\setminus \{0\}\) immer genau \(n\) L"osungen.
+  In \(\mathbb{C}\) hat aber die Gleichung \(z^n=a\) f"ur ein \(a\in
+  \mathbb{C}\setminus \{0\}\) immer genau \(n\) L"osungen.
 \end{relation}
 
 Sei \(w\in \mathbb{C}\) mit \(w^n=a\). Dann gilt \((\frac{z}{w})^n=1\) f"ur jedes
@@ -849,47 +855,47 @@ Sei \(w\in \mathbb{C}\) mit \(w^n=a\). Dann gilt \((\frac{z}{w})^n=1\) f"ur jede
 und dann reduzieren wir den allgemeinen Fall darauf.
 
 \begin{definition}{Einheitswurzel}{}
-Eine Zahl \(z\in \mathbb{C}\) heisst \(n\text{-te}\) Einheitswurzel, wenn \(z^n=1\).
+  Eine Zahl \(z\in \mathbb{C}\) heisst \(n\text{-te}\) Einheitswurzel, wenn \(z^n=1\).
 \end{definition}
 
 \begin{proposition}[]
-F"ur jedes \(n\geq, n\in\mathbb{N}\) existieren genau \(n\)
-Einheitswurzeln in \(\mathbb{C}\). Sie sind durch die Formel
-\(z_k=e^{\frac{2\pi\cdot k\cdot i}{n}} \text{ mit } k=0,1,...,n-1\) gegeben.
+  F"ur jedes \(n\geq, n\in\mathbb{N}\) existieren genau \(n\)
+  Einheitswurzeln in \(\mathbb{C}\). Sie sind durch die Formel
+  \(z_k=e^{\frac{2\pi\cdot k\cdot i}{n}} \text{ mit } k=0,1,...,n-1\) gegeben.
 \end{proposition}
 
 \begin{prof}[] \
-\(z_k\) sind \(n\text{-te}\) Einheitswurzeln denn:
-\begin{align*}
-z_k^n & = (e^{\frac{2\cdot\pi\cdot k}{n}})^n \\ 
-& = e^{2\pi\cdot k} \\
-& = 1
-\end{align*}
+  \(z_k\) sind \(n\text{-te}\) Einheitswurzeln denn:
+  \begin{align*}
+    z_k^n & = (e^{\frac{2\cdot\pi\cdot k}{n}})^n \\ 
+          & = e^{2\pi\cdot k} \\
+          & = 1
+  \end{align*}
 
 
-Wir m"ussen noch zeigen, dass jede \(n\text{-te}\) Einheitswurzel von dieser Form
-ist. \\
+  Wir m"ussen noch zeigen, dass jede \(n\text{-te}\) Einheitswurzel von dieser Form
+  ist. \\
 
-Sei \(z\in\mathbb{C}\) mit \(z^n=1\). Es gilt:
+  Sei \(z\in\mathbb{C}\) mit \(z^n=1\). Es gilt:
 
-\begin{align*}
-|z|^n & =|z^n|=1 \\
-& \implies |z|=1  \\
-& \implies z=e^{i\cdot\varphi} \tag*{f"ur ein $\varphi\in[0, 2\pi)$}  \\ 
-& \implies 1 = z^n \\
-& = (e^{i\varphi})^n=e^{i\varphi\cdot n} \\
-& =\cos(n\varphi)+i\cdot \sin(n\varphi)
-\end{align*}
+  \begin{align*}
+    |z|^n & =|z^n|=1 \\
+          & \implies |z|=1  \\
+          & \implies z=e^{i\cdot\varphi} \tag*{f"ur ein $\varphi\in[0, 2\pi)$}  \\ 
+          & \implies 1 = z^n \\
+          & = (e^{i\varphi})^n=e^{i\varphi\cdot n} \\
+          & =\cos(n\varphi)+i\cdot \sin(n\varphi)
+  \end{align*}
 
-Also folgt:
-\begin{gather*}
-\cos(n\varphi)=1,\;\sin(n\varphi)=0 \\
-\implies  n\cdot\varphi = 2\pi\cdot k \tag*{f"ur ein $k\in \mathbb{Z}$} \\ 
- \implies \varphi = \frac{2\pi\cdot k}{n} \tag*{f"ur ein $k\in \mathbb{Z}$}
-\end{gather*}
+  Also folgt:
+  \begin{gather*}
+    \cos(n\varphi)=1,\;\sin(n\varphi)=0 \\
+    \implies  n\cdot\varphi = 2\pi\cdot k \tag*{f"ur ein $k\in \mathbb{Z}$} \\ 
+    \implies \varphi = \frac{2\pi\cdot k}{n} \tag*{f"ur ein $k\in \mathbb{Z}$}
+  \end{gather*}
 
 
-Da \(\varphi\) in \([0,2\pi)\implies 0\leq k < n\).
+  Da \(\varphi\) in \([0,2\pi)\implies 0\leq k < n\).
 \end{prof}
 
 Wenn wir jetzt also eine Gleichung \(z^n=a\) l"osen wollen, reicht es, eine
@@ -901,15 +907,15 @@ Eine L"osung \(w\) kann man folgendermassen finden:
 \begin{relation}
 
 
-\begin{align*} 
-\text{Schreiben wir a}\; & =|a|\cdot e^{i\cdot \psi}\; \text{f"ur ein $\psi\in \mathbb{R}$} \\
-\text{Dann gilt: }
-w & =\sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}} \text{ l"ost $w^n=a$} \\
-& \\
-\left(\sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}}\right)^n & = \sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}\cdot n} \\
-& = |a|\cdot e^{i\cdot \psi} \\ 
-& = a
-\end{align*}
+  \begin{align*} 
+    \text{Schreiben wir a}\; & =|a|\cdot e^{i\cdot \psi}\; \text{f"ur ein $\psi\in \mathbb{R}$} \\
+    \text{Dann gilt: }
+    w & =\sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}} \text{ l"ost $w^n=a$} \\
+                             & \\
+    \left(\sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}}\right)^n & = \sqrt[n]{|a|}\cdot e^{\frac{i\cdot\psi}{n}\cdot n} \\
+                             & = |a|\cdot e^{i\cdot \psi} \\ 
+                             & = a
+  \end{align*}
 \end{relation}
 
 Gemetrische Interpretation: regul"ares \(n\text{-Eck}\).
@@ -921,35 +927,35 @@ Gemetrische Interpretation: regul"ares \(n\text{-Eck}\).
 Wir werden die Bezeichung \(K\) f"ur \(\mathbb{R}\) oder \(\mathbb{C}\) verwenden.
 
 \begin{definition}{Lineare Gleichung}{}
-Eine Lineare Gleichung "uber \(K\) ist eine Gleichung der Form
-\(a_1x_1+a_2x_2+...+a_nx_n=b\).\\
-Hierbei sind \(x_1,...,x_n\) die Variablen und \(a_1,...,a_n,b \in K\), die Koeffizienten.
+  Eine Lineare Gleichung "uber \(K\) ist eine Gleichung der Form
+  \(a_1x_1+a_2x_2+...+a_nx_n=b\).\\
+  Hierbei sind \(x_1,...,x_n\) die Variablen und \(a_1,...,a_n,b \in K\), die Koeffizienten.
 \end{definition}
 
 \begin{definition}{Lineares Gleichunssystem}{}
-Ein Lineares Gleichungsystem ist eine endliche Menge von Gleichungen:
-\[{\displaystyle {\begin{matrix}a_{11}x_{1}+a_{12}x_{2}\,+&\cdots
-&+\,a_{1n}x_{n}&=&b_{1}\\a_{21}x_{1}+a_{22}x_{2}\,+&\cdots
-&+\,a_{2n}x_{n}&=&b_{2}\\&&&\vdots &\\a_{m1}x_{1}+a_{m2}x_{2}\,+&\cdots
-&+\,a_{mn}x_{n}&=&b_{m}\\\end{matrix}}}\]
+  Ein Lineares Gleichungsystem ist eine endliche Menge von Gleichungen:
+  \[{\displaystyle {\begin{matrix}a_{11}x_{1}+a_{12}x_{2}\,+&\cdots
+          &+\,a_{1n}x_{n}&=&b_{1}\\a_{21}x_{1}+a_{22}x_{2}\,+&\cdots
+          &+\,a_{2n}x_{n}&=&b_{2}\\&&&\vdots &\\a_{m1}x_{1}+a_{m2}x_{2}\,+&\cdots
+          &+\,a_{mn}x_{n}&=&b_{m}\\\end{matrix}}}\]
 \end{definition}
 
 Ein L"osung von diesem Gleichungssystem ist ein \[n\text{-Tupel }
-\left( \begin{matrix} x_{1}\\ \vdots\\ x_{n}\end{matrix} \right) \in K^{n} \]
+  \left( \begin{matrix} x_{1}\\ \vdots\\ x_{n}\end{matrix} \right) \in K^{n} \]
 dass jede Gleichung erf"ullt. Ein lineares Gleichungssystem (LGS) zu l"osen,
 heisst, alle L"osungen zu finden.
 
 \begin{relation}
-\textbf{Idee}: Man formt das LGS durch Operationen um, die die Menge der L"osungen nicht
-ver"andern. Solche Operationen heissen "Aquivalenzumformungen. Diese sind unter
-anderem: 
-\begin{enumerate}
-\item Multiplikation einer Gleichung mit einer zahl \(\alpha\in K\setminus \{0\}\)
-\item Addierung von einer Gleichung zu der anderen (z.B. Ersetzen der zweiten
-Gleichung durch die Summe der ersten und zweiten.)
-\item Vertauschen von zwei Gleichungen; dies kann man auf Operationen von Typ eins
-und Zwei zur"ukf"uhren
-\end{enumerate}
+  \textbf{Idee}: Man formt das LGS durch Operationen um, die die Menge der L"osungen nicht
+  ver"andern. Solche Operationen heissen "Aquivalenzumformungen. Diese sind unter
+  anderem: 
+  \begin{enumerate}
+  \item Multiplikation einer Gleichung mit einer zahl \(\alpha\in K\setminus \{0\}\)
+  \item Addierung von einer Gleichung zu der anderen (z.B. Ersetzen der zweiten
+    Gleichung durch die Summe der ersten und zweiten.)
+  \item Vertauschen von zwei Gleichungen; dies kann man auf Operationen von Typ eins
+    und Zwei zur"ukf"uhren
+  \end{enumerate}
 \end{relation}
 
 Wir werden ein LGS umformen, um es auf eine Form zu bringen, wo die L"osung
@@ -957,56 +963,56 @@ offensichtlich ist.
 
 Wir beobachten:
 \begin{relation}
-Es ist "uberflu"ssig, die Variablen mitzuschleppen. Man k"onnte statdessen die
-''Tabellen'' von Koeffizienten umformen.
+  Es ist "uberflu"ssig, die Variablen mitzuschleppen. Man k"onnte statdessen die
+  ''Tabellen'' von Koeffizienten umformen.
 \end{relation}
 
 \begin{definition}{}{}
-Eine \(M\times N\) Matrix \(A\) ist eine Tabelle der Gr"osse \(m\times n\), gef"ullt
-mit Elementen aus \(K\).  
-\[A=(a_{ij})_{\substack{i=1,\cdots,m \\ j=1,\cdots,n}}\]
+  Eine \(M\times N\) Matrix \(A\) ist eine Tabelle der Gr"osse \(m\times n\), gef"ullt
+  mit Elementen aus \(K\).  
+  \[A=(a_{ij})_{\substack{i=1,\cdots,m \\ j=1,\cdots,n}}\]
 \end{definition}
 
 \begin{exa}
-\[
-  A=\left( \begin{matrix} 1& 1\\ 2& -3\end{matrix} \right)
-\]
+  \[
+    A=\left( \begin{matrix} 1& 1\\ 2& -3\end{matrix} \right)
+  \]
 
-Wobei \(a_{11} = 1\), \(a_{21} = 2\), \(a_{12}=1\) und \(a_{22}=-3\).
+  Wobei \(a_{11} = 1\), \(a_{21} = 2\), \(a_{12}=1\) und \(a_{22}=-3\).
 \end{exa}
 
 \begin{relation}
-Gegeben ein LGS (\(*\)), k"onnen wir eine Matrix \[ A=\left( \begin{matrix}
-a_{11}& \cdots & a_{1n}\\ \vdots & & \vdots \\ a_{n1}& \ldots &
-a_{nn}\end{matrix} \right) \] aufstellen. Sie heisst Koeffizientenmatrix des
-LGS. Auch stellen wir \[b=\left( \begin{matrix} b_{1}\\ \vdots
-\\ b_{n}\end{matrix} \right)\]
-eine \(m\times 1\) Matrix (Spalte) auf. (Sie
-heisst rechter Teil des LGS). Die Matrix \(A'=(A\mid b)\) heisst erweiterte
-Koeffizientenmatrix des LGS (\(*\)).
+  Gegeben ein LGS (\(*\)), k"onnen wir eine Matrix \[ A=\left( \begin{matrix}
+        a_{11}& \cdots & a_{1n}\\ \vdots & & \vdots \\ a_{n1}& \ldots &
+        a_{nn}\end{matrix} \right) \] aufstellen. Sie heisst Koeffizientenmatrix des
+  LGS. Auch stellen wir \[b=\left( \begin{matrix} b_{1}\\ \vdots
+        \\ b_{n}\end{matrix} \right)\]
+  eine \(m\times 1\) Matrix (Spalte) auf. (Sie
+  heisst rechter Teil des LGS). Die Matrix \(A'=(A\mid b)\) heisst erweiterte
+  Koeffizientenmatrix des LGS (\(*\)).
 \end{relation}
 
 
 \begin{definition}{Elementare Zeilenumforumungen}{}
-Die "Aquivalenzumformungen des LGS, die wir vorhin betrachtet haben, entsprechen
-dann folgenden Umformungen von der erweiterten Koeffizientenmatrix: 
-\begin{itemize}
- \item[1'.] Multiplikation einer Zeile mit $\alpha \in K$
- \item[2'.] Addieren von einer Zeile zu der anderen.
-\end{itemize}
-Wir werden dann versuchen, die (erweiterten koeffzienten-) Matrizen durch diese
-Umformungen auf eine Form zu bringen, in der man die L"osung leicht ablesen
-kann.
+  Die "Aquivalenzumformungen des LGS, die wir vorhin betrachtet haben, entsprechen
+  dann folgenden Umformungen von der erweiterten Koeffizientenmatrix: 
+  \begin{itemize}
+  \item[1'.] Multiplikation einer Zeile mit $\alpha \in K$
+  \item[2'.] Addieren von einer Zeile zu der anderen.
+  \end{itemize}
+  Wir werden dann versuchen, die (erweiterten koeffzienten-) Matrizen durch diese
+  Umformungen auf eine Form zu bringen, in der man die L"osung leicht ablesen
+  kann.
 
-\(1'\) und \(2'\) heissen elementare Zeilenumforumungen.
+  \(1'\) und \(2'\) heissen elementare Zeilenumforumungen.
 \end{definition}
 
 Weitere Zeilenumformungen, die man aus diesen erhalten kann:
 \begin{relation}
-\begin{itemize}
-\item Vertauschen Zweier Zeilen
-\item Addieren einer Zeile, Multipliziert mit \(\alpha \not= 0\)
-\end{itemize}
+  \begin{itemize}
+  \item Vertauschen Zweier Zeilen
+  \item Addieren einer Zeile, Multipliziert mit \(\alpha \not= 0\)
+  \end{itemize}
 \end{relation}
 
 Ziel ist eine gegebe erweiterte Koeffizientenmatrix \((A\mid b)\), durch
@@ -1014,201 +1020,192 @@ Zeilenumformungen zu einer Matrix umzuformen, aus der man die L"osung leicht
 ablesen kann.
 
 \begin{definition}{Pivotelement}{}
-Gegeben einer Zeile \(Z=(a_1,...,a_n)\in K^n\), nennen wir das erste Element
-\(a\not= 0\) das Pivotelement.
-Wenn \(Z=(0,...,0)\) ist dann gibt es kein Pivotelement.
+  Gegeben einer Zeile \(Z=(a_1,...,a_n)\in K^n\), nennen wir das erste Element
+  \(a\not= 0\) das Pivotelement.
+  Wenn \(Z=(0,...,0)\) ist dann gibt es kein Pivotelement.
 \end{definition}
 
 \begin{definition}{Zeilenstufenform}{}
-Eine Matrix \(A\) hat Zeilenstufenform, wenn folgendes gilt:
-\begin{enumerate}
-\item Die Nummern von Pivotlementen der Zeilen von \(A\) bilden eine aufsteigende
-Folge.
-\item Die Nullzeilen, falls existent, stehen am Ende.
-\end{enumerate}
+  Eine Matrix \(A\) hat Zeilenstufenform, wenn folgendes gilt:
+  \begin{enumerate}
+  \item Die Nummern von Pivotlementen der Zeilen von \(A\) bilden eine aufsteigende
+    Folge.
+  \item Die Nullzeilen, falls existent, stehen am Ende.
+  \end{enumerate}
 \end{definition}
 
 \begin{exa} \
-\[
-\begin{pmatrix}
- 0 & a_{12} & a_{13} \\
- 0 & 0 & a_{23} \\
- 0 & 0 & 0 \\
-\end{pmatrix}
-\]
+  \[
+    \begin{pmatrix}
+      0 & a_{12} & a_{13} \\
+      0 & 0 & a_{23} \\
+      0 & 0 & 0 \\
+    \end{pmatrix}
+  \]
 \end{exa}
 
 \begin{theo}{Gausssches Eliminationsverfahren}{}
-Jede Matrix kann durch elementare Zeilenumformungen auf die Stufenform gebracht
-werden.
+  Jede Matrix kann durch elementare Zeilenumformungen auf die Stufenform gebracht
+  werden.
 \end{theo}
 
 \begin{prof}[]
-	Sei \(A=
-	\begin{pmatrix}
-	a_{11} & \cdots & a_{1n} \\
-	\vdots & \ddots & \vdots \\
-	a_{n1} & \cdots & a_{nn} \\
-	
-	\end{pmatrix}\).
-	\begin{itemize}
-		\item Wenn \(A=0 \implies\) Bewiesen.
-		\item Wenn \(A\not=0\), dann gibt es eine Spalte \(\not= 0\). Sei
-		\(j_1\) die Nummer dieser Spalte. Durch vertausche von Zeilen erreichen wir
-		zun"achst \(a_{1j_1}\not= 0\). Multiplaktion der ersten Zeile mit
-		\(\frac{1}{a_{1j_1}}\). Jetzt Subtrahiere von jeder Zeile ab der Zweiten die erste
-		Zeile multipliziert mit \(a_{kj_1}\) (\(k=\) Nummer der Zeile).\\
-	
-		Wir erhalten dann Restmatrix \(A_1<A\) und wir wenden das selbe Verfahren auf
-		\(A_1\) an. Da \(A_1\) weniger Zeilen hat, stoppt der ganze Prozess.
-	\end{itemize}
-\begin{notte}
-Nach diesem Verfahren gilt sogar: Pivotelemente sind alle \(=1\)
-\end{notte}
+  Sei \(A=
+  \begin{pmatrix}
+    a_{11} & \cdots & a_{1n} \\
+    \vdots & \ddots & \vdots \\
+    a_{n1} & \cdots & a_{nn} \\
+    
+  \end{pmatrix}\).
+  \begin{itemize}
+  \item Wenn \(A=0 \implies\) Bewiesen.
+  \item Wenn \(A\not=0\), dann gibt es eine Spalte \(\not= 0\). Sei
+    \(j_1\) die Nummer dieser Spalte. Durch vertausche von Zeilen erreichen wir
+    zun"achst \(a_{1j_1}\not= 0\). Multiplaktion der ersten Zeile mit
+    \(\frac{1}{a_{1j_1}}\). Jetzt Subtrahiere von jeder Zeile ab der Zweiten die erste
+    Zeile multipliziert mit \(a_{kj_1}\) (\(k=\) Nummer der Zeile).\\
+    
+    Wir erhalten dann Restmatrix \(A_1<A\) und wir wenden das selbe Verfahren auf
+    \(A_1\) an. Da \(A_1\) weniger Zeilen hat, stoppt der ganze Prozess.
+  \end{itemize}
+  \begin{notte}
+    Nach diesem Verfahren gilt sogar: Pivotelemente sind alle \(=1\)
+  \end{notte}
 \end{prof}
 
 
 \begin{exa}
-\begin{align*}
-  & \begin{gmatrix}[p]
+  \begin{align*}
+    & \begin{gmatrix}[p]
       1 & 2 \\
       3 & 4
       \rowops
       \add[-3]{0}{1}
     \end{gmatrix} \\
-  \Rightarrow & \begin{gmatrix}[p]
+    \Rightarrow & \begin{gmatrix}[p]
       1 & 2 \\
       0 & -6
       \rowops
       \mult{1}{\scriptstyle\cdot-\frac{1}{6}}
     \end{gmatrix} \\
-  \Rightarrow & \begin{gmatrix}[p]
+    \Rightarrow & \begin{gmatrix}[p]
       1 & 2 \\
       0 & 1
     \end{gmatrix}
-\end{align*}
+  \end{align*}
 \end{exa}
 
 \begin{definition}{Reduzierte Zeilenstufenform}{}
-Nachdem wir die Zeilenstufenform mit Pivotelementen \(=1\) erreicht haben, k"onnen
-wir durch weitere Zeilenumformungen die eintr"age zu Null f"uhren, die oberhalb
-von Pivotelementen stehen. Die Finalform heisst dann \textbf{reduzierte
-Zeilenstufenform}.
+  Nachdem wir die Zeilenstufenform mit Pivotelementen \(=1\) erreicht haben, k"onnen
+  wir durch weitere Zeilenumformungen die eintr"age zu Null f"uhren, die oberhalb
+  von Pivotelementen stehen. Die Finalform heisst dann \textbf{reduzierte
+    Zeilenstufenform}.
 \end{definition}
 
 Das entsprechende Verfahren zum L"osen von LGS sieht so aus:
 \begin{relation}
-\begin{enumerate}
-\item Bringe die erweiterte Koeffizientenmatrix auf die reduzierte
-Zeilenstufenform: \\
-Die Spalten mit den Pivotelementen in dieser reduzierten Zeilenstufenform
-nennen wir Basispalten.
-\item Zwei F"alle:
-\begin{enumerate}
-\item Letzte Spalte des ist eine Basispalte - in diesem Fall hat das LGS keine
-L"osungen, da eine Gleichung \(0=1\) entsteht.
-\item Die letzte Spalte ist keine Basisspalte: \\
-Das LGS in der reduzierten Zeilenstufenform dr"uckt die Variablen, die zu
-Basisspalten geh"oren , durch die restlichen (freien) Variablen und den
-rechten Teil des LGS aus. Alle L"osungen werden dadurch erhalten, dass
-man f"ur die freien Variablen beliebige Werte in \(K\) ausw"ahlt. Die
-Basisvariablen werden dann durch Freie Variablen ausgedr"uckt.
-\end{enumerate}
-\end{enumerate}
+  \begin{enumerate}
+  \item Bringe die erweiterte Koeffizientenmatrix auf die reduzierte
+    Zeilenstufenform: \\
+    Die Spalten mit den Pivotelementen in dieser reduzierten Zeilenstufenform
+    nennen wir Basispalten.
+  \item Zwei F"alle:
+    \begin{enumerate}
+    \item Letzte Spalte des ist eine Basispalte - in diesem Fall hat das LGS keine
+      L"osungen, da eine Gleichung \(0=1\) entsteht.
+    \item Die letzte Spalte ist keine Basisspalte: \\
+      Das LGS in der reduzierten Zeilenstufenform dr"uckt die Variablen, die zu
+      Basisspalten geh"oren , durch die restlichen (freien) Variablen und den
+      rechten Teil des LGS aus. Alle L"osungen werden dadurch erhalten, dass
+      man f"ur die freien Variablen beliebige Werte in \(K\) ausw"ahlt. Die
+      Basisvariablen werden dann durch Freie Variablen ausgedr"uckt.
+    \end{enumerate}
+  \end{enumerate}
 \end{relation}
-
-\todo{Ergaenzen!!}
-In unserem Beispiel l"asst sich die L"osung so aufschreiben: 
-
-
-Errinnerung: ein LGS hatte die erweiterte Koeffizientenmatrix \((A|b)\). Das LGS4
-l"asst sich dann auch so aufschreiben:$\backslash$\ \(:=A\cdot x\), wobei \(x=\)
-
 
 \section{Matrizenrechnung}
 \label{sec:org0f3e63e}
 \begin{definition}{Matrix-Spaltenvektor Produkt}{}
-Das Produkt von einer \(m\times n\) Matrix \(A\) und einer Spalte \(x=\begin{pmatrix}
-x_1\\\vdots\\x_n
-\end{pmatrix}\) (in dieser
-Reihenfolge) wird definiert durch \[A\cdot x = 
-\begin{pmatrix}
-a_{11}x_1 + \cdots + a_{1n}x_n \\
-\cdots \\
-a_{m1}x_1 + \cdots + a_{mn}x_n
-\end{pmatrix}
-=x_1\cdot\begin{pmatrix}
-a_{11}\\\vdots\\a_{m1}
-\end{pmatrix} + \cdots + 
-x_n\cdot\begin{pmatrix}
-a_{n1}\\\vdots\\x_{mn}
-\end{pmatrix}
-\]
+  Das Produkt von einer \(m\times n\) Matrix \(A\) und einer Spalte \(x=\begin{pmatrix}
+    x_1\\\vdots\\x_n
+  \end{pmatrix}\) (in dieser
+  Reihenfolge) wird definiert durch \[A\cdot x = 
+    \begin{pmatrix}
+      a_{11}x_1 + \cdots + a_{1n}x_n \\
+      \cdots \\
+      a_{m1}x_1 + \cdots + a_{mn}x_n
+    \end{pmatrix}
+    =x_1\cdot\begin{pmatrix}
+      a_{11}\\\vdots\\a_{m1}
+    \end{pmatrix} + \cdots + 
+    x_n\cdot\begin{pmatrix}
+      a_{n1}\\\vdots\\x_{mn}
+    \end{pmatrix}
+  \]
 \end{definition}
 
 \begin{exa}
-	 In dieser Schreibweise wird das LGS
-	\(A\cdot x = b\).
+  In dieser Schreibweise wird das LGS
+  \(A\cdot x = b\).
 \end{exa}
 \todo{Besipiel Ergaenzen}
 \begin{notation}$ $\newline
-	\begin{itemize}
-		\item Die Menge von Matrizen der Gr"osse \(m\times n\) mit Eintr"agen in \(K\) wird durch \(M(m\times n, K)\) oder \(K^{m\times n}\) bezeichnet. 
-		\item Matrizen der Gr"osse \(1\times
-		n\) heissen \textbf{Spalten} der L"ange \(n\). 
-		\item Matrizen der Gr"osse \(n\times 1\) heissen
-		\textbf{Zeilen} der L"ange \(n\).
-	\end{itemize}
+  \begin{itemize}
+  \item Die Menge von Matrizen der Gr"osse \(m\times n\) mit Eintr"agen in \(K\) wird durch \(M(m\times n, K)\) oder \(K^{m\times n}\) bezeichnet. 
+  \item Matrizen der Gr"osse \(1\times
+    n\) heissen \textbf{Spalten} der L"ange \(n\). 
+  \item Matrizen der Gr"osse \(n\times 1\) heissen
+    \textbf{Zeilen} der L"ange \(n\).
+  \end{itemize}
 \end{notation}
 
 \begin{definition}{Addition von Matrizen}{}
-Matrizen gleicher Gr"osse kann man eintragsweise Addieren. Seien \(A,B \in K^{m\times n}\), dann ist ihre Summe: \[(A+B)_{ij}:=A_{ij}+B_{ij}\]
+  Matrizen gleicher Gr"osse kann man eintragsweise Addieren. Seien \(A,B \in K^{m\times n}\), dann ist ihre Summe: \[(A+B)_{ij}:=A_{ij}+B_{ij}\]
 \end{definition}
 
 \begin{definition}{Skalarmultiplikation von Matrizen}{}
-Matrizen kann man mit Zahlen multiplizieren (indem man jeden eintrag mit dieser
-Zahl multipliziert).
-\[(\lambda \cdot A)_{ij}:=\lambda \cdot A_{ij}\]
+  Matrizen kann man mit Zahlen multiplizieren (indem man jeden eintrag mit dieser
+  Zahl multipliziert).
+  \[(\lambda \cdot A)_{ij}:=\lambda \cdot A_{ij}\]
 \end{definition}
 
 \begin{definition}{Matrix-Multiplikation}{}
-Wenn die Breite von \(A\) mit der H"ohe von \(B\) "ubereinstimmt, kann man das
-Produkt \(A\cdot B\) definieren: \\
-\(A\cdot B:=(A\cdot b_1\; \cdots \; A\cdot b_n)\) mit \(B=(b_1\; \cdots\; b_n)\) (Spalten)
-mit \(A\cdot B \in K^{p\times n}\)
+  Wenn die Breite von \(A\) mit der H"ohe von \(B\) "ubereinstimmt, kann man das
+  Produkt \(A\cdot B\) definieren: \\
+  \(A\cdot B:=(A\cdot b_1\; \cdots \; A\cdot b_n)\) mit \(B=(b_1\; \cdots\; b_n)\) (Spalten)
+  mit \(A\cdot B \in K^{p\times n}\)
 \end{definition}
 \begin{exa}
-	\({\begin{pmatrix}1&1\\{\color {red}0}&{\color {red}1}\\1&0\end{pmatrix}}{\begin{pmatrix}4&6&{\color {red}8}&2\\5&7&{\color {red}9}&3\end{pmatrix}}={\begin{pmatrix}9&13&17&5\\5&7&{\color {red}9}&3\\4&6&8&2\end{pmatrix}}\)
+  \({\begin{pmatrix}1&1\\{\color {red}0}&{\color {red}1}\\1&0\end{pmatrix}}{\begin{pmatrix}4&6&{\color {red}8}&2\\5&7&{\color {red}9}&3\end{pmatrix}}={\begin{pmatrix}9&13&17&5\\5&7&{\color {red}9}&3\\4&6&8&2\end{pmatrix}}\)
 \end{exa}
 
 \section{Eigenschaften der Matrix-Multiplikation}
 \label{sec:org8eaaee0}
 \begin{notation}[]
-\begin{itemize}
-\item wenn \(\alpha_1,...,\alpha_n\in K\) dann notieren wir \(\alpha_1+...+\alpha_n :=
-   \sum_{i=1}^{n}{\alpha_i}\)
-\item analog \(\alpha_1\cdot ...\cdot\alpha_n := \Pi_{i=1}^{n}{\alpha_i}\)
-\end{itemize}
+  \begin{itemize}
+  \item wenn \(\alpha_1,...,\alpha_n\in K\) dann notieren wir \(\alpha_1+...+\alpha_n :=
+    \sum_{i=1}^{n}{\alpha_i}\)
+  \item analog \(\alpha_1\cdot ...\cdot\alpha_n := \Pi_{i=1}^{n}{\alpha_i}\)
+  \end{itemize}
 \end{notation}
 
 \begin{relation}
-Es gilt dann mit \(A=(a_{ij})_{\substack{i=1,p}}\) : \((A\cdot
-x))_i=\sum_{j=1}^{m}{a_{ij}\cdot x_j,\, i=1,p}\) \\
+  Es gilt dann mit \(A=(a_{ij})_{\substack{i,j=1,p}}:\; (A\cdot
+  x)_i=\sum_{j=1}^{p}{a_{ij}\cdot x_j,\, i=1,p}\) \\
 
-Insbesondere gilt: \((A\cdot b_k)_i\) Aber \((A\cdot b_k)_i = (A\cdot B)_{ik}\) und \((b_k)_j=b_jk\)
+  Insbesondere gilt: \((A\cdot b_k)_i = (A\cdot B)_{ik}\) und \((b_k)_j=B_{jk}\)
 \end{relation}
 
 \begin{relation}
-Matrixmultiplikation ist \emph{linear}: \(A\cdot (\lambda B_1 + \lambda_2 A B_2)\)
-Analog:
+  Matrixmultiplikation ist \emph{linear}: \(A\cdot (\lambda_1 B_1 + \lambda_2 B_2)= A\lambda_1 B_1 + A\lambda_2 B_2\) und \((\lambda_1 B_1 + \lambda_2 B_2) \cdot A= \lambda_1 B_1 A + \lambda_2 B_2 A\)
 \end{relation}
 
 \begin{prof}[]
-Sei \(C=A\cdot (\lambda_1 B_1 + \lambda_2 B_2)\)
+  Sei \(C=A\cdot (\lambda_1 B_1 + \lambda_2 B_2)\)
 \end{prof}
 
 \begin{relation}
-Die Matrixmultiplikation ist assoziativ: \(A\cdot (B\cdot C)=(A\cdot B)\cdot C\)
+  Die Matrixmultiplikation ist assoziativ: \(A\cdot (B\cdot C)=(A\cdot B)\cdot C\)
 \end{relation}
 
 \begin{prof}[]
@@ -1216,23 +1213,28 @@ Die Matrixmultiplikation ist assoziativ: \(A\cdot (B\cdot C)=(A\cdot B)\cdot C\)
 \end{prof}
 
 \begin{definition}{Einheitsmatrix}{}
-Die Einheitsmatrix der gr"osse \(r\) ist die Matrix, die auf der Hauptdiagonale
-(links-oben nach rechts unten) Einsen und sonnst Nullen hat. Beizeichnung \(E_r\)
-oder \(1_r\).
+  Die Einheitsmatrix der gr"osse \(r\) ist die Matrix, die auf der Hauptdiagonale
+  (links-oben nach rechts unten) Einsen und sonnst Nullen hat. Beizeichnung \(E_r\)
+  oder \(1_r\).
 \end{definition}
 
 \begin{definition}{Kronecker-Symbol}{}
-Das Kronecker-Symbol ist definiert als: 
+  Das Kronecker-Symbol ist definiert als: \[\delta_{ij}=
+    \begin{cases}
+      1 & \text{wenn } i=j\\
+      0 & \text{sonst}
+    \end{cases}
+\]
 
-Also gilt: \((Er)_{ij}=\delta_{ij}\).
+  Also gilt: \((E_r)_{ij}=\delta_{ij}\).
 \end{definition}
 
 \begin{theo}{}{} \
-F"ir alle \(A\in K^{p\times m}\) gilt:
-\begin{itemize}
-\item \(E_p\cdot A=A\)
-\item \(A\cdot E_m =A\)
-\end{itemize}
+  F"ir alle \(A\in K^{p\times m}\) gilt:
+  \begin{itemize}
+  \item \(E_p\cdot A=A\)
+  \item \(A\cdot E_m =A\)
+  \end{itemize}
 \end{theo}
 
 \begin{prof}[]
@@ -1241,9 +1243,9 @@ F"ir alle \(A\in K^{p\times m}\) gilt:
 
 
 \begin{notation}[]
-Die Matrix Multiplikation ist nicht Konjunktiv: \(A\cdot B\not= B\cdot A\) im
-Allgemeinen, selbst wenn beide Produkte definiert sind und die gleiche Gr"osse
-haben.
+  Die Matrix Multiplikation ist nicht Kommutativ: \(A\cdot B\not= B\cdot A\) im
+  Allgemeinen, selbst wenn beide Produkte definiert sind und die gleiche Gr"osse
+  haben.
 \end{notation}
 
 \begin{exa}
@@ -1251,109 +1253,171 @@ haben.
 \end{exa}
 
 \begin{notation}[]
-Die \(i\text{te}\) Spalten der Einheitsmatrix wird durch \(e_i=()\) bezeichnet.
+  Die \(i-\text{te}\) Spalte der Einheitsmatrix wird durch \(e_i=
+  \begin{pmatrix}
+    \vdots \\
+    1 \\
+    \vdots\\
+  \end{pmatrix}
+\) bezeichnet.
 \end{notation}
 
 \begin{definition}{Transposition}{}
-Sei \(A\in K^{m\times n}\). Die transponierte Matrix \(A^{T}\in K^{n\times n}\) ist
-definiert durch \((A^T)_{ij}:=A_{ji}\). Also ist die i-te Zeile der Einheitsmatrix \((e_i)^T\)
+  Sei \(A\in K^{m\times n}\). Die transponierte Matrix \(A^{T}\in K^{n\times n}\) ist
+  definiert durch \((A^T)_{ij}:=A_{ji}\).
 \end{definition}
+
+\begin{notte}
+  Demnach ist die $i\text{-te}$ Zeile von $E_r$: \((e_i)^T\).
+\end{notte}
 
 Wie l"ost man nun das LGS \(A\cdot x=b\)? Man bringt die erweiterte
 Koeffizientenmatrix in die reduzierten Zeilenstufenform.
 
-\begin{relation}
-Die Basisspalten in der reduzierten Zeilenstufenform sind von der Form, wo \(e_i\)
-die i-te Spalte der Einheitsmatrix \(1_r\) ist. \(r <= m\).
-\end{relation}
+\subsection{L"oesungen eines LGS}
+Wie l"ost man nun ein LGS?
+Ein LGS l"asst sich in die folgende Form bringen:
+\[
+  \left(
+    \begin{array}{cc|c}
+      1_r & B & b'\\
+      0 & 0 & b''\\
+    \end{array}\right)
+\]
 
-Wenn die ersten \(r\) Spalten Basisspalten sind, dann sieht die reduzierte
-Zeilenstufenform so aus:
-
-
-Dann sehen die L"osungen so aus:
+Die L"osung des LGS sieht dann wiefolgt aus:
 \begin{relation}
 \begin{enumerate}
-\item Es gibt keine \(\iff\) \(b''\not= 0\)
-\item Wenn \(b''=0\), dann sehen die L"osungen so aus: \[x=+\]
+\item Es gibt keine. $\iff b''\not= 0$
+\item Wenn $b''=0$, dann sehen die L"osungen so aus:
+  \[x=
+    \begin{pmatrix}
+      b'\\0
+    \end{pmatrix}
+    +     \begin{pmatrix}
+      -B \\ 1_{n-r}
+    \end{pmatrix} \cdot t
+  \]  Dabei ist $t\in \mathbb{K}^{n-r}$.
 \end{enumerate}
 \end{relation}
 
-\begin{proposition}
-Sei \(A\in k^{m\times n}\). Das homogene LGS der Form \(L=\{\phi
-t \}\) fuer ein \(r\geq 0, \phi\)
+\begin{exa}
+  Gegeben sei folgendes LGS:
+  \[\left(
+      \begin{array}{ccccc|c}
+        1 & 0 & 1 & 2 & 7 & 5\\
+        0 & 1 & 3 & 4 & 7 & 6\\
+        0 & 0 & 0 & 0 & 0 & 0\\
+        0 & 0 & 0 & 0 & 0 & 0\\
+      \end{array}
+    \right)
+  \]
+  Es gilt also $r=2$, $n=5$ sowie $b'=
+  \begin{pmatrix}
+    5\\ 6  
+  \end{pmatrix}$, $b''=
+  \begin{pmatrix}
+    0\\ 0
+  \end{pmatrix}$ und $B=
+  \begin{pmatrix}
+    1 & 2 & 7\\
+    3 & 4 & 8\\
+  \end{pmatrix}
+  $.
 
-\(\rightarrow\) es gibt \(n-r\) freie Parameter, die die Loesungsmenge beschreiben.
+  Damit erh"alt man folgende L"osung:
+  \[
+    x=\begin{pmatrix}
+      5\\ 6 \\ 0 \\ 0 \\ 0
+    \end{pmatrix} +
+    \begin{pmatrix}
+      -1 & -2 & -7\\
+      -3 & -4 & -8\\
+      1 & 0 & 0\\
+      0 & 1 & 0\\
+      0 & 0 & 1\\
+    \end{pmatrix}\cdot t
+  \] mit $t\in \mathbb{K}^3$.
+\end{exa}
+
+
+
+\begin{proposition}
+  Sei \(A\in k^{m\times n}\). Das homogene LGS der Form \(L=\{\phi
+  t \}\) fuer ein \(r\geq 0, \phi\)
+
+  \(\rightarrow\) es gibt \(n-r\) freie Parameter, die die Loesungsmenge beschreiben.
 \end{proposition}
 
 \begin{bem}
- Ein homogenes LGS \(A\cdot x=0\) mit  hat immer eine L"osung \(x\not=
-0\) (es gibt mindestens eine freie Variable).
+  Ein homogenes LGS \(A\cdot x=0\) mit  hat immer eine L"osung \(x\not=
+  0\) (es gibt mindestens eine freie Variable).
 \end{bem}
 
 \begin{exa}
-Finde ein reelles Polynom von Grad 2.
+  Finde ein reelles Polynom von Grad 2.
 
-Die Frage ist aequivalent zu dem LGS:
+  Die Frage ist aequivalent zu dem LGS:
 \end{exa}
 
 \begin{definition}{}{}
-Die Menge der Polynome vom Grad h"ochstens \(n\) mit Koeffizienten in \(K\) ist
-durch \(K[t]_n\) berechnet.
+  Die Menge der Polynome vom Grad h"ochstens \(n\) mit Koeffizienten in \(K\) ist
+  durch \(K[t]_n\) berechnet.
 \end{definition}
+
 
 \part{Vektorr"aume}
 \chapter{Grundlagen}
 \label{sec:org4906e00}
 \begin{definition}{Vektorraum}{}
-Ein \(k\) - Vektorraum \(V\) ist eine Menge zusammen mit den Operationen und mit
-folgenden Eigenschaften:
-\begin{itemize}
-\item Addition \(+:\, V\times V \to V, (v_1,v_2)\mapsto v_1+v_2\)
-\begin{enumerate}
-\item kommutativ
-\item assoziativ
-\item \(\exists 0 \in V\) mit \(0+v=v+0=v\) \(v \in V\)
-\end{enumerate}
-\item Skalarmultiplikation \(+:\, V\times V \to V, (v_1,v_2)\mapsto v_1+v_2\)
-\begin{enumerate}
-\item assoziativ
-\item distributiv bez. addition
-\item \(1\cdot v = v\), \(v\in V\)
-\end{enumerate}
-\end{itemize}
+  Ein \(k\) - Vektorraum \(V\) ist eine Menge zusammen mit den Operationen und mit
+  folgenden Eigenschaften:
+  \begin{itemize}
+  \item Addition \(+:\, V\times V \to V, (v_1,v_2)\mapsto v_1+v_2\)
+    \begin{enumerate}
+    \item kommutativ
+    \item assoziativ
+    \item \(\exists 0 \in V\) mit \(0+v=v+0=v\) \(v \in V\)
+    \end{enumerate}
+  \item Skalarmultiplikation \(+:\, V\times V \to V, (v_1,v_2)\mapsto v_1+v_2\)
+    \begin{enumerate}
+    \item assoziativ
+    \item distributiv bez. addition
+    \item \(1\cdot v = v\), wobei \(v\in V\)
+    \end{enumerate}
+  \end{itemize}
 \end{definition}
 
 \begin{exa}
-\begin{enumerate}
-\item \(K\) ist selbst ein Vektorraum mit \(+\) und \(\cdot\)
-\item \(K^{n}:=K^{n\times 1}\) ist ein K-Vektorraum mit:
-\begin{enumerate}
-\item Addition
-\item Skalarmultiplikation
-\end{enumerate}
-\item \(K^{m \times n}\), eine Matrix der Gr"osse \(m\times n\) mit Eintr"agen in K,
-ist ein K-Vektorraum mit Addition und Skalarmultiplikation von Matrizen:
-\item \(K[t]_n\) ist ein K-Vektorraum:
-\item \(K[t]:=\{a_n\cdot \}\) - alle Polynome mit Koeffizienten in \(K\) bilden einen
-K-Vektorraum mit gleichen Operatoren.
-\item Sei \(X\) X eine Menge (z.B. \(X=\mathbb{R}\)) \(Fun(X,K)=\{\}\) ist ein K-Vektorraum:
-\begin{enumerate}
-\item Addition \((f_1 + f_2)(x):= f_1(x)+ f_2(x)\), \(x\in X\)
-\item Miltiplikation
-\end{enumerate}
-\item Sei \(A\in K^{m\times n}\). Die L"osungen von dem homogenen LGS bilden einen
-Vektorraum:
-\begin{itemize}
-\item Wenn \(x_1,x_2\) L"osungen sind, dann gilt: Also ist die Menge der
-L"osungen auch ein Vekorraum bzgl. der Operatoren aus \(K^n\)
-\end{itemize}
-\end{enumerate}
+  \begin{enumerate}
+  \item \(K\) ist selbst ein Vektorraum mit \(+\) und \(\cdot\)
+  \item \(K^{n}:=K^{n\times 1}\) ist ein K-Vektorraum mit:
+    \begin{enumerate}
+    \item Addition
+    \item Skalarmultiplikation
+    \end{enumerate}
+  \item \(K^{m \times n}\), eine Matrix der Gr"osse \(m\times n\) mit Eintr"agen in K,
+    ist ein K-Vektorraum mit Addition und Skalarmultiplikation von Matrizen:
+  \item \(K[t]_n\) ist ein K-Vektorraum:
+  \item \(K[t]:=\{a_n\cdot \}\) - alle Polynome mit Koeffizienten in \(K\) bilden einen
+    K-Vektorraum mit gleichen Operatoren.
+  \item Sei \(X\) X eine Menge (z.B. \(X=\mathbb{R}\)) \(Fun(X,K)=\{\}\) ist ein K-Vektorraum:
+    \begin{enumerate}
+    \item Addition \((f_1 + f_2)(x):= f_1(x)+ f_2(x)\), \(x\in X\)
+    \item Miltiplikation
+    \end{enumerate}
+  \item Sei \(A\in K^{m\times n}\). Die L"osungen von dem homogenen LGS bilden einen
+    Vektorraum:
+    \begin{itemize}
+    \item Wenn \(x_1,x_2\) L"osungen sind, dann gilt: Also ist die Menge der
+      L"osungen auch ein Vekorraum bzgl. der Operatoren aus \(K^n\)
+    \end{itemize}
+  \end{enumerate}
 \end{exa}
 
 \begin{notte}[]
-Bei der Entwicklung der Vektorraumtheorie ist es oft n"utzlich, an das Beispiel
-\(V=K^n\) zu denken.
+  Bei der Entwicklung der Vektorraumtheorie ist es oft n"utzlich, an das Beispiel
+  \(V=\matbb{K}^n\) zu denken.
 \end{notte}
 
 \chapter{Vektorraumtheorie}
@@ -1361,209 +1425,215 @@ Bei der Entwicklung der Vektorraumtheorie ist es oft n"utzlich, an das Beispiel
 Sei \(V\) ein K-Vektorraum.
 
 \begin{definition}{Linearkombination}{}
-Seien \(v_1, v_2\). Die Linearkombination mit Koeffizienten ist der Vektor.
+  Seien \(v_1, \dots, v_b\). Die Linearkombination mit Koeffizienten $\lambda_1, \dots, \lambda_n$ ist der Vektor $v=\lambda_1\cdot v_1 + \dots + \lambda_n \cdot v_n$.
 \end{definition}
 
 \begin{definition}{Triviale Linearkombination}{}
-Eine Linearkombination heist trivial wenn \(\lambda_1 = \lambda_2 = ... =
-\lambda_n = 0\). (\emph{Nichttrivial} wenn mindestens ein \(\lambda_i\not= 0\)).
+  Eine Linearkombination heist \emph{trivial} wenn \(\lambda_1 = \lambda_2 = ... =
+  \lambda_n = 0\). (\emph{Nichttrivial} wenn mindestens ein \(\lambda_i\not= 0\)).
 \end{definition}
 
 
-\begin{definition}{}{}
-Die Menge der Vektoren heist linear Unabh"angig wenn: \$\$ (Nur die Triviale
-linearkombination ergibt 0). Andernfalls heist die Menge linear abh"angig.
+\begin{definition}{Lineare Unab"angigkeit}{}
+  Die Menge der Vektoren heist linear Unabh"angig wenn: $0$ (Nur die Triviale
+  linearkombination ergibt 0). Andernfalls heist die Menge linear abh"angig.
 \end{definition}
 
 \begin{exa}
-\(\begin{pmatrix}1\\0\end{pmatrix}\begin{pmatrix}0\\1\end{pmatrix}\)
+  \(\begin{pmatrix}1\\0\end{pmatrix}\begin{pmatrix}0\\1\end{pmatrix}\) sind linear unabh"angig.
 \end{exa}
 
 \begin{exa}
-\(\{v_1,v_2\}\) sind linear abhaengig wenn sie Proportional sind.
+  \(\{v_1,v_2\}\) sind linear abhaengig wenn sie Proportional sind.
 
-\begin{prof}[]
+  \begin{prof}[]
 
-\end{prof}
+  \end{prof}
 \end{exa}
 
 \begin{lemma}
-  Die Menge ist linear abh"angig. \(v_i\) ist eine Linearkombination von \$\$
+  Die Menge \(\{v_1, \dots, v_n\}\subset V\) ist linear abh"angig. $\iff$  $v_i$ ist eine Linearkombination von $\{v_n, \dots, v_{i-1}, \dots, v_{i+1}, \dots, v_n\}$
 \end{lemma}
-\begin{prof}[]
-Wenn \(v_i=\lambda_1 v_1\), dann \(0=\) Denn \(-1\) ist ein nicht-trivialer
-Linearfaktor.
 
-\((\implies)\) Nach Definition gibt es eine nichttriviale Linearkombination: als
-\(\exists i : \lambda_i \not= 0\) Also gilt  folglich 
+\begin{prof}[]
+  Wenn \(v_i=\lambda_1 v_1\), dann \(0=\) Denn \(-1\) ist ein nicht-trivialer
+  Linearfaktor.
+
+  \((\implies)\) Nach Definition gibt es eine nichttriviale Linearkombination: als
+  \(\exists i : \lambda_i \not= 0\) Also gilt  folglich 
 \end{prof}
 
 \begin{notte}[]
-Eine L"osung des LGS \(Ax=b\) ist eine Spalte \$\$ mit 
-Deis heisst, das LGS \(Ax=b\) zu l"osen ist genau linearkombinationen von spalten
-zu finden, welche \(b\) ergeben.
+  Eine L"osung des LGS \(A\cdot x=b\) ist eine Spalte $\begin{pmatrix} x_1\\ \vdots \\ x_n  \end{pmatrix}$ mit \[A\cdot \begin{pmatrix} x_1\\ \vdots \\ x_n  \end{pmatrix} = \begin{pmatrix} a_1 & \dots & a_n \end{pmatrix}\cdot \begin{pmatrix} x_1\\ \vdots \\ x_n  \end{pmatrix} = a_1\cdot x_1 + \dots + a_n\cdot x_n = b\]
+  Deis heisst, das LGS \(A\cdot x=b\) zu l"osen ist genau linearkombinationen von spalten
+  zu finden, welche \(b\) ergeben.
 \end{notte}
 
 \begin{lemma}
   Seien die Vektoren linear unabh"angig. Ein Vektor \(v\) ist genau dann
-eine Linearkombination von \(v_1,...,v_n\) wenn linear abh"angig ist.
+  eine Linearkombination von \(v_1,...,v_n\) wenn \(\{v_1,...,v_n,v\}\) linear abh"angig ist.
 \end{lemma}
 
 \begin{prof}[]
-(\(\implies\)) Sei Dann gilt , also ist linear ab"angig.
-Sei .. linear abh"angig  Dann 
+  (\(\implies\)) Sei Dann gilt , also ist linear ab"angig.
+  Sei .. linear abh"angig  Dann 
 
-Es gilt: \(\lambda \not= 0\) (wenn  .. linearunabh"angig.) Also gilt \(v=-\lambda_1\)
+  Es gilt: \(\lambda \not= 0\) (wenn  .. linearunabh"angig.) Also gilt \(v=-\lambda_1\)
 \end{prof}
 
 \begin{lemma}
-  Sei \(v=\lambda\) eine Linearkombination von \(v_1,...,v_n\). Diese
-Darstellung ist eindeutig ganau dann, wenn linear unabh"angig sind.
+  Sei \(v\) eine Linearkombination von \(v_1,...,v_n\). Diese
+  Darstellung ist eindeutig ganau dann, wenn \(\{v_1,...,v_n, v\}\) linear unabh"angig sind.
 \end{lemma}
 
 \begin{prof}[]
-\((\implies)\) Sei die Darstellung eindeutig \$v=..\$ Wenn jetzt \$\$, dan gilt \(v=\)
-Eindeutigkeit der Darstellung ergibt:
+  \((\implies)\) Sei die Darstellung eindeutig \$v=..\$ Wenn jetzt \$\$, dan gilt \(v=\)
+  Eindeutigkeit der Darstellung ergibt:
 
-Seien \(v_1,..,v_n\) linear unabh"angig, sei 
-Dann gilt: \(\rightarrow\) lineare Unabhaengigkeit von erzwingt Korollar: Wenn die
-Spalten von \(A\) linear unabhaenig sind, hat das LGS \(Ax=b\) h"ochstens eine
-L"osung, folglich hat \(Ax=0\) genau eine L"osung x=0.
+  Seien \(v_1,..,v_n\) linear unabh"angig, sei 
+  Dann gilt: \(\rightarrow\) lineare Unabhaengigkeit von erzwingt Korollar: Wenn die
+  Spalten von \(A\) linear unabhaenig sind, hat das LGS \(Ax=b\) h"ochstens eine
+  L"osung, folglich hat \(Ax=0\) genau eine L"osung x=0.
 \end{prof}
 
 \begin{notte}[zu geometrischer Interpretation]
-Wichitige Beispiele von Vektorr"aumen sind: \(V=\mathbb{R}^2\) (Ebene),
-\(V=\mathbb{R}^3\) (3D-Raum).
+  Wichitige Beispiele von Vektorr"aumen sind: \(V=\mathbb{R}^2\) (Ebene),
+  \(V=\mathbb{R}^3\) (3D-Raum).
 \end{notte}
 
 Seien \(v_1, v_2\) nicht proportional.
 In drei Dimensionen:
 \begin{relation}
-\begin{itemize}
-\item wenn \(v_3\) in \(E\) liegt, dann ist \(v_3\) eine Linearkombination \(v_1, v_2\)
-\item wenn nicht, dann linear Unabhaenig (sonst in Ebene.)
-\end{itemize}
+  \begin{itemize}
+  \item wenn \(v_3\) in \(E\) liegt, dann ist \(v_3\) eine Linearkombination \(v_1, v_2\)
+  \item wenn nicht, dann linear Unabh"angig (sonst in Ebene.)
+  \end{itemize}
 \end{relation}
 
-\chapter{Lineare unabhangigkeit in R"aumen}
+\chapter{Lineare unabhangigkeit in Vektorr"aumen}
 \label{sec:orgea5b4b9}
 \begin{proposition}
-  Seien \(v_1,...,v_n \in \mathbb{V}\) linear unabhaenig, seien \(W_1,
-..., W_n \in \mathbb{V}\) so dass jedes \(w_i\) eine Linearkombination von
-\(v_1,...,v_n\) ist. Wenn \(m>n\), dann sind \(w_1,...,w_n\) linear abhaengig.
+  Seien \(v_1,...,v_n \in \mathbb{V}\) linear unabh"angig, seien \(w_1,
+  ..., w_n \in \mathbb{V}\) so dass jedes \(w_i\) eine Linearkombination von
+  \(v_1,...,v_n\) ist. Wenn \(m>n\), dann sind \(w_1,...,w_n\) linear abhaengig.
 \end{proposition}
 
 \begin{prof}[]
-Seien 
-\begin{align*}
-w_1= a_{11} v_1 + a_{12} v_2 + ... + a_{nn} v_n \\
-w_1= a_{21} v_1 + a_{22} v_2 + ... + a_{nn} v_n \\
-\end{align*}
-Wir suchen \(\lambda\) (*). Das ist "aquivalent zu:
+  Seien 
+  \begin{align*}
+    w_1= a_{11} v_1 + a_{12} v_2 + ... + a_{nn} v_n \\
+    w_1= a_{21} v_1 + a_{22} v_2 + ... + a_{nn} v_n \\
+  \end{align*}
+  Wir suchen \(\lambda\) (*). Das ist "aquivalent zu:
 
-Dies ist nach linearer Unabhaenig von \ldots{} "Aquivalent zu:
+  Dies ist nach linearer Unabh"Angig von \ldots{} "Aquivalent zu:
 
-Das heist (*) ist "aquivalent zu einem homogenen LGS aus \(n\) Gleichungen mit \(m\)
-Variablen. \(n<m\), also gibt es eine L"osung $\ldots{}$, die ungleich \(0\) ist. \(\implies\)
-sind linear unabh"angig.
+  Das heist (*) ist "aquivalent zu einem homogenen LGS aus \(n\) Gleichungen mit \(m\)
+  Variablen. \(n<m\), also gibt es eine L"osung $\ldots{}$, die ungleich \(0\) ist. \(\implies\)
+  sind linear unabh"angig.
 \end{prof}
 
 \begin{korollar}
-  Je drei Vektoren in \(\mathbb{R}^2\) sind linear unabh"angig, je \(n+1\)
-Vektoren in \$\$ sind linear unabh"angig.
+  Je drei Vektoren in \(\mathbb{R}^2\) sind linear abh"angig, je \(n+1\)
+  Vektoren in $\mathbb{R}^n$ sind linear abh"angig.
 \end{korollar}
 
 \begin{prof}[von Korollar]
-Seien \(e_i\) die Spalten der Einheitsmatrix sind linear unabh"angig. 
+  Seien \(e_i\) die Spalten der Einheitsmatrix. Diese sind linear unabh"angig. 
 
-Dies zeigt auch, dass jeder Vektor in \(R\) eine Linearkombination von \(e_i\) ist. 
+  Das zeigt auch, dass jeder Vektor in \(R\) eine Linearkombination von \(e_i\) ist. 
 \end{prof}
 
 \begin{definition}{Untervektorraum}{}
-Sei V ein \(K-\) Vektorraum, \(U\subseteq V\) eine Teilmenge von V. \(U\) heist
-untervektorraum wenn:
-\begin{enumerate}
-\item \(V\not= \varnothing\)
-\item 
+  Sei V ein \(\mathbb{K}\)-Vektorraum, \(U\subseteq V\) eine Teilmenge von V. \(U\) heist
+  untervektorraum wenn:
+  \begin{enumerate}
+  \item \(V\not= \varnothing\)
+  \item $u, v \in U \implies u+v \in U$
 
-\item 
-\end{enumerate}
+  \item $\lambda \in \mathbb{K},\, u \in U \implies \lambda \cdot u \in U $
+  \end{enumerate}
 
-In anderen Worten: Eine Teilmenge von \(V\) die selbst ein Vektorraum ist bzgl.
-der von \(V\) vererbten Operationen.
+  In anderen Worten: Eine Teilmenge von \(V\) die selbst ein Vektorraum bzgl.
+  der von \(V\) vererbten Operationen ist.
 \end{definition}
 
 \begin{notte}[]
-(1) und (3) \(\implies\) \(0\in U\)
+  (1) und (3) \(\implies\) \(0\in U\)
 \end{notte}
 
-\begin{definition}{}{}
-Sei \(S \in V\) eine Teilmenge. Der von \(S\) erzeugte Vektorraum (lineare H"ulle
-von \(S\)) \(<S>:=\{\}\) (Menge aller Linearkombinationen von Vektoren in \(S\)).
+\begin{definition}{Lineare H"ulle / Span}{}
+  Sei \(S \in V\) eine Teilmenge. Der von \(S\) erzeugte Vektorraum (die lineare H"ulle
+  von \(S\)) ist: \[\langle S \rangle:=\left\{\sum_{i=1}^k{\lambda_i \cdot v_i}\mid \lambda_i \in \mathbb{K}, \, v_i \in S \right\}\] (Menge aller Linearkombinationen von Vektoren in \(S\).)
 
-Alternative Notation: \(<s>=\text{span S}\).
+  Alternative Notation: \(\langle S \rangle=\text{span }S\).
 \end{definition}
 
 \begin{notte}[]
-\(<s>\) ist der kleinste Untervektorraum in \(V\), der \(S\) enth"alt. 
-\(<\varnothing >:=\{0\}\)
+  \(\langle S \rangle\) ist der kleinste Untervektorraum in \(V\), der \(S\) enth"alt. 
+  \(<\varnothing >:=\{0\}\)
 \end{notte}
 
 \begin{exa}
-Seien \(v_1, v_2 \in \mathbb{R}^3\).
-\(<v1,v2>\) ist eine Gerade wenn \(v_1,v_2\) linear abh. Ist Ebene wenn \(v_1,v_2\)
-linear unbh.
+  Seien \(v_1, v_2 \in \mathbb{R}^3\).
+  \(\langle v1,v2 \rangle\) ist eine Gerade wenn \(v_1,v_2\) linear abh. Ist Ebene wenn \(v_1,v_2\)
+  linear unbh.
 \end{exa}
 
-\begin{definition}{}{}
-\(S\in V\) heisst Erzeugendensystem wenn \(<S>=V\). (S spannt den Vektorraum auf.)
-
-ist ein Erzeugendensystem: jeder Vektor in \(V\) ist eine Linearkombination von:
-
-\(\lambda_i\) sind nicht unbedingt eindeutig bestimmt, weil nicht linear unabh.
-vorrausgesetzt waren.
+\begin{definition}{Erzeugendensstem}{}
+  \(S\in V\) heisst Erzeugendensystem wenn \(\langle S \rangle=V\). (S spannt den Vektorraum auf.)
 \end{definition}
 
-\begin{definition}{}{}
-Ein Erzeugendensystem \(B\in V\) heisst basis, wenn es linear unabh. ist. Nach dem
-Lemma ueber Eindeutigkeit der koeffzienten der Linearkombination gilt: \(B=\{v_1,
-..., v_n\}\) ist eine Basis genau dann, wenn f"ur jeden Vektor \(v \in V\) gibt es
- eindeutig bestimmte Zahlen.
-\end{definition}
+\begin{notte}
+  $S$ ist ein Erzeugendensystem: jeder Vektor in \(V\) ist eine
+  Linearkombination aus $S$. Diese ist nicht eindeutig bestimmt, weil
+  keine linear unabhängigkeit vorrausgesetzt war.
+\end{notte}
 
-\begin{definition}{}{}
-Ein Vektorraum \(V\) heisst endlich dimensional, wenn er ein endliches
-erzeugendensystem besitzt. (= wird von endlich vielen Vektoren aufgespannt).
+\begin{definition}{Basis}{}
+  Ein Erzeugendensystem \(B\in V\) heisst basis, wenn es linear unabhängig ist. 
+\end{definition}
+\begin{relation}
+  Nach dem Lemma "uber die Eindeutigkeit der Koeffzienten der
+  Linearkombination gilt: \(B=\setdot{v}\) ist eine Basis genau
+  dann, wenn f"ur jeden Vektor \(v \in V\) gibt es eindeutig bestimmte
+  Zahlen $\setdot{\lambda}$ so dass $v=\linn{\lambda}{v}$.
+\end{relation}
+
+\begin{definition}{Endliche Dimension eines Vektorraumes}{}
+  Ein Vektorraum \(V\) heisst endlich dimensional, wenn er ein endliches
+  erzeugendensystem besitzt. (= wird von endlich vielen Vektoren aufgespannt)
 \end{definition}
 
 \begin{theo}{}{}
-Jeder endlichedimensionale Vektorraum \(V\)  hat eine Basis, Je zwei Basen von \(V\)
-haben gleich viele Elemente.
+  Jeder endlichedimensionale Vektorraum \(V\)  hat eine Basis.\\ Je zwei Basen von \(V\)
+  haben gleich viele Elemente.
 \end{theo}
 
 \begin{prof}[]
-Sei \(S\) ein endliches Erzeugendensyste von \(V\), Wenn \(S\) lin. unabh. ist, ist es
-eine Basis und wir haben gewonnen. Wenn \(S\) linear abh"angig ist $\implies$
-(Lemma) einer von den Vektoren in \(S\) ist eine Linearkombination von den
-anderen. Das entfernen dieses Vektors "andert die Tatsache nicht, das \(S\) den
-Vektorraum aufspannt. Jetzt haben wir eine kleinere Menge und fangen von vorne
-an. Da \(S\) endlich ist und durch entfernen Vektoren kleiner wird haben wir am
-Ende eine Basis.
-\(\rightarrow\) Wir haben eine Basis.
+  Sei \(S\) ein endliches Erzeugendensyste von \(V\), Wenn \(S\) lin. unabh. ist, ist es
+  eine Basis und wir haben gewonnen. Wenn \(S\) linear abh"angig ist $\implies$
+  (Lemma) einer von den Vektoren in \(S\) ist eine Linearkombination von den
+  anderen. Das entfernen dieses Vektors "andert die Tatsache nicht, das \(S\) den
+  Vektorraum aufspannt. Jetzt haben wir eine kleinere Menge und fangen von vorne
+  an. Da \(S\) endlich ist und durch entfernen Vektoren kleiner wird haben wir am
+  Ende eine Basis.
+  \(\rightarrow\) Wir haben eine Basis.
 
-Seien \(S, S'\) zwei Basen. Da \(S\) eine Basis ist, ist jedes element von \(S'\) eine
-linearkombination in \(S\). Die elemente von \(S\) sind linear unabh. (weil Basis).
-Wenn also \(m>n\), dann folgt aus der Proposition, dass \(S'\) linear abh. ist, was
-unm"oglich ist, da \(S'\) eine Basis ist. Also \(m \leq n\) und aus Symmetriegr"unden folgt auch \(n \leq m\).
+  Seien \(S, S'\) zwei Basen. Da \(S\) eine Basis ist, ist jedes element von \(S'\) eine
+  linearkombination in \(S\). Die elemente von \(S\) sind linear unabh. (weil Basis).
+  Wenn also \(m>n\), dann folgt aus der Proposition, dass \(S'\) linear abh. ist, was
+  unm"oglich ist, da \(S'\) eine Basis ist. Also \(m \leq n\) und aus Symmetriegr"unden folgt auch \(n \leq m\).
 \end{prof}
 
-\begin{definition}{}{}
-Sei \(V\) ein endlichdimensionaler Vektorraum. Die Anzahl der Vektoren in einer
-(folglich in jeder) Basis von \(V\) heist Dimension von V. \emph{Bezeichung}: \(\dim V\).n
+\begin{definition}{Dimension eines Vektorraumes}{}
+  Sei \(V\) ein endlichdimensionaler Vektorraum. Die Anzahl der Vektoren in einer
+  (folglich in jeder) Basis $B$ von \(V\) heist \emph{Dimension} von V. \\
+  \emph{Bezeichung}: \(\dim V\ = |B|\)
 \end{definition}
 
 \begin{exa}[s]
-\(\dim K^{n}=n\) weil \ldots{} eine Basis bilden. 
+  \(\dim K^{n}=n\) weil \ldots{} eine Basis bilden. 
 \end{exa}
 
 \textbf{Frage}: kannn man eine lineare unabh"angige Menge \(S\in V\) zu eine Basis
@@ -1571,70 +1641,71 @@ erweitern?.
 
 \begin{proposition}
   Jede linear unabh"angige Teilmenge \(S\in V\) eines
-endlichdimensionalen Vektorraumes \(V\) ist in einer maximalen linear
-unabh"angigen Teilmenge enthalten. Eine maximal linear unabh. Teilmenge von \(V\)
-st eine Basis von \(V\).
+  endlichdimensionalen Vektorraumes \(V\) ist in einer maximalen linear
+  unabh"angigen Teilmenge enthalten. Eine maximal linear unabh. Teilmenge von \(V\)
+  st eine Basis von \(V\).
 \end{proposition}
 
 
 \begin{definition}{Maximal linear unabh"angige Teilmengen}{}
-Eine Teilmenge \(S'\in V\) ist maximal linear unabh., wenn aus \(S\)
-linear unabh. folgt.
+  Eine Teilmenge \(S'\in V\) ist maximal linear unabhängig falls:
+  \[S'\subseteq S'' \subseteq V \text{ und } S \text{ linear unabhängig}\implies S'' = S'\]
+  Das bedeutet, dass $S'$ in keiner gr"osseren linear unabhängigen Teilmenge enthalten ist.
 \end{definition}
 
 \begin{prof}[1]
-Sei linear unabh.
-Zwei F"alle: entweder ist \(S\) schon maximal (dann sind wir fertig) oder man kann
-S erweitern. Wenn wir \(S\) erweitern k"onnen, f"ugen wir neue Vektoren hinzu, bis
-wir es nicht mehr tun koennen, ohne lineare unabh. zu verletzen.
+  Sei linear unabh.
+  Zwei F"alle: entweder ist \(S\) schon maximal (dann sind wir fertig) oder man kann
+  S erweitern. Wenn wir \(S\) erweitern k"onnen, f"ugen wir neue Vektoren hinzu, bis
+  wir es nicht mehr tun koennen, ohne lineare unabh. zu verletzen.
 
-Dieser Prozess endet, weil eine linear unabh. Teilmenge h"ochstens von \(V\)
-hoechstens \(\dim V\) viele Vektoren enthalten kann. (Prop. "uber lineare unabh.
-von vektoren aus linearkombinartionen der Basis.)
+  Dieser Prozess endet, weil eine linear unabh. Teilmenge h"ochstens von \(V\)
+  hoechstens \(\dim V\) viele Vektoren enthalten kann. (Prop. "uber lineare unabh.
+  von vektoren aus linearkombinartionen der Basis.)
 \end{prof}
 
 \begin{prof}[2]
-Sei \(S\in V\) maximal linear unabh"angig. Wir habe zu zeigen: \(<S>=V\) (Def. einer
-Basis). Wenn $\ldots{}$ d.h. aber, aber \(S\cup {v}\) ist linear unabh. (lemma) $\implies$
-\(S\) dann nicht maximal.
+  Sei \(S\in V\) maximal linear unabh"angig. Wir habe zu zeigen: \(\langle s \rangle=V\) (Def. einer
+  Basis). Wenn $\ldots{}$ d.h. aber, aber \(S\cup {v}\) ist linear unabh. (lemma) $\implies$
+  \(S\) dann nicht maximal.
 \end{prof}
 
 \begin{korollar}
   Man kann jeder lienar unabh. Teilmenge \(S\in V\) zu einer Basis
-erweitern.
+  erweitern.
 \end{korollar}
 
 \begin{notte}
-Wenn \(V=K^n, S\in V\) linear unabh. \(\rightarrow\) man kann zur erweiterung passende
-Spalten der Einheitsmatrix.
+  Wenn \(V=K^n, S\in V\) linear unabh. \(\rightarrow\) man kann zur erweiterung passende
+  Spalten der Einheitsmatrix.
 \end{notte}
 
 \begin{notte}[]
-Man kann bei der obrigen Proposition das Wort "endlichdimensional" fallen
-lassen, aber es braucht ein bisschen mehr Mengenlehre (Auswahlaxiom).x
+  Man kann bei der obrigen Proposition das Wort "endlichdimensional" fallen
+  lassen, aber es braucht ein bisschen mehr Mengenlehre (Auswahlaxiom).x
 \end{notte}
 \begin{theo}{}{}
-Sei V ein endlichdimensionaler Vektorraum und \(U\in V\) ein Untervektorraum. Dann
-gillt: \(\dim U \leq \dim V\).  \(\dim U = \dim V \iff U=V\)
+  Sei V ein endlichdimensionaler Vektorraum und \(U\in V\) ein Untervektorraum. Dann
+  gillt: \(\dim U \leq \dim V\).  \(\dim U = \dim V \iff U=V\)
 \end{theo}
 
 \begin{prof}[]
-Sei eine maximale linear unabh. Teilmenge in U. (so eine Teilmenge existiert
-weil V endlich ist.)
-Nach Proposition (2) ist \ldots{} eine Basis in \(U\), also gilt \(\dim U = k\) Erweitere
-\ldots{} zu einer Basis in V \ldots{}. 
+  Sei eine maximale linear unabh. Teilmenge in U. (so eine Teilmenge existiert
+  weil V endlich ist.)
+  Nach Proposition (2) ist \ldots{} eine Basis in \(U\), also gilt \(\dim U = k\) Erweitere
+  \ldots{} zu einer Basis in V \ldots{}. 
 
-(2) \ldots{} trivial \ldots{} Sei \ldots{} eine Basis in U. Erweitere sie zu einer Basis in
-\(V\). Diese Basis in V muss aber wegen \ldots{} gleich viele Vektoren haben. \ldots{}. ist
-eine Basis in \(V\) \ldots{}
+  (2) \ldots{} trivial \ldots{} Sei \ldots{} eine Basis in U. Erweitere sie zu einer Basis in
+  \(V\). Diese Basis in V muss aber wegen \ldots{} gleich viele Vektoren haben. \ldots{}. ist
+  eine Basis in \(V\) \ldots{}
 \end{prof}
 
 
 \begin{definition}{}{}
-Sei \(V\) ein Vektorraum \$\$ eine Basis in V. Die Zahlen \((\lambda_1,...\lambda_n)\)
-heissen Koordinaten bzgl. des Vektors. Die Spalte \ldots{} heisst Koordinatenspalte
-dieses Vektors bzgl. \(B\).
-Die Definition einer Basis garantiert, dass hierdurch eine Bijektion \ldots{} entsteht.
+  Sei \(V\) ein Vektorraum \$\$ eine Basis in V. Die Zahlen \((\lambda_1,...\lambda_n)\)
+  heissen Koordinaten bzgl. des Vektors. Die Spalte \ldots{} heisst Koordinatenspalte
+  dieses Vektors bzgl. \(B\).
+  Die Definition einer Basis garantiert, dass hierdurch eine Bijektion \ldots{} entsteht.
 \end{definition}
 
 \begin{notte}
@@ -1642,7 +1713,7 @@ Die Definition einer Basis garantiert, dass hierdurch eine Bijektion \ldots{} en
 \end{notte}
 
 \begin{exa}
-Sei \(Ax=0\) ein h. LGS
+  Sei \(Ax=0\) ein h. LGS
 \end{exa}
 
 \textbf{Aus Uebungen} \ldots{}
@@ -1650,11 +1721,11 @@ Sei \(Ax=0\) ein h. LGS
 \begin{lemma}
   Die Spalten von \(\Phi\) bilden eine Basis in L.
 \end{lemma}
-  
-\begin{prof}[]
-Die Spalten von \(\Phi\) sind linear unabhaenig. (sonst abb. nicht injektiv)
 
-Ferner spannen sie das ganze L auf (Surjektiv). 
+\begin{prof}[]
+  Die Spalten von \(\Phi\) sind linear unabh"angig. (sonst abb. nicht injektiv)
+
+  Ferner spannen sie das ganze L auf (Surjektiv). 
 \end{prof}
 
 \textbf{Frage} Gegeben Basen \ldots{} in \(V\), und einem Vektor \(v\in V\). Wie rechnet man die
@@ -1663,12 +1734,12 @@ Koordinaten bezgl. B in Koordinaten bzgl. B' um.
 Sprachweise ist: B ist alte Basis und B' ist neue Basis.
 So gilt:
 \begin{relation}
-\ldots{} Dr"ucken wir Vektoren von B' bzgl. Vektoren von B aus: \(V\) \ldots{}
-wir erhalten \(C\) 
-(Die Spalten von C sind Koordinaten der "neuen" Basis bzgl der alten Basis. )
+  \ldots{} Dr"ucken wir Vektoren von B' bzgl. Vektoren von B aus: \(V\) \ldots{}
+  wir erhalten \(C\) 
+  (Die Spalten von C sind Koordinaten der "neuen" Basis bzgl der alten Basis. )
 
-Also gilt: \ldots{}
-\(\lambda = G\cdot \lambda'\)
+  Also gilt: \ldots{}
+  \(\lambda = G\cdot \lambda'\)
 \end{relation}
 
 \textbf{Frage} Ist \(D\) in diesem Fall immer invertierbar? (Ja, aber wir brauchen mehr Theorie.)
@@ -1676,51 +1747,51 @@ Also gilt: \ldots{}
 \chapter{Lineare Abbildungen zwischen Vektorr"aumen}
 \label{sec:orgb4c03c4}
 \begin{definition}{Lineare Abbildung}{}
-Seien \(V, W\) zwei K-Vektorr"aume. Eine Abbildung \(f: V\rightarrow W\) heißt linear, wenn:
+  Seien \(V, W\) zwei K-Vektorr"aume. Eine Abbildung \(f: V\rightarrow W\) heißt linear, wenn:
 
-\begin{enumerate}
-	\item \(\forall v,v' \in V: f(v+v')=f(v)+f(v')\)
-	\item \(\forall v\in V, \lambda \in K: f(\lambda v)=\lambda f(v)\)
-\end{enumerate}
+  \begin{enumerate}
+  \item \(\forall v,v' \in V: f(v+v')=f(v)+f(v')\)
+  \item \(\forall v\in V, \lambda \in K: f(\lambda v)=\lambda f(v)\)
+  \end{enumerate}
 
 \end{definition}
 
 \begin{exa}
-$f_{A}: K^n\rightarrow K^m, x\mapsto A\cdot x$, für $A \in K^{m\times n}$ ist eine lineare Abbildung.
+  $f_{A}: K^n\rightarrow K^m, x\mapsto A\cdot x$, für $A \in K^{m\times n}$ ist eine lineare Abbildung.
 \end{exa}
 
 \begin{exa}
-\(V=\mathbb{R}[x]_5,\;W=\mathbb{R}[x]_4\). $f: V\rightarrow W, p \mapsto \frac{dp}{dx}$ ist eine lineare Abbildung, die jedem Polynom seine Ableitung zuordnet.
+  \(V=\mathbb{R}[x]_5,\;W=\mathbb{R}[x]_4\). $f: V\rightarrow W, p \mapsto \frac{dp}{dx}$ ist eine lineare Abbildung, die jedem Polynom seine Ableitung zuordnet.
 \end{exa}
 
 \begin{exa}
-$V=W=\{f:\mathbb{R}\rightarrow\mathbb{R}\}$ die Menge aller reellen, reellwertiger Funktionen. Für eine gegebene Abbildung $g:\mathbb{R}\rightarrow\mathbb{R}$ ist die Abbildung $mg: V\rightarrow W, f\mapsto g\cdot f, (g\cdot f)(x)=g(x)\cdot f(x)$ linear.
+  $V=W=\{f:\mathbb{R}\rightarrow\mathbb{R}\}$ die Menge aller reellen, reellwertiger Funktionen. Für eine gegebene Abbildung $g:\mathbb{R}\rightarrow\mathbb{R}$ ist die Abbildung $mg: V\rightarrow W, f\mapsto g\cdot f, (g\cdot f)(x)=g(x)\cdot f(x)$ linear.
 \end{exa}
 
 \begin{definition}{}{}
-Sei $f:V\rightarrow W$eine Lineare Abbildung. Der Kern von \(f\) wird definiert als \[Ker\: f := f^{-1}(0) = \{v\in V|f(v)=0\}\] Der Kern der Abbildung f ist also die Menge aller Elemente in V, die auf das Nullelement von W abgebildet werden.
+  Sei $f:V\rightarrow W$eine Lineare Abbildung. Der Kern von \(f\) wird definiert als \[Ker\: f := f^{-1}(0) = \{v\in V|f(v)=0\}\] Der Kern der Abbildung f ist also die Menge aller Elemente in V, die auf das Nullelement von W abgebildet werden.
 \end{definition}
 
 \begin{exa}
-$f=f_A: K^n\rightarrow K^m \quad x\mapsto A\cdot x$\\
-$Ker (f_A) = \{x\in K^n|A\cdot x = 0\}$, also die Lösung des homogenen LGS mit der Koeffizientenmatrix A.
+  $f=f_A: K^n\rightarrow K^m \quad x\mapsto A\cdot x$\\
+  $Ker (f_A) = \{x\in K^n|A\cdot x = 0\}$, also die Lösung des homogenen LGS mit der Koeffizientenmatrix A.
 \end{exa}
 
 \begin{beobachtung}
   Der Kern von \(f\) ist ein Untervektorraum von \(V\):
-\[v_1 , v_2 \in Ker(f) \Rightarrow f(v_1 + v_2)=f(v_1 )+f(v_2 )=0 \Rightarrow v_1 + v_2 \in Ker(f) \]
-\[v \in Ker(f), \lambda \in K \Rightarrow f(\lambda v)=\lambda f(v)=\lambda \cdot 0 = 0 \Rightarrow \lambda v \in Ker(f) \]
+  \[v_1 , v_2 \in Ker(f) \Rightarrow f(v_1 + v_2)=f(v_1 )+f(v_2 )=0 \Rightarrow v_1 + v_2 \in Ker(f) \]
+  \[v \in Ker(f), \lambda \in K \Rightarrow f(\lambda v)=\lambda f(v)=\lambda \cdot 0 = 0 \Rightarrow \lambda v \in Ker(f) \]
 \end{beobachtung}
 
 \begin{beobachtung}
   Das Bild von f $Im(f) \subseteq W$ ist Untervektorraum, wenn:
-\[w_1 =f(v_1 ), w_2 = f(v_2 )\in Im(f) \Rightarrow w_1 +w_2 = f(v_1 )+f(v_2 )= f(v_1 +v_2) \Rightarrow w_1 +w_2 \in Im(f) \]
-\[w=f(v)\in Im(f), \lambda \in K \Rightarrow \lambda w = \lambda f(v)=f(\lambda v) \in Im(f) \]
-$\Rightarrow$ Das Bild einer linearen Abbildung ist ein Untervektorraum.
+  \[w_1 =f(v_1 ), w_2 = f(v_2 )\in Im(f) \Rightarrow w_1 +w_2 = f(v_1 )+f(v_2 )= f(v_1 +v_2) \Rightarrow w_1 +w_2 \in Im(f) \]
+  \[w=f(v)\in Im(f), \lambda \in K \Rightarrow \lambda w = \lambda f(v)=f(\lambda v) \in Im(f) \]
+  $\Rightarrow$ Das Bild einer linearen Abbildung ist ein Untervektorraum.
 \end{beobachtung}
 
 \begin{exa}
-$Im(f_A )=\{b\in K^m \:|\: \exists x \in K^n: A\cdot x=b \}=\{b\in K^m\:|\:LGS Ax=b\; l"osbar\} $
+  $Im(f_A )=\{b\in K^m \:|\: \exists x \in K^n: A\cdot x=b \}=\{b\in K^m\:|\:LGS Ax=b\; l"osbar\} $
 \end{exa}
 
 \begin{beobachtung}
@@ -1734,76 +1805,76 @@ $Im(f_A )=\{b\in K^m \:|\: \exists x \in K^n: A\cdot x=b \}=\{b\in K^m\:|\:LGS A
 \end{proposition}
 
 \begin{prof}[]
-f injektiv $\iff v_1 \neq v_2 \in V: f(v_1)\neq f(v_2) \iff f(v_1)-f(v_2)\neq 0 \iff f(v_1 -v_2)\neq 0 \iff v_1,v_2 \in V, v_1-v_2\neq 0: f(v_1 -v_2)\neq 0 \iff v\neq 0: f(v)\neq 0 \iff Ker(f) = \{0\}$
+  f injektiv $\iff v_1 \neq v_2 \in V: f(v_1)\neq f(v_2) \iff f(v_1)-f(v_2)\neq 0 \iff f(v_1 -v_2)\neq 0 \iff v_1,v_2 \in V, v_1-v_2\neq 0: f(v_1 -v_2)\neq 0 \iff v\neq 0: f(v)\neq 0 \iff Ker(f) = \{0\}$
 \end{prof}
 
 \begin{definition}{}{}
-Eine bijektive Lineare Abbildung \(f:V\rightarrow W\) heißt Vektorraumisomorphismus
-zwischen \(V\) und \(W\). \(V\) und \(W\) heißen isomorph, wenn es einen
-Vektorraumisomorphismus \(f: V\rightarrow W\) gibt.
+  Eine bijektive Lineare Abbildung \(f:V\rightarrow W\) heißt Vektorraumisomorphismus
+  zwischen \(V\) und \(W\). \(V\) und \(W\) heißen isomorph, wenn es einen
+  Vektorraumisomorphismus \(f: V\rightarrow W\) gibt.
 \end{definition}
 
 \begin{exa}
-Sei \(V\) ein Vektorraum, \(S\subseteq V = \{v_1, v_2, ..., v_n\}\). Die
-Aufspannabbildung $\varphi_S: K^n \rightarrow V$ wird definiert als $\varphi_S(\lambda)=\sum_{i=1}^{n}\lambda_i v_i$
+  Sei \(V\) ein Vektorraum, \(S\subseteq V = \{v_1, v_2, ..., v_n\}\). Die
+  Aufspannabbildung $\varphi_S: K^n \rightarrow V$ wird definiert als $\varphi_S(\lambda)=\sum_{i=1}^{n}\lambda_i v_i$
 
-\begin{itemize}
-	\item \(\varphi_s\) ist linear.
-	\item \(\varphi_s\) ist bijektiv \(\iff\) S ist Basis.
-\end{itemize}
+  \begin{itemize}
+  \item \(\varphi_s\) ist linear.
+  \item \(\varphi_s\) ist bijektiv \(\iff\) S ist Basis.
+  \end{itemize}
 \end{exa}
 
 \begin{korollar}
-	\(S=\{v_1,\ldots,v_n\}\) ist eine Basis von V $\implies \varphi_S: K^n \rightarrow V$ ist Isomorphismus ($K^n\cong V$)
+  \(S=\{v_1,\ldots,v_n\}\) ist eine Basis von V $\implies \varphi_S: K^n \rightarrow V$ ist Isomorphismus ($K^n\cong V$)
 \end{korollar}
 
 \begin{korollar}
-	\(\dim V = n \iff V\cong K^n\)
+  \(\dim V = n \iff V\cong K^n\)
 \end{korollar}
 
 \begin{beobachtung}
-	Wenn \(f:V\rightarrow W\) Isomorphismus $\implies f^{-1}:W\rightarrow V $ ist auch ein Isomorphismus.
+  Wenn \(f:V\rightarrow W\) Isomorphismus $\implies f^{-1}:W\rightarrow V $ ist auch ein Isomorphismus.
 \end{beobachtung}
 
 \section{Dimensionsformel}
 \label{sec:org9a58004}
 \begin{theo}{}{}
-Sei \(f:V\to W\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gilt: \(\mdim\mKer f + \mdim\mIm f = \mdim V\).
+  Sei \(f:V\to W\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gilt: \(\mdim\mKer f + \mdim\mIm f = \mdim V\).
 \end{theo}
 
 \begin{lemma} sei \(f\) wie oben. Sei \(U \subseteq \mKer(f)\) ein Untervektorraum mit \(U \cap \mKer(f) = \{0\}\).  Dann ist \(f|_U:U\to f(U)\) ein Isomorphismus.
 \end{lemma}
 
 \begin{prof}[Beweis des Lemmas]
-\(f|_U:U\to f(U)\) ist surjektiv nach Konstruktion. Zu zeigen: \(f|_U\) injkektiv \(\iff \mKer f|_U = \{0\}\). Sei \(u\in \mKer f|_U \). Dann gilt \(u\in U \land u \in \mKer(f) \implies u \in U \cap \mKer f \implies u = 0\)
+  \(f|_U:U\to f(U)\) ist surjektiv nach Konstruktion. Zu zeigen: \(f|_U\) injkektiv \(\iff \mKer f|_U = \{0\}\). Sei \(u\in \mKer f|_U \). Dann gilt \(u\in U \land u \in \mKer(f) \implies u \in U \cap \mKer f \implies u = 0\)
 \end{prof}
 
 \begin{prof}[Beweis der Dimensionsformel]
-W"ahle eine Basis \({e_1, ..., e_k}\) in \(\mKer f\) und erg"anze sie zu einer Basis
-\({e_1, ..., e_n}\) in \(V\).
+  W"ahle eine Basis \({e_1, ..., e_k}\) in \(\mKer f\) und erg"anze sie zu einer Basis
+  \({e_1, ..., e_n}\) in \(V\).
 
-Betrachte jetzt \(U:=\langle e_{k+1}, ..., e_n\rangle \subseteq V\) Untervektorraum. Es gilt $U \cap \ker(f) = \{0\}$, weil für $u\in U \cap \ker(f)$ gilt: \(u = \sum\limits_{i=1}^k \lambda_ie_i \), weil \(e_1, \dots e_k\) eine Basis im Kern ist, und \(u = \sum\limits_{i=k+1}^{n} \lambda_i e_i\) weil \(u\in U\). Also: \(\sum\limits_{i=1}^k \lambda_ie_i - \sum\limits_{i=k+1}^{n} \lambda_ie_i = 0 \xRightarrow{e_1,\dots, e_n \text{Basis}} \text{alle }\lambda_i = 0 \implies u =0\).
+  Betrachte jetzt \(U:=\langle e_{k+1}, ..., e_n\rangle \subseteq V\) Untervektorraum. Es gilt $U \cap \ker(f) = \{0\}$, weil für $u\in U \cap \ker(f)$ gilt: \(u = \sum\limits_{i=1}^k \lambda_ie_i \), weil \(e_1, \dots e_k\) eine Basis im Kern ist, und \(u = \sum\limits_{i=k+1}^{n} \lambda_i e_i\) weil \(u\in U\). Also: \(\sum\limits_{i=1}^k \lambda_ie_i - \sum\limits_{i=k+1}^{n} \lambda_ie_i = 0 \xRightarrow{e_1,\dots, e_n \text{Basis}} \text{alle }\lambda_i = 0 \implies u =0\).
 
-Das Lemma sagt jetzt: \(f|_U\) ist ein Isomorphismus. Außerdem gilt f"ur \(v =\sum\limits_{i=1}^{n}\lambda_ie_i \in V:\)
-\begin{align*}
-f(v) = f\left(\underbrace{\sum_{i=1}^{k}\lambda_ie_i}_{\in \mKer(f)}\right) + f\left(\sum_{i=k+1}^{n}\lambda_ie_i\right) = f\left(\underbrace{\sum_{i=k+1}^{n} \lambda_ie_i}_{\in U}\right)
-\end{align*}
-\(\implies f(V)=f(U)\) also \(f|_U : U\to f(V) = \mIm(f) \) ist ein Isomorphismus \(\implies \mdim \mIm f = \mdim U \)
+  Das Lemma sagt jetzt: \(f|_U\) ist ein Isomorphismus. Außerdem gilt f"ur \(v =\sum\limits_{i=1}^{n}\lambda_ie_i \in V:\)
+  \begin{align*}
+    f(v) = f\left(\underbrace{\sum_{i=1}^{k}\lambda_ie_i}_{\in \mKer(f)}\right) + f\left(\sum_{i=k+1}^{n}\lambda_ie_i\right) = f\left(\underbrace{\sum_{i=k+1}^{n} \lambda_ie_i}_{\in U}\right)
+  \end{align*}
+  \(\implies f(V)=f(U)\) also \(f|_U : U\to f(V) = \mIm(f) \) ist ein Isomorphismus \(\implies \mdim \mIm f = \mdim U \)
 
-Nun gilt nach Konstruktion von \(U\): \[\underbrace{\mdim \mKer(f)}_{k} + \underbrace{\mdim U}_{n-k} = \underbrace{\mdim V}_{n} \implies \mdim\mKer f + \mdim\mIm f = \mdim V \]
+  Nun gilt nach Konstruktion von \(U\): \[\underbrace{\mdim \mKer(f)}_{k} + \underbrace{\mdim U}_{n-k} = \underbrace{\mdim V}_{n} \implies \mdim\mKer f + \mdim\mIm f = \mdim V \]
 \end{prof}
 
 \section{Summe von Untervektorr"aumen}
 \label{sec:org83dfe63}
 \begin{definition}{}{}
-	Sei V ein Vektorraum, $U_1, U_2 \subseteq V$ Untervektorräume.
-	\[U_1 + U_2 := \{u_1+u_2 | u_1 \in U_1, u_2 \in U_2\}\]
-	heißt Summe von $U_1$ und $U_2$.
-	$U_1 + U_2$ ist Untervektorraum.
-	
+  Sei V ein Vektorraum, $U_1, U_2 \subseteq V$ Untervektorräume.
+  \[U_1 + U_2 := \{u_1+u_2 | u_1 \in U_1, u_2 \in U_2\}\]
+  heißt Summe von $U_1$ und $U_2$.
+  $U_1 + U_2$ ist Untervektorraum.
+  
 \end{definition}
 \begin{definition}{}{}
-Die Summe von $U_1$ und $U_2$ heißt direkt, wenn $U_1 \cap U_2 = \{0\}$. Bezeichnung: $U_1 + U_2 = U_1 \oplus U_2$
+  Die Summe von $U_1$ und $U_2$ heißt direkt, wenn $U_1 \cap U_2 = \{0\}$. Bezeichnung: $U_1 + U_2 = U_1 \oplus U_2$
 \end{definition}
 
 \textbf{Bemerkung} \ldots{}
@@ -1814,57 +1885,57 @@ Ausgangsraum als eine direkte Summe dargestellt.
 \textbf{Bemerkung}: Dimensionsformel ist auch Rangformel.
 
 \begin{definition}{Rang}{}
-Sei $f:V\to W$ linear. Der Rang von \(f\) ist $\mRg(f) = \text{rk}(f) := \dim\mIm(f)$
+  Sei $f:V\to W$ linear. Der Rang von \(f\) ist $\mRg(f) = \text{rk}(f) := \dim\mIm(f)$
 \end{definition}
 
 \begin{proposition} Sei \(f:V\to W\) linear, endlichdimensional.
-Dann gilt:
-\begin{itemize}
-\item $f$ injektiv $\implies \mKer(f) = \{0\}$ und $ \mRg(f) = \dim V$
-\item $f$ surjektiv $\implies \mIm(f) = W$ und $\mRg(f) = \dim W$
-\end{itemize}
+  Dann gilt:
+  \begin{itemize}
+  \item $f$ injektiv $\implies \mKer(f) = \{0\}$ und $ \mRg(f) = \dim V$
+  \item $f$ surjektiv $\implies \mIm(f) = W$ und $\mRg(f) = \dim W$
+  \end{itemize}
 \end{proposition}
 
 
 \begin{korollar} Ist \(\mdim V = \mdim W \), so ist \(f\) injektiv $\iff $ \(f\) surjektiv.\end{korollar}
 \begin{beobachtung}
-	Das ist analog zu Abbildungen endlicher Mengen: Sind \(X,Y\) endliche Mengen, \(h: X\to Y\) eine Abbildung, so gilt:
-	\begin{itemize}
-		\item \(h\text{ injektiv} \iff |h(X)| = |X| \)
-		\item \(h\text{ surjektiv} \iff |h(X)| = |Y| \)
-		\item \(h\text{ bijektiv} \iff |X|=|h(X)|=|Y| \)
-	\end{itemize}
+  Das ist analog zu Abbildungen endlicher Mengen: Sind \(X,Y\) endliche Mengen, \(h: X\to Y\) eine Abbildung, so gilt:
+  \begin{itemize}
+  \item \(h\text{ injektiv} \iff |h(X)| = |X| \)
+  \item \(h\text{ surjektiv} \iff |h(X)| = |Y| \)
+  \item \(h\text{ bijektiv} \iff |X|=|h(X)|=|Y| \)
+  \end{itemize}
 \end{beobachtung}
 
 \begin{proposition}[Dimensionsformel]
-Sind \(U_1, U_2 \subset V\) Untervektorr"aume, dann gilt: \(\dim(U_1 +U_2) =\dim U_1 + \dim U_2 - \dim (U_1\cap U_2)\)
+  Sind \(U_1, U_2 \subset V\) Untervektorr"aume, dann gilt: \(\dim(U_1 +U_2) =\dim U_1 + \dim U_2 - \dim (U_1\cap U_2)\)
 \end{proposition}
 \begin{bem}
-\(U_1\cap U_2\) ist stets ein Untervektorraum, wenn \(U_1\) und \(U_2\) Untervektorr"aume sind.
+  \(U_1\cap U_2\) ist stets ein Untervektorraum, wenn \(U_1\) und \(U_2\) Untervektorr"aume sind.
 \end{bem}
 \begin{prof}[Dimensionsformel] 
 
-Betrachte die Abbildung \(f: U_1 \times U_2 \to U_1 + U_2, (u_1, u_2) \mapsto u_1 + u_2 \). Hierbei ist \(U_1\times U_2 = \{(u_1, u_2) | u_1 \in U_1, u_2 \in U_2 \} \) der Verktorraum der Paare \((u_1, u_2)\) mit
-elementweisen Operationen:
-\begin{align*}
-(u_1, u_2) + (u_1', u_2') &= (u_1 + u_1', u_2 + u_2') \\
-\lambda (u_1, u_2) &= (\lambda u_1, \lambda u_2)
-\end{align*}
-Oft nennt man \(U_1 \times U_2\) auch \gq{"au"sere direkte Summe} von \(U_1\) und \(U_2\) mit Bezeichnung \(U_1 \oplus U_2\).
-\begin{bem}Die Kollision der
-Bezeichnungen \(U_1\oplus U_2\) für die direkte Summe zweier Untervektorr"aume / "außere Summe ist harmlos ("Ubg).
-\end{bem}
+  Betrachte die Abbildung \(f: U_1 \times U_2 \to U_1 + U_2, (u_1, u_2) \mapsto u_1 + u_2 \). Hierbei ist \(U_1\times U_2 = \{(u_1, u_2) | u_1 \in U_1, u_2 \in U_2 \} \) der Verktorraum der Paare \((u_1, u_2)\) mit
+  elementweisen Operationen:
+  \begin{align*}
+    (u_1, u_2) + (u_1', u_2') &= (u_1 + u_1', u_2 + u_2') \\
+    \lambda (u_1, u_2) &= (\lambda u_1, \lambda u_2)
+  \end{align*}
+  Oft nennt man \(U_1 \times U_2\) auch \gq{"au"sere direkte Summe} von \(U_1\) und \(U_2\) mit Bezeichnung \(U_1 \oplus U_2\).
+  \begin{bem}Die Kollision der
+    Bezeichnungen \(U_1\oplus U_2\) für die direkte Summe zweier Untervektorr"aume / "außere Summe ist harmlos ("Ubg).
+  \end{bem}
 
-Nun gilt \(\dim \mKer(f) + \dim\mIm(f) = \dim(U_1\times U_2) \)
+  Nun gilt \(\dim \mKer(f) + \dim\mIm(f) = \dim(U_1\times U_2) \)
 
-Es gilt weiterhin: \(\dim(U_1 \times U_2) = \dim U_1 + \dim U_2 \) Wenn \(e_1, \dots, e_k \) eine Basis in \(U_1\) und \(b_1, \dots, b_l \) eine Basis in \(U_2\) \(\implies\) \(e_1, \dots, e_k, b_1, \dots, b_l\) Basis in \(U_1\times U_2\)
+  Es gilt weiterhin: \(\dim(U_1 \times U_2) = \dim U_1 + \dim U_2 \) Wenn \(e_1, \dots, e_k \) eine Basis in \(U_1\) und \(b_1, \dots, b_l \) eine Basis in \(U_2\) \(\implies\) \(e_1, \dots, e_k, b_1, \dots, b_l\) Basis in \(U_1\times U_2\)
 
-Ferner gilt: \(\mIm(f) = U_1 + U_2\) per Definition. Nun ist:
-\begin{align*}
-\mKer(f) &= \{(u_1, u_2) | u_1 \in U_1, u_2\in U_2, u_1 + u_2 = 0\} = \{(u, -u)| u \in U_1 \cap U_2 \}\\
-&\implies \dim\mKer (f) = \dim(U_1 \cap U_2)\\
-&\implies \underbrace{\dim(U_1 \cap U_2)}_{\dim\mKer(f)} + \underbrace{\dim(U_1 + U_2)}_{\dim\mIm(f)} = \underbrace{\dim(U_1) + \dim(U_2)}_{\dim (U_1\times U_2)}
-\end{align*}
+  Ferner gilt: \(\mIm(f) = U_1 + U_2\) per Definition. Nun ist:
+  \begin{align*}
+    \mKer(f) &= \{(u_1, u_2) | u_1 \in U_1, u_2\in U_2, u_1 + u_2 = 0\} = \{(u, -u)| u \in U_1 \cap U_2 \}\\
+             &\implies \dim\mKer (f) = \dim(U_1 \cap U_2)\\
+             &\implies \underbrace{\dim(U_1 \cap U_2)}_{\dim\mKer(f)} + \underbrace{\dim(U_1 + U_2)}_{\dim\mIm(f)} = \underbrace{\dim(U_1) + \dim(U_2)}_{\dim (U_1\times U_2)}
+  \end{align*}
 \end{prof}
 
 Was hat diese ganze Theorie mit Matrizen zu tun? Intuitiv: Abbildungen sind
@@ -1872,117 +1943,117 @@ Was hat diese ganze Theorie mit Matrizen zu tun? Intuitiv: Abbildungen sind
 Abbildungen.
 
 \begin{exa}
-Strecken in Richtung von \(l_2\) mit Faktor 2. Wie beschreibt man \(f\) in
-Koordinaten?
+  Strecken in Richtung von \(l_2\) mit Faktor 2. Wie beschreibt man \(f\) in
+  Koordinaten?
 \end{exa}
 
 \section{Abbildunngsmatrix}
 \begin{definition}{Raum der Homomorphismen}{}
-Seien \(V,W\) zwei (\(\mathbb{K}\)-) Vektorr"aume.
-\[\mHom_\mathbb{K}(V,W) = \{f: V\to W \mid f \text{ ist }\mathbb{K}\text{-linear}\}\].
+  Seien \(V,W\) zwei (\(\mathbb{K}\)-) Vektorr"aume.
+  \[\mHom_\mathbb{K}(V,W) = \{f: V\to W \mid f \text{ ist }\mathbb{K}\text{-linear}\}\].
 \end{definition}
 \begin{proposition}
-\(\mHom_\mathbb{K}(V,W)\) ist auch ein Vektorraum.
+  \(\mHom_\mathbb{K}(V,W)\) ist auch ein Vektorraum.
 \end{proposition}
 \begin{prof}
-Wenn \(f_1, f_2 \in \mHom_\mathbb{K}(V,W)\):
-\begin{align*}
-(f_1 + f_2)(v) &= f_1(v) + f_2(v) \quad\text{ist linear} \\
-(\lambda f_1)(v) &= \lambda\cdot f_1(v)\quad\text{ist auch linear}
-\end{align*}
+  Wenn \(f_1, f_2 \in \mHom_\mathbb{K}(V,W)\):
+  \begin{align*}
+    (f_1 + f_2)(v) &= f_1(v) + f_2(v) \quad\text{ist linear} \\
+    (\lambda f_1)(v) &= \lambda\cdot f_1(v)\quad\text{ist auch linear}
+  \end{align*}
 \end{prof}
 
 Seien \(V, W\) endlichdimensional, \(B = \{b_1, \dots, b_n\}\) Basis in \(V\), \(C = \{c_1, \dots, c_m\}\) Basis in \(W\). Sei \(f \in \mHom_\mathbb{K}(V,W)\). Die Abbildungsmatrix \(F= M_C^B(f)\) in \(f\) bzgl. \(B\) und \(C\) ist definiert als
 Matrix, deren Spalten die Koordinatenspalten von \(f(b_1),\dots, f(b_n)\) bzgl. der Basis \(C\) sind:
 \begin{align*}
-f(b_j) = \sum_{i=1}^mF_{ij}c_i \implies F \in \mathbb{K}^{m\times n}
+  f(b_j) = \sum_{i=1}^mF_{ij}c_i \implies F \in \mathbb{K}^{m\times n}
 \end{align*}
 
 \textbf{Vorsicht!} \(M_C^B(f)\) h"angt von der Wahl der Basen B und C ab (\(f\) jedoch nicht!).
 
 \begin{exa}
-Rotation um \(\frac{\pi}{4}\) gegen Urzeigersinn.
-\begin{align*}
-M_B^B(f) = \begin{pmatrix}
-\nicefrac{\sqrt{2}}{2} & -\nicefrac{\sqrt{2}}{2}\\
-\nicefrac{\sqrt{2}}{2} & \nicefrac{\sqrt{2}}{2}
-\end{pmatrix}
-\end{align*}
+  Rotation um \(\frac{\pi}{4}\) gegen Urzeigersinn.
+  \begin{align*}
+    M_B^B(f) = \begin{pmatrix}
+      \nicefrac{\sqrt{2}}{2} & -\nicefrac{\sqrt{2}}{2}\\
+      \nicefrac{\sqrt{2}}{2} & \nicefrac{\sqrt{2}}{2}
+    \end{pmatrix}
+  \end{align*}
 \end{exa}
 
 \begin{proposition} Seien \(V,W,B,C\) wie oben. Dann entsprechen die Abbildungsmatrizen
- \(F = M_C^B(f)\) den Abbildungen.  Genauer: Die Abbildung \(M_C^B: \mHom_\mathbb{K}(V,W)\to\mathbb{K}^{m\times n}\), \(f \mapsto M_C^B(f)\) ist ein Isomorphismus von
- Vektorra"umen.
+  \(F = M_C^B(f)\) den Abbildungen.  Genauer: Die Abbildung \(M_C^B: \mHom_\mathbb{K}(V,W)\to\mathbb{K}^{m\times n}\), \(f \mapsto M_C^B(f)\) ist ein Isomorphismus von
+  Vektorra"umen.
 \end{proposition}
 
 \begin{prof}
-Aus Definition von \(M_C^B(f)\) folgt sofort:
-\begin{align*}
-M^B_C(f_1 + f_2) &= M_C^B(f_1) + M_C^B(f_2)\\
-M^B_C(\lambda\cdot f) &= \lambda\cdot M_C^B(f)
-\end{align*}
-Also ist \(M_C^B(f)\) eine lineare
-Abbildung.
+  Aus Definition von \(M_C^B(f)\) folgt sofort:
+  \begin{align*}
+    M^B_C(f_1 + f_2) &= M_C^B(f_1) + M_C^B(f_2)\\
+    M^B_C(\lambda\cdot f) &= \lambda\cdot M_C^B(f)
+  \end{align*}
+  Also ist \(M_C^B(f)\) eine lineare
+  Abbildung.
 
-\(M_C^B\) ist injektiv: wenn \(f\) mit \(M^B_C(f) = 0\), dann gilt \(f(b_j) = 0\quad\forall j= 1,\dots n\); Da jeder Vektor \(v \in V\) eine Linearkombination von \(b_j\)s ist, folgt \(f(v) = 0 \quad\forall v \in V\) \(\implies\) der Kern ist null
+  \(M_C^B\) ist injektiv: wenn \(f\) mit \(M^B_C(f) = 0\), dann gilt \(f(b_j) = 0\quad\forall j= 1,\dots n\); Da jeder Vektor \(v \in V\) eine Linearkombination von \(b_j\)s ist, folgt \(f(v) = 0 \quad\forall v \in V\) \(\implies\) der Kern ist null
 
-\(M^B_C\) ist auch surjektiv: sei \(F\in \mathbb{K}^{m\times n}\) gegeben. Definiere eine Abbildung \(f: V\to W\) folgenderma"sen:
-\begin{align*}
-f\left(\sum_{j=1}^n\lambda_jb_j\right) = \sum_{j=1}^n\lambda_j\cdot\left(\sum_{i=1}^mF_{ij}c_i\right)=\sum_{i=1}^mc_i\sum_{j=1}^nF_{ij}\lambda_j
-\end{align*}
+  \(M^B_C\) ist auch surjektiv: sei \(F\in \mathbb{K}^{m\times n}\) gegeben. Definiere eine Abbildung \(f: V\to W\) folgenderma"sen:
+  \begin{align*}
+    f\left(\sum_{j=1}^n\lambda_jb_j\right) = \sum_{j=1}^n\lambda_j\cdot\left(\sum_{i=1}^mF_{ij}c_i\right)=\sum_{i=1}^mc_i\sum_{j=1}^nF_{ij}\lambda_j
+  \end{align*}
 
-\(f\) ist linear und es gilt:
-\begin{align*}
-f(b_j) = \sum_{i=1}^mF_{ij}c_i \implies M^B_C(f) = F
-\end{align*}
+  \(f\) ist linear und es gilt:
+  \begin{align*}
+    f(b_j) = \sum_{i=1}^mF_{ij}c_i \implies M^B_C(f) = F
+  \end{align*}
 \end{prof}
 
 Im Beweis haben wir unter anderem festgestellt:
 \begin{relation}
-\begin{align*}
-f\left(\sum_{j=1}^n\lambda_jb_j\right)=\sum_{i=1}^mc_i\underbrace{\sum_{j=1}^nF_{ij}\lambda_j}_{\mu_i}
-\end{align*}
+  \begin{align*}
+    f\left(\sum_{j=1}^n\lambda_jb_j\right)=\sum_{i=1}^mc_i\underbrace{\sum_{j=1}^nF_{ij}\lambda_j}_{\mu_i}
+  \end{align*}
 
-Das hei"st: Wenn \(v=\sum_{j=1}^n\lambda_jb_j\in V\) mit Koordinatenspalte \(\lambda = (\lambda_1,\dots,\lambda_n)^\top\) (bez"uglich \(B\)), \(w = f(v)\), dann hat \(w\) folgende Koordinatenspalte bez"uglich \(C\):
-\begin{align}
-\mu = F\cdot \lambda
-\end{align}
+  Das hei"st: Wenn \(v=\sum_{j=1}^n\lambda_jb_j\in V\) mit Koordinatenspalte \(\lambda = (\lambda_1,\dots,\lambda_n)^\top\) (bez"uglich \(B\)), \(w = f(v)\), dann hat \(w\) folgende Koordinatenspalte bez"uglich \(C\):
+  \begin{align}
+    \mu = F\cdot \lambda
+  \end{align}
 \end{relation}
 
 \begin{exa}
-Wenn \(V=K^n, W=K^M\) dann hat \(V\) eine Basis \(\mathcal{E}_n = (e_1, \dots, e_n)\), wobei \(e_i\) der Vektor ist, der an der \(i\)-ten Stelle 1 ist und sonst 0. Und \(W\) hat die Basis \(\mathcal{E}_m = (e_1, \dots, e_m)\).
-Sei \(A\in K^{m\times n }\), \(f_A: \mathbb{K}^n\to \mathbb{K}^m\), \(x \mapsto A\cdot x\). Dann gilt:
-\begin{align*}
-M^{\mathcal{E}_n}_{\mathcal{E}_m}(f_A) &= A\\
-f_A(e_j) &= A\cdot e_j = j\text{-te Spalte von } A = a_j
-\end{align*}
+  Wenn \(V=K^n, W=K^M\) dann hat \(V\) eine Basis \(\mathcal{E}_n = (e_1, \dots, e_n)\), wobei \(e_i\) der Vektor ist, der an der \(i\)-ten Stelle 1 ist und sonst 0. Und \(W\) hat die Basis \(\mathcal{E}_m = (e_1, \dots, e_m)\).
+  Sei \(A\in K^{m\times n }\), \(f_A: \mathbb{K}^n\to \mathbb{K}^m\), \(x \mapsto A\cdot x\). Dann gilt:
+  \begin{align*}
+    M^{\mathcal{E}_n}_{\mathcal{E}_m}(f_A) &= A\\
+    f_A(e_j) &= A\cdot e_j = j\text{-te Spalte von } A = a_j
+  \end{align*}
 \end{exa}
 
 Seien \(V, W, Z\) drei \(\mathbb{K}\)-Vektorr"aume, \(f \in \mHom_\mathbb{K}(V, W)\), \(g \in \mHom_\mathbb{K}(W,Z)\). Dann gilt: \(g\circ f \in \mHom_\mathbb{K}(V,Z)\).
 
 \begin{proposition}
-	 Seien \(B,C,D\) Basen in
-	\(V,W,Z\). Dann gilt: \(M^B_D(g\circ f) = M^C_D(g)\cdot M^B_C(f)\).
+  Seien \(B,C,D\) Basen in
+  \(V,W,Z\). Dann gilt: \(M^B_D(g\circ f) = M^C_D(g)\cdot M^B_C(f)\).
 \end{proposition}
 \begin{prof}
- Sei \(F = M^B_C(f)\), \(G = M^C_D(g)\). Dann:
- \begin{align*}
- (g\circ f)(b_j) &= g(f(b_j)) = g\left(\sum_{i=1}^m F_{ij}c_i\right) = \sum_{i=1}^mF_{ij}g(c_i) \\&= \sum_{i=1}^m F_{ij}\sum_{k=1}^lG_{ki}d_k = \sum_{k=1}^l\underbrace{\left(\sum_{i=1}^mG_{ki}F_{ij}\right)}_{M^B_D(g\circ f)}d_k
- \end{align*}
+  Sei \(F = M^B_C(f)\), \(G = M^C_D(g)\). Dann:
+  \begin{align*}
+    (g\circ f)(b_j) &= g(f(b_j)) = g\left(\sum_{i=1}^m F_{ij}c_i\right) = \sum_{i=1}^mF_{ij}g(c_i) \\&= \sum_{i=1}^m F_{ij}\sum_{k=1}^lG_{ki}d_k = \sum_{k=1}^l\underbrace{\left(\sum_{i=1}^mG_{ki}F_{ij}\right)}_{M^B_D(g\circ f)}d_k
+  \end{align*}
 \end{prof}
 
 Wenn \(V\) ein Vektorraum ist, \(B,B'\) zwei Basen, dann erhalten wir die
- Basiswechselmatrix \(S\), deren Spalten die Koordinaten von den neuen
- Basisvektoren \((b_1', \dots, b_n')\) bez"uglich der alten Basis \(B = (b_1,
- \dots, b_n)\) sind. Es folgt sofort aus den Definitionen:
- \(S=M^{B'}_B(\mId_V)\)
- 
+Basiswechselmatrix \(S\), deren Spalten die Koordinaten von den neuen
+Basisvektoren \((b_1', \dots, b_n')\) bez"uglich der alten Basis \(B = (b_1,
+\dots, b_n)\) sind. Es folgt sofort aus den Definitionen:
+\(S=M^{B'}_B(\mId_V)\)
+
 \begin{lemma}[Basiswechselmatrizen sind invertierbar]
-	\(S = M^{B'}_B(\mId_V)\) ist invertierbar f"ur je zwei Basen \(B, B' \subset V\), und \(S^{-1} = M^B_{B'}(\mId_V)\).
+  \(S = M^{B'}_B(\mId_V)\) ist invertierbar f"ur je zwei Basen \(B, B' \subset V\), und \(S^{-1} = M^B_{B'}(\mId_V)\).
 \end{lemma}
 \begin{prof}
-	\(M^B_B(\mId_V)=1_n\), daher ist
-	\[\underbrace{M^{B'}_B(\mId_V)}_{S}\cdot M^B_{B'}(\mId_V) = M^B_B(\mId_V) = 1_n \]
+  \(M^B_B(\mId_V)=1_n\), daher ist
+  \[\underbrace{M^{B'}_B(\mId_V)}_{S}\cdot M^B_{B'}(\mId_V) = M^B_B(\mId_V) = 1_n \]
 \end{prof}
 
 
@@ -2012,10 +2083,10 @@ in den neuen koordinaten $\lambda'=S^{-1}\lambda$
 \end{notte}
 
 \begin{lemma}[Verhalten von Abbildungsmatrizen unter Basiswechsel]
-Sei .. eine Lineare Abbildung, ..., dann gilt:
-\[
-  M^{B'}_{C'}(f)=
-\] In Anderen Worten: wenn $S$ die Basiswechselmatrix von ... so gilt
+  Sei .. eine Lineare Abbildung, ..., dann gilt:
+  \[
+    M^{B'}_{C'}(f)=
+  \] In Anderen Worten: wenn $S$ die Basiswechselmatrix von ... so gilt
 \end{lemma}
 
 \begin{prof}
@@ -2123,16 +2194,16 @@ Kriterium, welches effizient berechenbar w"ahre. Ausserdem fehlt uns zur Zeit
 eine geometrische Interpretation f"ur invertierbarkeit.
 
 \begin{relation}
-\begin{trivlist}
+  \begin{trivlist}
   \item Wir haben gesehen: $A\in K^{n\times n}$ ist genau dann invertierbar, wenn ihre Spalten
-  (Zeilen) linear unabh"angig sind.
- 
+    (Zeilen) linear unabh"angig sind.
+    
   \item  Wenn $A\in \mathbb{K}^{2\times 2}$, dann sind ihre
-  Spalten linear unabh"angig genau dann, wenn die entsprechenden Vektoren $a_1,
-  a_2 \in \mathbb{R}^2$ ein ''nicht ausgeartetes'' Parallelogramm aufspannen. \\
+    Spalten linear unabh"angig genau dann, wenn die entsprechenden Vektoren $a_1,
+    a_2 \in \mathbb{R}^2$ ein ''nicht ausgeartetes'' Parallelogramm aufspannen. \\
 
   \item Analog sind $a_1, a_2, a_3$ linear unabh"angig in $\mathbb{R}^3$.
-\end{trivlist}
+  \end{trivlist}
 \end{relation}
 
 Wenn wir diese Ideen in einen ''abstrakten'' Vektorraum uebertragen wollen,
@@ -2149,7 +2220,7 @@ $\mathbb{R}^2$ bzw. $\mathbb{R}^3$?
   entsprechenden Faktor.
   \begin{align*}
     Vol(\lambda\cdot a_1, a_2)=\lambda\cdot \mVol(a_1,a_2) \tag{$\lambda \geq 0$}
-    \end{align*}
+  \end{align*}
 \end{itemize}
 
 \begin{definition}{Volumenform}
@@ -2218,10 +2289,13 @@ Wir wollen die Abh"angigkeit aus dem lemma explizit aufschreiben
 \begin{exa}
   Ein Elelement \(\sigma \in S_n\) schreibt man h"aufig als Tabelle:
   
-  \[\left(\begin{array}{cccc}
-  	1 & 2 & ... & n\\
-  	\sigma(1) & \sigma(2) & ... & \sigma(n)\\
-  \end{array}\right)\]
+  \[
+    \left(
+      \begin{array}{cccc}
+        1 & 2 & ... & n\\
+        \sigma(1) & \sigma(2) & ... & \sigma(n)\\
+      \end{array}\right)
+  \]
 \end{exa}
 
 \begin{notte}
@@ -2281,223 +2355,223 @@ V\) mit Darstellungen \(v_i = \sum_{i=1}^n{\lambda_{ij}\cdot b_j}\).
 
 \todo{Das stand so nicht an der Tafel, aber \((-1)^\varepsilon\) kam mir spanisch vor}
 \begin{align*}
-    \omega(v_1,\dots,v_n) &= \omega\left(\sum_{j_1=1}^n\lambda_{1,j_1}b_{j_1},\dots,\sum_{j_n=1}^n\lambda_{n,j_n}b_{j_n}\right) \\
-    &= \sum_{j_1,\dots,j_n=1}^n\left(\underbrace{\lambda_{1,j_1}\dots\lambda_{n,j_n}}_{\text{Produkt}}\cdot\omega(b_{j_1},\dots,b_{j_n})\right) \\
-    &= \sum_{\sigma\in S_n}\left(\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)}\omega(b_{\sigma(1)},\dots,b_{\sigma(n)})\right) \\
-    &= \left(\sum_{\sigma\in S_n}{\varepsilon(\sigma)}\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)}\right)\omega(b_1,\dots,b_n)
+  \omega(v_1,\dots,v_n) &= \omega\left(\sum_{j_1=1}^n\lambda_{1,j_1}b_{j_1},\dots,\sum_{j_n=1}^n\lambda_{n,j_n}b_{j_n}\right) \\
+                        &= \sum_{j_1,\dots,j_n=1}^n\left(\underbrace{\lambda_{1,j_1}\dots\lambda_{n,j_n}}_{\text{Produkt}}\cdot\omega(b_{j_1},\dots,b_{j_n})\right) \\
+                        &= \sum_{\sigma\in S_n}\left(\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)}\omega(b_{\sigma(1)},\dots,b_{\sigma(n)})\right) \\
+                        &= \left(\sum_{\sigma\in S_n}{\varepsilon(\sigma)}\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)}\right)\omega(b_1,\dots,b_n)
 \end{align*}
 
 
- Wenn \(V=K^n, (b_1,\dots,b_n) = (e_1,\dots,e_n)\) die Standardbasis in \(K^n\), und die Volumenform \(\omega:
- V^n\to K\) so gew"ahlt ist, dass \(\omega(e_1,...,e_n)=1\), dann bekommt man
- folgende Definition f"ur eine Matrix \(A\):
+Wenn \(V=K^n, (b_1,\dots,b_n) = (e_1,\dots,e_n)\) die Standardbasis in \(K^n\), und die Volumenform \(\omega:
+V^n\to K\) so gew"ahlt ist, dass \(\omega(e_1,...,e_n)=1\), dann bekommt man
+folgende Definition f"ur eine Matrix \(A\):
 
- \begin{definition}{}{}
- 	Sei \(A\in K^{n\times n}\) eine Matrix mit Eintr"agen \(a_{ij}\). Wenn man die Zeilen von \(A\) (sagen wir \(\alpha_1,\dots, \alpha_n\)) als
-   Vektoren in \(K^n\) auffast, dann gilt: \[\omega(\alpha_1,\dots,\alpha_n) = \sum_{\sigma\in S_n}{\varepsilon(\sigma)a_{1,\sigma(1)}\dots a_{n,\sigma(n)}} =: \det A \]
-   Das nennen wir ab jetzt auch Leibniz-Formel.
- \end{definition}
+\begin{definition}{}{}
+  Sei \(A\in K^{n\times n}\) eine Matrix mit Eintr"agen \(a_{ij}\). Wenn man die Zeilen von \(A\) (sagen wir \(\alpha_1,\dots, \alpha_n\)) als
+  Vektoren in \(K^n\) auffast, dann gilt: \[\omega(\alpha_1,\dots,\alpha_n) = \sum_{\sigma\in S_n}{\varepsilon(\sigma)a_{1,\sigma(1)}\dots a_{n,\sigma(n)}} =: \det A \]
+  Das nennen wir ab jetzt auch Leibniz-Formel.
+\end{definition}
 
- \begin{relation}
-   Geometrische Bedeutung: \(\det A\) ist das (orientierte) Volumen des Quaders / Parallelotops aufgespannt durch Zeilen von \(A\) (wenn man das Volumen des \gq{Standardquaders} aufgespannt durch Standardzeilen \(e_1^T,\dots,e_n^T\) gleich 1 setzt)
- \end{relation}
+\begin{relation}
+  Geometrische Bedeutung: \(\det A\) ist das (orientierte) Volumen des Quaders / Parallelotops aufgespannt durch Zeilen von \(A\) (wenn man das Volumen des \gq{Standardquaders} aufgespannt durch Standardzeilen \(e_1^T,\dots,e_n^T\) gleich 1 setzt)
+\end{relation}
 \begin{proposition}
-	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
+  Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
 \end{proposition}
 \begin{prof}
-	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
-	\begin{align*}
-	\det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
-	&= \sum_{\sigma = \sigma'\circ\tau_{ij}\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{i,\sigma(i)}\dots\lambda_{j,\sigma(j)}\dots\lambda_{n,\sigma(n)} \\
-	&= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(j)}}\dots \lambda_{n,\sigma'(n)} \\
-	&= \mcolor{-} \sum_{\sigma'\in S_n} \mcolor{\varepsilon(\sigma')} \lambda_{1,\sigma'(1)}\dots\lambda_{i,\sigma'(i)}\dots\lambda_{j,\sigma'(j)}\dots\lambda_{n,\sigma'(n)} = -\det \Delta \\
-	&\implies \det \Delta = 0
-	\end{align*}
-	\(\implies\omega \) alternierend.
+  W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
+  \begin{align*}
+    \det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
+               &= \sum_{\sigma = \sigma'\circ\tau_{ij}\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{i,\sigma(i)}\dots\lambda_{j,\sigma(j)}\dots\lambda_{n,\sigma(n)} \\
+               &= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(j)}}\dots \lambda_{n,\sigma'(n)} \\
+               &= \mcolor{-} \sum_{\sigma'\in S_n} \mcolor{\varepsilon(\sigma')} \lambda_{1,\sigma'(1)}\dots\lambda_{i,\sigma'(i)}\dots\lambda_{j,\sigma'(j)}\dots\lambda_{n,\sigma'(n)} = -\det \Delta \\
+               &\implies \det \Delta = 0
+  \end{align*}
+  \(\implies\omega \) alternierend.
 \end{prof}
 
 \(\omega\) ist eindeutig durch den Wert (=1) auf \(B\) bestimmt \(\implies\)  wenn \(\omega'\) eine Volumenform auf \(V\) ist, so gilt \(\omega' = \underbrace{\omega'(b_1,\dots,b_n)}_{\in K}\cdot\omega\)
 
 \begin{definition}{Determinante}
-	Sei \(V\) ein \(n\)-dimensionaler Vektorraum, \(f: V\to V\) linear. Die Determinante von \(f\) ist
-	\[\det(f):= \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)}\]
-	wobei \(\omega \neq 0\) eine Volumenform auf \(V\) ist.
+  Sei \(V\) ein \(n\)-dimensionaler Vektorraum, \(f: V\to V\) linear. Die Determinante von \(f\) ist
+  \[\det(f):= \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)}\]
+  wobei \(\omega \neq 0\) eine Volumenform auf \(V\) ist.
 \end{definition}
 
 \begin{beobachtung}
-	Die obige Proposition zeigt, dass \(\det(f)\) wohldefiniert ist (= auf die Wahl von \(\omega\neq 0\) nicht ankommt). Geometrisch: \(\det(f)\) ist der Verzerrungsfaktor von dem Volumen (unter \(f\)).
+  Die obige Proposition zeigt, dass \(\det(f)\) wohldefiniert ist (= auf die Wahl von \(\omega\neq 0\) nicht ankommt). Geometrisch: \(\det(f)\) ist der Verzerrungsfaktor von dem Volumen (unter \(f\)).
 \end{beobachtung}
 
 \begin{lemma}
-	\(\det\Delta = \det\Delta^T\quad\forall \Delta\in K^{n\times n}\)
+  \(\det\Delta = \det\Delta^T\quad\forall \Delta\in K^{n\times n}\)
 \end{lemma}
 \begin{prof}
-	Es gilt: \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\quad\forall \sigma\in S_n \) (folgt z.B. aus \(\varepsilon(\sigma\circ\sigma^{-1})=1=\varepsilon(\sigma)\varepsilon(\sigma^{-1})\))
-	\begin{align*}
-	\det\Delta^T = \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{\sigma(1),1}\dots\lambda_{\sigma(n),n} = \sum_{\sigma^{-1}\in S_n}\varepsilon(\sigma^{-1})\lambda_{1,\sigma^{-1}(1)}\dots\lambda_{n,\sigma^{-1}(n)} = \det \Delta
-	\end{align*}
+  Es gilt: \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\quad\forall \sigma\in S_n \) (folgt z.B. aus \(\varepsilon(\sigma\circ\sigma^{-1})=1=\varepsilon(\sigma)\varepsilon(\sigma^{-1})\))
+  \begin{align*}
+    \det\Delta^T = \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{\sigma(1),1}\dots\lambda_{\sigma(n),n} = \sum_{\sigma^{-1}\in S_n}\varepsilon(\sigma^{-1})\lambda_{1,\sigma^{-1}(1)}\dots\lambda_{n,\sigma^{-1}(n)} = \det \Delta
+  \end{align*}
 \end{prof}
 \begin{proposition}
-	\begin{enumerate}
-		\item \(f, g: V\to V \) linear \(\implies\det(g\circ f) = \det(g)\det(f) \)
-		\item \(f\) ist genau dann invertierbar, wenn \(\det(f)\neq 0 \)
-	\end{enumerate}
+  \begin{enumerate}
+  \item \(f, g: V\to V \) linear \(\implies\det(g\circ f) = \det(g)\det(f) \)
+  \item \(f\) ist genau dann invertierbar, wenn \(\det(f)\neq 0 \)
+  \end{enumerate}
 \end{proposition}
 \begin{korollar}
-	Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
+  Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
 \end{korollar}
 \begin{prof}
-	\begin{align*}
-	\det(f) = \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
-	\end{align*}
+  \begin{align*}
+    \det(f) = \frac{\omega(f(b_1),\dots,f(b_n)}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
+  \end{align*}
 \end{prof}
 \begin{korollar}
-	Eine Matrix \(A\in K^{n\times n} \) ist genau dann invertierbar, wenn \(\det A \neq 0 \)
+  Eine Matrix \(A\in K^{n\times n} \) ist genau dann invertierbar, wenn \(\det A \neq 0 \)
 \end{korollar}
 \begin{bem}
-	Es gibt eine Reihe von Begriffen f"ur Matrizen, die nach unseren Invertierbarkeitskriterien alle "aquivalent dazu sind, dass \(A \) invertierbar ist, z.B. nicht ausgeartet, regul"ar etc.
+  Es gibt eine Reihe von Begriffen f"ur Matrizen, die nach unseren Invertierbarkeitskriterien alle "aquivalent dazu sind, dass \(A \) invertierbar ist, z.B. nicht ausgeartet, regul"ar etc.
 \end{bem}
 \begin{korollar}
-Wie berechnet man Determinanten?
+  Wie berechnet man Determinanten?
 
-Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnungen macht man normalerweise unter Benutzung folgender Eigenschaften der Determinante (die daraus folgen, dass \(\det : (K^n)^n \to K\) eine Volumenform ist):
-\begin{itemize}
-	\item Wenn man zu einer Zeile / Spalte der Matrix ein Vielfaches einer anderen Zeile bzw. Spalte addiert, so "andert sich die Determinante nicht;
-	\item \(\det \) ist linear in jeder Zeile bzw. Spalte.
-\end{itemize}
+  Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnungen macht man normalerweise unter Benutzung folgender Eigenschaften der Determinante (die daraus folgen, dass \(\det : (K^n)^n \to K\) eine Volumenform ist):
+  \begin{itemize}
+  \item Wenn man zu einer Zeile / Spalte der Matrix ein Vielfaches einer anderen Zeile bzw. Spalte addiert, so "andert sich die Determinante nicht;
+  \item \(\det \) ist linear in jeder Zeile bzw. Spalte.
+  \end{itemize}
 \end{korollar}
 \begin{bem}
-	F"ur \(\varepsilon(\sigma)\), das Vorzeichen einer Permutation, gibt's auch die Physiker-Notation: \(\varepsilon_{1,\dots,n}=1\) und es ver"andert das Vorzeichen, wenn man zwei Indizes vertauscht.
+  F"ur \(\varepsilon(\sigma)\), das Vorzeichen einer Permutation, gibt's auch die Physiker-Notation: \(\varepsilon_{1,\dots,n}=1\) und es ver"andert das Vorzeichen, wenn man zwei Indizes vertauscht.
 \end{bem}
 \begin{bem}[Orientierung von Vektorr"aumen]
-	Volumenformen sind laut unserer Definition linear \(\implies\) selbst wenn \(V\) ein \(\mathbb{R}\)-Vektorraum ist, kann es passieren, dass \(\omega(v_1,\dots,v_n)< 0\). Die Wahl von einer Volumenform \(\omega\) definiert die sogenannte \emph{Orientierung} von \(V\) (\(V\) ein \(mathbb{R}\)-VR). Wenn wir \(\omega\) fixieren, dann entstehen zwei Klassen von Basen in \(V\): \(B = (b_1,\dots,b_n)\) hei"st positiv (negativ) orientiert, wenn \(\omega(b_1,\dots,b_n) > (<) 0\). 
-	
-	In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
+  Volumenformen sind laut unserer Definition linear \(\implies\) selbst wenn \(V\) ein \(\mathbb{R}\)-Vektorraum ist, kann es passieren, dass \(\omega(v_1,\dots,v_n)< 0\). Die Wahl von einer Volumenform \(\omega\) definiert die sogenannte \emph{Orientierung} von \(V\) (\(V\) ein \(mathbb{R}\)-VR). Wenn wir \(\omega\) fixieren, dann entstehen zwei Klassen von Basen in \(V\): \(B = (b_1,\dots,b_n)\) hei"st positiv (negativ) orientiert, wenn \(\omega(b_1,\dots,b_n) > (<) 0\). 
+  
+  In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
 \end{bem}
 
 \begin{proposition}	Sei \(V\) ein \(n\)-dimensionaler Vektorraum. Es gibt eine bis auf ein Vielfaches eindeutige Volumenform \(\omega \neq 0\) auf \(V\).
 \end{proposition}
 \begin{prof}
-	W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
-	\begin{align*}
-	\det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
-	&= \sum_{\sigma = \sigma'\circ\tau_{ij}\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{i,\sigma(i)}\dots\lambda_{j,\sigma(j)}\dots\lambda_{n,\sigma(n)} \\
-	&= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(j)}}\dots \lambda_{n,\sigma'(n)} \\
-	&= \mcolor{-} \sum_{\sigma'\in S_n} \mcolor{\varepsilon(\sigma')} \lambda_{1,\sigma'(1)}\dots\lambda_{i,\sigma'(i)}\dots\lambda_{j,\sigma'(j)}\dots\lambda_{n,\sigma'(n)} = -\det A \\
-	&\implies \det A = 0
-	\end{align*}
-	\(\implies\omega \) alternierend.
+  W"ahle eine Basis \(B= (b_1,\dots,b_n) \in V\), definiere \(\omega(v_1,\dots,v_n)\) durch die Leibniz-Formel mit \(\omega(b_1,\dots,b_n):=1\). Dann ist \(\omega\neq 0\) nach Konstruktion. \(\omega\) ist linear in jeder Variable, weil \(\det\Delta \) definiert durch die Leibniz-Formel linear in jeder Zeile der Matrix \(\Delta\) ist. Wir m"ussen noch zeigen, dass es alternierend ist: \[\omega(v_1,\dots,v_{i-1},v_i,v_{i+1},\dots,v_{j-1},v_j,v_{j_1},\dots,v_n) = \det\Delta \cdot\omega(b_1,\dots,b_n) \] Wobei die \(i\)-te und \(j\)-te Zeile von \(\Delta\) "ubereinstimmen (es gilt also \(\lambda_{i,x}=\lambda_{j,x}\)). Es gilt:
+  \begin{align*}
+    \det\Delta &= \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{n,\sigma(n)} \\
+               &= \sum_{\sigma = \sigma'\circ\tau_{ij}\in S_n}\varepsilon(\sigma)\lambda_{1,\sigma(1)}\dots\lambda_{i,\sigma(i)}\dots\lambda_{j,\sigma(j)}\dots\lambda_{n,\sigma(n)} \\
+               &= \sum_{\sigma\in S_n}\varepsilon(\sigma'\circ\tau_{ij})\cdot\lambda_{1,\sigma'(1)}\dots\overbrace{\lambda_{i,\sigma'(j)}}^{=\lambda_{i,\sigma(i)}}\dots\overbrace{\lambda_{j,\sigma'(i)}}^{=\lambda_{j,\sigma(j)}}\dots \lambda_{n,\sigma'(n)} \\
+               &= \mcolor{-} \sum_{\sigma'\in S_n} \mcolor{\varepsilon(\sigma')} \lambda_{1,\sigma'(1)}\dots\lambda_{i,\sigma'(i)}\dots\lambda_{j,\sigma'(j)}\dots\lambda_{n,\sigma'(n)} = -\det A \\
+               &\implies \det A = 0
+  \end{align*}
+  \(\implies\omega \) alternierend.
 \end{prof}
 
 \(\omega\) ist eindeutig durch den Wert (=1) auf \(B\) bestimmt \(\implies\)  wenn \(\omega'\) eine Volumenform auf \(V\) ist, so gilt \(\omega' = \underbrace{\omega'(b_1,\dots,b_n)}_{\in K}\cdot\omega\)
 
 \begin{definition}{Determinante}{}
-	Sei \(V\) ein \(n\)-dimensionaler Vektorraum, \(f: V\to V\) linear. Die Determinante von \(f\) ist
-	\[\det(f):= \frac{\omega(f(b_1),\dots,f(b_n))}{\omega(b_1,\dots,b_n)}\]
-	wobei \(\omega \neq 0\) eine Volumenform auf \(V\) ist.
+  Sei \(V\) ein \(n\)-dimensionaler Vektorraum, \(f: V\to V\) linear. Die Determinante von \(f\) ist
+  \[\det(f):= \frac{\omega(f(b_1),\dots,f(b_n))}{\omega(b_1,\dots,b_n)}\]
+  wobei \(\omega \neq 0\) eine Volumenform auf \(V\) ist.
 \end{definition}
 
 \begin{beobachtung}
-	Die obige Proposition zeigt, dass \(\det(f)\) wohldefiniert ist (= auf die Wahl von \(\omega\neq 0\) nicht ankommt). Geometrisch: \(\det(f)\) ist der Verzerrungsfaktor von dem Volumen (unter \(f\)).
+  Die obige Proposition zeigt, dass \(\det(f)\) wohldefiniert ist (= auf die Wahl von \(\omega\neq 0\) nicht ankommt). Geometrisch: \(\det(f)\) ist der Verzerrungsfaktor von dem Volumen (unter \(f\)).
 \end{beobachtung}
 
 \begin{lemma}
-	\(\det\Delta = \det\Delta^T\quad\forall \Delta\in K^{n\times n}\)
+  \(\det\Delta = \det\Delta^T\quad\forall \Delta\in K^{n\times n}\)
 \end{lemma}
 \begin{prof}
-	Es gilt: \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\quad\forall \sigma\in S_n \) (folgt z.B. aus \(\varepsilon(\sigma\circ\sigma^{-1})=1=\varepsilon(\sigma)\varepsilon(\sigma^{-1})\))
-	\begin{align*}
-	\det\Delta^T = \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{\sigma(1),1}\dots\lambda_{\sigma(n),n} = \sum_{\sigma^{-1}\in S_n}\varepsilon(\sigma^{-1})\lambda_{1,\sigma^{-1}(1)}\dots\lambda_{n,\sigma^{-1}(n)} = \det \Delta
-	\end{align*}
+  Es gilt: \(\varepsilon(\sigma) = \varepsilon(\sigma^{-1})\quad\forall \sigma\in S_n \) (folgt z.B. aus \(\varepsilon(\sigma\circ\sigma^{-1})=1=\varepsilon(\sigma)\varepsilon(\sigma^{-1})\))
+  \begin{align*}
+    \det\Delta^T = \sum_{\sigma\in S_n}\varepsilon(\sigma)\lambda_{\sigma(1),1}\dots\lambda_{\sigma(n),n} = \sum_{\sigma^{-1}\in S_n}\varepsilon(\sigma^{-1})\lambda_{1,\sigma^{-1}(1)}\dots\lambda_{n,\sigma^{-1}(n)} = \det \Delta
+  \end{align*}
 \end{prof}
 \begin{proposition}
-	\begin{enumerate}
-		\item \(f, g: V\to V \) linear \(\implies\det(g\circ f) = \det(g)\det(f) \)
-		\item \(f\) ist genau dann invertierbar, wenn \(\det(f)\neq 0 \)
-	\end{enumerate}
+  \begin{enumerate}
+  \item \(f, g: V\to V \) linear \(\implies\det(g\circ f) = \det(g)\det(f) \)
+  \item \(f\) ist genau dann invertierbar, wenn \(\det(f)\neq 0 \)
+  \end{enumerate}
 \end{proposition}
 \begin{prof}
   \begin{enumerate}
   \item Wenn \(f\) oder \(g\) nicht bijektiv sind, dann ist \(g\circ f\) auch nicht bijektiv. Daher ist \(\det g\circ f = 0 = \det g \det f\). Sonst gilt:
     \begin{align*}
       \det (f\circ g) &= \frac{\omega (g\circ f(v_1), \dots, g\circ f(v_n))}{\omega (v_1, \dots, v_n)} \\
-      &= \frac{\omega (g\circ f(v_1), \dots, g\circ f(v_n))}{\omega (f(v_1), \dots, f(v_n))}\cdot\frac{\omega (f(v_1), \dots, f(v_n))}{\omega (v_1,\dots ,v_n)} = \det f\det g
+                      &= \frac{\omega (g\circ f(v_1), \dots, g\circ f(v_n))}{\omega (f(v_1), \dots, f(v_n))}\cdot\frac{\omega (f(v_1), \dots, f(v_n))}{\omega (v_1,\dots ,v_n)} = \det f\det g
     \end{align*}
     Wobei der letzte Schritt nur funktioniert, weil \(f\) bijektiv sein soll und damit \(f(v_1), \dots ,f(v_n)\) auch eine Basis in \(V\) ist.
   \item \(f\) invertierbar \(\iff f\) bijektiv \(\iff f(v_1), \dots, f(v_n)\) ist eine Basis, wenn \(v_1, \dots, v_n\) eine Basis ist \(\iff\) \(f(v_1), \dots, f(v_n)\) sind linear unabh"angig f"ur linear unabh"angige \(v_1,\dots, v_n\) \(\iff \det f \neq 0\)
   \end{enumerate}
 \end{prof}
 \begin{korollar}
-	Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
+  Sei \(B\) eine Basis in \(V\), \(f:V\to V \) linear. Dann gilt: \(\det(f) = \det M^B_B(f) \)
 \end{korollar}
 \begin{prof}
-	\begin{align*}
-	\det(f) = \frac{\omega(f(b_1),\dots,f(b_n))}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
-	\end{align*}
+  \begin{align*}
+    \det(f) = \frac{\omega(f(b_1),\dots,f(b_n))}{\omega(b_1,\dots,b_n)} \stackrel{Def. Abb. + Leibniz}{=} \det M^B_B(f)^T \stackrel{Lemma}{=} \det M_B^B(f)
+  \end{align*}
 \end{prof}
 \begin{korollar}
-	Eine Matrix \(A\in K^{n\times n} \) ist genau dann invertierbar, wenn \(\det A \neq 0 \)
+  Eine Matrix \(A\in K^{n\times n} \) ist genau dann invertierbar, wenn \(\det A \neq 0 \)
 \end{korollar}
 \begin{bem}
-	Es gibt eine Reihe von Begriffen f"ur Matrizen, die nach unseren Invertierbarkeitskriterien alle "aquivalent dazu sind, dass \(A \) invertierbar ist, z.B. nicht ausgeartet, regul"ar etc.
+  Es gibt eine Reihe von Begriffen f"ur Matrizen, die nach unseren Invertierbarkeitskriterien alle "aquivalent dazu sind, dass \(A \) invertierbar ist, z.B. nicht ausgeartet, regul"ar etc.
 \end{bem}
 \begin{korollar}
-Wie berechnet man Determinanten?
+  Wie berechnet man Determinanten?
 
-Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnungen macht man normalerweise unter Benutzung folgender Eigenschaften der Determinante (die daraus folgen, dass \(\det : (K^n)^n \to K\) eine Volumenform ist):
-\begin{itemize}
-	\item Wenn man zu einer Zeile / Spalte der Matrix ein Vielfaches einer anderen Zeile bzw. Spalte addiert, so "andert sich die Determinante nicht;
-	\item \(\det \) ist linear in jeder Zeile bzw. Spalte.
-\end{itemize}
+  Die Leibniz-Foreml ist zu ineffizient (sie hat \(n!\) Summanden). Die Berechnungen macht man normalerweise unter Benutzung folgender Eigenschaften der Determinante (die daraus folgen, dass \(\det : (K^n)^n \to K\) eine Volumenform ist):
+  \begin{itemize}
+  \item Wenn man zu einer Zeile / Spalte der Matrix ein Vielfaches einer anderen Zeile bzw. Spalte addiert, so "andert sich die Determinante nicht;
+  \item \(\det \) ist linear in jeder Zeile bzw. Spalte.
+  \end{itemize}
 \end{korollar}
 \begin{bem}
-	F"ur \(\varepsilon(\sigma)\), das Vorzeichen einer Permutation, gibt's auch die Physiker-Notation: \(\varepsilon_{1,\dots,n}=1\) und es ver"andert das Vorzeichen, wenn man zwei Indizes vertauscht.
+  F"ur \(\varepsilon(\sigma)\), das Vorzeichen einer Permutation, gibt's auch die Physiker-Notation: \(\varepsilon_{1,\dots,n}=1\) und es ver"andert das Vorzeichen, wenn man zwei Indizes vertauscht.
 \end{bem}
 \begin{bem}[Orientierung von Vektorr"aumen]
-	Volumenformen sind laut unserer Definition linear \(\implies\) selbst wenn \(V\) ein \(\mathbb{R}\)-Vektorraum ist, kann es passieren, dass \(\omega(v_1,\dots,v_n)< 0\). Die Wahl von einer Volumenform \(\omega\) definiert die sogenannte \emph{Orientierung} von \(V\) (\(V\) ein \(mathbb{R}\)-VR). Wenn wir \(\omega\) fixieren, dann entstehen zwei Klassen von Basen in \(V\): \(B = (b_1,\dots,b_n)\) hei"st positiv (negativ) orientiert, wenn \(\omega(b_1,\dots,b_n) > (<) 0\). 
-	
-	In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
+  Volumenformen sind laut unserer Definition linear \(\implies\) selbst wenn \(V\) ein \(\mathbb{R}\)-Vektorraum ist, kann es passieren, dass \(\omega(v_1,\dots,v_n)< 0\). Die Wahl von einer Volumenform \(\omega\) definiert die sogenannte \emph{Orientierung} von \(V\) (\(V\) ein \(mathbb{R}\)-VR). Wenn wir \(\omega\) fixieren, dann entstehen zwei Klassen von Basen in \(V\): \(B = (b_1,\dots,b_n)\) hei"st positiv (negativ) orientiert, wenn \(\omega(b_1,\dots,b_n) > (<) 0\). 
+  
+  In diesem Sinne ist \(\omega(v_1,\dots,v_n)\) das \emph{orientierte} Volumen von dem Quader aufgespannt durch \(v_1,\dots,v_n\): wenn \(v_1,\dots,v_n\) positiv orientiert sind, ist \(\omega(v_1,\dots,v_n) = \) \(+\)Volumen, andernfalls \(-\)Volumen.
 \end{bem}
 
 \chapter{Eigenvektoren, Eigenwerte, Diagonalisierbarkeit}
 
 Wir haben gesehen: wenn \(f: V\to W\) linear, \(V, W\) endlichdimensionale Vektorr"aume \(\implies \exists B\subset V, C\subset W \) Basen so dass
 \[M^B_C(f) = \begin{pmatrix}
-1_r & 0\\
-0 & 0
-\end{pmatrix}, r = \mRg f\]
+    1_r & 0\\
+    0 & 0
+  \end{pmatrix}, r = \mRg f\]
 
 \begin{definition}{Endomorphismus, lineare Operatoren}{}
-	Ein Endomorphismus von \(V\) ist eine lineare Abbildung \(f: V\to V\). Bezeichnung: \(f\in \text{End}_K(V) = \text{Hom}_K(V,V) \)	
-	
-	Endomorphismus hei"sen auch lineare Operatoren auf \(V\). Die Wahl einer Basis \(B\subset V \) gibt uns eine Matrix \(M^B_B(f)\).
+  Ein Endomorphismus von \(V\) ist eine lineare Abbildung \(f: V\to V\). Bezeichnung: \(f\in \text{End}_K(V) = \text{Hom}_K(V,V) \)	
+  
+  Endomorphismus hei"sen auch lineare Operatoren auf \(V\). Die Wahl einer Basis \(B\subset V \) gibt uns eine Matrix \(M^B_B(f)\).
 \end{definition}
 \begin{korollar}[Hauptfrage]
-	Wenn \(f\) gegeben ist, wie findet man eine Basis \(B\), so dass \(M^B_B(f)\) eine besonders einfache Form hat?
-	
-	"Aquivalent, in Termen von Matrizen: Gegeben eine Matrix \(A\in K^{n\times n} \), finde eine invertierbare Matrix \(S\) so dass \(S^{-1}AS\) besonders einfache Form hat.
+  Wenn \(f\) gegeben ist, wie findet man eine Basis \(B\), so dass \(M^B_B(f)\) eine besonders einfache Form hat?
+  
+  "Aquivalent, in Termen von Matrizen: Gegeben eine Matrix \(A\in K^{n\times n} \), finde eine invertierbare Matrix \(S\) so dass \(S^{-1}AS\) besonders einfache Form hat.
 \end{korollar}
-  Sei \(V\) ein \(\mathbb{R}\)-Vektorraum, sei \(B\) eine Basis mit \[M^B_B(f) =
-    \begin{pmatrix}
-      1 & 0 & 0 \\
-      0 & 2 & 0 \\
-      0 & 0 & 3
-    \end{pmatrix} = \mDiag(1,2,3) \]
-  Das hei"st, \(f\) ist in diesem Fall eine Streckung mit Koeffizienten 1, 2, oder 3 in Richtung von \(b_1\), \(b_2\) oder \(b_{3}\).
+Sei \(V\) ein \(\mathbb{R}\)-Vektorraum, sei \(B\) eine Basis mit \[M^B_B(f) =
+  \begin{pmatrix}
+    1 & 0 & 0 \\
+    0 & 2 & 0 \\
+    0 & 0 & 3
+  \end{pmatrix} = \mDiag(1,2,3) \]
+Das hei"st, \(f\) ist in diesem Fall eine Streckung mit Koeffizienten 1, 2, oder 3 in Richtung von \(b_1\), \(b_2\) oder \(b_{3}\).
 
-  \begin{definition}{Eigenvektor, Eigenwert}{}
-    Sei \(f: V\to V\) eine lineare Abbildung. Ein Eigenvektor von \(f\) ist ein Vektor \(v\neq 0\), so dass \(f(v) = \lambda v\) f"ur ein \(\lambda \in K\), \(\lambda\) hei"st \emph{Eigenwert} von \(f\). Man sagt, dass \(v\) Eigenvektor zum Eigenwert \(\lambda\) ist. Geometrisch gesehen: \(f\) streckt \(v\) mit Koeffizienten \(\lambda\).
-  \end{definition}
-  \begin{lemma}
-    Sei \(f: V\to V\) ein Endomorphismus. Wenn \(B = (b_{1},\dots,b_{n})\) eine Basis in \(V\) aus Eigenvektoren zu Eigenwerten \(\lambda_{1},\dots,\lambda_{n}\) ist, so gilt:
-    \[M^{B}_{B}(f)=
-      \begin{pmatrix}
-        \lambda_{1} & & 0 \\
-        & \ddots & \\
-        0 & & \lambda_{n}
-      \end{pmatrix}
-      = \mDiag(\lambda_{1},\dots,\lambda_{n})
-    \]
+\begin{definition}{Eigenvektor, Eigenwert}{}
+  Sei \(f: V\to V\) eine lineare Abbildung. Ein Eigenvektor von \(f\) ist ein Vektor \(v\neq 0\), so dass \(f(v) = \lambda v\) f"ur ein \(\lambda \in K\), \(\lambda\) hei"st \emph{Eigenwert} von \(f\). Man sagt, dass \(v\) Eigenvektor zum Eigenwert \(\lambda\) ist. Geometrisch gesehen: \(f\) streckt \(v\) mit Koeffizienten \(\lambda\).
+\end{definition}
+\begin{lemma}
+  Sei \(f: V\to V\) ein Endomorphismus. Wenn \(B = (b_{1},\dots,b_{n})\) eine Basis in \(V\) aus Eigenvektoren zu Eigenwerten \(\lambda_{1},\dots,\lambda_{n}\) ist, so gilt:
+  \[M^{B}_{B}(f)=
+    \begin{pmatrix}
+      \lambda_{1} & & 0 \\
+      & \ddots & \\
+      0 & & \lambda_{n}
+    \end{pmatrix}
+    = \mDiag(\lambda_{1},\dots,\lambda_{n})
+  \]
   (\(B\) hei"st auch Eigenbasis.)
 \end{lemma}
 \begin{prof}
@@ -2519,7 +2593,7 @@ Es folgt: Wenn wir die Diagonalform von \(M^B_B(f)\) errichen m"ochten, m"ussen 
   \item Sei \(v\in V\) ein Eigenvektor (Eigenvektoren sind per Definition \(\neq 0\)) zum Eigenwert \(\lambda\). Nach Definition gilt:
     \begin{align*}
       f(v) &= \lambda v \iff f(v) - \lambda v = 0 \iff (f - \lambda\mId_V)(v) = 0 \\
-      &\iff v\in \mKer(\lambda\mId_V - f)
+           &\iff v\in \mKer(\lambda\mId_V - f)
     \end{align*}
     Andersherum: Wenn \(v \in \mKer(\lambda\mId_V -f)\setminus\{0\}\), dann ist \((\lambda\mId_V -f)(v)=0\land v\neq 0 \implies v\) ist Eigenvektor zum Eigenwert \(\lambda\).
   \item Nach (oben) ist \(\lambda\) ein Eigenwert \(\iff\mKer(\lambda\mId_V -f)\neq 0\)\(\iff \lambda\mId_V -f\) ist nicht invertierbar \(\iff\det(\lambda\mId_V - f) = 0\)
@@ -2528,8 +2602,8 @@ Es folgt: Wenn wir die Diagonalform von \(M^B_B(f)\) errichen m"ochten, m"ussen 
 F"ur die Suche nach Eigenvektoren bedeutet das:
 \begin{enumerate}
 \item Wenn wir einen Eigenwert \(\lambda\) kennen, k"onnen wir Eigenvektoren ganz einfach bestimmen, indem wir eine Basis von \(\mKer(\lambda\mId_V -f)\) finden (dazu muss man nur ein LGS l"osen).
-  \item Um Eigenwerte zu finden, m"ussen wir die Gleichung \(\det(\lambda\mId_V - f) = 0\) nach \(\lambda\) l"osen.
-  \end{enumerate}
+\item Um Eigenwerte zu finden, m"ussen wir die Gleichung \(\det(\lambda\mId_V - f) = 0\) nach \(\lambda\) l"osen.
+\end{enumerate}
 \begin{definition}{Charakteristisches Polynom}{}
   Sei \(f\in\mEnd_K(V)\). Das Polynom \[\chi_f(\lambda) := \det(\lambda\mId_V-f)\] hei"st charakteristisches Polynom von \(f\). Die Gleichung \[\chi_f(\lambda) = 0\] hei"st charakteristische Gleichung von \(f\).
 \end{definition}
@@ -2551,7 +2625,7 @@ Aus obigen "Uberlegungen folgt: Die Nullstellen von \(\chi_f(\lambda)\) sind gen
 \end{lemma}
 \begin{prof}
   Sei \(\lambda_1\neq\lambda_2\), sei weiterhin \(v\in\mKer(\lambda_1\mId_V-f)\cap\mKer(\lambda_2\mId_V-f)\). Dann gilt \(f(v)=\lambda_1v=\lambda_2v\) \(\implies(\lambda_1-\lambda_2)v = 0\implies v = 0\).
-(Nachtrag). Ausf"uhrlicherer Beweis dieser Aussage: Seien \(v_1,\dots,v_n\) Eigenvektoren zu Eigenwerten \(\lambda_1,\dots,\lambda_n\) (diese sollen paarweise verschieden sein). Sei \(\alpha_1 v_1+\dots + \alpha_nv_n = 0\). Wir definieren \(g_i\):
+  (Nachtrag). Ausf"uhrlicherer Beweis dieser Aussage: Seien \(v_1,\dots,v_n\) Eigenvektoren zu Eigenwerten \(\lambda_1,\dots,\lambda_n\) (diese sollen paarweise verschieden sein). Sei \(\alpha_1 v_1+\dots + \alpha_nv_n = 0\). Wir definieren \(g_i\):
   \begin{align*}
     g_i := (f-\lambda_1\mId_V)\dots(f-\lambda_{i-1}\mId_V)(f-\lambda_{i+1}\mId_V)\dots(f-\lambda_n\mId_V)
   \end{align*}
@@ -2562,7 +2636,7 @@ Aus obigen "Uberlegungen folgt: Die Nullstellen von \(\chi_f(\lambda)\) sind gen
                  0, & k\neq i \\
                  \beta_iv_i, & k = i
                \end{cases} \quad ,\beta_i\neq 0 \\
-    &\implies \text{auf }\alpha_1v_1+\dots +\alpha_nv_n = 0\text{ angewendet}: \alpha_i\beta_iv_i = 0 \xRightarrow{\beta_i \neq 0} \alpha_i = 0
+             &\implies \text{auf }\alpha_1v_1+\dots +\alpha_nv_n = 0\text{ angewendet}: \alpha_i\beta_iv_i = 0 \xRightarrow{\beta_i \neq 0} \alpha_i = 0
   \end{align*}
   Und das kann man f"ur jedes \(i\) machen \(\implies\) alle \(v_i\) sind linear unabh"angig.
 \end{prof}
@@ -2581,20 +2655,20 @@ Insbesondere folgt f"ur (3), dass die Vereinigung von Basen in Eigenr"aumen imme
   \item Eigenvektoren:
     \begin{enumerate}
     \item zu \(\lambda_1 = 5\): Finde Basis zu \(\mKer(f - \lambda\mId_V)\) \(\implies\) homogenes LGS mit Matrix \(
-        \begin{pmatrix}
-          4 & -6 \\
-          2 & -3
-        \end{pmatrix}
+      \begin{pmatrix}
+        4 & -6 \\
+        2 & -3
+      \end{pmatrix}
       \) l"osen, Basen finden \(\implies\begin{pmatrix}3\\2\end{pmatrix}\) ist L"osung
     \item f"ur \(\lambda_2 = 6\): L"ose homogenes LGS mit Matrix \(
-        \begin{pmatrix}
-          3 & -6 \\
-          2 & -4
-        \end{pmatrix}
-\) \(\implies\begin{pmatrix}2\\1\end{pmatrix}\) ist L"osung
-\end{enumerate}
-\item Eigenbasis: \(B = (v_1, v_2)\), setze nun \(S = M^{B'}_B=\begin{pmatrix}3 & 2\\ 2 & 1\end{pmatrix}\)
-  \[\implies M^{B'}_{B'}=S^{-1}\begin{pmatrix}9 & -6 \\ 2 & 2 \end{pmatrix}S = \begin{pmatrix}5 & 0 \\ 0 & 6 \end{pmatrix}\]
+      \begin{pmatrix}
+        3 & -6 \\
+        2 & -4
+      \end{pmatrix}
+      \) \(\implies\begin{pmatrix}2\\1\end{pmatrix}\) ist L"osung
+    \end{enumerate}
+  \item Eigenbasis: \(B = (v_1, v_2)\), setze nun \(S = M^{B'}_B=\begin{pmatrix}3 & 2\\ 2 & 1\end{pmatrix}\)
+    \[\implies M^{B'}_{B'}=S^{-1}\begin{pmatrix}9 & -6 \\ 2 & 2 \end{pmatrix}S = \begin{pmatrix}5 & 0 \\ 0 & 6 \end{pmatrix}\]
   \end{enumerate}
 \end{exa}
 Was sind m"ogliche Hindernisse zu Diagonalisierbarkeit?
@@ -2612,7 +2686,7 @@ Es kann passieren, dass es \gq{zu wenig} Eigenwerte gibt.
       -1 & \lambda
     \end{pmatrix}
     = \lambda^2 + 1
-\] \(\implies\) keine reellen Nullstellen \(\implies\) keine Eigenwerte, keine Eigenvektoren. Hier scheitern wir daran, dass das Polynom \(\lambda^2+1\) nicht genug Nullstellen in \(\mathbb{R}\) hat.
+  \] \(\implies\) keine reellen Nullstellen \(\implies\) keine Eigenwerte, keine Eigenvektoren. Hier scheitern wir daran, dass das Polynom \(\lambda^2+1\) nicht genug Nullstellen in \(\mathbb{R}\) hat.
 \end{exa}
 
 \section{Nullstellen von Polynomen}
@@ -2646,7 +2720,7 @@ Folgerung: Sei \(V\) ein \(\mathbb{C}\)-Vektorraum, dann hat lineares \(f: V\to 
 \begin{prof}
   \begin{align*}
     f_{\mathbb{C}}((\alpha + i\beta)\cdot(v,w)) &= f_{\mathbb{C}}((\alpha v - \beta w, \beta v + \alpha w)) = (\alpha f(v) - \beta f(w), \beta f(v) + \alpha f(w)) \\
-    &= (\alpha + i \beta)\cdot (f(v), f(w)) = (\alpha + i \beta) \cdot f_{\mathbb{C}}((v, w))
+                                                &= (\alpha + i \beta)\cdot (f(v), f(w)) = (\alpha + i \beta) \cdot f_{\mathbb{C}}((v, w))
   \end{align*}
 \end{prof}
 \begin{bem}
@@ -2675,7 +2749,7 @@ Folgerung: Sei \(V\) ein \(\mathbb{C}\)-Vektorraum, dann hat lineares \(f: V\to 
       1 & 0
     \end{pmatrix}
     \rightarrow \chi_{R_{\frac{\pi}{2}}}(\lambda) = \lambda^2 + 1
-\]
+  \]
 \end{exa}
 
 \begin{prof}
@@ -2727,7 +2801,7 @@ Zusammen mit der Existenz von Eigenvektoren f"ur $f_{\mathbb{C}}$ (Folgerung des
 \end{relation}
 
 Diese Proposition beantwortet auf die bestm"ogliche Weise die Frage: \gq{Was
-passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat}
+  passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat}
 
 \begin{exa}
   Wir hatten noch die Frage, ob es passieren kann, dass man \gq{genug} Eigenwerte hat, aber nicht genug Eigenvektoren? Antwort: Ja, das kann auch passieren.
@@ -2738,12 +2812,12 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat}
       0 & 1 \\
       0 & 0
     \end{pmatrix}
-   \implies \chi_f(\lambda) = \det
-   \begin{pmatrix}
-     \lambda & -1 \\
-     0 & \lambda
-   \end{pmatrix} = \lambda^2
-\] \(\implies \lambda = 0\) ist der Eigenwert (der ist doppelt belegt), 1 ist der einzige Eigenvektor zu \(\lambda = 0\)
+    \implies \chi_f(\lambda) = \det
+    \begin{pmatrix}
+      \lambda & -1 \\
+      0 & \lambda
+    \end{pmatrix} = \lambda^2
+  \] \(\implies \lambda = 0\) ist der Eigenwert (der ist doppelt belegt), 1 ist der einzige Eigenvektor zu \(\lambda = 0\)
 
   \(\implies f\) ist nicht diagnoalisierbar :(
 \end{exa}
@@ -2768,11 +2842,11 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat}
   Folglich ist
   \begin{align*}
     \chi_f(\lambda) &= \det(\lambda\cdot\mId_V - f) = \det
-    \begin{pmatrix}
-      \lambda\cdot\mId_{\dim U} - M^{B'}_{B'}(f|_U) & *\\
-      0 & \lambda\cdot\mId_m - C
-    \end{pmatrix}\\
-    &= \det(\lambda\cdot\mId_{\dim U} - M^{B'}_{B'}(f|_U))\det(\lambda\cdot\mId_m  - C) = \chi_{f|_U}(\lambda)\cdot\det(\lambda\cdot\mId_m - C)
+                      \begin{pmatrix}
+                        \lambda\cdot\mId_{\dim U} - M^{B'}_{B'}(f|_U) & *\\
+                        0 & \lambda\cdot\mId_m - C
+                      \end{pmatrix}\\
+                    &= \det(\lambda\cdot\mId_{\dim U} - M^{B'}_{B'}(f|_U))\det(\lambda\cdot\mId_m  - C) = \chi_{f|_U}(\lambda)\cdot\det(\lambda\cdot\mId_m - C)
   \end{align*}
   mit \(m = \dim V - \dim U\).
 \end{prof}
@@ -2829,14 +2903,14 @@ passiert, wenn ein reeller Operator Eigenwerte mit imagin"arem Teil hat}
 \end{prof}
 
 \begin{notte}[Tips und Tricks]
-    Der obige Satz ist nur interessant, wenn (1) erf"ullt ist und mehrfache
-    Nullstellen existieren, weil f"ur jeden Eigenwert $\lambda$ von $f$ gilt ja
-    nach Definition $\mu_{geo}(\lambda)\geq 1$. D.h., wenn alle Nullstellen in
-    $K$ liegen und \(\mu_{alg}(\lambda) = 1\) f"ur alle Eigenwerte $\lambda$ dann gilt: \(\mu_{geo}(\lambda) = 1\) f"ur alle
-    Eigenwerte $\lambda$, und $f$ ist dann diagonalisierbar.
+  Der obige Satz ist nur interessant, wenn (1) erf"ullt ist und mehrfache
+  Nullstellen existieren, weil f"ur jeden Eigenwert $\lambda$ von $f$ gilt ja
+  nach Definition $\mu_{geo}(\lambda)\geq 1$. D.h., wenn alle Nullstellen in
+  $K$ liegen und \(\mu_{alg}(\lambda) = 1\) f"ur alle Eigenwerte $\lambda$ dann gilt: \(\mu_{geo}(\lambda) = 1\) f"ur alle
+  Eigenwerte $\lambda$, und $f$ ist dann diagonalisierbar.
 
-    $\implies$ Jede Komplexe Matrix ist bis auf eine beliebeig kleine
-    Pertubation diagonalisierbar. In diesen Sinne sind \glqq{}die meissten\grqq{} Matrizen diagonalisierbar.
+  $\implies$ Jede Komplexe Matrix ist bis auf eine beliebeig kleine
+  Pertubation diagonalisierbar. In diesen Sinne sind \glqq{}die meissten\grqq{} Matrizen diagonalisierbar.
 \end{notte}
 
 Zum charakteristischen Polynom:
@@ -2866,19 +2940,19 @@ tats"achliche Bedeutung.
   Antwort: Die Jordan-Normalform: Blockform mit Bl"ocken \[J_k(\lambda) =
     \begin{pmatrix}
       \lambda & 1 &  & 0 \\
-       & \ddots & \ddots &  \\
-       &  & \ddots & 1 \\
+      & \ddots & \ddots &  \\
+      &  & \ddots & 1 \\
       0 &  &  & \lambda
     \end{pmatrix}
-\]
-Die Jordan-Normalform ist dann:
-\[ J= 
-  \begin{pmatrix}
-    J_1 & & 0 \\
-    & \ddots & \\
-    0 & & J_n
-  \end{pmatrix}
-\]
+  \]
+  Die Jordan-Normalform ist dann:
+  \[ J= 
+    \begin{pmatrix}
+      J_1 & & 0 \\
+      & \ddots & \\
+      0 & & J_n
+    \end{pmatrix}
+  \]
   Diagonalisierbarkeit entspricht der Bedingung, dass  alle Bl"ocke Gr"osse 1 haben.
 \end{relation}
 
@@ -2925,7 +2999,7 @@ In der Physik ist die folgene Bilinearform von Bedeutung: ...
       &\ddots & \\
       0 & & 1
     \end{pmatrix}
-\] Dieses Skalarprodukt ist linear in jeder Variable und daher eine Bilinearform.
+  \] Dieses Skalarprodukt ist linear in jeder Variable und daher eine Bilinearform.
 \end{exa}
 Wenn $x,y$ die Koordinatenspalten von $v$ bzw. $w$ bzgl. $B = \{b_1,\dots, b_n\}$ sind, so haben wir
 \begin{align*}
@@ -2937,7 +3011,7 @@ bzw. $w$ bzgl. $B'$, so haben wir: $x=M_{B}^{B'}x', y = M_{B}^{B'}y'$  $\implies
 folgt, dass $M_{B'}= (M^{B'}_{B})^T\cdot M_B(b)\cdot (M^{B'}_{B})$.
 
 Wie bei linearen Abbildungen stellt sich die Frage: \gq{Gibt es eine Basis so dass
-$M_B(b)$ besonders einfach ist?} Diese Form ist f"ur unterschiedliche
+  $M_B(b)$ besonders einfach ist?} Diese Form ist f"ur unterschiedliche
 Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
 
 \begin{definition}{}{}
@@ -2971,8 +3045,8 @@ Bilinearformen unterschiedlich. (Hier nur f"ur symetrische Formen.)
   wenn $M_B(b)$ nicht ausgeartet ist (wenn sie also invertierbar ist).
 \end{prof}
 Der Beweis Zeigt auch, dass $\dim V^\perp = \dim
-  \{x\in K^n\mid  M_B(b)x= 0\} = \dim V - \mRg M_B(b)$. Insbesondere ist die Zahl $\mRg M_B(b)$
-  unabh"angig von der Basis $B$.
+\{x\in K^n\mid  M_B(b)x= 0\} = \dim V - \mRg M_B(b)$. Insbesondere ist die Zahl $\mRg M_B(b)$
+unabh"angig von der Basis $B$.
 \begin{definition}{}{}
   \(\mRg(b):=\dim V - \dim V^\perp = \mRg M_B(b)\)
 \end{definition}
@@ -2984,7 +3058,7 @@ Der Beweis Zeigt auch, dass $\dim V^\perp = \dim
     & \ddots & \\
     0 & & 1
   \end{pmatrix}
- = n\). Geometrisch wissen wir: wenn $U$ in
+  = n\). Geometrisch wissen wir: wenn $U$ in
   $\mathbb{R}^3$ eine Gerade ist, dann ist \(U^\perp\) eine Ebene und umgekehrt.
 \end{exa}
 
@@ -3027,8 +3101,8 @@ einfach aussieht.
   \end{align*}
   Das hei"st, $\dim U^\perp \geq \dim V - \dim U$, egal ob \(b\) ausgeartet ist.
   Andererseits gilt: \[U\cap U^\perp = \{u\in U \mid b(u,u')=0\;\forall u'\in U \}
-  = \text{das orthogonale Komplement von U bzgl. } b|_U\]
-Es gilt also: wenn $V=U \oplus U^\perp \implies U\cap U^\perp = \{0\} \implies b|_U$ ist nicht ausgeartet. Andererseits: wenn \(b|_U\) nicht ausgeartet, dann ist \(U\cap U^\perp = 0\) also ist die Summe von \(U\) und \(U^\perp\) direkt, \(\dim U + \dim U^\perp \geq \dim V \implies \dim U + \dim U^\perp = \dim V \implies U\oplus U^\perp = V\).
+    = \text{das orthogonale Komplement von U bzgl. } b|_U\]
+  Es gilt also: wenn $V=U \oplus U^\perp \implies U\cap U^\perp = \{0\} \implies b|_U$ ist nicht ausgeartet. Andererseits: wenn \(b|_U\) nicht ausgeartet, dann ist \(U\cap U^\perp = 0\) also ist die Summe von \(U\) und \(U^\perp\) direkt, \(\dim U + \dim U^\perp \geq \dim V \implies \dim U + \dim U^\perp = \dim V \implies U\oplus U^\perp = V\).
 \end{prof}
 
 \begin{definition}{Orthogonale Basis}{}
@@ -3058,22 +3132,22 @@ Es gilt also: wenn $V=U \oplus U^\perp \implies U\cap U^\perp = \{0\} \implies b
   Induktion "uber $n=\dim V$. 
   (IA) Wenn $n=1$ nichts zu zeigen.
   (IS) Sei $n>1$ und es sei die Aussage f"ur alle Vektorr"aume mit Dimension $<n$
-    gezeigt.
-    \begin{itemize}
-    \item[1. Fall] $b=0$: Jede Basis ist orthogonal, fertig.
-    \item[2. Fall] $b\neq 0\xRightarrow{\text{Polarisierung}} \exists e_1\in V$ mit
-      $q(e_1)=b(e_1,e_1)\neq 0$. Es sei $U=\langle e_1 \rangle$, also ist \(b|_U\) nicht ausgeartet. Aus der Proposition folgt daher \(V = U\oplus U^\perp = \langle e_1\rangle\oplus\langle e_1\rangle^\perp\). Die Induktionsvoraussetzung angewandt auf \(\langle e_1\rangle^\perp\) liefert \(e_2,\dots,e_n\in \langle e_1\rangle^\perp\), daher ist \(e_1,\dots, e_n\) eine Orthogonalbasis in \(V\).
-    \end{itemize}
+  gezeigt.
+  \begin{itemize}
+  \item[1. Fall] $b=0$: Jede Basis ist orthogonal, fertig.
+  \item[2. Fall] $b\neq 0\xRightarrow{\text{Polarisierung}} \exists e_1\in V$ mit
+    $q(e_1)=b(e_1,e_1)\neq 0$. Es sei $U=\langle e_1 \rangle$, also ist \(b|_U\) nicht ausgeartet. Aus der Proposition folgt daher \(V = U\oplus U^\perp = \langle e_1\rangle\oplus\langle e_1\rangle^\perp\). Die Induktionsvoraussetzung angewandt auf \(\langle e_1\rangle^\perp\) liefert \(e_2,\dots,e_n\in \langle e_1\rangle^\perp\), daher ist \(e_1,\dots, e_n\) eine Orthogonalbasis in \(V\).
+  \end{itemize}
 \end{prof}
 
 \begin{relation}
   $\mathcal{E}=(e_1,\ldots, e_n) \subset V$ ist eine Orthogonalbasis genau dann, wenn \[
-  M_{\mathcal{E}}(b)=
-  \begin{pmatrix}
-    b_{11} & & 0 \\
-    & \ddots & \\
-    0 & & b_{nn} \\
-  \end{pmatrix}
+    M_{\mathcal{E}}(b)=
+    \begin{pmatrix}
+      b_{11} & & 0 \\
+      & \ddots & \\
+      0 & & b_{nn} \\
+    \end{pmatrix}
   \] eine Diagonalmatrix ist. Also: f"ur jede symmetrische Matrix $A$ gibt es eine invertierbare Matrix $S$
   mit $S^T\cdot A\cdot S = D$ (Diagonalmatrix). Wenn $K=\mathbb{R}$, kann man
   erreichen, dass die Diagonaleintr"age aus ${0,1,-1}$ bestshen (wenn
@@ -3099,25 +3173,25 @@ Der Satz "uber die Existenz von Orthogonalbasen ist nicht besonders konstruktiv,
 \end{satz}
 \begin{prof}
   Induktion "uber $n=\dim V$: (IA, $n=1$) $V=\langle f_1 \rangle, \delta_1 = \frac{\delta_1}{\delta_0} = b(f_1, f_1) \neq 0$ (IS) nach Induktionsvoraussetzung gilt die gilt die Aussage f"ur
-    $V_{n-1}=\langle f_1,\ldots,f_{n-1} \rangle\implies e_1,\dots, e_{n-1}$, eine Orthogonalbasis in \(V_{n-1}\), die die Aussagen des Satzes erf"ullt. Wir suchen nun \(e_n = f_n + \sum_{i=1}^{n-1}\lambda_i e_i\). F"ur \(i=1,\dots,n-1\) gilt \(q(e_i) = \frac{\delta_i}{\delta_{i-1}} \neq 0\):
-      \begin{align*}
-        0 \overset{!}{=} b(e_n, e_j) &= b(f_n, e_j) + \sum_{i=1}^n\lambda_i\underbrace{b(e_i,e_j)}_{=0\iff i\neq j} \\
-        &= b(f_n, e_j) + \lambda_j\underbrace{b(e_j, e_j)}_{\neq 0} \\
-        \lambda_j &= -\frac{b(f_n, e_j)}{b(e_j, e_j)}
-      \end{align*}
-      Bleibt zu zeigen: \(q(e_i) = \frac{\delta_n}{\delta_{n-1}}\). Wir wissen bereits: \(e_k \in f_k + V_{k-1}\;\forall k=1,\dots,n\). Die Basiswechselmatrix von \(F = (f_1,\dots, f_n)\) zu \(\mathcal{E} = (e_1, \dots, e_n)\) sieht so aus:
-      \[ S=
-        \begin{pmatrix}
-          1 & & * \\
-          & \ddots & \\
-          0 & & 1
-        \end{pmatrix} \implies \det S = 1\]
-      Andererseits gilt
-      \begin{align*}
-        M_{\mathcal{E}}(b) &= \begin{pmatrix}q(e_1) & & 0\\ & \ddots & \\ 0 & & q(e_n)\end{pmatrix} = S^TAS \\
-                           &\implies \det M_{\mathcal{E}}(b) = \underline{q(e_1)\cdot\dots\cdot q(e_n)} = 1\cdot\det A\cdot 1 = \det A = \underline{\delta_n} \\
-        &\implies q(e_n) = \frac{q(e_1)\cdot\dots\cdot q(e_n)}{q(e_1)\cdot\dots\cdot q(e_{n-1})} = \frac{\delta_n}{\delta_{n-1}}
-      \end{align*}
+  $V_{n-1}=\langle f_1,\ldots,f_{n-1} \rangle\implies e_1,\dots, e_{n-1}$, eine Orthogonalbasis in \(V_{n-1}\), die die Aussagen des Satzes erf"ullt. Wir suchen nun \(e_n = f_n + \sum_{i=1}^{n-1}\lambda_i e_i\). F"ur \(i=1,\dots,n-1\) gilt \(q(e_i) = \frac{\delta_i}{\delta_{i-1}} \neq 0\):
+  \begin{align*}
+    0 \overset{!}{=} b(e_n, e_j) &= b(f_n, e_j) + \sum_{i=1}^n\lambda_i\underbrace{b(e_i,e_j)}_{=0\iff i\neq j} \\
+                                 &= b(f_n, e_j) + \lambda_j\underbrace{b(e_j, e_j)}_{\neq 0} \\
+    \lambda_j &= -\frac{b(f_n, e_j)}{b(e_j, e_j)}
+  \end{align*}
+  Bleibt zu zeigen: \(q(e_i) = \frac{\delta_n}{\delta_{n-1}}\). Wir wissen bereits: \(e_k \in f_k + V_{k-1}\;\forall k=1,\dots,n\). Die Basiswechselmatrix von \(F = (f_1,\dots, f_n)\) zu \(\mathcal{E} = (e_1, \dots, e_n)\) sieht so aus:
+  \[ S=
+    \begin{pmatrix}
+      1 & & * \\
+      & \ddots & \\
+      0 & & 1
+    \end{pmatrix} \implies \det S = 1\]
+  Andererseits gilt
+  \begin{align*}
+    M_{\mathcal{E}}(b) &= \begin{pmatrix}q(e_1) & & 0\\ & \ddots & \\ 0 & & q(e_n)\end{pmatrix} = S^TAS \\
+                       &\implies \det M_{\mathcal{E}}(b) = \underline{q(e_1)\cdot\dots\cdot q(e_n)} = 1\cdot\det A\cdot 1 = \det A = \underline{\delta_n} \\
+                       &\implies q(e_n) = \frac{q(e_1)\cdot\dots\cdot q(e_n)}{q(e_1)\cdot\dots\cdot q(e_{n-1})} = \frac{\delta_n}{\delta_{n-1}}
+  \end{align*}
 \end{prof}
 
 \begin{exa}
@@ -3233,9 +3307,9 @@ Man bemerkt: Wenn \(K=\mathbb{C}\), dann kann man das \(\lambda_i\) auch komplex
 \label{sec:evr}
 
 \begin{definition}{Euklidischer Vektorraum}{}
-	Sei $V$ ein $\mathbb{R}$ Vektorraum. Das Paar $(V, \langle\cdot,\cdot\rangle)$ hei"st
-	euklidischer Vektorraum, wenn $\langle\cdot,\cdot\rangle: V\times V \rightarrow \mathbb{R}$
-	eine positiv definite Bilinearform ist. $\langle\cdot,\cdot\rangle$ hei"st Skalarprodukt.  
+  Sei $V$ ein $\mathbb{R}$ Vektorraum. Das Paar $(V, \langle\cdot,\cdot\rangle)$ hei"st
+  euklidischer Vektorraum, wenn $\langle\cdot,\cdot\rangle: V\times V \rightarrow \mathbb{R}$
+  eine positiv definite Bilinearform ist. $\langle\cdot,\cdot\rangle$ hei"st Skalarprodukt.  
 \end{definition}
 Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von L"angen der Vektoren und Winkeln zwischen Vektoren zu reden.
 \begin{definition}{Orthogonalit"at}{}
@@ -3256,7 +3330,7 @@ Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von L"
       \langle x, x\rangle & \langle x, y\rangle \\
       \langle x, y\rangle & \langle y, y\rangle
     \end{pmatrix}
-\] die Matrix von \(\langle\cdot , \cdot\rangle\) auf dem Vektorraum \(\spn\{x, y\}\). Nach dem Sylvesterkriterium gilt: \(0 < \det A = ||x||^2\cdot ||y||^2 - \langle x, y\rangle ^2\).
+  \] die Matrix von \(\langle\cdot , \cdot\rangle\) auf dem Vektorraum \(\spn\{x, y\}\). Nach dem Sylvesterkriterium gilt: \(0 < \det A = ||x||^2\cdot ||y||^2 - \langle x, y\rangle ^2\).
 \end{prof}
 \begin{exa}
   \(V = C([0, 1], \mathbb{R}), \langle f, g\rangle := \int_0^1f(x)g(x)\dif x \forall f, g \in V\)
@@ -3293,7 +3367,7 @@ Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von L"
 \end{definition}
 
 
-%Sei \(E\) eine Orthogonalbasis (ONB), \(B\) eine weitere Basis von \(V\). Sei \(S = M_E^B\) die Basiswechselmatrix von \(E\) zu \(B\). Nach Transformationsregel f"ur Matrizen von Bilinearformen gilt \[G(B) = S^T\underbrace{1_n}_{=G(E)}S = S^TS\] \(\implies B\) ist ONB \(\iff S^TS = 1_n \iff S^T = S^{-1} \quad (SS^T = 1_n)\)
+% Sei \(E\) eine Orthogonalbasis (ONB), \(B\) eine weitere Basis von \(V\). Sei \(S = M_E^B\) die Basiswechselmatrix von \(E\) zu \(B\). Nach Transformationsregel f"ur Matrizen von Bilinearformen gilt \[G(B) = S^T\underbrace{1_n}_{=G(E)}S = S^TS\] \(\implies B\) ist ONB \(\iff S^TS = 1_n \iff S^T = S^{-1} \quad (SS^T = 1_n)\)
 
 
 \begin{relation}
@@ -3311,9 +3385,9 @@ Skalarprodukt liefert die geometrische Struktur auf $V$, die uns erlaubt, von L"
   invertierbar und $\det S = \pm 1$.
 \end{definition}
 
-  \emph{"Ubung:} Beweisen Sie, dass eine \(n\times n\)-Matrix genau dann orthogonal ist, wenn ihre Spalten (oder Zeilen) eine ONB bez"uglich des Standardskalaproduktes bilden
+\emph{"Ubung:} Beweisen Sie, dass eine \(n\times n\)-Matrix genau dann orthogonal ist, wenn ihre Spalten (oder Zeilen) eine ONB bez"uglich des Standardskalaproduktes bilden
 
-  Sei \(U\subseteq V\) ein Unterraum. Dann ist die Einschr"ankung von \(\langle ., .\rangle\) auf \(U\) eine positiv definite (also nicht ausgeartete) Bilinearform nach dem Silvester-Kriterium. \(\implies\) Direkte Summenzerlegung \(V = U\oplus U^\perp\) \(\implies\) jedes \(v\in V\) ist eindeutig darstellbar als \(v = u + u^\perp\) mit \(u\in U, u^\perp \in U^\perp\). \(u\) hei"st orthogonale Projektion von \(v\) auf \(U\). \(\implies\) Lineare Abbildung \(p_U: V\to U, p_U(v = u + u^\perp) = u\). \(p_U\) hei"st orthogonale Projektion auf \(U\).
+Sei \(U\subseteq V\) ein Unterraum. Dann ist die Einschr"ankung von \(\langle ., .\rangle\) auf \(U\) eine positiv definite (also nicht ausgeartete) Bilinearform nach dem Silvester-Kriterium. \(\implies\) Direkte Summenzerlegung \(V = U\oplus U^\perp\) \(\implies\) jedes \(v\in V\) ist eindeutig darstellbar als \(v = u + u^\perp\) mit \(u\in U, u^\perp \in U^\perp\). \(u\) hei"st orthogonale Projektion von \(v\) auf \(U\). \(\implies\) Lineare Abbildung \(p_U: V\to U, p_U(v = u + u^\perp) = u\). \(p_U\) hei"st orthogonale Projektion auf \(U\).
 
 \begin{lemma}[Explizite Formel f"ur orthogonale Projektion]
   Sei \(e_1, \dots, e_k\) ONB von \(U \subseteq V\). Dann gilt f"ur \(v\in V\):
@@ -3438,7 +3512,7 @@ liefert.
 \end{notte}
 
 \begin{definition}
-   Sei $(V, \langle {\cdot, \cdot} \rangle)$ ein eukl./unit. Vektorraum. Sei
+  Sei $(V, \langle {\cdot, \cdot} \rangle)$ ein eukl./unit. Vektorraum. Sei
   $\mathcal{E}=(e_1,...,e_n)$ eine Orthonormalbasis in $V$, $f: V\mapsto V $
   linear. 
   \begin{itemize}
@@ -3461,10 +3535,10 @@ liefert.
 \end{prof}
 \begin{notation}
   \begin{itemize}
- \item $O(V)=\{f\in\mEnd (V) \mid f\text{ Orthogonal}\}$ ($V$ eukl)
+  \item $O(V)=\{f\in\mEnd (V) \mid f\text{ Orthogonal}\}$ ($V$ eukl)
   \item $O(n):= O(\mathbb{R}^n, \langle{\cdot, \cdot} = \{A\in
     \mathbb{R}^{n\times  n} \mid A \text{ Orthogonal}\})$
-    \item $U(V)=\{f\in\mEnd (V) \mid f\text{ Unit"ar}\}$ ($V$ unit"ar)
+  \item $U(V)=\{f\in\mEnd (V) \mid f\text{ Unit"ar}\}$ ($V$ unit"ar)
   \item $U(n):= O(\mathbb{C}^n, \langle{\cdot, \cdot} = \{A\in
     \mathbb{C}^{n\times  n} \mid A \text{ Orthogonal}\})$
   \item $S O(n) = {A\in O(u) \mid \det A = 1}$ - spez. Orth. Gruppe
@@ -3672,8 +3746,8 @@ Wir betrachten nun $Sp(1)=\{h\in \mathbb{H} \mid ||h|| = 1\}$
     auch eine Standartbasis in $\mathbb{H}$
   \end{enumerate}
 
-$Sp(1)$ ist einheitssph"are in $\mathbb{R}^4$ Da man je zwei Punkte auf der
-Sph"are durch eine stetige Kurve verbinden kann ist $\det \phi$ konstant ($=1$)
+  $Sp(1)$ ist einheitssph"are in $\mathbb{R}^4$ Da man je zwei Punkte auf der
+  Sph"are durch eine stetige Kurve verbinden kann ist $\det \phi$ konstant ($=1$)
 \end{relation}
 
 
@@ -3683,10 +3757,10 @@ Sph"are durch eine stetige Kurve verbinden kann ist $\det \phi$ konstant ($=1$)
 \begin{itemize}
 \item \(A\cdot B\) Zeilen von \(A\) mal Spalten von \(B\)
 \item LGS L"osungen als Vektor!
-\begin{itemize}
-\item Keine nicht offensichtlich Schritte ueberspringen!
-\item Paramatervektor und sine Elemente genau definieren!
-\end{itemize}
+  \begin{itemize}
+  \item Keine nicht offensichtlich Schritte ueberspringen!
+  \item Paramatervektor und sine Elemente genau definieren!
+  \end{itemize}
 \item Transposition vertauscht faktoren.
 \item k-te Spalte \((A)_k\)
 \end{itemize}

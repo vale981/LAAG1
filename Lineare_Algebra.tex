@@ -45,6 +45,7 @@
 \newcommandx{\linn}[4][3=1,4=n]{\ensuremath{#1_{#3}\cdot #2_{#3} + \dots + #1_{#4} \cdot #2_{#4}}}
 \newcommandx{\setdot}[3][2=1,3=n]{\ensuremath{\{#1_{#2} ,\dots , #1_{#3}\}}}
 \newcommandx{\lldot}[3][2=1,3=n]{\ensuremath{#1_{#2} ,\dots , #1_{#3}}}
+\newcommandx{\allsum}[5][3=i,4=1,5=n]{\ensuremath{\sum_{#3=#4}^{#5}{#1_{#3}\cdot #2_{#3}}}}
 \usepackage[most]{tcolorbox}
 \usepackage{booktabs}
 \tcbuselibrary{theorems}
@@ -1701,46 +1702,66 @@ erweitern?.
 \end{prof}
 
 
-\begin{definition}{}{}
-  Sei \(V\) ein Vektorraum \$\$ eine Basis in V. Die Zahlen \((\lambda_1,...\lambda_n)\)
-  heissen Koordinaten bzgl. des Vektors. Die Spalte \ldots{} heisst Koordinatenspalte
-  dieses Vektors bzgl. \(B\).
-  Die Definition einer Basis garantiert, dass hierdurch eine Bijektion \ldots{} entsteht.
+\begin{definition}{Koordinaten bez"uglich einer Basis}{}
+  Sei \(V\) ein Vektorraum $B$ eine Basis in $V$. Sei
+  $v=\llin{\lambda}{v}$ ein Vektor in $V$. Die Zahlen
+  \((\lldot{\lambda})\) heissen \emph{Koordinaten} des Vektors $v$ bez"uglich
+  der Basis $B$. Die Spalte
+  $\begin{pmatrix}
+    \lambda_1
+    & \cdots
+    & \lambda_n
+  \end{pmatrix}^T$ heisst Koordinatenspalte dieses Vektors
+  bzgl. \(B\).  Die Definition einer Basis garantiert, dass hierdurch
+  eine Bijektion zwischen den Koordinatenspalten in $\mathbb{K}^n$ und
+  den Vektoren in $V$ entsteht.
 \end{definition}
 
 \begin{notte}
-  Diese Korrespondenz kommt auf die Wahl der Basis an.
+  Diese Korrespondenz von Koordinatenspalte und Vektor kommt auf die
+  Wahl der Basis an.
 \end{notte}
 
-\begin{exa}
-  Sei \(Ax=0\) ein h. LGS
-\end{exa}
-
-\textbf{Aus Uebungen} \ldots{}
+\textbf{Aus den "Ubungen.} Sei $A\cdot x = 0$ ein LGS.
+\[\exists \phi \text{ mit } L=\{\phi\cdot t\mid t\in
+  \mathbb{K}^{n-r}1\} \text{ die L"osungsmenge des LGS und } t \mapsto
+  \phi\cdot t \text{ eine Bijektion } \mathb{K}^{n-r}\rightarrow
+  L\]
 
 \begin{lemma}
-  Die Spalten von \(\Phi\) bilden eine Basis in L.
+  Die Spalten von \(\phi\) bilden eine Basis in L.
 \end{lemma}
 
 \begin{prof}[]
-  Die Spalten von \(\Phi\) sind linear unabh"angig. (sonst abb. nicht injektiv)
+  Die Spalten von \(\ohi\) sind linear unabh"angig. (Sonst w"ahre die Abbildung nicht injektiv.)
 
-  Ferner spannen sie das ganze L auf (Surjektiv). 
+  Ferner spannen sie das ganze L auf und ist somit Surjektiv. 
 \end{prof}
 
-\textbf{Frage} Gegeben Basen \ldots{} in \(V\), und einem Vektor \(v\in V\). Wie rechnet man die
-Koordinaten bezgl. B in Koordinaten bzgl. B' um.
+\textbf{Frage.} Gegeben Basen $B$, $B'$ in \(V\) und einem Vektor \(v\in V\). Wie rechnet man die
+Koordinaten bezgl. $B$ in Koordinaten bzgl. $B'$ um?
 
-Sprachweise ist: B ist alte Basis und B' ist neue Basis.
-So gilt:
-\begin{relation}
-  \ldots{} Dr"ucken wir Vektoren von B' bzgl. Vektoren von B aus: \(V\) \ldots{}
-  wir erhalten \(C\) 
-  (Die Spalten von C sind Koordinaten der "neuen" Basis bzgl der alten Basis. )
+\begin{notation}
+$B=(\lldot{b})$ ist die ''alte Basis'' und $B'=(\lldot{b'})$ ist die ''neue Basis''.
+\end{notation}
 
-  Also gilt: \ldots{}
-  \(\lambda = G\cdot \lambda'\)
-\end{relation}
+Es gilt v=\allsum{\lambda}{b}=\allsum{\lambda'}{b'}. Wenn wir die Vektoren von $B'$ bez"uglich $B$
+ausdr"ucken:
+\[
+  \begin{align*}{}
+    b'_1 & = C_{11}\cdot b_1 + \dots + C_{n1}\cdot b_n\\
+    \vdots &\\
+    b'_n & = C_{1n}\cdot b_1 + \dots + C_{nn}\cdot b_n\\
+  \end{align*}
+\]
+
+Daraus erhalten wir
+$C=(C_{ij})_{i=\overline{1, n},\;j=\overline{1, n}}$\quad Also eine Matrix
+deren Spalten die Koordinaten der ''neuen'' Basis inder der ''alten'' darstellt.
+Nun gilt damit: \[v=\allsum{\lambda}{b}=\sum_{j=1}^{n}{\lambda'_j\cdot \left({\sum_{i=1}^{n}{C_{ij}\cdot b_i}}\right)}=\sum_{i=1}^n\overbrace{\left({\sum_{j=1}^n{C_{ij}\cdot \lambda'_j}}\right)}^{\lambda_i}\cdot b_i\]
+
+Wenn also $\lambda=\begin{pmatrix}\lambda_1 \\ \vdots \\ \lambda_n\end{pmatrix}$ und $\lambda'=\begin{pmatrix}\lambda'_1 \\ \vdots \\ \lambda'_n\end{pmatrix}$ so folg \(\lambda = C\cdot \lambda'\)
+
 
 \textbf{Frage} Ist \(D\) in diesem Fall immer invertierbar? (Ja, aber wir brauchen mehr Theorie.)
 

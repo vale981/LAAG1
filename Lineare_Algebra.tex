@@ -46,6 +46,9 @@
 \newcommandx{\setdot}[3][2=1,3=n]{\ensuremath{\{#1_{#2} ,\dots , #1_{#3}\}}}
 \newcommandx{\lldot}[3][2=1,3=n]{\ensuremath{#1_{#2} ,\dots , #1_{#3}}}
 \newcommandx{\allsum}[5][3=i,4=1,5=n]{\ensuremath{\sum_{#3=#4}^{#5}{#1_{#3}\cdot #2_{#3}}}}
+\newcommandx{\lmap}[3][1=f,2=V,3=W]{#1:\, #2 \rightarrow #3}
+\newcommandx{\mmat}[3][1=B,2=C,3=M]{#3^{#1}_{#2}}
+
 \usepackage[most]{tcolorbox}
 \usepackage{booktabs}
 \tcbuselibrary{theorems}
@@ -698,7 +701,7 @@ gelten (\emph{K"orperaxiome}): F"ur \(z_1, z_2, z_3 \in \mathbb{C}\) gilt, z.B.:
   Also ist \(z=\Re(z)+ \Im(z)\cdot i\).
 \end{definition}
 
-\begin{definition}{Rein Imagin"are Zahlen}{}
+\begin{definition}{Reinimagin"are Zahlen}{}
   Die Zahlen der Form \(b\cdot i : b\in \mathbb{R}\) heissen \textbf{rein Imagin"ar}.
 \end{definition}
 
@@ -1083,13 +1086,13 @@ ablesen kann.
       \rowops
       \add[-3]{0}{1}
     \end{gmatrix} \\
-    \Rightarrow & \begin{gmatrix}[p]
+    \implies & \begin{gmatrix}[p]
       1 & 2 \\
       0 & -6
       \rowops
       \mult{1}{\scriptstyle\cdot-\frac{1}{6}}
     \end{gmatrix} \\
-    \Rightarrow & \begin{gmatrix}[p]
+    \implies & \begin{gmatrix}[p]
       1 & 2 \\
       0 & 1
     \end{gmatrix}
@@ -1748,11 +1751,11 @@ $B=(\lldot{b})$ ist die ''alte Basis'' und $B'=(\lldot{b'})$ ist die ''neue Basi
 Es gilt v=\allsum{\lambda}{b}=\allsum{\lambda'}{b'}. Wenn wir die Vektoren von $B'$ bez"uglich $B$
 ausdr"ucken:
 \[
-  \begin{align*}{}
+  \begin{split}
     b'_1 & = C_{11}\cdot b_1 + \dots + C_{n1}\cdot b_n\\
     \vdots &\\
     b'_n & = C_{1n}\cdot b_1 + \dots + C_{nn}\cdot b_n\\
-  \end{align*}
+  \end{split}
 \]
 
 Daraus erhalten wir
@@ -1772,7 +1775,7 @@ Wenn also $\lambda=\begin{pmatrix}\lambda_1 \\ \vdots \\ \lambda_n\end{pmatrix}$
 
   \begin{enumerate}
   \item \(\forall v,v' \in V: f(v+v')=f(v)+f(v')\)
-  \item \(\forall v\in V, \lambda \in K: f(\lambda v)=\lambda f(v)\)
+  \item \(\forall v\in V,\,  \lambda \in K: f(\lambda v)=\lambda f(v)\)
   \end{enumerate}
 
 \end{definition}
@@ -1789,30 +1792,37 @@ Wenn also $\lambda=\begin{pmatrix}\lambda_1 \\ \vdots \\ \lambda_n\end{pmatrix}$
   $V=W=\{f:\mathbb{R}\rightarrow\mathbb{R}\}$ die Menge aller reellen, reellwertiger Funktionen. Für eine gegebene Abbildung $g:\mathbb{R}\rightarrow\mathbb{R}$ ist die Abbildung $mg: V\rightarrow W, f\mapsto g\cdot f, (g\cdot f)(x)=g(x)\cdot f(x)$ linear.
 \end{exa}
 
-\begin{definition}{}{}
-  Sei $f:V\rightarrow W$eine Lineare Abbildung. Der Kern von \(f\) wird definiert als \[Ker\: f := f^{-1}(0) = \{v\in V|f(v)=0\}\] Der Kern der Abbildung f ist also die Menge aller Elemente in V, die auf das Nullelement von W abgebildet werden.
+\begin{definition}{Kern einer Linearen Abbildung}{}
+  Sei $f:V\rightarrow W$eine Lineare Abbildung. Der Kern von \(f\) wird definiert als \[Ker\: f := f^{-1}(0) = \{v\in V \mid f(v)=0\}\] Der Kern der Abbildung f ist also die Menge aller Elemente in V, die auf das Nullelement von W abgebildet werden.
 \end{definition}
 
 \begin{exa}
   $f=f_A: K^n\rightarrow K^m \quad x\mapsto A\cdot x$\\
-  $Ker (f_A) = \{x\in K^n|A\cdot x = 0\}$, also die Lösung des homogenen LGS mit der Koeffizientenmatrix A.
+  $Ker (f_A) = \{x\in K^n\mid A\cdot x = 0\}$, also die Lösung des homogenen LGS mit der Koeffizientenmatrix A.
 \end{exa}
 
 \begin{beobachtung}
   Der Kern von \(f\) ist ein Untervektorraum von \(V\):
-  \[v_1 , v_2 \in Ker(f) \Rightarrow f(v_1 + v_2)=f(v_1 )+f(v_2 )=0 \Rightarrow v_1 + v_2 \in Ker(f) \]
-  \[v \in Ker(f), \lambda \in K \Rightarrow f(\lambda v)=\lambda f(v)=\lambda \cdot 0 = 0 \Rightarrow \lambda v \in Ker(f) \]
+  \[
+  \begin{split}
+  v_1 , v_2 \in\mKer(f) & \implies f(v_1 + v_2)=f(v_1 )+f(v_2 )=0 \implies v_1 + v_2 \in\mKer(f)\; \forall v \in\mKer(f)\, , \lambda \in K \\
+   &\implies f(\lambda \cdot v)=\lambda \cdot f(v)=\lambda \cdot 0 = 0 \implies \lambda \cdot v \in\mKer(f)
+  \end{split} \]
 \end{beobachtung}
 
 \begin{beobachtung}
   Das Bild von f $Im(f) \subseteq W$ ist Untervektorraum, wenn:
-  \[w_1 =f(v_1 ), w_2 = f(v_2 )\in Im(f) \Rightarrow w_1 +w_2 = f(v_1 )+f(v_2 )= f(v_1 +v_2) \Rightarrow w_1 +w_2 \in Im(f) \]
-  \[w=f(v)\in Im(f), \lambda \in K \Rightarrow \lambda w = \lambda f(v)=f(\lambda v) \in Im(f) \]
-  $\Rightarrow$ Das Bild einer linearen Abbildung ist ein Untervektorraum.
+  \[
+  \begin{split}
+  w_1 =f(v_1 )\, , w_2 = f(v_2 )\in\mIm(f) \implies w_1 +w_2 = f(v_1 )+f(v_2 )= f(v_1 +v_2) \implies w_1 +w_2 \in\mIm(f) \\
+ \implies w=f(v)\in\mIm(f)\, , \lambda \in K \implies \lambda w = \lambda f(v)=f(\lambda v) \in \mIm(f) 
+  \end{split}
+  \]
+  $\implies$ Das Bild einer linearen Abbildung ist ein Untervektorraum.
 \end{beobachtung}
 
 \begin{exa}
-  $Im(f_A )=\{b\in K^m \:|\: \exists x \in K^n: A\cdot x=b \}=\{b\in K^m\:|\:LGS Ax=b\; l"osbar\} $
+  \[Im(f_A )=\{b\in K^m \mid \exists x \in K^n: A\cdot x=b \}=\{b\in K^m\mid LGS Ax=b\; \text{l"osbar}\}\]
 \end{exa}
 
 \begin{beobachtung}
@@ -1826,14 +1836,18 @@ Wenn also $\lambda=\begin{pmatrix}\lambda_1 \\ \vdots \\ \lambda_n\end{pmatrix}$
 \end{proposition}
 
 \begin{prof}[]
-  f injektiv $\iff v_1 \neq v_2 \in V: f(v_1)\neq f(v_2) \iff f(v_1)-f(v_2)\neq 0 \iff f(v_1 -v_2)\neq 0 \iff v_1,v_2 \in V, v_1-v_2\neq 0: f(v_1 -v_2)\neq 0 \iff v\neq 0: f(v)\neq 0 \iff Ker(f) = \{0\}$
+  f injektiv $\iff v_1 \neq v_2 \in V: f(v_1)\neq f(v_2) \iff f(v_1)-f(v_2)\neq 0 \iff f(v_1 -v_2)\neq 0 \iff v_1,v_2 \in V, v_1-v_2\neq 0: f(v_1 -v_2)\neq 0 \iff v\neq 0: f(v)\neq 0 \iff\mKer(f) = \{0\}$
 \end{prof}
 
-\begin{definition}{}{}
-  Eine bijektive Lineare Abbildung \(f:V\rightarrow W\) heißt Vektorraumisomorphismus
+\begin{definition}{Vektroraumisomorphismus}{}
+  Eine \emph{bijektive} Lineare Abbildung \(f:V\rightarrow W\) heißt Vektorraumisomorphismus
   zwischen \(V\) und \(W\). \(V\) und \(W\) heißen isomorph, wenn es einen
   Vektorraumisomorphismus \(f: V\rightarrow W\) gibt.
 \end{definition}
+
+\begin{notation}
+Sind $V, W$ isomorphe Vektotrr"aume, so schreibt man auch: $V \cong W$.
+\end{notation}
 
 \begin{exa}
   Sei \(V\) ein Vektorraum, \(S\subseteq V = \{v_1, v_2, ..., v_n\}\). Die
@@ -1860,14 +1874,14 @@ Wenn also $\lambda=\begin{pmatrix}\lambda_1 \\ \vdots \\ \lambda_n\end{pmatrix}$
 \section{Dimensionsformel}
 \label{sec:org9a58004}
 \begin{theo}{}{}
-  Sei \(f:V\to W\) eine Lineare Abbildung, sei \(V\) endlich dimensional. Dann gilt: \(\mdim\mKer f + \mdim\mIm f = \mdim V\).
+  Sei \(f:V\to W\) eine Lineare Abbildung, sei \(V\) endlich dimensional. \[\mdim\mKer f + \mdim\mIm f = \mdim V\]
 \end{theo}
 
 \begin{lemma} sei \(f\) wie oben. Sei \(U \subseteq \mKer(f)\) ein Untervektorraum mit \(U \cap \mKer(f) = \{0\}\).  Dann ist \(f|_U:U\to f(U)\) ein Isomorphismus.
 \end{lemma}
 
 \begin{prof}[Beweis des Lemmas]
-  \(f|_U:U\to f(U)\) ist surjektiv nach Konstruktion. Zu zeigen: \(f|_U\) injkektiv \(\iff \mKer f|_U = \{0\}\). Sei \(u\in \mKer f|_U \). Dann gilt \(u\in U \land u \in \mKer(f) \implies u \in U \cap \mKer f \implies u = 0\)
+  \(f|_U:U\to f(U)\) ist surjektiv nach Konstruktion. \\ Zu zeigen: \(f|_U\) injkektiv \(\iff \mKer f|_U = \{0\}\). Sei \(u\in \mKer f|_U \). Dann gilt \(u\in U \land u \in \mKer(f) \implies u \in U \cap \mKer f \implies u = 0\)
 \end{prof}
 
 \begin{prof}[Beweis der Dimensionsformel]
@@ -1878,7 +1892,7 @@ Wenn also $\lambda=\begin{pmatrix}\lambda_1 \\ \vdots \\ \lambda_n\end{pmatrix}$
 
   Das Lemma sagt jetzt: \(f|_U\) ist ein Isomorphismus. Außerdem gilt f"ur \(v =\sum\limits_{i=1}^{n}\lambda_ie_i \in V:\)
   \begin{align*}
-    f(v) = f\left(\underbrace{\sum_{i=1}^{k}\lambda_ie_i}_{\in \mKer(f)}\right) + f\left(\sum_{i=k+1}^{n}\lambda_ie_i\right) = f\left(\underbrace{\sum_{i=k+1}^{n} \lambda_ie_i}_{\in U}\right)
+    f(v) = f\underbrace{\left(\sum_{i=1}^{k}\lambda_ie_i\right)}_{\in \mKer(f)} + f\left(\sum_{i=k+1}^{n}\lambda_ie_i\right) = f\underbrace{\left(\sum_{i=k+1}^{n} \lambda_ie_i\right)}_{\in U}
   \end{align*}
   \(\implies f(V)=f(U)\) also \(f|_U : U\to f(V) = \mIm(f) \) ist ein Isomorphismus \(\implies \mdim \mIm f = \mdim U \)
 
@@ -1887,23 +1901,24 @@ Wenn also $\lambda=\begin{pmatrix}\lambda_1 \\ \vdots \\ \lambda_n\end{pmatrix}$
 
 \section{Summe von Untervektorr"aumen}
 \label{sec:org83dfe63}
-\begin{definition}{}{}
+\begin{definition}{Summe von Vektorr"aumen}{}
   Sei V ein Vektorraum, $U_1, U_2 \subseteq V$ Untervektorräume.
-  \[U_1 + U_2 := \{u_1+u_2 | u_1 \in U_1, u_2 \in U_2\}\]
+  \[U_1 + U_2 := \{u_1+u_2 \mid u_1 \in U_1, u_2 \in U_2\}\]
   heißt Summe von $U_1$ und $U_2$.
   $U_1 + U_2$ ist Untervektorraum.
   
 \end{definition}
-\begin{definition}{}{}
+\begin{definition}{Direkte Vektorraumsumme}{}
   Die Summe von $U_1$ und $U_2$ heißt direkt, wenn $U_1 \cap U_2 = \{0\}$. Bezeichnung: $U_1 + U_2 = U_1 \oplus U_2$
 \end{definition}
 
-\textbf{Bemerkung} \ldots{}
+\begin{notte}
+	Im Beweis der Dimensionsformel haben wir gezeigt, dass die Summe aus $U$ und $\mKer(f)$ direkt ist.
+\end{notte}
+\begin{notte}
+	Dimensionsformel ist auch Rangformel.
+\end{notte}
 
-In dieser Bezeichnung haben wir im Beseris der Dimensionsformel haben wir den
-Ausgangsraum als eine direkte Summe dargestellt. 
-\todo{Das bitte ergänzen, da habe ich nicht gut mitgeschrieben}
-\textbf{Bemerkung}: Dimensionsformel ist auch Rangformel.
 
 \begin{definition}{Rang}{}
   Sei $f:V\to W$ linear. Der Rang von \(f\) ist $\mRg(f) = \text{rk}(f) := \dim\mIm(f)$
@@ -1931,9 +1946,9 @@ Ausgangsraum als eine direkte Summe dargestellt.
 \begin{proposition}[Dimensionsformel]
   Sind \(U_1, U_2 \subset V\) Untervektorr"aume, dann gilt: \(\dim(U_1 +U_2) =\dim U_1 + \dim U_2 - \dim (U_1\cap U_2)\)
 \end{proposition}
-\begin{bem}
+\begin{notte}
   \(U_1\cap U_2\) ist stets ein Untervektorraum, wenn \(U_1\) und \(U_2\) Untervektorr"aume sind.
-\end{bem}
+\end{notte}
 \begin{prof}[Dimensionsformel] 
 
   Betrachte die Abbildung \(f: U_1 \times U_2 \to U_1 + U_2, (u_1, u_2) \mapsto u_1 + u_2 \). Hierbei ist \(U_1\times U_2 = \{(u_1, u_2) | u_1 \in U_1, u_2 \in U_2 \} \) der Verktorraum der Paare \((u_1, u_2)\) mit
@@ -1943,13 +1958,14 @@ Ausgangsraum als eine direkte Summe dargestellt.
     \lambda (u_1, u_2) &= (\lambda u_1, \lambda u_2)
   \end{align*}
   Oft nennt man \(U_1 \times U_2\) auch \gq{"au"sere direkte Summe} von \(U_1\) und \(U_2\) mit Bezeichnung \(U_1 \oplus U_2\).
-  \begin{bem}Die Kollision der
+  \begin{notte}Die Kollision der
     Bezeichnungen \(U_1\oplus U_2\) für die direkte Summe zweier Untervektorr"aume / "außere Summe ist harmlos ("Ubg).
-  \end{bem}
+  \end{notte}
 
-  Nun gilt \(\dim \mKer(f) + \dim\mIm(f) = \dim(U_1\times U_2) \)
-
-  Es gilt weiterhin: \(\dim(U_1 \times U_2) = \dim U_1 + \dim U_2 \) Wenn \(e_1, \dots, e_k \) eine Basis in \(U_1\) und \(b_1, \dots, b_l \) eine Basis in \(U_2\) \(\implies\) \(e_1, \dots, e_k, b_1, \dots, b_l\) Basis in \(U_1\times U_2\)
+  Nun gilt \(\dim \mKer(f) + \dim\mIm(f) = \dim(U_1\times U_2) \) 
+  Es gilt weiterhin: \(\dim(U_1 \times U_2) = \dim U_1 + \dim U_2 \)
+  
+  Wenn \(e_1, \dots, e_k \) eine Basis in \(U_1\) und \(b_1, \dots, b_l \) eine Basis in \(U_2\) \(\implies\) \(e_1, \dots, e_k,\, b_1, \dots, b_l\) Basis in \(U_1\times U_2\)
 
   Ferner gilt: \(\mIm(f) = U_1 + U_2\) per Definition. Nun ist:
   \begin{align*}
@@ -1971,7 +1987,7 @@ Abbildungen.
 \section{Abbildunngsmatrix}
 \begin{definition}{Raum der Homomorphismen}{}
   Seien \(V,W\) zwei (\(\mathbb{K}\)-) Vektorr"aume.
-  \[\mHom_\mathbb{K}(V,W) = \{f: V\to W \mid f \text{ ist }\mathbb{K}\text{-linear}\}\].
+  \[\mHom_\mathbb{K}(V,W) = \{f: V\to W \mid f \text{ ist }\mathbb{K}\text{-linear}\}\]
 \end{definition}
 \begin{proposition}
   \(\mHom_\mathbb{K}(V,W)\) ist auch ein Vektorraum.
@@ -2032,13 +2048,13 @@ Matrix, deren Spalten die Koordinatenspalten von \(f(b_1),\dots, f(b_n)\) bzgl. 
 Im Beweis haben wir unter anderem festgestellt:
 \begin{relation}
   \begin{align*}
-    f\left(\sum_{j=1}^n\lambda_jb_j\right)=\sum_{i=1}^mc_i\underbrace{\sum_{j=1}^nF_{ij}\lambda_j}_{\mu_i}
+    f\left(\sum_{j=1}^n\lambda_jb_j\right)=\sum_{i=1}^mc_i\cdot\underbrace{\sum_{j=1}^nF_{ij}\lambda_j}_{\mu_i}
   \end{align*}
 
   Das hei"st: Wenn \(v=\sum_{j=1}^n\lambda_jb_j\in V\) mit Koordinatenspalte \(\lambda = (\lambda_1,\dots,\lambda_n)^\top\) (bez"uglich \(B\)), \(w = f(v)\), dann hat \(w\) folgende Koordinatenspalte bez"uglich \(C\):
-  \begin{align}
+  \[
     \mu = F\cdot \lambda
-  \end{align}
+  \]
 \end{relation}
 
 \begin{exa}
@@ -2085,40 +2101,44 @@ Jede Basis in V definiert eine Bijektion $\phi_B^{-1}V\rightarrow K^n, v\mapsto 
   $\phi_B$ ist hierbei die Aufspannabbildung.  
 \end{relation}
 
-\textbf{Warnung} Unsere Konvention f"ur die Basiswechselmatrix: ''von $B$ zu
+\textbf{Warnung!} Unsere Konvention f"ur die Basiswechselmatrix: ''von $B$ zu
 $B'$'' ist $M^{B'}_B$, also dr"uckt die meue Basis in der alten aus und ist
 nicht die einzige!
 
 \section{Physikerdefinition eines Vektors}
 \label{sec:phyv}
 
-Ein (kontravarianter) Vektor ist ein Objekt, welches durch ein n-Tuperl \(\lambda\)
+Ein (kontravarianter) Vektor ist ein Objekt, welches durch ein n-Tupel \(\lambda\)
 von Zahlen beschrieben wird, die sich Koordinatentransformationenen so
 verh"alt: Ist $S$ die Basiswechselmatrix der Koordinatentransformation, so gilt
-in den neuen koordinaten $\lambda'=S^{-1}\lambda$
+in den neuen koordinaten $\lambda'=S^{-1}\cdot\lambda$
 
 \begin{notte}
   Diese Transformationsformel haben wir gesehen: ist $v\in V$ mit der
   Koordinatenspalte $\lambda$ bzgl. $B$ so gilt
-  $\lambda=M^{B'}_{Basiswechselmatrix}\cdot \lambda ' $
+  $\lambda=M^{B'}_{B}\cdot \lambda ' $
 \end{notte}
 
 \begin{lemma}[Verhalten von Abbildungsmatrizen unter Basiswechsel]
-  Sei .. eine Lineare Abbildung, ..., dann gilt:
+  Sei $\lmap$ eine Lineare Abbildung, $B,B'$ Basen in $V$, dann gilt:
   \[
-    M^{B'}_{C'}(f)=
-  \] In Anderen Worten: wenn $S$ die Basiswechselmatrix von ... so gilt
+    \mmat[B'][C'](f)=(\mmat[C'][C])^{-1} \cdot \mmat(f) \cdot \mmat[B'][B]
+  \] In Anderen Worten: Wenn $S$ die Basiswechselmatrix von $B$ zu $B'$m sowie $T$ die 
+  Basiswechselmatrix von $C$ zu $C'$ so gilt:
+   \[
+  \mmat[B'][C'](f)=T^{-1}\cdot \mmat(f) \cdot S
+  \]
 \end{lemma}
 
 \begin{prof}
-  $M^{B'}_{C'}(f)=$
+  \[M^{B'}_{C'}(f)=\mmat[B'][C'](id_w \circ f \circ id_v)=\mmat[C][C'](id_w) \cdot \mmat(f) \cdot \mmat[B'][B](id_v)=(\mmat[C'][C])^{-1} \cdot \mmat(f) \cdot \mmat[B'][B]\]
 \end{prof}
 
 \begin{notte}[zur Basiswechselmatrix]
   $ M^{B'}_{B}$ ist die Basiswechselmatrix von $B$ zu $B'$: sie enth"alt die
   Koordinaten von Vektoren aus $B'$ bzgl. $B$. Wie verhalten sich die
-  Kootdinaten von Vektoren bzgl. $B$ und $B'$ Antwort: $\lambda =
-  S^{-1}\lambda$.
+  Kootdinaten von Vektoren bzgl. $B$ und $B'$?\\
+   Antwort: $\lambda = S^{-1}\lambda$.
 \end{notte}
 
 \begin{exa}
@@ -3133,7 +3153,7 @@ einfach aussieht.
 \end{definition}
 
 \begin{exa}
-  Im $\mathbb{R}^3$ ist es mit dem Skalarprodukt genau geometrische Orthogonalit"at.
+ Im $\mathbb{R}^3$ ist es mit dem Skalarprodukt genau geometrische Orthogonalit"at.
 \end{exa}
 
 \begin{satz}{Existenz von Orthogonalbasen}
@@ -3471,7 +3491,7 @@ liefert.
   Es gilt: \(\omega (\mathcal{E}') = \det (S)\cdot\omega (\mathcal{E})\), wobei \(S\) die Basiswechselmatrix von \(\mathcal{E}\) zu \(\mathcal{E}'\) ist. Nun ist \(S\) aber orthogonal, \(\det S = \pm 1\), also \(|\omega (\mathcal{E}')| = 1\).
 \end{prof}
 \begin{definition}{Volumen}{}
-  Seien \(v_1,\dots, v_n\in V\) (\(V\) ist ein euklidischer Vektorraum). Das \epmh{Volumen} des von \(v_1,\dots, v_n\) aufgespannten Parallelepipeds definieren wir als \[\text{vol}(v_1,\dots,v_n) := |\omega (v_1,\dots,v_n)|\] wobei \(\omega\) eine Volumenform ist mit \(\omega (\mathcal{E}) = 1\) f"ur eine (und damit jede) ONB.
+  Seien \(v_1,\dots, v_n\in V\) (\(V\) ist ein euklidischer Vektorraum). Das \emph{Volumen} des von \(v_1,\dots, v_n\) aufgespannten Parallelepipeds definieren wir als \[\text{vol}(v_1,\dots,v_n) := |\omega (v_1,\dots,v_n)|\] wobei \(\omega\) eine Volumenform ist mit \(\omega (\mathcal{E}) = 1\) f"ur eine (und damit jede) ONB.
 \end{definition}
 \begin{satz}{Volumen durch die Determinante der Gram-Matrix}{}
   Seien \(v_1,dots,v_n\in V\) Vektoren in einem \(n\)-dimensionalen euklidischen Vektorraum. Dann gilt: \(\text{vol}(v_1,\dots,v_n)^2 = \det G(v_1,\dots,v_n)\)

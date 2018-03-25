@@ -48,7 +48,8 @@
 \newcommandx{\allsum}[5][3=i,4=1,5=n]{\ensuremath{\sum_{#3=#4}^{#5}{#1_{#3}\cdot #2_{#3}}}}
 \newcommandx{\lmap}[3][1=f,2=V,3=W]{#1:\, #2 \rightarrow #3}
 \newcommandx{\mmat}[3][1=B,2=C,3=M]{#3^{#1}_{#2}}
-
+\newcommandx{\kkk}[3][1=n,2=m,3=K]{\mathbb{#3}^{#1\times #2}}
+\newcommandx{\kk}[2][1=K,2=n]{\mathbb{#1}^{#2}}
 \usepackage[most]{tcolorbox}
 \usepackage{booktabs}
 \tcbuselibrary{theorems}
@@ -2138,7 +2139,7 @@ in den neuen koordinaten $\lambda'=S^{-1}\cdot\lambda$
   $ M^{B'}_{B}$ ist die Basiswechselmatrix von $B$ zu $B'$: sie enth"alt die
   Koordinaten von Vektoren aus $B'$ bzgl. $B$. Wie verhalten sich die
   Kootdinaten von Vektoren bzgl. $B$ und $B'$?\\
-   Antwort: $\lambda = S^{-1}\lambda$.
+%   Antwort: $\lambda = S^{-1}\lambda$.
 \end{notte}
 
 \begin{exa}
@@ -2146,46 +2147,75 @@ in den neuen koordinaten $\lambda'=S^{-1}\cdot\lambda$
 \end{exa}
 
 \begin{proposition}[Rangform einer linearen Abbildung]
-  Sei ... eine Lineare Abbildung und $V,W$ endlichdimensional. Dann existieren
-  Basen ... , so dass ...
+  Sei $\lmap$  eine Lineare Abbildung und $V,W$ endlichdimensional. Dann existieren
+  Basen $B, C$ in $V$ , so dass: 
+  \[
+  \mmat(f) = \begin{pmatrix}
+	1_r & 0 \\
+	0 & 0
+  \end{pmatrix}, r = \mRg(f)
+  \]
 \end{proposition}
 
 \begin{korollar}
-  F"ur jede Matrix ... gibt es invertierbare Matrizen ... , so dass
+  F"ur jede Matrix $A\in \mathbb{K}^{m\times n}$ gibt es invertierbare Matrizen $T\in \mathbb{K}^{m\times m},\, S \in \mathbb{K}^{n\times n}$ , so dass \[T^{-1} \cdot A \cdot S = \begin{pmatrix}
+  1_r & 0 \\
+  0 & 0
+  \end{pmatrix}\]
 \end{korollar}
 
+\begin{notte}
+	Der folgende Beiweis ist sehr konstruktiv orientiert. Vollziehen Sie die Schritte praktisch nach und Sie werden ihn verstehen.
+\end{notte}
 \begin{prof}
-  Sei ... w"ahle eine Basis ... im $\text{Ker}(f)$  und erweitere sie zu einer
-  Basis ... in Basis. Setze: ... Beim Beweis der Dimensionsformal haben wir
-  gesehen ... . Erweitere jetzt ... zu einer Basis ... in $W$. Es gilt. 
+	\begin{trivlist}
+		\item   Sei $r=\mRg(f)$ w"ahle eine Basis $\lldot{b}[r+1]$ im $\mKer(f)$  und erweitere sie zu einer
+		Basis $\lldot{b}$ in $V$. 
+		\item Setze: $c_i:=f(b_i),\, i=\overline{1,r}$.\quad Beim Beweis der Dimensionsformal haben wir
+		gesehen $f\mid \langle\lldot{b}[1][r]\rangle: \langle\lldot{b}[1][r]\rangle \rightarrow f(V)$ 
+		ist ein Isomorphismus. Damit ist $\lldot{c}[1][r]$ eine Basis in $\mIm(f)$ . 
+		\item Erweitere dieselbe jetzt zu einer Basis $\lldot{c}$ in $W$. Es gilt \[\mmat(f)= \begin{pmatrix}
+		1_r & 0 \\
+		0 & 0
+		\end{pmatrix}\]. 
+	\end{trivlist}
 \end{prof}
 
 \section{Konsequenzen f"ur Matrizen}
 \label{sec:konsma}
+\begin{trivlist}
+	\item Sei $A\in \kkk[n][m] \longrightarrow f_A: \kk \rightarrow \kk,\; x \mapsto A\cdot x$.
+	\item Wobei: $Rg(A)=Rg(f_A)=\mdim \langle\underbrace{\lldot{a}}_{\text{Spalten von } A}\rangle$ und $\mKer(A)=\mKer(f_A),\; \mIm(A)=\mIm(f_A)$.
+\end{trivlist}
 
-Sei ...
-$Rg(A)=Rg(f_A))=dim<a_1,...,a_n>$ ...
 
-\begin{korollar}[Kriterien f"ur Invertierbarkeit]
-  Sei ... Folgende bedingungen sin ... :
+\begin{satz}{Kriterien f"ur Invertierbarkeit}{}
+	Folgende Kriterien sind "Aquivalent:
   \begin{enumerate}
-  \item Wenn ..., dann ist $f$ ein Isomorphismus
-  \item A ist invertierbar.
-  \item $A^T$ ist Invertierbar
-  \item $\exists B\in K^n$ mit (Ist ''Rechtsinvertierbar'')
-  \item ... (Ist ''Linksinvertierbar'')
-  \item ... A hat vollen Rang
-  \item Kern ist die leere Menge
-  \item Das LGS $A\cdot x = 0$ hat nur die triviale L"osung $x=0$
-  \item Das LGS $A\cdot x = n$ hat f"ur jedes $b\in $ genau eine L"osung
-  \item A ist darstellbar als das Produkt von Elementarmatrizen
-  \end{enumerate}
+	\item Wenn $A=\mmat(f)$, dann ist $f$ ein Isomorphismus
+	\item $A$ ist invertierbar.
+	\item $A^T$ ist Invertierbar
+	\item $\exists B\in \kkk[n][n]$ mit  $A\cdot B = 1_n$ ($A$ Ist ''Rechtsinvertierbar'')
+	\item $\exists C\in \kkk[n][n]$ mit  $C\cdot A = 1_n$ ($A$ Ist ''Linksinvertierbar'')
+	\item $\mRg(A) = n\, A$ hat vollen Rang
+	\item $\mKer A = \{0\}$
+	\item $\mIm A = \kk$
+	\item Das LGS $A\cdot x = 0$ hat nur die triviale L"osung $x=0$.
+	\item Das LGS $A\cdot x = n$ hat f"ur jedes $b\in $ genau eine L"osung.
+	\item A ist darstellbar als das Produkt von Elementarmatrizen: $A=T_1 \cdots T_i$
+\end{enumerate}
+\vspace{\baselineskip}
+Ausserdem gilt: wenn $A\cdot B = 1_n$ bzw. $B\cdot C = 1_n$ so ist $A^{-1} =  B = C$.
+\end{satz}
 
-  Ausserdem gilt: wenn ... wie in ..., so ist ... 
-\end{korollar}
-
-Aus dem Satz ergibt sich folgendes Verfahren zur Berechnung von $A^{-1}$: ...
-Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
+\begin{relation}
+Aus dem Satz ergibt sich folgendes Verfahren zur Berechnung von $A^{-1}$:
+\begin{enumerate}
+\item Man nehme das LGS $(A\mid 1_n)$ und L"ose es nach dem Gauss Verfahren.
+\item Damit werden gleichzeitig die LGS $A\cdot c_i = e_i,\; i=\overline{1,n}$ gel"ost.
+\item Die L"osungen $c_i$ ergeben die Matrix $(c_i)=C$ mit $A\cdot C = 1_n \xRightarrow{Satz} C=A^{-1}$
+\end{enumerate}
+\end{relation}
 
 \begin{lemma}[Injektivit"at und Surjektivit"at bei Verkn"upfungen]
   Seien $X,Y,Z$ Mengen, ... Dann gilt:  
@@ -2200,7 +2230,7 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
 \end{prof}
 
 \begin{prof}{des Satzes}\leavevmode
-  \begin{itemize}
+  \begin{trivlist}
   \item[(0) $\implies$ (1)]  $A=M^{\varepsilon}_{\varepsilon}(f_A)$, woberi $f_A:$
   \item[(1) $\implies$ (0)] Sei $A$ invertierbar, $A=$ Betrachten wir die
     Abbildung $g$ mit ..., es gilt: 
@@ -2224,7 +2254,7 @@ Das stimmt denn: dieses Verfahren l"ost gleichzeitig die LGS ...
     Nun wenn $A\cdot B = 1_n$ wie in (2) $\implies$, \\
     Wenn wir ... \\
     Analog
-  \end{itemize}
+  \end{trivlist}
 \end{prof}
 
 \chapter{Determinanten}

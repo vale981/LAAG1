@@ -27,6 +27,7 @@
 \usepackage{xifthen}
 \usepackage{xargs}
 \usepackage{commath} % differential stuff
+\usepackage{enumitem}
 \newcommand{\gq}[1]{\glqq{}#1\grqq{}} % german quotes
 \newcommand{\mcolor}[2][red]{\begingroup\color{#1}#2\endgroup }
 \DeclareMathOperator{\mdim}{dim}
@@ -53,6 +54,8 @@
 \usepackage[most]{tcolorbox}
 \usepackage{booktabs}
 \tcbuselibrary{theorems}
+\newlist{theolist}{itemize}{3}
+\setlist[theolist,1]{label=\textbullet,leftmargin=1in}
 \newtcbtheorem[number within=section,list inside=definition]{definition}{Definition}%
 {code={\boldmath},colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
 \newtcbtheorem[number within=section. list inside=definition]{axiom}{Axiom}%
@@ -972,7 +975,7 @@ Wir beobachten:
   ''Tabellen'' von Koeffizienten umformen.
 \end{relation}
 
-\begin{definition}{}{}
+\begin{definition}{Matrix}{}
   Eine \(M\times N\) Matrix \(A\) ist eine Tabelle der Gr"osse \(m\times n\), gef"ullt
   mit Elementen aus \(K\).  
   \[A=(a_{ij})_{\substack{i=1,\cdots,m \\ j=1,\cdots,n}}\]
@@ -2191,17 +2194,17 @@ in den neuen koordinaten $\lambda'=S^{-1}\cdot\lambda$
 
 \begin{satz}{Kriterien f"ur Invertierbarkeit}{}
 	Folgende Kriterien sind "Aquivalent:
-  \begin{enumerate}
-	\item Wenn $A=\mmat(f)$, dann ist $f$ ein Isomorphismus
+  \begin{enumerate}[start=0]
+	\item Wenn $A=\mmat(f)$, dann ist $f$ ein Isomorphismus.
 	\item $A$ ist invertierbar.
-	\item $A^T$ ist Invertierbar
+	\item[$\mathnormal{1^T}$.] $A^T$ ist Invertierbar
 	\item $\exists B\in \kkk[n][n]$ mit  $A\cdot B = 1_n$ ($A$ Ist ''Rechtsinvertierbar'')
 	\item $\exists C\in \kkk[n][n]$ mit  $C\cdot A = 1_n$ ($A$ Ist ''Linksinvertierbar'')
-	\item $\mRg(A) = n\, A$ hat vollen Rang
+	\item $\mRg(A) = n$ - $A$ hat vollen Rang
 	\item $\mKer A = \{0\}$
 	\item $\mIm A = \kk$
 	\item Das LGS $A\cdot x = 0$ hat nur die triviale L"osung $x=0$.
-	\item Das LGS $A\cdot x = n$ hat f"ur jedes $b\in $ genau eine L"osung.
+	\item Das LGS $A\cdot x = n$ hat f"ur jedes $b\in \kk$ genau eine L"osung.
 	\item A ist darstellbar als das Produkt von Elementarmatrizen: $A=T_1 \cdots T_i$
 \end{enumerate}
 \vspace{\baselineskip}
@@ -2217,32 +2220,45 @@ Aus dem Satz ergibt sich folgendes Verfahren zur Berechnung von $A^{-1}$:
 \end{enumerate}
 \end{relation}
 
-\begin{lemma}[Injektivit"at und Surjektivit"at bei Verkn"upfungen]
-  Seien $X,Y,Z$ Mengen, ... Dann gilt:  
-\end{lemma}
-
-\begin{prof}[Beweisschema]
+\begin{lemma}[Injektivit"at und Surjektivit"at bei Verkn"upfungen]\label{surcomp}
+  Seien $X,Y,Z$ Mengen, $\lmap[f][X][Y],\, \lmap[g][Y][Z]$ Dann gilt:
   \begin{enumerate}
-  \item (0) $ \iff $ (1)
-  \item (1) $ \iff $ (2): $B:=A^{-1}$
-  \item (1) $ \iff $ (3): $C:=A^{-1}$
+  	\item $g\circ f$ surjektiv $\implies$ $g$ surjektiv
+  	\item $g\circ f$ injektiv $\implies$ $f$ injektiv
   \end{enumerate}
+\end{lemma}
+\begin{prof}[des Lemmas]\hfill
+	\begin{enumerate}
+		\item $g \text{ nicht surjektiv }\implies$ $\exists z \in Z \text{ mit } z\not= g(y)\; \forall y\in Y \allowbreak \implies z \not=g(f(x)) \;\forall x \in X$\\$\implies g \circ f \text{ nicht surjektiv}$ 
+		\item $f \text{ nich injektiv }\implies \exists x \not=x' mit f(x)=f(x') \implies (g\circ f)(x)=(g\circ f)(x') \implies g\circ f \text{ nicht injektiv}$
+	\end{enumerate}
 \end{prof}
 
-\begin{prof}{des Satzes}\leavevmode
-  \begin{trivlist}
-  \item[(0) $\implies$ (1)]  $A=M^{\varepsilon}_{\varepsilon}(f_A)$, woberi $f_A:$
-  \item[(1) $\implies$ (0)] Sei $A$ invertierbar, $A=$ Betrachten wir die
-    Abbildung $g$ mit ..., es gilt: 
-  \item[(1) $\iff$ ($1^T$)] ...
-  \item[(4) $ \iff $ (5) $ \iff $ (6)] nach dem Lemma
-  \item[(7) $ \iff $ (5)]
-  \item[(8) $ \iff $ ((5) $ \iff $ (6))]
-  \item[(2) $ \implies $ (6)] Wenn $A\cdot B=1_n$, dann muss nach dem Lemmma die
-    Abbildung $x\mapsto A\cdot x$ surjektiv sein $\implies$ (6)
-  \item[(3) $ \implies $ (5)] $C\cdot A = 1_n$
-  \item[(9) $ \implies $ (1)] Elementarmatrizen sind invertierbar, und wenn...
-  \item[(7) $ \implies $ (9)] L"osen wir das LGS $A\cdot x = 0$ durch
+\begin{prof}[des Satzes]
+  \hfill
+
+  \begin{theolist}
+  \item[0 $\implies$ 1]  $A=M^{\varepsilon}_{\varepsilon}(f_A)$, wobei $\lmap[f_A][\kk][\kk],\, x \mapsto A\cdot x$ und $\varepsilon = (\lldot{e})$\\ 
+  $(0)$ sagt, dass $f_A$ ein isomorphismus ist, wir haben also ein $f_A^{-1}$. Es gilt:
+  \begin{itemize}
+  	\item $\mmat[\varepsilon][\varepsilon](f_A^{-1})\cdot\mmat[\varepsilon][\varepsilon](f_A) = \mmat[\varepsilon][\varepsilon](id_{\kk})=1_n$
+  	\item $\mmat[\varepsilon][\varepsilon](f_A)\cdot\mmat[\varepsilon][\varepsilon](f_A^{-1}) = \mmat[\varepsilon][\varepsilon](id_{\kk})=1_n$
+  \end{itemize}
+   \item[1 $\implies$ 0] Sei $A$ invertierbar. $A=\mmat(f)$\\ Betrachten wir die
+    Abbildung $g$ mit $\mmat[C][B](g)=A^{-1}$, es gilt: 
+    \\ $\mmat[B][B](g\circ f) = \mmat[C][B](g) \circ \mmat(f) = A \cdot A^{-1} = 1_n$ damit $g \circ f = \mId$, analog $f\circ g = \mId$. Nach Lemma \ref{surcomp} ist $f$ also ein Isomorphismus (Injektiv und Surjektiv).
+  \item[1 $\iff$ $1^T$] ...
+  \item[1 $\implies$ 2] $B:=A^{-1}$
+  \item[1 $\implies$ 3] $C:=A^{-1}$
+  \item[4 $ \iff $ 5 $ \iff $ 6] nach dem Lemma und $(1)$
+  \item[7 $ \iff $ 5] $\{x\mid A\cdot x = 0\} = \mKer (A)$
+  \item[8 $ \iff $ (5 $ \iff $ 6)]  $\{x\mid A\cdot x = b\} = \mKer (A) = \underbrace{f_A^{-1}(b)}_{\text{Urbild}}$ also existiert eine L"osung genau dann, wenn $\mIm(f_A)=\mIm(A) = \kk$ ($b$ beliebig).\\
+Andererseits ist die L"osung genau danneindeutig eindeutig, wenn $f_A$ injektiv ist. D.h. Existenz in $(8) \iff (6)$, Eindeutigkeit in $(8)\iff (5)$
+  \item[2 $ \implies $ 6] Wenn $A\cdot B=1_n$, dann muss nach dem Lemmma die
+    Abbildung $x\mapsto A\cdot x$ surjektiv sein $\implies$ 6
+  \item[3 $ \implies $ 5] $C\cdot A = 1_n$
+  \item[9 $ \implies $ 1] Elementarmatrizen sind invertierbar, und wenn...
+  \item[7 $ \implies $ 9] L"osen wir das LGS $A\cdot x = 0$ durch
     Zeilenumformungen (Gauss-Jordan): also machen wir Zeilenumformungen. Wir
     haben keine freien Variablen, denn wir haben nur eine L"osung $\implies$
     $A$ wird zur $1_n$ durch Zeilenumformungen transformiert. Wenn wir den
@@ -2254,7 +2270,7 @@ Aus dem Satz ergibt sich folgendes Verfahren zur Berechnung von $A^{-1}$:
     Nun wenn $A\cdot B = 1_n$ wie in (2) $\implies$, \\
     Wenn wir ... \\
     Analog
-  \end{trivlist}
+  \end{theolist}
 \end{prof}
 
 \chapter{Determinanten}
